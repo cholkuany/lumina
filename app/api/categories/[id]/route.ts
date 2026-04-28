@@ -1,17 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import dbConnect from '@/lib/db/connection'
-import Category from '@/lib/db/models/Category'
+import Category, { type ICategory } from '@/lib/db/models/Category'
 import { categorySchema } from '@/lib/validations/category.validation'
 import { z } from 'zod'
+import mongoose from 'mongoose'
+
+type CategoryModel = ICategory & { _id: mongoose.Types.ObjectId }
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect()
 
-    const category = await Category.findById(params.id)
+    const { id } = await params
+    const category = await Category.findById(id)
       .populate('parent', 'name slug')
       .lean()
 
@@ -189,7 +193,7 @@ export async function DELETE(
   }
 }
 
-async function updateDescendantAncestors(category: any) {
+async function updateDescendantAncestors(category: CategoryModel) {
   const descendants = await Category.find({
     ancestors: { $elemMatch: { _id: category._id } },
   })
