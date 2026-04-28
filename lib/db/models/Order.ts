@@ -25,11 +25,6 @@ const OrderItemSchema = new Schema({
     type: Map,
     of: String,
   },
-  // skuId: "WALLET-BROWN",
-  // itemTotal: {
-  //   type: Number,
-  //   required: true,
-  // },
 });
 
 // Shipping Address
