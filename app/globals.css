@@ -1,15 +1,53 @@
 @import "tailwindcss";
 
+/* Expose CSS variables to Tailwind */
+@theme inline {
+  /* Background / foreground */
+  --color-background: var(--ivory);
+  --color-foreground: var(--foreground);
+
+  /* Brand colors */
+  --color-ivory: var(--ivory);
+  --color-linen: var(--linen);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-charcoal: var(--charcoal);
+  --color-warm-gray: var(--warm-gray);
+  --color-warm-gray-light: var(--warm-gray-light);
+  --color-warm-gray-dark: var(--warm-gray-dark);
+
+  /* Fonts (from next/font) */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Base design tokens */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --ivory: #FFFDF9;
+  --linen: #F7F4EF;
+  --gold: #B8956C;
+  --gold-light: #D4B896;
+  --gold-dark: #9A7B56;
+  --charcoal: #232323;
+  --warm-gray: #D6D0C7;
+  --warm-gray-light: #E8E4DD;
+  --warm-gray-dark: #A8A29E;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --radius-brand: 12px;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 15px -3px rgba(35, 35, 35, 0.07);
+  --shadow-hover: 0 10px 40px -10px rgba(35, 35, 35, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +57,45 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--ivory);
+    color: var(--charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Components */
+@layer components {
+  .container-lumina {
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-lumina {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-lumina {
+      padding-inline: 2rem;
+    }
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
