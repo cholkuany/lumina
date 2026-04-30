@@ -7,9 +7,12 @@ import { Button } from '@/components/ui/Button'
 import { useCart } from '@/context/CartContext'
 import { formatPrice } from '@/lib/utils'
 
+import type { ShippingFormData } from '@/components/checkout/ShippingForm'
+import type { PaymentFormData } from '@/components/checkout/PaymentForm'
+
 interface OrderReviewProps {
-  shippingData: any
-  paymentData: any
+  shippingData: ShippingFormData
+  paymentData: PaymentFormData
   onBack: () => void
   onSubmit: () => void
   isProcessing: boolean
@@ -23,6 +26,8 @@ export function OrderReview({
   isProcessing
 }: OrderReviewProps) {
   const { state, subtotal } = useCart()
+
+  console.log("cart state in OrderReview:", state)
 
   const shippingCost = shippingData.shippingMethod === 'standard'
     ? (subtotal >= 50 ? 0 : 5.99)
@@ -48,7 +53,7 @@ export function OrderReview({
             <div key={item.id} className="flex gap-4">
               <div className="relative w-16 h-16 bg-white rounded-lg overflow-hidden shrink-0">
                 <Image
-                  src={item.product.images[0]}
+                  src={item.product.variant.images[0].secure_url}
                   alt={item.product.name}
                   fill
                   className="object-cover"
@@ -61,9 +66,9 @@ export function OrderReview({
                 <h4 className="text-sm font-medium text-charcoal line-clamp-1">
                   {item.product.name}
                 </h4>
-                {item.selectedVariants && (
+                {item.product.variant.attributes && (
                   <p className="text-xs text-warm-gray-dark">
-                    {Object.values(item.selectedVariants).join(' / ')}
+                    {Object.values(item.product.variant.attributes).join(' / ')}
                   </p>
                 )}
               </div>

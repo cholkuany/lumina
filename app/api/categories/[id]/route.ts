@@ -45,12 +45,12 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect()
-
-    const categoryId = params.id
+    const { id } = await params
+    const categoryId = id
     const body = await request.json()
     const validatedData = categorySchema.parse(body)
 
@@ -143,13 +143,15 @@ export async function PUT(
 
 export async function DELETE(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await dbConnect()
 
+    const { id } = await params
+
     // Check if category has children
-    const hasChildren = await Category.exists({ parent: params.id })
+    const hasChildren = await Category.exists({ parent: id })
     if (hasChildren) {
       return NextResponse.json(
         {
@@ -160,7 +162,7 @@ export async function DELETE(
     }
 
     // Check if category has products
-    const category = await Category.findById(params.id)
+    const category = await Category.findById(id)
     if (category && category.productCount > 0) {
       return NextResponse.json(
         {
@@ -170,7 +172,7 @@ export async function DELETE(
       )
     }
 
-    const deletedCategory = await Category.findByIdAndDelete(params.id)
+    const deletedCategory = await Category.findByIdAndDelete(id)
 
     if (!deletedCategory) {
       return NextResponse.json(

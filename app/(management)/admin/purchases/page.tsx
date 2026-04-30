@@ -348,6 +348,8 @@ export default function PurchasesPage() {
         confirmLabel="Cancel Order"
         variant="danger"
         isLoading={isLoading}
+        action='cancel'
+        resource='product'
       />
     </div>
   )

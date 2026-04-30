@@ -8,17 +8,15 @@ import {
   Loader2
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { OrderProps } from '@/app/(shop)/account/orders/[id]/page'
+import { OrderProps } from '@/lib/types'
 
 // Return Items Modal Content
 export function ReturnItemsContent({
   order,
   onClose,
-  onSubmit
 }: {
   order: OrderProps
   onClose: () => void
-  onSubmit: () => void
 }) {
   const [selectedItems, setSelectedItems] = useState<Record<string, { selected: boolean; quantity: number; reason: string }>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -106,7 +104,7 @@ export function ReturnItemsContent({
             <div className="flex gap-4">
               <div className="relative w-16 h-16 bg-linen rounded-lg overflow-hidden shrink-0">
                 <Image
-                  src={item.product.images[0]}
+                  src={item.product.images[0].secure_url}
                   alt={item.product.name}
                   fill
                   className="object-cover"

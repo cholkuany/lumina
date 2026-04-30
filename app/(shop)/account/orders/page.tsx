@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 
 // Mock orders data
-const orders = [
+export const orders = [
   {
     id: '1',
     orderNumber: 'LUM-12345678',
@@ -25,8 +25,25 @@ const orders = [
         product: {
           id: '1',
           name: 'Wireless Noise-Canceling Headphones',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
           price: 249.99,
+          variant: {
+            id: "",
+            attributes: {
+              color: "",
+              size: "",
+              material: "",
+            },
+            price: 0,
+            originalPrice: 0,
+            quantity: 5,
+            sku: "",
+            images: [
+              {
+                secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
+                public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'
+              }
+            ],
+          }
         },
         quantity: 1,
       },
@@ -35,8 +52,25 @@ const orders = [
         product: {
           id: '3',
           name: 'Organic Cotton Throw Blanket',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
           price: 79.99,
+          variant: {
+            id: "",
+            attributes: {
+              color: "",
+              size: "",
+              material: "",
+            },
+            price: 0,
+            originalPrice: 0,
+            quantity: 1,
+            sku: "",
+            images: [
+              {
+                secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
+                public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'
+              }
+            ],
+          }
         },
         quantity: 1,
       },
@@ -69,8 +103,25 @@ const orders = [
         product: {
           id: '2',
           name: 'Premium Leather Watch',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
           price: 189.99,
+          variant: {
+            id: "",
+            attributes: {
+              color: "",
+              size: "",
+              material: "",
+            },
+            price: 0,
+            originalPrice: 0,
+            quantity: 3,
+            sku: "",
+            images: [
+              {
+                secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
+                public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'
+              }
+            ],
+          }
         },
         quantity: 1,
       },
@@ -103,8 +154,25 @@ const orders = [
         product: {
           id: '4',
           name: 'Smart Home Speaker',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
           price: 129.99,
+          variant: {
+            id: "",
+            attributes: {
+              color: "",
+              size: "",
+              material: "",
+            },
+            price: 0,
+            originalPrice: 0,
+            quantity: 1,
+            sku: "",
+            images: [
+              {
+                secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
+                public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'
+              }
+            ],
+          }
         },
         quantity: 1,
       },
@@ -125,7 +193,7 @@ const orders = [
     shipping: 5.99,
     tax: 10.40,
   },
-]
+];
 
 const filterOptions = [
   { value: 'all', label: 'All Orders' },

@@ -13,10 +13,10 @@ const reports: ReportData[] = []
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { reviewId: string } }
+  { params }: { params: Promise<{ reviewId: string }> }
 ) {
   try {
-    const { reviewId } = params
+    const { reviewId } = await params
     const body = await request.json()
     const { userId, reason, details } = body
 

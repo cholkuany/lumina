@@ -8,8 +8,26 @@ import { Checkbox } from '@/components/ui/Checkbox'
 import { RadioGroup } from '@/components/ui/RadioGroup'
 import { Button } from '@/components/ui/Button'
 
+type ShippingMethod = 'standard' | 'express' | 'overnight'
+
+export type ShippingFormData = {
+  email: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  apartment: string,
+  city: string,
+  state: string,
+  zipCode: string,
+  country: string,
+  phone: string,
+  shippingMethod: ShippingMethod,
+  saveAddress: boolean,
+  createAccount: boolean,
+}
+
 interface ShippingFormProps {
-  onSubmit: (data: unknown) => void
+  onSubmit: (data: ShippingFormData) => void
 }
 
 const countries = [
@@ -37,7 +55,7 @@ const shippingMethods = [
 ]
 
 export function ShippingForm({ onSubmit }: ShippingFormProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ShippingFormData>({
     email: '',
     firstName: '',
     lastName: '',
@@ -53,7 +71,7 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
     createAccount: false,
   })
 
-  const handleChange = (field: string, value: unknown) => {
+  const handleChange = (field: string, value: boolean | string | ShippingMethod) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 

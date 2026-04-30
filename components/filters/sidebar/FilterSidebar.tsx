@@ -10,18 +10,6 @@ import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import type { NestedCategory } from '@/hooks/useCategories'
 
-// interface FilterOption {
-//   value: string
-//   label: string
-//   count?: number
-// }
-
-// interface FilterGroup {
-//   id: string
-//   name: string
-//   options: FilterOption[]
-// }
-
 interface FilterSidebarProps {
   // filters: FilterGroup[]
   filters: NestedCategory[]

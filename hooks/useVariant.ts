@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import type { ProductVariant, Attribute } from '@/lib/types'
 import { normalizedValue } from '@/lib/utils'
 
-const buildKey = (attrs: Attribute) =>
+export const buildKey = (attrs: Attribute) =>
   Object.entries(attrs)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([k, v]) => `${k}:${v}`)
@@ -94,30 +94,32 @@ export function useVariantSelector(variants: ProductVariant[]) {
   // Change attribute
   const setAttribute = (attributes: Partial<Attribute>) => {
     const [attribute, value] = Object.entries(attributes)[0]
-    setSelected(prev => {
-      if (prev[attribute] === value) return prev
+    if (value !== undefined) {
+      setSelected(prev => {
+        if (prev[attribute] === value) return prev
 
-      const next: Attribute = {
-        ...prev,
-        [attribute]: value
-      }
-
-      // is this combination valid?
-      const key = buildKey(next)
-
-      if (variantKeyMap.has(key)) {
-        return next
-      }
-
-      // fallback
-      for (const variant of variants) {
-        if (variant.attributes?.[attribute] === value) {
-          return filterAttributes(variant.attributes ?? {})
+        const next: Attribute = {
+          ...prev,
+          [attribute]: value
         }
 
-      }
-      return prev
-    })
+        // is this combination valid?
+        const key = buildKey(next)
+
+        if (variantKeyMap.has(key)) {
+          return next
+        }
+
+        // fallback
+        for (const variant of variants) {
+          if (variant.attributes?.[attribute] === value) {
+            return filterAttributes(variant.attributes ?? {})
+          }
+
+        }
+        return prev
+      })
+    }
   }
 
   // Attribute options

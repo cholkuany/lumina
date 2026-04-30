@@ -25,7 +25,7 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
         className="relative w-20 h-20 shrink-0 bg-linen rounded-lg overflow-hidden"
       >
         <Image
-          src={item.variantImage || item.product.variants[0].images[0].secure_url}
+          src={item.product.variant.images[0].secure_url}
           alt={item.product.name}
           fill
           className="object-cover"
@@ -41,9 +41,9 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
         </Link>
 
         {/* Variants */}
-        {item.selectedVariants && Object.keys(item.selectedVariants).length > 0 && (
+        {item.product.variant.attributes && Object.keys(item.product.variant.attributes).length > 0 && (
           <p className="text-xs text-warm-gray-dark mb-2">
-            {Object.entries(item.selectedVariants)
+            {Object.entries(item.product.variant.attributes)
               .map(([key, value]) => `${key}: ${value}`)
               .join(' / ')}
           </p>

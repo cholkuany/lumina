@@ -15,26 +15,14 @@ import { ReviewData } from '@/lib/validations/review.validation'
 interface WriteReviewFormProps {
   productId: string
   productName: string
-  // onSubmit: (review: ReviewData) => Promise<void>
   onCancel?: () => void
 }
-
-// export interface ReviewData {
-//   rating: number
-//   title: string
-//   content: string
-//   images: string[]
-//   recommendProduct: boolean | null
-//   product: string
-// }
 
 export function WriteReviewForm({
   productId,
   productName,
-  // onSubmit,
   onCancel,
 }: WriteReviewFormProps) {
-  // const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string[]>>({})
 
@@ -43,7 +31,6 @@ export function WriteReviewForm({
     title: '',
     content: '',
     images: [],
-    // recommendProduct: true,
     product: productId,
   })
 
@@ -51,9 +38,6 @@ export function WriteReviewForm({
 
   const handleChange = (field: keyof ReviewData, value: unknown) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
-    // if (errors[field]) {
-    //   setErrors((prev) => ({ ...prev, [field]: '' }))
-    // }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -77,46 +61,6 @@ export function WriteReviewForm({
         },
       })
   }
-
-  // const validateForm = () => {
-  //   const newErrors: Record<string, string> = {}
-
-  //   if (formData.rating === 0) {
-  //     newErrors.rating = 'Please select a star rating'
-  //   }
-
-  //   if (!formData.title.trim()) {
-  //     newErrors.title = 'Please add a review title'
-  //   } else if (formData.title.length < 5) {
-  //     newErrors.title = 'Title must be at least 5 characters'
-  //   }
-
-  //   if (!formData.content.trim()) {
-  //     newErrors.content = 'Please write your review'
-  //   } else if (formData.content.length < 20) {
-  //     newErrors.content = 'Review must be at least 20 characters'
-  //   }
-
-  //   setErrors(newErrors)
-  //   return Object.keys(newErrors).length === 0
-  // }
-
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-
-  //   if (!validateForm()) return
-
-  //   setIsSubmitting(true)
-
-  //   try {
-  //     await onSubmit(formData)
-  //     setIsSubmitted(true)
-  //   } catch {
-  //     setErrors({ submit: 'Failed to submit review. Please try again.' })
-  //   } finally {
-  //     setIsSubmitting(false)
-  //   }
-  // }
 
   // Success State
   if (isSubmitted) {
@@ -292,4 +236,3 @@ export function WriteReviewForm({
     </form>
   )
 }
-

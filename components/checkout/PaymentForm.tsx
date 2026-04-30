@@ -9,8 +9,22 @@ import { RadioGroup } from '@/components/ui/RadioGroup'
 import { Button } from '@/components/ui/Button'
 
 interface PaymentFormProps {
-  onSubmit: (data: unknown) => void
+  onSubmit: (data: PaymentFormData) => void
   onBack: () => void
+}
+
+type PaymentMethod = 'card' | 'paypal' | 'applepay'
+export type PaymentFormData = {
+  paymentMethod: PaymentMethod,
+  cardNumber: string,
+  cardName: string,
+  expiry: string,
+  cvv: string,
+  sameAsShipping: boolean,
+  billingAddress: string,
+  billingCity: string,
+  billingState: string,
+  billingZip: string,
 }
 
 const paymentMethods = [
@@ -20,7 +34,7 @@ const paymentMethods = [
 ]
 
 export function PaymentForm({ onSubmit, onBack }: PaymentFormProps) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PaymentFormData>({
     paymentMethod: 'card',
     cardNumber: '',
     cardName: '',
@@ -33,7 +47,7 @@ export function PaymentForm({ onSubmit, onBack }: PaymentFormProps) {
     billingZip: '',
   })
 
-  const handleChange = (field: string, value: unknown) => {
+  const handleChange = (field: string, value: boolean | string | PaymentMethod) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 

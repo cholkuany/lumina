@@ -2,12 +2,12 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, CheckCircle } from 'lucide-react'
 import { CheckoutSteps } from '@/components/checkout/CheckoutSteps'
-import { ShippingForm } from '@/components/checkout/ShippingForm'
-import { PaymentForm } from '@/components/checkout/PaymentForm'
+import { ShippingForm, ShippingFormData } from '@/components/checkout/ShippingForm'
+import { PaymentForm, PaymentFormData } from '@/components/checkout/PaymentForm'
 import { OrderReview } from '@/components/checkout/OrderReview'
 import { CartItem } from '@/components/cart/CartItem'
 import { useCart } from '@/context/CartContext'
@@ -15,22 +15,22 @@ import { formatPrice } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 
 export default function CheckoutPage() {
-  const router = useRouter()
+  // const router = useRouter()
   const { state, subtotal, clearCart } = useCart()
   const [currentStep, setCurrentStep] = useState(1)
-  const [shippingData, setShippingData] = useState(null)
-  const [paymentData, setPaymentData] = useState(null)
+  const [shippingData, setShippingData] = useState<ShippingFormData | null>(null)
+  const [paymentData, setPaymentData] = useState<PaymentFormData | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const [orderComplete, setOrderComplete] = useState(false)
   const [orderNumber, setOrderNumber] = useState('')
 
-  const handleShippingSubmit = (data: any) => {
+  const handleShippingSubmit = (data: ShippingFormData) => {
     setShippingData(data)
     setCurrentStep(2)
     window.scrollTo(0, 0)
   }
 
-  const handlePaymentSubmit = (data: any) => {
+  const handlePaymentSubmit = (data: PaymentFormData) => {
     setPaymentData(data)
     setCurrentStep(3)
     window.scrollTo(0, 0)
@@ -81,7 +81,7 @@ export default function CheckoutPage() {
             Order Number: <span className="text-gold">{orderNumber}</span>
           </p>
           <p className="text-sm text-warm-gray-dark mb-8">
-            We've sent a confirmation email with your order details.
+            We&apos;ve sent a confirmation email with your order details.
             You can track your order status in your account.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

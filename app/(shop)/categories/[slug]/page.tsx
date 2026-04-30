@@ -6,6 +6,7 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { Button } from '@/components/ui/Button'
 import { ChevronRight } from 'lucide-react'
+import { Product } from '@/lib/types'
 
 type categoryData = {
   id: string,
@@ -14,19 +15,7 @@ type categoryData = {
   image: string,
   itemCount: number,
   subcategories: { name: string, slug: string, count: number, image: string }[],
-  featuredProducts:
-  {
-    id: string,
-    name: string,
-    price: number,
-    originalPrice?: number,
-    image: string,
-    description: string,
-    rating: number,
-    reviewCount: number,
-    isSale?: boolean,
-    isNewArrival?: boolean
-  }[],
+  featuredProducts: Product[]
 }
 
 // Mock data - replace with actual data fetching
@@ -49,45 +38,64 @@ const categoriesData: Record<string, categoryData> = {
       {
         id: '1',
         name: 'Wireless Noise-Canceling Headphones',
+        description: '',
+        slug: 'wireless-noise-canceling-headphones',
         price: 249.99,
         originalPrice: 299.99,
-        image: '/images/products/headphones.jpg',
-        description: '',
+        category: { name: 'Electronics' },
         rating: 4.8,
         reviewCount: 234,
         isSale: true,
+        variants: [
+          {
+            id: '1-default',
+            attributes: {
+              color: '',
+              size: '',
+              material: '',
+            },
+            price: 249.99,
+            originalPrice: 299.99,
+            stock: 20,
+            sku: 'SKU-1',
+            images: [
+              {
+                secure_url: '/images/products/headphones.jpg',
+                public_id: 'Wireless Noise-Canceling Headphones',
+              },
+            ],
+          },
+        ],
       },
       {
         id: '4',
         name: 'Smart Home Speaker',
+        description: '',
+        slug: 'smart-home-speaker',
         price: 129.99,
         originalPrice: 159.99,
-        image: '/images/products/speaker.jpg',
-        description: '',
+        category: { name: 'Electronics' },
         rating: 4.6,
         reviewCount: 312,
         isSale: true,
+        variants: [
+          {
+            id: '4-default',
+            attributes: { color: '', size: '', material: '' },
+            price: 129.99,
+            originalPrice: 159.99,
+            stock: 50,
+            sku: 'SKU-4',
+            images: [
+              {
+                secure_url: '/images/products/speaker.jpg',
+                public_id: 'Smart Home Speaker',
+              },
+            ],
+          },
+        ],
       },
-      {
-        id: '8',
-        name: 'Bluetooth Earbuds',
-        price: 99.99,
-        image: '/images/products/earbuds.jpg',
-        description: '',
-        rating: 4.3,
-        reviewCount: 278,
-        isNewArrival: true,
-      },
-      {
-        id: '9',
-        name: '4K Ultra HD Smart TV',
-        price: 599.99,
-        image: '/images/products/tv.jpg',
-        description: '',
-        rating: 4.7,
-        reviewCount: 156,
-      },
-    ],
+    ]
   },
   fashion: {
     id: 'fashion',
@@ -106,22 +114,64 @@ const categoriesData: Record<string, categoryData> = {
       {
         id: '2',
         name: 'Premium Leather Watch',
-        price: 189.99,
-        image: '/images/products/watch.jpg',
         description: '',
+        slug: 'premium-leather-watch',
+        price: 189.99,
+        category: { name: 'Fashion' },
         rating: 4.9,
         reviewCount: 156,
         isNewArrival: true,
+        variants: [
+          {
+            id: '2-default',
+            attributes: {
+              color: '',
+              size: '',
+              material: '',
+            },
+            price: 189.99,
+            originalPrice: 189.99,
+            sku: 'SKU-2',
+            stock: 30,
+            images: [
+              {
+                secure_url: '/images/products/watch.jpg',
+                public_id: 'Premium Leather Watch',
+              },
+            ],
+          },
+        ],
       },
       {
         id: '6',
         name: 'Running Shoes Pro',
-        price: 159.99,
-        image: '/images/products/shoes.jpg',
         description: '',
+        slug: 'running-shoes-pro',
+        price: 159.99,
+        category: { name: 'Fashion' },
         rating: 4.8,
         reviewCount: 445,
         isNewArrival: true,
+        variants: [
+          {
+            id: '6-default',
+            attributes: {
+              color: '',
+              size: '',
+              material: '',
+            },
+            price: 159.99,
+            originalPrice: 159.99,
+            stock: 100,
+            sku: 'SKU-6',
+            images: [
+              {
+                secure_url: '/images/products/shoes.jpg',
+                public_id: 'Running Shoes Pro',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -142,29 +192,92 @@ const categoriesData: Record<string, categoryData> = {
       {
         id: '3',
         name: 'Organic Cotton Throw Blanket',
-        price: 79.99,
-        image: '/images/products/blanket.jpg',
         description: '',
+        slug: 'organic-cotton-throw-blanket',
+        price: 79.99,
+        category: { name: 'Home & Living' },
         rating: 4.7,
         reviewCount: 89,
+        variants: [
+          {
+            id: '3-default',
+            attributes: {
+              color: '',
+              size: '',
+              material: '',
+            },
+            price: 79.99,
+            originalPrice: 79.99,
+            sku: 'SKU-3',
+            stock: 50,
+            images: [
+              {
+                secure_url: '/images/products/blanket.jpg',
+                public_id: 'Organic Cotton Throw Blanket',
+              },
+            ],
+          },
+        ],
       },
       {
         id: '5',
         name: 'Minimalist Desk Lamp',
-        price: 89.99,
-        image: '/images/products/lamp.jpg',
         description: '',
+        slug: 'minimalist-desk-lamp',
+        price: 89.99,
+        category: { name: 'Home & Living' },
         rating: 4.5,
         reviewCount: 67,
+        variants: [
+          {
+            id: '5-default',
+            attributes: {
+              color: '',
+              size: '',
+              material: '',
+            },
+            price: 89.99,
+            originalPrice: 89.99,
+            sku: 'SKU-5',
+            stock: 40,
+            images: [
+              {
+                secure_url: '/images/products/lamp.jpg',
+                public_id: 'Minimalist Desk Lamp',
+              },
+            ],
+          },
+        ],
       },
       {
         id: '7',
         name: 'Ceramic Plant Pot Set',
-        price: 49.99,
-        image: '/images/products/pots.jpg',
         description: '',
+        slug: 'ceramic-plant-pot-set',
+        price: 49.99,
+        category: { name: 'Home & Living' },
         rating: 4.4,
         reviewCount: 123,
+        variants: [
+          {
+            id: '7-default',
+            attributes: {
+              color: '',
+              size: '',
+              material: '',
+            },
+            price: 49.99,
+            originalPrice: 49.99,
+            stock: 75,
+            sku: 'SKU-7',
+            images: [
+              {
+                secure_url: '/images/products/pots.jpg',
+                public_id: 'Ceramic Plant Pot Set',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
@@ -282,7 +395,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {category.featuredProducts.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </section>

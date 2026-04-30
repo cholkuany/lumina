@@ -1,7 +1,8 @@
 'use client'
 
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
-import type { CartItem, Product, Attribute } from '@/lib/types'
+import type { CartItem, Product, Attribute, CartProductVariant, CartProduct } from '@/lib/types'
+import { buildKey } from '@/hooks/useVariant'
 
 interface CartState {
   items: CartItem[]
@@ -37,14 +38,16 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_ITEM': {
       const { product, quantity, variants, image } = action.payload
-      const variantKey = variants ? JSON.stringify(variants) : ''
+
+      // const variantKey = variants ? JSON.stringify(variants) : ''
+
+      const variantKey = buildKey(variants as Attribute)
+
       const existingIndex = state.items.findIndex(
-        item => item.product.id === product.id && JSON.stringify(item.selectedVariants) === variantKey
+        item => item.product.id === product.id && buildKey(item.product.variant.attributes) === variantKey
       )
 
       if (existingIndex > -1) {
-        // const updatedItems = [...state.items]
-        // updatedItems[existingIndex].quantity += quantity
         const updatedItems = state.items.map((item, index) =>
           index === existingIndex
             ? { ...item, quantity: item.quantity + quantity }
@@ -53,9 +56,33 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         return { ...state, items: updatedItems, isOpen: true }
       }
 
+      if (!variants) {
+        throw new Error("Variant not found")
+      }
+
+      const selected = product.variants.find(v => {
+        return Object.entries(variants).every(([key, value]) => v.attributes[key] === value)
+      })
+
+      const productVariant: CartProductVariant = {
+        id: selected!.id,
+        attributes: selected!.attributes,
+        price: selected!.price,
+        originalPrice: selected?.originalPrice,
+        sku: selected!.sku,
+        images: selected!.images,
+      }
+
+      const cartProduct: CartProduct = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        variant: productVariant,
+      }
+
       return {
         ...state,
-        items: [...state.items, { id: `${product.id}-${Date.now()}`, product, quantity, selectedVariants: variants, variantImage: image }],
+        items: [...state.items, { id: `${product.id}-${Date.now()}`, product: cartProduct, quantity, variantImage: image }],
         isOpen: true,
       }
     }
@@ -122,7 +149,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const closeCart = () => dispatch({ type: 'CLOSE_CART' })
 
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = state.items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+  const subtotal = state.items.reduce((sum, item) => sum + item.product.variant.price * item.quantity, 0)
 
   return (
     <CartContext.Provider

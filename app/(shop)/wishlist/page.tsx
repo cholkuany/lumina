@@ -119,7 +119,7 @@ export default function WishlistPage() {
                   </div>
 
                   {/* Stock Status */}
-                  {item.product.inStock ? (
+                  {item.product.stockCount ? (
                     <p className="text-xs text-green-600 mb-3">In Stock</p>
                   ) : (
                     <p className="text-xs text-red-500 mb-3">Out of Stock</p>
@@ -130,7 +130,7 @@ export default function WishlistPage() {
                     className="w-full"
                     size="sm"
                     onClick={() => handleAddToCart(item.product)}
-                    disabled={!item.product.inStock}
+                    disabled={!item.product.stockCount}
                   >
                     <ShoppingBag className="w-4 h-4 mr-2" />
                     Add to Cart

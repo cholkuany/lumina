@@ -6,10 +6,10 @@ const votes: Record<string, Record<string, 'up' | 'down'>> = {}
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { reviewId: string } }
+  { params }: { params: Promise<{ reviewId: string }> }
 ) {
   try {
-    const { reviewId } = params
+    const { reviewId } = await params
     const body = await request.json()
     const { vote, userId } = body
 
@@ -68,10 +68,10 @@ export async function POST(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { reviewId: string } }
+  { params }: { params: Promise<{ reviewId: string }> }
 ) {
   try {
-    const { reviewId } = params
+    const { reviewId } = await params
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
 

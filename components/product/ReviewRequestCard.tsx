@@ -4,11 +4,10 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Star, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { StarRatingInput } from '@/components/ui/StarRatingInput'
 import { WriteReviewModal } from './WriteReviewModal'
-import { ReviewData } from './WriteReviewForm'
 
 interface ReviewRequestCardProps {
   orderId: string
@@ -22,14 +21,13 @@ interface ReviewRequestCardProps {
 }
 
 export function ReviewRequestCard({
-  orderId,
+  // orderId,
   product,
   purchaseDate,
   onDismiss,
 }: ReviewRequestCardProps) {
   const [quickRating, setQuickRating] = useState(0)
   const [showFullReview, setShowFullReview] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleQuickRate = (rating: number) => {
     setQuickRating(rating)
@@ -37,29 +35,6 @@ export function ReviewRequestCard({
     if (rating <= 3) {
       setShowFullReview(true)
     }
-  }
-
-  const handleSubmitReview = async (reviewData: ReviewData) => {
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    console.log('Review submitted:', { orderId, productId: product.id, ...reviewData })
-    setIsSubmitted(true)
-  }
-
-  if (isSubmitted) {
-    return (
-      <div className="bg-green-50 border border-green-200 rounded-brand p-4">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-            <Star className="w-6 h-6 text-green-600 fill-green-600" />
-          </div>
-          <div>
-            <p className="font-medium text-green-700">Thanks for your review!</p>
-            <p className="text-sm text-green-600">Your feedback helps other shoppers.</p>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -129,7 +104,7 @@ export function ReviewRequestCard({
         onClose={() => setShowFullReview(false)}
         productId={product.id}
         productName={product.name}
-        onSubmit={handleSubmitReview}
+      // onSubmit={handleSubmitReview}
       />
     </>
   )

@@ -50,7 +50,7 @@ const orders = [
         product: {
           id: '1',
           name: 'Wireless Noise-Canceling Headphones',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
+          images: [{ secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp', public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp' }],
           price: 249.99,
           color: 'Matte Black',
           size: null,
@@ -63,7 +63,7 @@ const orders = [
         product: {
           id: '3',
           name: 'Organic Cotton Throw Blanket',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
+          images: [{ secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp', public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp' }],
           price: 79.99,
           color: 'Oatmeal',
           size: '50" x 60"',
@@ -131,7 +131,11 @@ const orders = [
         product: {
           id: '2',
           name: 'Premium Leather Watch',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
+          images: [
+            {
+              secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
+              public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'
+            }],
           price: 189.99,
           color: 'Brown Leather',
           size: null,
@@ -196,7 +200,12 @@ const orders = [
         product: {
           id: '4',
           name: 'Smart Home Speaker',
-          images: ['/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'],
+          images: [
+            {
+              secure_url: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
+              public_id: '3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp'
+            },
+          ],
           price: 129.99,
           color: 'Charcoal Gray',
           size: null,
@@ -514,7 +523,7 @@ export default function OrderDetailsPage() {
                     {/* Product Image */}
                     <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-linen rounded-lg overflow-hidden shrink-0">
                       <Image
-                        src={item.product.images[0]}
+                        src={item.product.images[0].secure_url}
                         alt={item.product.name}
                         fill
                         className="object-cover"
@@ -719,7 +728,6 @@ export default function OrderDetailsPage() {
         <ReturnItemsContent
           order={order}
           onClose={() => setShowReturnModal(false)}
-          onSubmit={() => { }}
         />
       </Modal>
 

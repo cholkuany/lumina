@@ -30,8 +30,8 @@ export function ProductCard({
 
   console.log('Cart Items:', cartItem)
 
-  const isCurrentVariantInCart = cartItem?.selectedVariants
-    ? JSON.stringify(cartItem.selectedVariants) === JSON.stringify(currentVariant.attributes)
+  const isCurrentVariantInCart = cartItem?.product.variant.attributes
+    ? JSON.stringify(cartItem.product.variant.attributes) === JSON.stringify(currentVariant.attributes)
     : false
 
   const isCurrrentVariantInstock = isCurrentVariantInCart
@@ -87,9 +87,6 @@ export function ProductCard({
               onClick={(e) => {
                 e.preventDefault()
                 handleAddToCart()
-                // addItemToCart({
-                //   ...product
-                // }, 1)
               }}
             >
               Quick Add

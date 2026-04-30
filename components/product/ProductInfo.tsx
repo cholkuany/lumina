@@ -62,7 +62,7 @@ export function ProductInfo({ product }: { product: Product }) {
   const stockCount = currentVariant?.stock ?? product.stockCount ?? 0
   const cartQuantity = state.items.find(
     item => item.product.id === product.id
-      && JSON.stringify(item.selectedVariants) === JSON.stringify(selectedVariants)
+      && JSON.stringify(item.product.variant.attributes) === JSON.stringify(selectedVariants)
   )?.quantity || 0
 
   return (

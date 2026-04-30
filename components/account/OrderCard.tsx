@@ -73,7 +73,7 @@ export function OrderCard({ order }: OrderCardProps) {
                 className="relative w-16 h-16 sm:w-20 sm:h-20 bg-linen rounded-lg overflow-hidden shrink-0"
               >
                 <Image
-                  src={item.product.images[0]}
+                  src={item.product.variant.images[0].secure_url}
                   alt={item.product.name}
                   fill
                   className="object-cover"

@@ -5,50 +5,13 @@ import { AccountSidebar } from '@/components/account/AccountSidebar'
 import { OrderCard } from '@/components/account/OrderCard'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Button } from '@/components/ui/Button'
-import { Order, LoginUser } from '@/lib/types'
+import { LoginUser } from '@/lib/types'
 import Image from 'next/image'
+
+import { orders } from './orders/page'
 
 import { getServerSession } from "@/lib/auth-server";
 import { redirect } from "next/navigation";
-
-// Mock recent orders
-const recentOrders: Order[] = [
-  {
-    id: '1',
-    orderNumber: 'LUM-12345678',
-    date: 'Dec 15, 2024',
-    status: 'shipped' as const,
-    total: 329.98,
-    items: [
-      {
-        id: '1',
-        product: {
-          id: '1',
-          name: 'Wireless Noise-Canceling Headphones',
-          images: ['/images/products/headphones.jpg'],
-          price: 249.99
-        },
-        quantity: 1,
-      },
-    ],
-    subtotal: 329.98,
-    shipping: 57697857,
-    tax: 67800,
-    shippingAddress: {
-      id: "33",
-      firstName: "John",
-      lastName: "Smith",
-      street: "1001 Main Street",
-      city: "London",
-      state: "Ontario",
-      zipCode: "T4R 3G7",
-      country: "Canada",
-      phone: "444-000-5555",
-      isDefault: true
-    },
-    trackingNumber: 'LUM-4576-TR'
-  },
-]
 
 const quickActions = [
   { icon: Package, label: 'Orders', href: '/account/orders', count: 5 },
@@ -143,9 +106,9 @@ export default async function AccountPage() {
                 </Link>
               </div>
 
-              {recentOrders.length > 0 ? (
+              {orders.length > 0 ? (
                 <div className="space-y-4">
-                  {recentOrders.map((order) => (
+                  {orders.map((order) => (
                     <OrderCard key={order.id} order={order} />
                   ))}
                 </div>

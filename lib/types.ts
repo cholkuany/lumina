@@ -1,4 +1,4 @@
-import { Product } from "./db/models"
+// import { Product } from "./db/models"
 import { IImage } from "./db/models/Product"
 import { DBReview } from "./queries/get.reviews"
 import { ProductFormData } from "./validations/product.validation"
@@ -20,7 +20,6 @@ export interface Product {
   unitsSold?: number
   rating: number
   reviewCount: number
-  // inStock: boolean
   stockCount?: number
   variants: ProductVariant[]
   specifications?: {
@@ -44,8 +43,8 @@ export type Attribute = {
   color: string
   size: string
   material?: string
-  [key: string]: string | undefined
-}
+  // [key: string]: string | undefined
+} & Record<string, string>
 
 export interface ProductVariant {
   id: string
@@ -57,14 +56,22 @@ export interface ProductVariant {
   images: IImage[]
 }
 
-export type CartProduct = Pick<Product, 'id' | 'name' | 'variants' | 'price'>
+
+export type CartProductVariant = Omit<ProductVariant, 'stock'>
+//  & {
+// quantity: number
+// image: string
+// }
+export type CartProduct = Pick<Product, 'id' | 'name' | 'price'>
+  & {
+    variant: CartProductVariant
+  }
 
 export interface CartItem {
   id: string
   product: CartProduct
   quantity: number
-  selectedVariants?: Partial<Attribute>
-  // Record<string, string>
+  // selectedVariants?: Partial<Attribute>
   variantImage?: string
 }
 
@@ -100,34 +107,6 @@ export interface ReviewSubmission {
   content: string
   images: IImage[]
   recommendProduct: boolean | null
-}
-
-export interface Address {
-  id: string
-  firstName: string
-  lastName: string
-  street: string
-  apartment?: string
-  city: string
-  state: string
-  zipCode: string
-  country: string
-  phone: string
-  isDefault: boolean
-}
-
-export interface Order {
-  id: string
-  orderNumber: string
-  date: string
-  status: 'processing' | 'shipped' | 'delivered' | 'cancelled'
-  items: CartItem[]
-  subtotal: number
-  shipping: number
-  tax: number
-  total: number
-  shippingAddress: Address
-  trackingNumber?: string
 }
 
 export interface ReviewForModeration extends Review {
@@ -175,6 +154,37 @@ export interface ModerationStats {
   averageResponseTime: string
 }
 
+export interface Address {
+  id: string
+  firstName: string
+  lastName: string
+  street: string
+  apartment?: string
+  city: string
+  state: string
+  zipCode: string
+  country: string
+  phone: string
+  isDefault: boolean
+}
+
+export type ShippingAddress = Address
+export type BillingAddress = Omit<Address, 'isDefault' | 'phone'>
+
+export interface Order {
+  id: string
+  orderNumber: string
+  date: string
+  status: OrderStatus
+  items: CartItem[]
+  subtotal: number
+  shipping: number
+  tax: number
+  total: number
+  shippingAddress: ShippingAddress
+  trackingNumber?: string
+}
+
 export type OrderStatus = 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
 export interface OrderProps {
@@ -201,30 +211,8 @@ export interface OrderProps {
     }
     quantity: number
   }>
-  shippingAddress: {
-    id: string
-    firstName: string
-    lastName: string
-    street: string
-    apartment?: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-    phone?: string
-    isDefault: boolean
-  }
-  billingAddress: {
-    id: string
-    firstName: string
-    lastName: string
-    street: string
-    apartment?: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-  }
+  shippingAddress: ShippingAddress
+  billingAddress: BillingAddress
   paymentMethod: {
     type: string
     brand: string
@@ -303,7 +291,7 @@ export interface AdminNotification {
   createdAt: string
 }
 
-export type ActionType = 'approve' | 'reject' | 'delete' | 'activate' | 'deactivate' | 'publish' | 'unpublish' | 'edit'
+export type ActionType = 'approve' | 'reject' | 'delete' | 'activate' | 'deactivate' | 'publish' | 'unpublish' | 'edit' | 'cancel'
 
 export type Resource = 'review' | 'product' | 'user'
 
