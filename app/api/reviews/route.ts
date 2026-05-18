@@ -13,6 +13,7 @@ import { getServerSession } from '@/lib/auth-server'
 import { Resource } from '@/lib/types'
 import { apiResponse } from '../apiResponse'
 import Order from '@/lib/db/models/Order';
+import Purchase from '@/lib/db/models/Purchase';
 
 type MongooseModel = Model<unknown>
 
@@ -20,7 +21,8 @@ const MODEL_MAP: Record<Resource, MongooseModel> = {
   review: Review,
   product: Product,
   user: User,
-  order: Order
+  order: Order,
+  purchase: Purchase
 }
 
 export async function POST(req: NextRequest) {
