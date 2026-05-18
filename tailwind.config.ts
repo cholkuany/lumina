@@ -30,7 +30,7 @@ const config: Config = {
         sans: ['DM Sans', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
-        'brand': '12px',
+        'brand': 'var(--radius-brand)',
       },
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(35, 35, 35, 0.07), 0 10px 20px -2px rgba(35, 35, 35, 0.04)',

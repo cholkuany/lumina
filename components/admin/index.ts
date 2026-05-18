@@ -1,8 +1,5 @@
 export { Sidebar } from './Sidebar'
 export { AdminHeader } from './Header'
 export { StatsCard } from './StatsCard'
-export { DataTable } from './DataTable'
-export { Pagination } from './Pagination'
-export { SearchFilter } from './SearchFilter'
 export { StatusBadge } from './StatusBadge'
 export { ConfirmModal } from './ConfirmModal'

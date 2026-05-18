@@ -1,25 +1,44 @@
 'use client'
 
 import { useState } from 'react'
-// import Link from 'next/link'
-import { DataTable } from '@/components/admin/DataTable'
-import { SearchFilter } from '@/components/admin/SearchFilter'
-import { Pagination } from '@/components/admin/Pagination'
+
+import { ResourceTable } from '@/components/tables/ResourceTable'
+import { useResourceController, useTableInstanceController } from '@/hooks/useResourceController'
+import { ResourceTableToolbar } from '@/components/tables/ResourceTableToolbar'
+import { ResourceTablePagination } from '@/components/tables/ResourceTablePagination'
+import { ResourceHeader } from '@/components/admin/resource/ResourceHeader'
+import { BulkActions } from '@/components/admin/resource/ResourceBulkActions'
+
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
-import { Eye, Printer, X, Mail, Check, Truck, Clock, Upload } from 'lucide-react'
+import { useOrderColumns } from '@/components/admin/columns/orderColumns'
 
+import { Printer, X, Mail, Check, Truck, Clock } from 'lucide-react'
+import { ConfirmModal } from '@/components/admin'
+export type TOrderStatus = 'shipped' | 'processing' | 'delivered' | 'cancelled'
+export type TPaymentStatus = 'paid' | 'refunded' | 'failed' | 'pending'
+
+export type TOrder = {
+  id: string,
+  orderNumber: string,
+  customer: { name: string, email: string },
+  items: number,
+  total: number,
+  status: TOrderStatus,
+  paymentStatus: TPaymentStatus,
+  date: string,
+}
 // Mock data
-const orders = [
+export const orders: TOrder[] = [
   {
     id: '1',
     orderNumber: 'LUM-2401-ABC123',
     customer: { name: 'Sarah Johnson', email: 'sarah@example.com' },
     items: 3,
     total: 299.99,
-    status: 'processing' as const,
+    status: 'processing',
     paymentStatus: 'paid',
     date: '2024-01-15T10:30:00Z',
   },
@@ -29,7 +48,7 @@ const orders = [
     customer: { name: 'Michael Chen', email: 'michael@example.com' },
     items: 1,
     total: 549.00,
-    status: 'shipped' as const,
+    status: 'shipped',
     paymentStatus: 'paid',
     date: '2024-01-15T09:15:00Z',
   },
@@ -39,7 +58,7 @@ const orders = [
     customer: { name: 'Emily Davis', email: 'emily@example.com' },
     items: 2,
     total: 189.50,
-    status: 'delivered' as const,
+    status: 'delivered',
     paymentStatus: 'paid',
     date: '2024-01-14T16:45:00Z',
   },
@@ -49,7 +68,7 @@ const orders = [
     customer: { name: 'James Wilson', email: 'james@example.com' },
     items: 5,
     total: 725.00,
-    status: 'processing' as const,
+    status: 'processing',
     paymentStatus: 'paid',
     date: '2024-01-14T14:20:00Z',
   },
@@ -59,7 +78,7 @@ const orders = [
     customer: { name: 'Anna Martinez', email: 'anna@example.com' },
     items: 1,
     total: 149.99,
-    status: 'cancelled' as const,
+    status: 'cancelled',
     paymentStatus: 'refunded',
     date: '2024-01-14T11:00:00Z',
   },
@@ -69,7 +88,7 @@ const orders = [
     customer: { name: 'Robert Brown', email: 'robert@example.com' },
     items: 4,
     total: 890.00,
-    status: 'shipped' as const,
+    status: 'shipped',
     paymentStatus: 'paid',
     date: '2024-01-13T15:30:00Z',
   },
@@ -90,140 +109,63 @@ const paymentStatuses = [
 ]
 
 export default function OrdersPage() {
-  const [selectedOrders, setSelectedOrders] = useState<string[]>([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [orderDetail, setOrderDetail] = useState<(typeof orders)[0] | null>(null)
+  // const router = useRouter()
+  const [orderDetail, setOrderDetail] = useState<TOrder | null>(null)
 
-  const handleSearch = (query: string) => {
-    console.log('Search:', query)
+  const {
+    filterValues,
+    setFilterValues,
+
+    confirm,
+    mutation,
+    handleDelete,
+
+    pagination,
+    setPagination,
+
+    rowSelection,
+    setRowSelection,
+
+    globalFilter,
+    setGlobalFilter
+  } = useResourceController('order')
+
+  const columns = useOrderColumns({ setOrderDetail })
+
+  const { table } = useTableInstanceController(
+    columns,
+    orders,
+    rowSelection,
+    setRowSelection,
+    pagination,
+    setPagination,
+    globalFilter,
+    setGlobalFilter,
+    (order) => order.id
+  )
+
+  const selectedIds =
+    table
+      .getSelectedRowModel()
+      .rows.map((row) =>
+        row.original.id
+      )
+
+  const handleBulkDelete = () => {
+    if (selectedIds.length > 0) {
+      handleDelete('delete', selectedIds)
+
+    }
   }
-
-  const handleFilterChange = (filters: Record<string, string>) => {
-    console.log('Filters:', filters)
-  }
-
-  const columns = [
-    {
-      key: 'order',
-      title: 'Order',
-      render: (order: (typeof orders)[0]) => (
-        <div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setOrderDetail(order)
-            }}
-            className="font-medium text-charcoal hover:text-gold transition-colors"
-          >
-            {order.orderNumber}
-          </button>
-          <p className="text-xs text-warm-gray-dark">
-            {new Date(order.date).toLocaleDateString('en-US', {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-          </p>
-        </div>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'customer',
-      title: 'Customer',
-      render: (order: (typeof orders)[0]) => (
-        <div>
-          <p className="text-sm font-medium text-charcoal">{order.customer.name}</p>
-          <p className="text-xs text-warm-gray-dark">{order.customer.email}</p>
-        </div>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'items',
-      title: 'Items',
-      render: (order: (typeof orders)[0]) => (
-        <span className="text-charcoal">{order.items}</span>
-      ),
-    },
-    {
-      key: 'total',
-      title: 'Total',
-      render: (order: (typeof orders)[0]) => (
-        <span className="font-medium text-charcoal">${order.total.toFixed(2)}</span>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'payment',
-      title: 'Payment',
-      render: (order: (typeof orders)[0]) => (
-        <span
-          className={cn(
-            'px-2 py-1 text-xs font-medium rounded-full capitalize',
-            order.paymentStatus === 'paid' && 'bg-green-100 text-green-700',
-            order.paymentStatus === 'pending' && 'bg-amber-100 text-amber-700',
-            order.paymentStatus === 'failed' && 'bg-red-100 text-red-700',
-            order.paymentStatus === 'refunded' && 'bg-gray-100 text-gray-700'
-          )}
-        >
-          {order.paymentStatus}
-        </span>
-      ),
-    },
-    {
-      key: 'status',
-      title: 'Status',
-      render: (order: (typeof orders)[0]) => <StatusBadge status={order.status} size="sm" />,
-    },
-    {
-      key: 'actions',
-      title: '',
-      render: (order: (typeof orders)[0]) => (
-        <div className="flex items-center justify-end gap-1">
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setOrderDetail(order)
-            }}
-            className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
-            title="View details"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              // Handle print
-            }}
-            className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
-            title="Print invoice"
-          >
-            <Printer className="w-4 h-4" />
-          </button>
-        </div>
-      ),
-      className: 'w-24',
-    },
-  ]
 
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold text-charcoal">Orders</h1>
-          <p className="text-warm-gray-dark mt-1">
-            Manage and track customer orders
-          </p>
-        </div>
-        <Button variant="secondary">
-          <Upload className="w-4 h-4 mr-2" />
-          Export Orders
-        </Button>
-      </div>
+      <ResourceHeader
+        title='Orders'
+        description='Manage and track customer orders'
+        exportText='Export Orders'
+      />
 
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -273,35 +215,28 @@ export default function OrdersPage() {
         </div>
       </div>
 
-      {/* Search & Filters */}
-      <SearchFilter
+      <ResourceTableToolbar
         searchPlaceholder="Search orders..."
-        onSearchChange={handleSearch}
+        search={globalFilter}
+        onSearchChange={setGlobalFilter}
         filters={[
           { key: 'status', label: 'Status', options: orderStatuses },
           { key: 'payment', label: 'Payment', options: paymentStatuses },
         ]}
-        onFilterChange={handleFilterChange}
+        onFilterChange={setFilterValues}
+        filterValues={filterValues}
+        actions={<BulkActions onDelete={handleBulkDelete} selected={selectedIds} />}
       />
 
-      {/* Data Table */}
-      <DataTable
-        columns={columns}
-        data={orders}
-        keyExtractor={(order) => order.id}
-        onRowClick={(order) => setOrderDetail(order)}
-        selectable
-        onSelectionChange={setSelectedOrders}
+      <ResourceTable
+        table={table}
+        onRowClick={
+          () => console.log(`/admin/orders`)
+        }
+        selectable={true}
       />
 
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={50}
-        onPageChange={setCurrentPage}
-        totalItems={1284}
-        itemsPerPage={10}
-      />
+      <ResourceTablePagination table={table} />
 
       {/* Order Detail Drawer */}
       {orderDetail && (
@@ -310,6 +245,20 @@ export default function OrdersPage() {
           onClose={() => setOrderDetail(null)}
         />
       )}
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={confirm.state.open}
+        onClose={confirm.close}
+        onConfirm={confirm.confirm}
+        title="Delete Order"
+        confirmLabel="Delete"
+        variant="danger"
+        action={confirm.state.type}
+        count={confirm.state.ids.length}
+        isLoading={mutation.isPending}
+        resource={confirm.state.resource}
+      />
     </div>
   )
 }

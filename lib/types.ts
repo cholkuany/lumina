@@ -3,6 +3,7 @@ import { IImage } from "./db/models/Product"
 import { DBReview } from "./queries/get.reviews"
 import { ProductFormData } from "./validations/product.validation"
 import { ZUser } from "./validations/user.validation"
+import { TOrder } from "@/app/(management)/admin/orders/page"
 
 export interface Product {
   id: string
@@ -293,12 +294,14 @@ export interface AdminNotification {
 
 export type ActionType = 'approve' | 'reject' | 'delete' | 'activate' | 'deactivate' | 'publish' | 'unpublish' | 'edit' | 'cancel'
 
-export type Resource = 'review' | 'product' | 'user'
+export type Resource = 'review' | 'product' | 'user' | 'order' | 'purchase'
 
 export const ENDPOINT_MAP: Record<Resource, string> = {
   review: '/api/reviews',
   product: '/api/products',
   user: '/api/users',
+  order: '/api/orders',
+  purchase: 'api/purchases',
 }
 
 export type ConfirmState<R extends Resource> = {
@@ -325,6 +328,7 @@ export interface ResourceMap {
   review: DBReview
   product: DBProduct
   user: DBUser
+  order: TOrder
 }
 
 export interface ListResponse<T> {
@@ -353,6 +357,10 @@ export const RESOURCE_CONFIG = {
   user: {
     endpoint: '/api/users',
     queryKey: ['users-dashboard'],
+  },
+  order: {
+    endpoint: '/api/order',
+    queryKey: ['orders-dashboard'],
   },
 } as const
 

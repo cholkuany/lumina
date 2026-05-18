@@ -9,7 +9,7 @@ export const WishlistButton = () => {
     <Button
       variant="ghost"
       size="icon"
-      className="hidden sm:flex"
+      className="flex"
       onClick={() => router.push('/wishlist')}
     >
       <Heart className="w-5 h-5" />

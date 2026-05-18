@@ -19,7 +19,7 @@ export const UserMenu = ({ user, firstName, lastName }: UserMenuProps) => {
   useClickOutside(ref, () => setOpen(false))
 
   return (
-    <div ref={ref} className="relative hidden sm:block">
+    <div ref={ref} className="relative block">
       <UserAvatar
         user={user}
         initials={`${firstName[0]}${lastName[0]}`}

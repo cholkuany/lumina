@@ -1,6 +1,4 @@
-// components/ui/Breadcrumb.tsx
 import Link from 'next/link'
-import { ChevronRight, Home } from 'lucide-react'
 
 interface BreadcrumbItem {
   label: string
@@ -13,18 +11,13 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav className="flex items-center gap-2 text-sm">
-      <Link href="/" className="text-warm-gray-dark hover:text-gold transition-colors">
-        <Home className="w-4 h-4" />
-      </Link>
-
+    <nav className="flex items-center gap-2 text-sm flex-wrap">
       {items.map((item, index) => (
-        <div key={index} className="flex items-center gap-2">
-          <ChevronRight className="w-4 h-4 text-warm-gray" />
+        <div key={index} className="flex items-center not-last:after:ml-2 not-last:after:content-['/'] not-last:after:text-warm-gray group">
           {item.href ? (
             <Link
               href={item.href}
-              className="text-warm-gray-dark hover:text-gold transition-colors"
+              className="text-warm-gray-dark hover:text-gold transition-colors group-last:text-charcoal underline underline-offset-[3px]"
             >
               {item.label}
             </Link>

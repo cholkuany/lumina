@@ -299,11 +299,12 @@ const categoriesData: Record<string, categoryData> = {
 }
 
 interface CategoryPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const category = categoriesData[params.slug]
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = await params
+  const category = categoriesData[slug]
 
   if (!category) {
     notFound()

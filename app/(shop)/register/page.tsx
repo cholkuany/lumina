@@ -1,4 +1,3 @@
-// app/register/page.tsx
 'use client'
 
 import { useState } from 'react'
@@ -47,14 +46,6 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-block">
-            <span className="font-serif text-3xl font-semibold text-charcoal">
-              LUMINA
-            </span>
-          </Link>
-        </div>
 
         {/* Form Card */}
         <div className="bg-white border border-warm-gray-light rounded-brand p-8 shadow-soft">
@@ -127,16 +118,6 @@ export default function RegisterPage() {
             </Link>
           </p>
         </div>
-
-        {/* Back to Home */}
-        <p className="text-center mt-6">
-          <Link
-            href="/"
-            className="text-sm text-warm-gray-dark hover:text-charcoal transition-colors"
-          >
-            ← Back to Home
-          </Link>
-        </p>
       </div>
     </main>
   )

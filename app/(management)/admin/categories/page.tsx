@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { CategoryTree } from '@/components/admin/CategoryTree'
 import { CategoryModal } from '@/components/admin/CategoryModal'
 import { ConfirmModal } from '@/components/admin/ConfirmModal'
-import { SearchFilter } from '@/components/admin/SearchFilter'
+import { SearchComponent } from '@/components/Search'
 import { Button } from '@/components/ui/Button'
 import { CategoryFormData } from '@/lib/validations/category.validation'
 import { useCategories } from '@/hooks/useCategories'
@@ -34,8 +34,15 @@ export default function CategoriesPage() {
   const { data, isPending, isError } = useCategories(showInactive)
   const { data: flatCategoryData, isPending: isFlatPending, isError: isFlatError } = useFlatCategories(true)
 
-  const pending = isPending && isFlatPending
-  const hasErred = isError && isFlatError
+  const pending = isPending || isFlatPending
+  const hasErred = isError || isFlatError
+
+  // Filter categories based on search
+  const filteredCategories = useMemo(() => {
+    return searchQuery
+      ? filterCategories(data?.categories ?? [], searchQuery)
+      : data?.categories ?? []
+  }, [data?.categories, searchQuery])
 
   if (pending) return <div>Loading...</div>
   if (hasErred) return <div>Error fetching categories.</div>
@@ -43,11 +50,6 @@ export default function CategoriesPage() {
   const categories = data?.categories ?? []
   const categoryMap = data?.categoryMap ?? new Map()
   const flatCategories = flatCategoryData ?? []
-
-  // Filter categories based on search
-  const filteredCategories = searchQuery
-    ? filterCategories(categories, searchQuery)
-    : categories
 
   const saveCategory = async (data: CategoryFormData) => {
     const url = modal.category
@@ -112,7 +114,7 @@ export default function CategoriesPage() {
       }
 
       queryClient.invalidateQueries({
-        queryKey: ['categories'],
+        queryKey: ['categories', showInactive],
       })
 
       setModal({ type: null })
@@ -175,10 +177,10 @@ export default function CategoriesPage() {
       {/* Search & Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex-1">
-          <SearchFilter
+          <SearchComponent
             searchPlaceholder="Search categories..."
+            search={searchQuery}
             onSearchChange={setSearchQuery}
-            onFilterChange={() => { }}
           />
         </div>
         <label className="flex items-center gap-2 px-4 py-2 bg-white rounded-brand border border-warm-gray cursor-pointer">
@@ -194,27 +196,12 @@ export default function CategoriesPage() {
 
       {/* Category Tree */}
       <div className="bg-white rounded-brand border border-warm-gray p-4">
-        {isPending ? (
-          <div className="space-y-3">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="flex items-center gap-3 animate-pulse">
-                <div className="w-6 h-6 bg-warm-gray-light rounded" />
-                <div className="w-8 h-8 bg-warm-gray-light rounded-lg" />
-                <div className="flex-1">
-                  <div className="h-4 bg-warm-gray-light rounded w-1/3 mb-2" />
-                  <div className="h-3 bg-warm-gray-light rounded w-1/4" />
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <CategoryTree
-            categories={filteredCategories}
-            onEdit={(category) => setModal({ type: 'edit', category })}
-            onDelete={(category) => setModal({ type: 'delete', category })}
-            onAddChild={(parentId) => setModal({ type: 'create', parentId })}
-          />
-        )}
+        <CategoryTree
+          categories={filteredCategories}
+          onEdit={(category) => setModal({ type: 'edit', category })}
+          onDelete={(category) => setModal({ type: 'delete', category })}
+          onAddChild={(parentId) => setModal({ type: 'create', parentId })}
+        />
       </div>
 
       {/* Create/Edit Modal */}

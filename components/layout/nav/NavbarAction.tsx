@@ -12,7 +12,7 @@ type NavbarActionsProps = {
 }
 
 export const NavbarActions = ({ user, firstName, lastName, itemCount }: NavbarActionsProps) => (
-  <div className="flex items-center gap-1 sm:gap-2">
+  <div className="flex items-center gap-0.5 sm:gap-2">
     <SearchBar />
     <UserMenu user={user} firstName={firstName} lastName={lastName} />
     <WishlistButton />

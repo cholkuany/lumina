@@ -1,18 +1,37 @@
 'use client'
 
 import { useState } from 'react'
-// import Link from 'next/link'
-import { DataTable } from '@/components/admin/DataTable'
-import { SearchFilter } from '@/components/admin/SearchFilter'
-import { Pagination } from '@/components/admin/Pagination'
+
+import { ResourceTable } from '@/components/tables/ResourceTable'
+import { ResourceTablePagination } from '@/components/tables/ResourceTablePagination'
+import { ResourceTableToolbar } from '@/components/tables/ResourceTableToolbar'
+import { useResourceController } from '@/hooks/useResourceController'
+import { useTableInstanceController } from '@/hooks/useResourceController'
+
+import { usePurchaseColumns } from '@/components/admin/columns/usePurchaseColumns'
+
 import { ConfirmModal } from '@/components/admin/ConfirmModal'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
-import { Clipboard, Box, Truck, Check, CircleDollarSign, Plus, Upload, Printer, Mail, Building, Download, X, Eye } from 'lucide-react'
+import { Clipboard, Box, Truck, Check, CircleDollarSign, Plus, Upload, Printer, Mail, Building, Download, X } from 'lucide-react'
+import { BulkActions } from '@/components/admin/resource/ResourceBulkActions'
 
+type PurchaseStatus = 'pending' | 'ordered' | 'in_transit' | 'received' | 'cancelled'
+
+export interface IPurchase {
+  id: string,
+  purchaseNumber: string,
+  supplier: { name: string, email: string },
+  items: number,
+  total: number,
+  status: PurchaseStatus,
+  expectedDate: string,
+  receivedDate: string | null,
+  date: string,
+}
 // Mock data - Purchases from suppliers/vendors
-const purchases = [
+const purchases: IPurchase[] = [
   {
     id: '1',
     purchaseNumber: 'PO-2401-001',
@@ -78,7 +97,7 @@ const purchaseStatuses = [
   { value: 'cancelled', label: 'Cancelled' },
 ]
 
-const statusConfig: Record<string, { label: string; className: string }> = {
+export const statusConfig: Record<string, { label: string; className: string }> = {
   pending: { label: 'Pending', className: 'bg-gray-100 text-gray-700' },
   ordered: { label: 'Ordered', className: 'bg-blue-100 text-blue-700' },
   in_transit: { label: 'In Transit', className: 'bg-amber-100 text-amber-700' },
@@ -87,21 +106,13 @@ const statusConfig: Record<string, { label: string; className: string }> = {
 }
 
 export default function PurchasesPage() {
-  const [selectedPurchases, setSelectedPurchases] = useState<string[]>([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [purchaseDetail, setPurchaseDetail] = useState<(typeof purchases)[0] | null>(null)
+  // const [selectedPurchases, setSelectedPurchases] = useState<string[]>([])
+  // const [currentPage, setCurrentPage] = useState(1)
+  const [purchaseDetail, setPurchaseDetail] = useState<IPurchase | null>(null)
   const [cancelModal, setCancelModal] = useState<{ open: boolean; purchaseId?: string }>({
     open: false,
   })
   const [isLoading, setIsLoading] = useState(false)
-
-  const handleSearch = (query: string) => {
-    console.log('Search:', query)
-  }
-
-  const handleFilterChange = (filters: Record<string, string>) => {
-    console.log('Filters:', filters)
-  }
 
   const handleCancelPurchase = async () => {
     setIsLoading(true)
@@ -110,115 +121,43 @@ export default function PurchasesPage() {
     setCancelModal({ open: false })
   }
 
-  const columns = [
-    {
-      key: 'purchase',
-      title: 'Purchase Order',
-      render: (purchase: (typeof purchases)[0]) => (
-        <div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setPurchaseDetail(purchase)
-            }}
-            className="font-medium text-charcoal hover:text-gold transition-colors"
-          >
-            {purchase.purchaseNumber}
-          </button>
-          <p className="text-xs text-warm-gray-dark">
-            {new Date(purchase.date).toLocaleDateString()}
-          </p>
-        </div>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'supplier',
-      title: 'Supplier',
-      render: (purchase: (typeof purchases)[0]) => (
-        <div>
-          <p className="text-sm font-medium text-charcoal">{purchase.supplier.name}</p>
-          <p className="text-xs text-warm-gray-dark">{purchase.supplier.email}</p>
-        </div>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'items',
-      title: 'Items',
-      render: (purchase: (typeof purchases)[0]) => (
-        <span className="text-charcoal">{purchase.items}</span>
-      ),
-    },
-    {
-      key: 'total',
-      title: 'Total',
-      render: (purchase: (typeof purchases)[0]) => (
-        <span className="font-medium text-charcoal">
-          ${purchase.total.toLocaleString()}
-        </span>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'expected',
-      title: 'Expected',
-      render: (purchase: (typeof purchases)[0]) => (
-        <span className="text-sm text-warm-gray-dark">
-          {new Date(purchase.expectedDate).toLocaleDateString()}
-        </span>
-      ),
-      sortable: true,
-    },
-    {
-      key: 'status',
-      title: 'Status',
-      render: (purchase: (typeof purchases)[0]) => {
-        const config = statusConfig[purchase.status]
-        return (
-          <span
-            className={cn(
-              'px-2 py-1 text-xs font-medium rounded-full',
-              config.className
-            )}
-          >
-            {config.label}
-          </span>
-        )
-      },
-    },
-    {
-      key: 'actions',
-      title: '',
-      render: (purchase: (typeof purchases)[0]) => (
-        <div className="flex items-center justify-end gap-1">
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              setPurchaseDetail(purchase)
-            }}
-            className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
-            title="View details"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-          {purchase.status !== 'received' && purchase.status !== 'cancelled' && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                setCancelModal({ open: true, purchaseId: purchase.id })
-              }}
-              className="p-2 text-warm-gray-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-              title="Cancel order"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </div>
-      ),
-      className: 'w-24',
-    },
-  ]
+  const columns = usePurchaseColumns({ setCancelModal, setPurchaseDetail })
+
+  const {
+    filterValues, setFilterValues,
+    pagination, setPagination,
+    globalFilter, setGlobalFilter,
+    // confirm,
+    // mutation,
+    handleDelete,
+    rowSelection, setRowSelection,
+  } = useResourceController('purchase')
+
+  const { table } = useTableInstanceController(
+    columns,
+    purchases,
+    rowSelection,
+    setRowSelection,
+    pagination,
+    setPagination,
+    globalFilter,
+    setGlobalFilter,
+    (purchase) => purchase.id
+  )
+
+  const selectedIds =
+    table
+      .getSelectedRowModel()
+      .rows.map((row) =>
+        row.original.id
+      )
+
+  const handleBulkDelete = () => {
+    if (selectedIds.length > 0) {
+      handleDelete('delete', selectedIds)
+
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -302,32 +241,29 @@ export default function PurchasesPage() {
       </div>
 
       {/* Search & Filters */}
-      <SearchFilter
+      <ResourceTableToolbar
         searchPlaceholder="Search purchases..."
-        onSearchChange={handleSearch}
+        onSearchChange={setGlobalFilter}
+        search={globalFilter}
         filters={[
           { key: 'status', label: 'Status', options: purchaseStatuses },
         ]}
-        onFilterChange={handleFilterChange}
+        onFilterChange={setFilterValues}
+        actions={<BulkActions onDelete={handleBulkDelete} selected={selectedIds} />}
+        filterValues={filterValues}
       />
 
       {/* Data Table */}
-      <DataTable
-        columns={columns}
-        data={purchases}
-        keyExtractor={(purchase) => purchase.id}
+      <ResourceTable
+        table={table}
         onRowClick={(purchase) => setPurchaseDetail(purchase)}
-        selectable
-        onSelectionChange={setSelectedPurchases}
+        selectable={true}
+        emptyMessage='No data found'
       />
 
       {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={10}
-        onPageChange={setCurrentPage}
-        totalItems={158}
-        itemsPerPage={10}
+      <ResourceTablePagination
+        table={table}
       />
 
       {/* Purchase Detail Drawer */}

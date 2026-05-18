@@ -1,7 +1,7 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import { createNotification } from '@/lib/queries/notification.queries';
 
-export type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
+export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
 // Order Item Sub-schema (snapshot of cart item at time of order)
 const OrderItemSchema = new Schema({
@@ -86,6 +86,17 @@ export interface IStatusHistory {
   note?: string;
 }
 
+export interface PaymentMethod {
+  type: {
+    type: string,
+    enum: ['card', 'paypal'];
+  },
+  brand: string,
+  last4: string,
+  expiryMonth: number,
+  expiryYear: number,
+}
+
 export interface IOrder {
   _id: mongoose.Types.ObjectId;
   orderNumber: string;
@@ -101,7 +112,7 @@ export interface IOrder {
   shippingAddress: IShippingAddress;
   billingAddress?: IShippingAddress;
   trackingNumber?: string;
-  paymentMethod: string;
+  paymentMethod: PaymentMethod;
   paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
   notes?: string;
   createdAt: Date;
@@ -168,9 +179,17 @@ const OrderSchema = new Schema<IOrder>(
     },
     billingAddress: ShippingAddressSchema,
     trackingNumber: String,
+    // paymentMethod: {
+    //   type: String,
+    //   required: true,
+    // },
     paymentMethod: {
-      type: String,
-      required: true,
+      type: {
+        type: String,
+        enum: ['card', 'paypal'],
+      },
+      brand: String,
+      last4: String,
     },
     paymentStatus: {
       type: String,
@@ -252,9 +271,11 @@ OrderSchema.post('save', async function () {
 
   // Order status changed → notify on meaningful transitions
   const statusMessages: Partial<Record<OrderStatus, string>> = {
-    SHIPPED: `Order from ${name} has been shipped`,
-    DELIVERED: `Order from ${name} was delivered`,
-    CANCELLED: `Order from ${name} was cancelled`,
+    shipped: `Order from ${name} has been shipped`,
+    delivered: `Order from ${name} was delivered`,
+    cancelled: `Order from ${name} was cancelled`,
+    processing: `Order from ${name} is being processed`,
+    pending: `Order from ${name} is pending`,
   }
 
   const message = statusMessages[this.status as OrderStatus]

@@ -12,13 +12,15 @@ import User from '@/lib/db/models/User'
 import { getServerSession } from '@/lib/auth-server'
 import { Resource } from '@/lib/types'
 import { apiResponse } from '../apiResponse'
+import Order from '@/lib/db/models/Order';
 
 type MongooseModel = Model<unknown>
 
 const MODEL_MAP: Record<Resource, MongooseModel> = {
   review: Review,
   product: Product,
-  user: User
+  user: User,
+  order: Order
 }
 
 export async function POST(req: NextRequest) {
