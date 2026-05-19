@@ -4,6 +4,7 @@ import { DBReview } from "./queries/get.reviews"
 import { ProductFormData } from "./validations/product.validation"
 import { ZUser } from "./validations/user.validation"
 import { TOrder } from "@/app/(management)/admin/orders/page"
+import { PurchaseFormValues } from "./validations/purchase.validation"
 
 export interface Product {
   id: string
@@ -59,10 +60,7 @@ export interface ProductVariant {
 
 
 export type CartProductVariant = Omit<ProductVariant, 'stock'>
-//  & {
-// quantity: number
-// image: string
-// }
+
 export type CartProduct = Pick<Product, 'id' | 'name' | 'price'>
   & {
     variant: CartProductVariant
@@ -72,7 +70,6 @@ export interface CartItem {
   id: string
   product: CartProduct
   quantity: number
-  // selectedVariants?: Partial<Attribute>
   variantImage?: string
 }
 
@@ -294,7 +291,7 @@ export interface AdminNotification {
 
 export type ActionType = 'approve' | 'reject' | 'delete' | 'activate' | 'deactivate' | 'publish' | 'unpublish' | 'edit' | 'cancel'
 
-export type Resource = 'review' | 'product' | 'user' | 'order' | 'purchase'
+
 
 export const ENDPOINT_MAP: Record<Resource, string> = {
   review: '/api/reviews',
@@ -320,6 +317,10 @@ export type DBProduct = ProductFormData & {
   id: string,
 }
 
+export type DBPurchase = PurchaseFormValues & {
+  id: string,
+}
+
 export type DBUser = ZUser & {
   id: string
 }
@@ -329,7 +330,10 @@ export interface ResourceMap {
   product: DBProduct
   user: DBUser
   order: TOrder
+  purchase: DBPurchase
 }
+
+export type Resource = keyof ResourceMap
 
 export interface ListResponse<T> {
   items: T[]
@@ -362,6 +366,10 @@ export const RESOURCE_CONFIG = {
     endpoint: '/api/order',
     queryKey: ['orders-dashboard'],
   },
+  purchase: {
+    endpoint: '/api/purchases',
+    queryKey: ['purchases-dashboard'],
+  }
 } as const
 
 export interface ApiError {

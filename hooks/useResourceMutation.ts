@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 // import { DBReview } from '@/lib/queries/get.reviews'
 import {
   ActionType,
-  Resource,
+  // Resource,
   // ENDPOINT_MAP,
   RESOURCE_CONFIG,
   ResourceMap,
@@ -13,18 +13,18 @@ import {
   ACTION_STATUS_MAP
 } from '@/lib/types'
 
-type MutationInput<R extends Resource> = {
+type MutationInput<R extends keyof ResourceMap> = {
   resource: R
   action: ActionType
   ids: string[]
 }
 
-type MutationContext<R extends Resource> = {
+type MutationContext<R extends keyof ResourceMap> = {
   previousData: ListResponse<ResourceMap[R]> | undefined
   queryKey: readonly string[]
 }
 
-export function useResourceMutation<R extends Resource>(options?: {
+export function useResourceMutation<R extends keyof ResourceMap>(options?: {
   onSuccess?: () => void
   onError?: (err: Error) => void
 }) {
