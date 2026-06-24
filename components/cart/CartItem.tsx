@@ -55,6 +55,7 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
               value={item.quantity}
               onChange={(qty) => updateQuantity(item.id, qty)}
               size="sm"
+              stock={item.product.variant.stock}
             />
           ) : (
             <span className="text-sm text-warm-gray-dark">Qty: {item.quantity}</span>
@@ -62,11 +63,11 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
 
           <div className="text-right">
             <p className="font-semibold text-charcoal">
-              {formatPrice(item.product.price * item.quantity)}
+              {formatPrice(item.product.variant.price * item.quantity)}
             </p>
             {item.quantity > 1 && (
               <p className="text-xs text-warm-gray-dark">
-                {formatPrice(item.product.price)} each
+                {formatPrice(item.product.variant.price)} each
               </p>
             )}
           </div>

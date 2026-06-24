@@ -51,15 +51,15 @@ export function ProductInfo({ product }: { product: Product }) {
     }
   }
 
-  const displayPrice = currentVariant?.price ?? product.price
-  const displayOriginalPrice = currentVariant?.originalPrice ?? product.originalPrice
+  const displayPrice = currentVariant?.price ?? 0
+  const displayOriginalPrice = currentVariant?.originalPrice ?? 0
 
   const discount = displayOriginalPrice && displayOriginalPrice > displayPrice
     ? Math.round(((displayOriginalPrice - displayPrice) / displayOriginalPrice) * 100)
     : 0
 
-  const isInStock = currentVariant ? currentVariant.stock > 0 : (product.stockCount ?? 0) > 0
-  const stockCount = currentVariant?.stock ?? product.stockCount ?? 0
+  const isInStock = currentVariant ? currentVariant.stock > 0 : false
+  const stockCount = currentVariant?.stock ?? 0
   const cartQuantity = state.items.find(
     item => item.product.id === product.id
       && JSON.stringify(item.product.variant.attributes) === JSON.stringify(selectedVariants)

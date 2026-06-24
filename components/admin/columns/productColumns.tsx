@@ -5,6 +5,7 @@ import { StatusBadge } from '@/components/admin/StatusBadge'
 import { ProductCell } from '../products/ProductCell'
 import { ProductActions } from '../products/ProductAction'
 import { ActionType } from '@/lib/types'
+import { getProductPrice, getProductStock } from '@/lib/utils'
 
 export function useProductColumns({
   onDelete,
@@ -31,7 +32,7 @@ export function useProductColumns({
       header: 'Price',
       cell: ({ row }) => (
         <span className="font-medium text-charcoal">
-          ${row.original.price.toFixed(2)}
+          ${getProductPrice(row.original).toFixed(2)}
         </span>
       ),
       enableSorting: true,
@@ -42,17 +43,18 @@ export function useProductColumns({
       header: 'Stock',
       cell: ({ row }) => {
         const product = row.original
+        const stock = getProductStock(product)
         return (
           <div className="flex items-center gap-2">
             <span className="text-charcoal">
-              {product.stockCount}
+              {stock}
             </span>
 
             <StatusBadge
               status={
-                (product.stockCount ?? 0) > 100
+                (stock ?? 0) > 100
                   ? 'in_stock'
-                  : (product.stockCount ?? 0) > 0
+                  : (stock ?? 0) > 0
                     ? 'low_stock'
                     : 'out_of_stock'
               }

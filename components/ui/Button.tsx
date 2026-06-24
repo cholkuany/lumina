@@ -22,10 +22,10 @@ const buttonVariants = cva(
         danger: `bg-red-500 text-white hover:bg-red-600 active:bg-red-700 focus:ring-red-500/30`
       },
       size: {
-        sm: 'h-9 px-4 text-sm rounded-brand',
-        md: 'h-11 px-6 text-sm rounded-brand',
-        lg: 'h-14 px-8 text-base rounded-brand',
-        icon: 'h-10 w-10 rounded-full',
+        sm: 'h-9 px-4 text-sm',
+        md: 'h-11 px-6 text-sm',
+        lg: 'h-14 px-8 text-base',
+        icon: 'h-10 w-10',
       },
     },
     defaultVariants: {
@@ -41,6 +41,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   isLoading?: boolean
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
+  href?: string
 }
 
 export function Button({

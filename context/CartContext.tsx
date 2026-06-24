@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
-import type { CartItem, Product, Attribute, CartProductVariant, CartProduct } from '@/lib/types'
+import type { CartItem, Product, Attribute, ProductVariant, CartProduct } from '@/lib/types'
 import { buildKey } from '@/hooks/useVariant'
 
 interface CartState {
@@ -64,19 +64,20 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         return Object.entries(variants).every(([key, value]) => v.attributes[key] === value)
       })
 
-      const productVariant: CartProductVariant = {
+      const productVariant: ProductVariant = {
         id: selected!.id,
         attributes: selected!.attributes,
         price: selected!.price,
         originalPrice: selected?.originalPrice,
         sku: selected!.sku,
         images: selected!.images,
+        stock: selected?.stock || 0
       }
 
       const cartProduct: CartProduct = {
         id: product.id,
         name: product.name,
-        price: product.price,
+        // price: product.price,
         variant: productVariant,
       }
 

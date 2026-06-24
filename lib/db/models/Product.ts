@@ -17,7 +17,7 @@ const ProductVariantSchema = new Schema<IProductVariant>({
     color: { type: String, required: true },
     size: { type: String, required: true },
     material: String,
-    value: String
+    // value: String
   },
   sku: {
     type: String,
@@ -59,16 +59,15 @@ const SpecificationSchema = new Schema(
   { _id: false }
 )
 
-
 export interface IImage {
   secure_url: string;
   public_id: string;
 }
+
 export interface Attributes {
   color: string;
   size: string;
   material?: string;
-  value?: string
 }
 
 export interface IProductVariant {
@@ -84,8 +83,8 @@ export interface IProduct {
   name: string;
   description: string;
   longDescription?: string;
-  price: number;
-  originalPrice?: number;
+  // price: number;
+  // originalPrice?: number;
   category: {
     name: string;
     parent?: string | null;
@@ -100,7 +99,7 @@ export interface IProduct {
     4: number;
     5: number;
   };
-  stockCount?: number;
+  // stockCount?: number;
   variants: IProductVariant[];
   specifications?: [{
     key: string,
@@ -139,21 +138,6 @@ const ProductSchema = new Schema<IProduct>(
       type: String,
       maxLength: [200, 'Brand cannot exceed 200 characters']
     },
-    price: {
-      type: Number,
-      required: [true, 'Price is required'],
-      min: [0, 'Price cannot be negative'],
-    },
-    originalPrice: {
-      type: Number,
-      min: [0, 'Original price cannot be negative'],
-      validate: {
-        validator: function (this: IProduct, value: number) {
-          return !value || value >= this.price
-        },
-        message: 'Original price must be greater than or equal to current price',
-      },
-    },
     category: {
       type: {
         name: { type: String, required: true },
@@ -185,11 +169,11 @@ const ProductSchema = new Schema<IProduct>(
       4: { type: Number, default: 0 },
       5: { type: Number, default: 0 },
     },
-    stockCount: {
-      type: Number,
-      min: [0, 'Stock count cannot be negative'],
-      default: 0,
-    },
+    // stockCount: {
+    //   type: Number,
+    //   min: [0, 'Stock count cannot be negative'],
+    //   default: 0,
+    // },
     unitsSold: {
       type: Number,
       min: [0, 'units sold cannot be negative'],

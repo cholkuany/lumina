@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getProduct } from '@/lib/queries/get.product'
-import { ProductForm } from '@/components/forms/ProductForm'
+import { ProductForm } from '@/components/forms/product/ProductForm'
 import { getLeafCategories } from '@/lib/queries/get.leaf.categories'
 
 import { ChevronRight } from 'lucide-react';

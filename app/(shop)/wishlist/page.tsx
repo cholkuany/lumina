@@ -109,17 +109,17 @@ export default function WishlistPage() {
 
                   <div className="flex items-center gap-2 mb-4">
                     <span className="font-semibold text-charcoal">
-                      {formatPrice(item.product.price)}
+                      {formatPrice(item.product.variants?.[0].price)}
                     </span>
-                    {item.product.originalPrice && (
+                    {item.product.variants?.[0].originalPrice && (
                       <span className="text-sm text-warm-gray-dark line-through">
-                        {formatPrice(item.product.originalPrice)}
+                        {formatPrice(item.product.variants?.[0].originalPrice)}
                       </span>
                     )}
                   </div>
 
                   {/* Stock Status */}
-                  {item.product.stockCount ? (
+                  {item.product.variants?.[0].stock ? (
                     <p className="text-xs text-green-600 mb-3">In Stock</p>
                   ) : (
                     <p className="text-xs text-red-500 mb-3">Out of Stock</p>
@@ -130,7 +130,7 @@ export default function WishlistPage() {
                     className="w-full"
                     size="sm"
                     onClick={() => handleAddToCart(item.product)}
-                    disabled={!item.product.stockCount}
+                    disabled={!item.product.variants?.[0].stock}
                   >
                     <ShoppingBag className="w-4 h-4 mr-2" />
                     Add to Cart

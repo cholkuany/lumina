@@ -8,7 +8,7 @@ import { DesktopNavigationWrapper } from './DesktopNavigation'
 import { MobileMenu } from './mobile/MobileMenu'
 import { MobileMenuToggle } from './MobileMenuToggle'
 import { NavbarActions } from './NavbarAction'
-import { HeaderBanner } from './HeaderBanner'
+// import { HeaderBanner } from './HeaderBanner'
 import { Logo } from './Logo'
 
 export type NavItem = {
@@ -36,7 +36,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-ivory/95 backdrop-blur-md border-b border-warm-gray-light">
-      <HeaderBanner />
+      {/* <HeaderBanner /> */}
 
       <nav className="container-lumina">
         <div className="flex items-center justify-between h-16 lg:h-20">

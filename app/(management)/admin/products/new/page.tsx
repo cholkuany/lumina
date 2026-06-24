@@ -1,4 +1,4 @@
-import { ProductForm } from '@/components/forms/ProductForm'
+import { ProductForm } from '@/components/forms/product/ProductForm'
 import { getLeafCategories } from '@/lib/queries/get.leaf.categories';
 
 export default async function NewProductPage() {

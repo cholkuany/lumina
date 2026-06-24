@@ -1,95 +1,132 @@
 "use client"
 
 // components/sections/TrendingProducts.tsx
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { ProductCard } from '@/components/ui/ProductCard'
-import { Button } from '@/components/ui/Button'
+// import { Button } from '@/components/ui/Button'
 // import { IProduct } from '@/lib/db/models'
 import { Product } from '@/lib/types'
 
-import { use } from 'react'
+// import { use } from 'react'
 
-// const products = [
-//   {
-//     id: '1',
-//     name: 'Wireless Noise-Canceling Headphones',
-//     description: 'Premium audio experience',
-//     price: 249.99,
-//     originalPrice: 299.99,
-//     image: '/21383084_en_front_800.avif',
-//     rating: 4.8,
-//     reviewCount: 234,
-//     isSale: true,
-//   },
-//   {
-//     id: '2',
-//     name: 'Minimalist Leather Watch',
-//     description: 'Timeless elegance',
-//     price: 189.00,
-//     image: '/21430531_en_front_800.avif',
-//     rating: 4.9,
-//     reviewCount: 128,
-//     isNewArrival: true,
-//   },
-//   {
-//     id: '3',
-//     name: 'Organic Cotton Throw Blanket',
-//     description: 'Cozy comfort',
-//     price: 79.99,
-//     image: '/3c4ea480-8ca8-4fdc-b7d9-f8cc159c8528.8ff8aabfc8ad54b3201bb0b9002e1f79.webp',
-//     rating: 4.7,
-//     reviewCount: 89,
-//   },
-//   {
-//     id: '4',
-//     name: 'Smart Home Speaker',
-//     description: 'Voice-controlled assistant',
-//     price: 129.99,
-//     originalPrice: 159.99,
-//     image: '/bf152e03-e160-45be-bace-63aec16520a9.01fcd6201fa0802d44e64df69f6fc8d1.jpeg',
-//     rating: 4.6,
-//     reviewCount: 312,
-//     isSale: true,
-//   },
-// ]
+import Link from 'next/link'
+import { DisplayCard } from './Hero'
 
-export function TrendingProducts({ trendingProducts }: { trendingProducts: Promise<Product[] | null> }) {
-  const trending = use(trendingProducts)
-  console.log('\ntrending product', trending)
-  const router = useRouter()
+export function TrendingProducts({
+  trendingProducts,
+}: {
+  trendingProducts: Product[]
+}) {
+  const products = trendingProducts || []
+  const bestSellers = products.slice(0, 6)
+  const deals = products.slice(2, 8)
+  const recommended = products.slice(8, 15)
+
   return (
-    <section className="py-16 lg:py-24 bg-linen">
-      <div className="container-lumina">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-gold text-sm font-medium tracking-wider">
-            POPULAR NOW
-          </span>
-          <h2 className="font-serif text-3xl lg:text-4xl text-charcoal mt-2 mb-4">
-            Trending Products
-          </h2>
-          <p className="text-warm-gray-dark max-w-md mx-auto">
-            Discover what our community is loving right now.
-            Curated picks updated weekly.
-          </p>
+    <section className="bg-linen pb-10">
+      <div className="container-lumina space-y-5">
+        <DisplayCard
+          title="Best sellers"
+          href="/products?sort=popular"
+          footerText="Shop best sellers"
+          items={bestSellers}
+          gridClassName="grid-cols-3 md:grid-cols-6"
+          renderItem={(product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              variant='compact'
+            />
+          )}
+        />
+
+        <div className="grid gap-5 lg:grid-cols-3">
+          <PromoPanel
+            href="/sale"
+            eyebrow="Limited-time savings"
+            title="Today&apos;s deals"
+            text="Discover markdowns on products shoppers love."
+            className="bg-linear-to-br from-gold to-gold-dark text-white"
+            cta="Shop deals"
+          />
+          <PromoPanel
+            href="/products?sort=newest"
+            eyebrow="Fresh drops"
+            title="New arrivals"
+            text="See what’s just landed across top categories."
+            className="bg-white text-charcoal"
+            cta="Explore new arrivals"
+          />
+          <PromoPanel
+            href="/categories"
+            eyebrow="Browse departments"
+            title="Shop by category"
+            text="Navigate quickly through curated product collections."
+            className="bg-charcoal text-white"
+            cta="View categories"
+          />
         </div>
 
-        {/* Products Grid */}
-        {trending &&
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-10">
-            {trending.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        }
+        <DisplayCard
+          title="Deals for you"
+          href="/sale"
+          footerText="Shop all deals"
+          items={deals}
+          gridClassName="grid-cols-3 md:grid-cols-6"
+          renderItem={(product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              variant='compact'
+            />
+          )}
+        />
 
-        {/* CTA */}
-        <div className="text-center">
-          <Button size="lg" onClick={() => router.push('/products')}>
-            View All Products
-          </Button>
-        </div>
+        <DisplayCard
+          title="Recommended for you"
+          href="/products"
+          footerText="See more"
+          items={recommended}
+          gridClassName="grid-cols-3 md:grid-cols-6"
+          renderItem={(product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              variant='compact'
+            />
+          )}
+        />
       </div>
     </section>
+  )
+}
+
+function PromoPanel({
+  href,
+  eyebrow,
+  title,
+  text,
+  cta,
+  className,
+}: {
+  href: string
+  eyebrow: string
+  title: string
+  text: string
+  cta: string
+  className: string
+}) {
+  return (
+    <Link
+      href={href}
+      className={`rounded-[18px] p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-hover ${className}`}
+    >
+      <p className="text-xs font-bold uppercase tracking-[0.16em] opacity-75">
+        {eyebrow}
+      </p>
+      <h3 className="mt-3 text-3xl font-extrabold">{title}</h3>
+      <p className="mt-3 text-sm leading-6 opacity-80">{text}</p>
+      <p className="mt-6 text-sm font-extrabold">{cta} →</p>
+    </Link>
   )
 }

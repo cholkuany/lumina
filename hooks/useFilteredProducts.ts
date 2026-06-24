@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import type { Product } from '@/lib/types'
 import { normalizedValue } from '@/lib/utils'
 
+import { getProductStock } from '@/lib/utils'
+
 const statusKeys = { in_stock: 100, low_stock: 99, out_of_stock: 0 }
 
 export function useFilteredProducts({
@@ -30,6 +32,7 @@ export function filteredProducts({
 
   return products.filter(p => {
     const ancestors = p.category.ancestors?.map(normalizedValue) || []
+    const stock = getProductStock(p)
 
     const matchesSearch =
       !searchQuery ||
@@ -42,7 +45,7 @@ export function filteredProducts({
 
       if (key === 'status') {
         const threshold = statusKeys[value as keyof typeof statusKeys]
-        return (p.stockCount ?? 0) >= threshold
+        return (stock ?? 0) >= threshold
       }
 
       if (key === 'category') {

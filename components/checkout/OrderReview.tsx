@@ -74,7 +74,7 @@ export function OrderReview({
               </div>
               <div className="text-right">
                 <p className="font-medium text-charcoal">
-                  {formatPrice(item.product.price * item.quantity)}
+                  {formatPrice(item.product.variant.price * item.quantity)}
                 </p>
               </div>
             </div>

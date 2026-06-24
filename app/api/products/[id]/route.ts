@@ -2,12 +2,93 @@ import type { NextRequest } from 'next/server'
 
 import { getProduct } from '@/lib/queries/get.product'
 import Product from '@/lib/db/models/Product'
-import { productSchema } from '@/lib/validations/product.validation'
+import { productSchema, productUpdateSchema, UpdateProduct } from '@/lib/validations/product.validation/product.schema'
 import { processVariantImages } from '../route'
 import dbConnect from '@/lib/db/connection'
 import { z } from 'zod'
 import { slugify } from '@/lib/utils'
 import mongoose from 'mongoose'
+
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const allowedProductUpdateFields = [
+    'name',
+    'description',
+    'longDescription',
+    'brand',
+    // 'price',
+    // 'originalPrice',
+    'category',
+    // 'stockCount',
+    'unitsSold',
+    'specifications',
+    'isNewArrival',
+    'isSale',
+    'isFeatured',
+  ] as const
+
+  await dbConnect()
+
+  try {
+    const { id } = await params
+    const body = await req.json()
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return Response.json({ message: 'Invalid product ID' }, { status: 400 })
+    }
+
+    const parseResult = productUpdateSchema.safeParse(body)
+
+    if (!parseResult.success) {
+      return Response.json(
+        {
+          message: 'Invalid product data',
+          errors: z.flattenError(parseResult.error),
+        },
+        { status: 400 }
+      )
+    }
+    const data: UpdateProduct = parseResult.data
+    const update: Record<string, unknown> = {}
+
+    for (const key of allowedProductUpdateFields) {
+      if (data[key]) {
+        update[key] = data[key]
+      }
+    }
+
+    if (data.name && typeof data.name === 'string') {
+      update.slug = slugify(data.name)
+    }
+
+    if (data.category) {
+      update.category = {
+        ...data.category,
+        parent: data.category.parent
+          ? new mongoose.Types.ObjectId(data.category.parent)
+          : null
+      }
+    }
+
+    return Response.json(
+      {
+        message: 'product updated',
+        product: `${id}`
+      },
+      { status: 200 }
+    )
+
+  } catch (error) {
+    console.log('Error patching product:', error)
+
+    return Response.json(
+      { message: 'Error updating product' },
+      { status: 500 }
+    )
+  }
+}
 
 export async function PUT(
   req: NextRequest,

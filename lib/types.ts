@@ -1,7 +1,7 @@
 // import { Product } from "./db/models"
 import { IImage } from "./db/models/Product"
 import { DBReview } from "./queries/get.reviews"
-import { ProductFormData } from "./validations/product.validation"
+import { ProductFormData } from "./validations/product.validation/product.schema"
 import { ZUser } from "./validations/user.validation"
 import { TOrder } from "@/app/(management)/admin/orders/page"
 import { PurchaseFormValues } from "./validations/purchase.validation"
@@ -12,8 +12,6 @@ export interface Product {
   description: string
   longDescription?: string
   slug: string
-  price: number
-  originalPrice?: number
   category: {
     name: string
     parent?: string | null
@@ -22,7 +20,6 @@ export interface Product {
   unitsSold?: number
   rating: number
   reviewCount: number
-  stockCount?: number
   variants: ProductVariant[]
   specifications?: {
     key: string,
@@ -59,11 +56,12 @@ export interface ProductVariant {
 }
 
 
-export type CartProductVariant = Omit<ProductVariant, 'stock'>
+// export type CartProductVariant = Omit<ProductVariant, 'stock'>
 
-export type CartProduct = Pick<Product, 'id' | 'name' | 'price'>
+export type CartProduct = Pick<Product, 'id' | 'name'>
   & {
-    variant: CartProductVariant
+    // variant: CartProductVariant
+    variant: ProductVariant
   }
 
 export interface CartItem {

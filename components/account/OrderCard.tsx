@@ -87,7 +87,7 @@ export function OrderCard({ order }: OrderCardProps) {
                 </Link>
                 <p className="text-sm text-warm-gray-dark">Qty: {item.quantity}</p>
                 <p className="text-sm font-medium text-charcoal">
-                  {formatPrice(item.product.price * item.quantity)}
+                  {formatPrice(item.product.variant.price * item.quantity)}
                 </p>
               </div>
             </div>

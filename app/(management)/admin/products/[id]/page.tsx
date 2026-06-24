@@ -26,9 +26,9 @@ export default async function ProductDetailPage({
   const totalStock = product.variants.reduce((sum, v) => sum + v.stock, 0)
 
   const discountPercentage =
-    product.originalPrice && product.originalPrice > product.price
+    product.variants[0].originalPrice && product.variants[0].originalPrice > product.variants[0].price
       ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
+        ((product.variants[0].originalPrice - product.variants[0].price) / product.variants[0].originalPrice) * 100
       )
       : 0
 
@@ -161,11 +161,11 @@ export default async function ProductDetailPage({
                 {/* Pricing */}
                 <div className="flex items-baseline gap-3">
                   <span className="text-2xl font-semibold text-gold">
-                    ${product.price.toFixed(2)}
+                    ${product.variants[0].price.toFixed(2)}
                   </span>
-                  {product.originalPrice && (
+                  {product.variants[0].originalPrice && (
                     <span className="text-lg text-warm-gray-dark line-through">
-                      ${product.originalPrice.toFixed(2)}
+                      ${product.variants[0].originalPrice.toFixed(2)}
                     </span>
                   )}
                 </div>

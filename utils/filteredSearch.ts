@@ -27,11 +27,6 @@ export const filteredSearch = (
     result = result.filter(p => selectedFilters.category.includes(p.category.name) || p.category.ancestors?.some(ancestor => selectedFilters.category?.includes(ancestor)))
   }
 
-  // Brand filter
-  // if (selectedFilters.brand?.length) {
-  //   result = result.filter(p => selectedFilters.brand.includes(p.brand))
-  // }
-
   // Rating filter
   if (selectedFilters.rating?.length) {
     const minRating = Math.min(...selectedFilters.rating.map(Number))
@@ -49,7 +44,7 @@ export const filteredSearch = (
   }
 
   // Price range
-  result = result.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1])
+  result = result.filter(p => p.variants?.[0].price >= priceRange[0] && p.variants?.[0].price <= priceRange[1])
 
   // Sort
   switch (sortBy) {
@@ -57,10 +52,10 @@ export const filteredSearch = (
       result.sort((a, b) => (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0))
       break
     case 'price-asc':
-      result.sort((a, b) => a.price - b.price)
+      result.sort((a, b) => a.variants?.[0].price - b.variants?.[0].price)
       break
     case 'price-desc':
-      result.sort((a, b) => b.price - a.price)
+      result.sort((a, b) => b.variants?.[0]?.price - a.variants?.[0].price)
       break
     case 'rating':
       result.sort((a, b) => b.rating - a.rating)

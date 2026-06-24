@@ -60,6 +60,19 @@
   --shadow-hover: 0 10px 40px -10px rgba(35, 35, 35, 0.12);
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollHiddened::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollHiddened {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -85,21 +98,105 @@
 /* Components */
 @layer components {
   .container-lumina {
-    max-width: 80rem;
+    max-width: 96rem;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 0.75rem;
   }
 
   @media (min-width: 640px) {
     .container-lumina {
-      padding-inline: 1.5rem;
+      padding-inline: 1rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container-lumina {
-      padding-inline: 2rem;
+      padding-inline: 1.25rem;
     }
+  }
+
+  @media (min-width: 1280px) {
+    .container-lumina {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  .surface-page {
+    background-color: var(--linen);
+  }
+
+  .surface-card {
+    background-color: #ffffff;
+    border: 1px solid var(--warm-gray-light);
+    border-radius: 18px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-card-hover {
+    transition: all 220ms ease;
+  }
+
+  .surface-card-hover:hover {
+    border-color: var(--gold-light);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .btn-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: var(--gold);
+    color: white;
+    font-weight: 800;
+    transition: background-color 200ms ease, transform 200ms ease;
+  }
+
+  .btn-brand:hover {
+    background-color: var(--gold-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid var(--warm-gray-light);
+    background-color: white;
+    color: var(--charcoal);
+    font-weight: 800;
+    transition: all 200ms ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold-light);
+    color: var(--gold-dark);
+  }
+
+  .section-title {
+    color: var(--charcoal);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .section-eyebrow {
+    color: var(--gold-dark);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+  }
+
+  .market-link {
+    color: var(--gold-dark);
+    font-weight: 700;
+    transition: color 180ms ease;
+  }
+
+  .market-link:hover {
+    color: var(--gold);
   }
 }
 
