@@ -8,9 +8,8 @@ import { Button } from '@/components/ui/Button'
 import { LoginUser } from '@/lib/types'
 import Image from 'next/image'
 
-import { orders } from './orders/page'
-
 import { getServerSession } from "@/lib/auth-server";
+import { getOrdersForUser } from '@/lib/queries/get.orders'
 import { redirect } from "next/navigation";
 
 const quickActions = [
@@ -28,6 +27,11 @@ export default async function AccountPage() {
   }
   const userSession: LoginUser = session.user as LoginUser;
   const [firstName, lastName] = userSession.name ? userSession.name.split(" ") : ["User", ""];
+  const orders = await getOrdersForUser(userSession.id)
+  const recentOrders = orders.slice(0, 3)
+  const accountQuickActions = quickActions.map((action) => (
+    action.href === '/account/orders' ? { ...action, count: orders.length } : action
+  ))
   return (
     <main className="pb-16">
       {/* Breadcrumb */}
@@ -76,7 +80,7 @@ export default async function AccountPage() {
             <div>
               <h2 className="font-serif text-xl text-charcoal mb-4">Quick Actions</h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {quickActions.map((action) => (
+                {accountQuickActions.map((action) => (
                   <Link
                     key={action.href}
                     href={action.href}
@@ -106,9 +110,9 @@ export default async function AccountPage() {
                 </Link>
               </div>
 
-              {orders.length > 0 ? (
+              {recentOrders.length > 0 ? (
                 <div className="space-y-4">
-                  {orders.map((order) => (
+                  {recentOrders.map((order) => (
                     <OrderCard key={order.id} order={order} />
                   ))}
                 </div>

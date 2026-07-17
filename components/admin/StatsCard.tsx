@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUp } from 'lucide-react'
 interface StatsCardProps {
   title: string
   value: string | number
+  description?: string
   change?: {
     value: number
     type: 'increase' | 'decrease'
@@ -13,13 +14,17 @@ interface StatsCardProps {
   iconBg?: string
 }
 
-export function StatsCard({ title, value, change, icon, iconBg = 'bg-gold/10' }: StatsCardProps) {
+export function StatsCard({ title, value, description, change, icon, iconBg = 'bg-gold/10' }: StatsCardProps) {
   return (
-    <div className="bg-white rounded-brand border border-warm-gray p-6 hover:shadow-soft transition-shadow">
+    <div className="group relative overflow-hidden bg-white rounded-brand border border-warm-gray p-5 hover:-translate-y-0.5 hover:shadow-hover transition-all duration-200">
+      <div className="absolute inset-x-0 top-0 h-0.5 bg-gold/0 group-hover:bg-gold transition-colors" />
       <div className="flex items-start justify-between">
         <div className="space-y-2">
           <p className="text-sm font-medium text-warm-gray-dark">{title}</p>
           <p className="text-2xl font-semibold text-charcoal">{value}</p>
+          {description && !change && (
+            <p className="text-xs text-warm-gray-dark">{description}</p>
+          )}
           {change && (
             <div className="flex items-center gap-1">
               {change.type === 'increase' ? (

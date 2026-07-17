@@ -15,6 +15,11 @@ export const purchaseItemSchema = z.object({
     .refine((val) => mongoose.Types.ObjectId.isValid(val), {
       message: 'Invalid product id',
     }),
+  variant: z
+    .string()
+    .refine((val) => mongoose.Types.ObjectId.isValid(val), {
+      message: 'Invalid variant id',
+    }),
 
   quantity: z
     .number({
@@ -34,7 +39,8 @@ export const purchaseSchema = z.object({
       error: 'Purchase number is required',
     })
     .trim()
-    .min(1, 'Purchase number is required'),
+    .min(1, 'Purchase number is required')
+    .optional(),
 
   supplier: z.object({
     name: z
@@ -71,6 +77,7 @@ export const purchaseSchema = z.object({
   receivedDate: z.coerce.date().nullable().optional(),
 
   date: z.coerce.date().optional(),
+  notes: z.string().trim().max(1000).optional(),
 })
 
 export type PurchaseFormValues = z.infer<typeof purchaseSchema>

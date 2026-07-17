@@ -69,10 +69,6 @@ export function CategoryModal({
     ? categories.find((c) => c.id === parentId)
     : null
 
-  console.log("parent category", parentCategory)
-  console.log("parent id", parentId)
-  console.log("flat categories", categories)
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Trash2 } from 'lucide-react'
 import { QuantitySelector } from '@/components/ui/QuantitySelector'
 import { useCart } from '@/context/CartContext'
-import { CartItem as CartItemType } from '@/lib/types'
+import { TCartItem as CartItemType } from '@/lib/types'
 import { formatPrice } from '@/lib/utils'
 
 interface CartItemProps {

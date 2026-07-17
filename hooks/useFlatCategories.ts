@@ -33,7 +33,6 @@ export const useFlatCategories = (flat: boolean) =>
 
       const data = await res.json()
       const flatCategories = buildFlatList(data)
-      console.log('/api/categories?flat=true RES', flatCategories)
       return flatCategories
     },
     staleTime: 10 * 60 * 1000,

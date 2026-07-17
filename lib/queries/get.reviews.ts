@@ -42,13 +42,11 @@ export type DBReview = DBReviewInput & {
 
 export async function getProductReviews(productId: string): Promise<DBReviewInput[] | null> {
   await dbConnect()
-  console.log('Fetching reviews for product ID:', productId)
   try {
     const reviews: DBReviewInput[] = await Review.aggregate([
       { $match: { product: new mongoose.Types.ObjectId(productId) } },
       productReviews,
     ])
-    console.log('Fetched Reviews from DB:', reviews)
     return reviews
   } catch (error) {
     console.error('Error fetching product reviews:', error)
@@ -59,13 +57,11 @@ export async function getProductReviews(productId: string): Promise<DBReviewInpu
 
 export async function getReviewById(reviewId: string): Promise<DBReviewInput | null> {
   await dbConnect()
-  console.log('Fetching review for review ID:', reviewId)
   try {
     const reviews: DBReviewInput[] = await Review.aggregate([
       { $match: { _id: new mongoose.Types.ObjectId(reviewId) } },
       productReviews,
     ])
-    console.log('Fetched Review from DB:', reviews[0])
     return reviews[0] || null
   } catch (error) {
     console.error('Error fetching review by ID:', error)

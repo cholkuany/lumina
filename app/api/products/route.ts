@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { uploadImages } from '@/lib/cloudinary'
+import { deleteImages, uploadImages } from '@/lib/cloudinary'
 import { z } from 'zod'
 import dbConnect from '@/lib/db/connection'
 import Product from '@/lib/db/models/Product'
@@ -7,15 +7,32 @@ import type { ProductVariantFormData } from '@/lib/validations/product.validatio
 import { productSchema } from '@/lib/validations/product.validation/product.schema'
 import { getProducts } from '@/lib/queries/get.products'
 import { getProduct } from '@/lib/queries/get.product'
-import type { Product as ProductType } from '@/lib/types'
+import type { TProduct as ProductType } from '@/lib/types'
 import mongoose from 'mongoose'
 
 type ProcessedVariant = Omit<ProductVariantFormData, 'images'> & {
   images: { public_id: string; secure_url: string }[]
 }
 
+type ProcessVariantImagesResult =
+  | {
+    dbVariants: ProcessedVariant[]
+    uploadedPublicIds: string[]
+    status: 200
+  }
+  | {
+    message: string
+    status: number
+  }
+
 export async function POST(req: NextRequest) {
+  return createProduct(req)
+}
+
+async function createProduct(req: NextRequest) {
   await dbConnect()
+
+  let uploadedPublicIds: string[] = []
 
   try {
     const body = await req.json()
@@ -48,15 +65,16 @@ export async function POST(req: NextRequest) {
       }
     }
 
-
     const formattedVariants = await processVariantImages(variants)
 
-    if (formattedVariants.status !== 200) {
+    if (!('dbVariants' in formattedVariants)) {
       return Response.json(
         { message: formattedVariants.message },
         { status: formattedVariants.status }
       )
     }
+
+    uploadedPublicIds = formattedVariants.uploadedPublicIds
 
     const dbProduct = { ...formattedBasicInfo, variants: formattedVariants.dbVariants }
 
@@ -75,6 +93,13 @@ export async function POST(req: NextRequest) {
     )
   } catch (error) {
     console.error('Error saving product to database:', error)
+
+    if (uploadedPublicIds.length > 0) {
+      await deleteImages(uploadedPublicIds).catch((cleanupError) => {
+        console.error('Failed to cleanup product images:', cleanupError)
+      })
+    }
+
     return Response.json(
       { message: 'Error saving product to database' },
       { status: 500 }
@@ -87,8 +112,29 @@ export async function GET() {
   return Response.json(res)
 }
 
-export const processVariantImages = async (variants: ProductVariantFormData[]) => {
+const getCloudinaryPublicId = (url: string) => {
+  try {
+    const pathname = new URL(url).pathname
+    const uploadIndex = pathname.indexOf('/upload/')
+
+    if (uploadIndex === -1) {
+      return pathname.split('/').slice(-2).join('/').split('.')[0]
+    }
+
+    const uploadPath = pathname.slice(uploadIndex + '/upload/'.length)
+    const withoutVersion = uploadPath.replace(/^v\d+\//, '')
+
+    return withoutVersion.replace(/\.[^/.]+$/, '')
+  } catch {
+    return url.split('/').slice(-2).join('/').split('.')[0]
+  }
+}
+
+export const processVariantImages = async (
+  variants: ProductVariantFormData[]
+): Promise<ProcessVariantImagesResult> => {
   const dbVariants: ProcessedVariant[] = []
+  const uploadedPublicIds: string[] = []
 
   for (const variant of variants) {
     const { images, ...variantData } = variant
@@ -108,7 +154,7 @@ export const processVariantImages = async (variants: ProductVariantFormData[]) =
         if (img.includes('cloudinary.com') || img.includes('res.cloudinary')) {
           existingImages.push({
             secure_url: img,
-            public_id: img.split('/').slice(-2).join('/').split('.')[0]
+            public_id: getCloudinaryPublicId(img)
           })
         } else {
           newImageUrls.push(img)
@@ -119,14 +165,22 @@ export const processVariantImages = async (variants: ProductVariantFormData[]) =
         ? await uploadImages(newImageUrls, 'lumina/products')
         : []
 
+      uploadedPublicIds.push(...uploadedImageIds.map((image) => image.public_id))
+
       // const uploadedImageIds = await uploadImages(images, 'lumina/products')
       dbVariants.push({ ...variantData, images: [...existingImages, ...uploadedImageIds] })
     } catch (error) {
+      if (uploadedPublicIds.length > 0) {
+        await deleteImages(uploadedPublicIds).catch((cleanupError) => {
+          console.error('Failed to cleanup uploaded variant images:', cleanupError)
+        })
+      }
+
       return {
         message: error instanceof Error ? error.message : 'Error uploading images',
         status: 500
       }
     }
   }
-  return { dbVariants, status: 200 }
+  return { dbVariants, uploadedPublicIds, status: 200 }
 }

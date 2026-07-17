@@ -15,10 +15,10 @@ import { signOut } from '@/lib/auth-client'
 const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutGrid },
   { name: 'Products', href: '/admin/products', icon: Box, badge: null },
-  { name: 'Orders', href: '/admin/orders', icon: ClipboardList, badge: 12 },
+  { name: 'Orders', href: '/admin/orders', icon: ClipboardList },
   { name: 'Purchases', href: '/admin/purchases', icon: ShoppingCart },
   { name: 'Users', href: '/admin/users', icon: Users },
-  { name: 'Reviews', href: '/admin/reviews', icon: Star, badge: 5 },
+  { name: 'Reviews', href: '/admin/reviews', icon: Star },
   { name: 'Categories', href: '/admin/categories', icon: Folder },
 ]
 
@@ -106,11 +106,6 @@ export function Sidebar({ user }: { user: LoginUser }) {
                     )}
                   />
                   <span className="flex-1">{item.name}</span>
-                  {item.badge && (
-                    <span className="px-2 py-0.5 text-xs font-semibold bg-gold text-white rounded-full">
-                      {item.badge}
-                    </span>
-                  )}
                 </Link>
               )
             })}

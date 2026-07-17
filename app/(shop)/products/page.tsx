@@ -13,6 +13,7 @@ export default async function ProductsPage({
   return (
     <Suspense fallback={<div>Loading products...</div>}>
       <FetchProducts
+        key={`${filter ?? ''}:${category ?? ''}`}
         searchQuery={filter ?? null}
         categoryParam={category ?? null}
       />

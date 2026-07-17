@@ -67,6 +67,8 @@ export function useTableInstanceController<T>(
   getRowId: (p: T) => string
 ) {
 
+  // TanStack Table returns function-bearing instances that React Compiler intentionally skips.
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: data ?? [],
     columns: columns ?? [],

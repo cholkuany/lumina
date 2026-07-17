@@ -1,6 +1,7 @@
-// components/layout/Footer.tsx
+'use client'
+
 import Link from 'next/link'
-import { Input } from '@/components/ui/Input'
+import { useState, type FormEvent } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 
@@ -33,6 +34,43 @@ const socialLinks = [
 ]
 
 export function Footer() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [message, setMessage] = useState('')
+
+  const handleSubscribe = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    setStatus('loading')
+    setMessage('')
+
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          source: 'footer',
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error ?? 'Unable to subscribe right now.')
+      }
+
+      setEmail('')
+      setStatus('success')
+      setMessage(data.message ?? "You're subscribed. Welcome to the LUMINA community.")
+    } catch (error) {
+      setStatus('error')
+      setMessage(error instanceof Error ? error.message : 'Unable to subscribe right now.')
+    }
+  }
+
   return (
     <footer className="bg-linen border-t border-warm-gray-light">
       {/* Newsletter Section */}
@@ -47,19 +85,47 @@ export function Footer() {
                 Subscribe for exclusive offers, new arrivals, and 10% off your first order.
               </p>
             </div>
-            <div className="flex w-full max-w-md gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 h-12 px-4 bg-white/10 border border-white/20 rounded-brand
-                           text-white placeholder:text-white/50
-                           focus:outline-none focus:border-gold focus:bg-white/15
-                           transition-colors"
-              />
-              <Button variant="gold" className="whitespace-nowrap">
-                Subscribe
-              </Button>
-            </div>
+            <form
+              onSubmit={handleSubscribe}
+              className="w-full max-w-md"
+              noValidate
+            >
+              <div className="flex gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value)
+                    if (status !== 'idle') {
+                      setStatus('idle')
+                      setMessage('')
+                    }
+                  }}
+                  placeholder="Enter your email"
+                  aria-label="Email address"
+                  aria-describedby={message ? 'newsletter-message' : undefined}
+                  required
+                  className="flex-1 h-12 px-4 bg-white/10 border border-white/20 rounded-brand text-white placeholder:text-white/50 focus:outline-none focus:border-gold focus:bg-white/15 transition-colors"
+                />
+                <Button
+                  type="submit"
+                  variant="gold"
+                  className="whitespace-nowrap"
+                  isLoading={status === 'loading'}
+                >
+                  {status === 'loading' ? 'Joining' : 'Subscribe'}
+                </Button>
+              </div>
+              {message && (
+                <p
+                  id="newsletter-message"
+                  className={`mt-2 text-sm ${status === 'error' ? 'text-red-200' : 'text-white/75'
+                    }`}
+                >
+                  {message}
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </div>

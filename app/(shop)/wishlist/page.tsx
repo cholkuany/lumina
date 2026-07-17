@@ -1,22 +1,19 @@
-// app/wishlist/page.tsx
 'use client'
 
 import Link from 'next/link'
 import { Heart, ShoppingBag, Trash2 } from 'lucide-react'
 import Image from 'next/image'
-import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Button } from '@/components/ui/Button'
 import { useWishlist } from '@/context/WishlistContext'
 import { useCart } from '@/context/CartContext'
 import { formatPrice } from '@/lib/utils'
-import { Product } from '@/lib/types'
+import { TProduct } from '@/lib/types'
 
 export default function WishlistPage() {
-  const { state, removeItem, clearWishlist } = useWishlist()
+  const { state, removeItem, clearWishlist, itemCount } = useWishlist()
   const { addItem } = useCart()
 
-  console.log('wishlist state', state)
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: TProduct) => {
     addItem(product, 1)
     removeItem(product.id)
   }
@@ -30,20 +27,15 @@ export default function WishlistPage() {
 
   return (
     <main className="pb-16">
-      {/* Breadcrumb */}
-      <div className="container-lumina py-4">
-        <Breadcrumb items={[{ label: 'Wishlist' }]} />
-      </div>
-
       <div className="container-lumina">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal">
+            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal pt-4">
               My Wishlist
             </h1>
             <p className="text-warm-gray-dark mt-1">
-              {state.items.length} {state.items.length === 1 ? 'item' : 'items'} saved
+              {itemCount} {itemCount === 1 ? 'item' : 'items'} saved
             </p>
           </div>
 

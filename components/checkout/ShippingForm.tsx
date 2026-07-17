@@ -7,27 +7,10 @@ import { Select } from '@/components/ui/Select'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { RadioGroup } from '@/components/ui/RadioGroup'
 import { Button } from '@/components/ui/Button'
-
-type ShippingMethod = 'standard' | 'express' | 'overnight'
-
-export type ShippingFormData = {
-  email: string,
-  firstName: string,
-  lastName: string,
-  address: string,
-  apartment: string,
-  city: string,
-  state: string,
-  zipCode: string,
-  country: string,
-  phone: string,
-  shippingMethod: ShippingMethod,
-  saveAddress: boolean,
-  createAccount: boolean,
-}
+import { TShippingFormData, TShippingMethod } from '@/lib/types'
 
 interface ShippingFormProps {
-  onSubmit: (data: ShippingFormData) => void
+  onSubmit: (data: TShippingFormData) => void
 }
 
 const countries = [
@@ -55,7 +38,7 @@ const shippingMethods = [
 ]
 
 export function ShippingForm({ onSubmit }: ShippingFormProps) {
-  const [formData, setFormData] = useState<ShippingFormData>({
+  const [formData, setFormData] = useState<TShippingFormData>({
     email: '',
     firstName: '',
     lastName: '',
@@ -71,7 +54,7 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
     createAccount: false,
   })
 
-  const handleChange = (field: string, value: boolean | string | ShippingMethod) => {
+  const handleChange = (field: string, value: boolean | string | TShippingMethod) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
@@ -94,12 +77,12 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
             placeholder="your@email.com"
             required
           />
-          <Checkbox
+          {/* <Checkbox
             id="createAccount"
             label="Create an account for faster checkout next time"
             checked={formData.createAccount}
             onChange={(checked) => handleChange('createAccount', checked)}
-          />
+          /> */}
         </div>
       </div>
 

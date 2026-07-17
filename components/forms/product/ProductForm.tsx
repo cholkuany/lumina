@@ -132,13 +132,6 @@ export function ProductForm({
     return ancestors
   }, [watchedCategory])
 
-  // const discountPercentage =
-  //   watchedOriginalPrice && watchedOriginalPrice > watchedPrice
-  //     ? Math.round(
-  //       ((watchedOriginalPrice - watchedPrice) / watchedOriginalPrice) * 100
-  //     )
-  //     : 0
-
   const onSubmit: SubmitHandler<ProductFormData> = async (data) => {
     startTransition(async () => {
       try {
@@ -146,7 +139,7 @@ export function ProductForm({
           ? `/api/products/${initialData!.id}`
           : '/api/products'
 
-        const method = isEditMode ? 'PUT' : 'POST'
+        const method = isEditMode ? 'PATCH' : 'POST'
 
         const response = await fetch(url, {
           method,
@@ -169,16 +162,6 @@ export function ProductForm({
     })
   }
 
-  const updateProductField = async <T,>(fieldName: string, value: T) => {
-    if (!initialData?.id) return
-
-    await fetch(`/api/products/${initialData.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ fieldName, value }),
-    })
-  }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
       <FormHeader
@@ -195,12 +178,6 @@ export function ProductForm({
           {activeTab === 'basic' && (
             <div className="space-y-6">
               <BasicFields register={register} errors={errors} />
-
-              {/* <Pricing
-                control={control}
-                errors={errors}
-                discountPercentage={discountPercentage}
-              /> */}
 
               {/* <Inventory register={register} errors={errors} /> */}
               <Inventory stockCount={totalStock} label="total stock" />

@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import type { Product } from '@/lib/types'
+import type { TProduct } from '@/lib/types'
 
 export const useProducts = () =>
   useQuery({
@@ -12,7 +12,7 @@ export const useProducts = () =>
       if (!result.ok) {
         throw new Error('Error fetching data')
       }
-      return result.json() as Promise<Product[]>
+      return result.json() as Promise<TProduct[]>
     }
   })
 
@@ -26,8 +26,6 @@ export const useProduct = (id: string) =>
         throw new Error('Error fetching data')
       }
 
-      console.log('\n\nFetch result:\n\n\n', result)
-
-      return result.json() as Promise<Product>
+      return result.json() as Promise<TProduct>
     }
   })

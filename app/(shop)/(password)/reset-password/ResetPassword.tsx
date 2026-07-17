@@ -39,7 +39,7 @@ export function ResetPassword({ token }: { token: string | undefined }) {
     setIsLoading(true);
 
     try {
-      const { data, error } = await authClient.resetPassword(
+      const { error } = await authClient.resetPassword(
         {
           newPassword: password,
           token
@@ -50,13 +50,12 @@ export function ResetPassword({ token }: { token: string | undefined }) {
         setError(error?.message || "Failed to reset password");
       } else {
         setSuccess(true);
-        setTimeout(() => {
-          router.push("/login");
-        }, 3000);
-      }
-      console.log(data);
+      setTimeout(() => {
+        router.push("/login");
+      }, 3000);
+    }
 
-    } catch (err: unknown) {
+  } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
       }

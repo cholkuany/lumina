@@ -1,22 +1,28 @@
-// context/WishlistContext.tsx
 'use client'
 
-import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
-import { WishlistItem, Product } from '@/lib/types'
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  ReactNode
+} from 'react'
+
+import { TWishlistItem, TProduct } from '@/lib/types'
 
 interface WishlistState {
-  items: WishlistItem[]
+  items: TWishlistItem[]
 }
 
 type WishlistAction =
-  | { type: 'ADD_ITEM'; payload: Product }
+  | { type: 'ADD_ITEM'; payload: TProduct }
   | { type: 'REMOVE_ITEM'; payload: string }
   | { type: 'CLEAR_WISHLIST' }
-  | { type: 'LOAD_WISHLIST'; payload: WishlistItem[] }
+  | { type: 'LOAD_WISHLIST'; payload: TWishlistItem[] }
 
 interface WishlistContextType {
   state: WishlistState
-  addItem: (product: Product) => void
+  addItem: (product: TProduct) => void
   removeItem: (productId: string) => void
   clearWishlist: () => void
   isInWishlist: (productId: string) => boolean
@@ -61,7 +67,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('lumina-wishlist', JSON.stringify(state.items))
   }, [state.items])
 
-  const addItem = (product: Product) => dispatch({ type: 'ADD_ITEM', payload: product })
+  const addItem = (product: TProduct) => dispatch({ type: 'ADD_ITEM', payload: product })
   const removeItem = (productId: string) => dispatch({ type: 'REMOVE_ITEM', payload: productId })
   const clearWishlist = () => dispatch({ type: 'CLEAR_WISHLIST' })
   const isInWishlist = (productId: string) => state.items.some(item => item.product.id === productId)

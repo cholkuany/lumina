@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { SlidersHorizontal, Grid, LayoutList, X } from 'lucide-react'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { ProductCard } from '@/components/ui/ProductCard'
@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { FilterSidebar } from '@/components/filters/sidebar/FilterSidebar'
 import { SortDropdown } from '@/components/filters/SortDropdown'
 import { cn } from '@/lib/utils'
-// import type { Product } from '@/lib/types'
+// import type { TProduct } from '@/lib/types'
 import { filteredSearch } from '@/utils/filteredSearch'
 
 import { useProducts } from '@/hooks/useProducts'
@@ -23,39 +23,45 @@ const sortOptions = [
   { value: 'bestselling', label: 'Best Selling' },
 ]
 
-export function FilterProduct({ categoryParam, searchQuery }: { categoryParam: string, searchQuery: string }) {
+export function FilterProduct({
+  categoryParam,
+  searchQuery,
+}: {
+  categoryParam: string | null
+  searchQuery: string | null
+}) {
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [viewMode, setViewMode] = useState<'grid' | 'flex'>('grid')
   const [sortBy, setSortBy] = useState('featured')
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500])
+
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>(() => {
-    const initial: Record<string, string[]> = {}
-    if (categoryParam) {
-      initial.category = [categoryParam]
-    }
+    const initial: Record<string, string[]> = categoryParam
+      ? { category: [categoryParam] }
+      : {}
     return initial
   })
 
   const { isPending, isError, data: allProducts = [], error } = useProducts()
+
   const {
     data: nestedCategories,
     isPending: areCategoriesPending,
-    isError: hasCategoriesErred
+    isError: hasCategoriesErred,
   } = useCategories(false)
 
   const pending = isPending && areCategoriesPending
   const hasErred = isError && hasCategoriesErred
 
   // Filter and sort products
-  const filteredProducts = useMemo(() => filteredSearch(allProducts, selectedFilters, priceRange, sortBy, searchQuery), [allProducts, selectedFilters, priceRange, sortBy, searchQuery])
+  const filteredProducts = useMemo(() =>
+    filteredSearch(allProducts, selectedFilters, priceRange, sortBy, searchQuery),
+    [allProducts, selectedFilters, priceRange, sortBy, searchQuery]
+  )
 
   if (pending) return <div>Loading...</div>
   if (hasErred) return <div>error fetching products {error.message}</div>
-
-  console.log("nested categories", nestedCategories)
-  console.log("query params", { searchQuery, categoryParam })
-  console.log("selected filters", selectedFilters)
 
   const handleFilterChange = (name: string, value: string, checked: boolean) => {
     setSelectedFilters(prev => {
@@ -94,8 +100,6 @@ export function FilterProduct({ categoryParam, searchQuery }: { categoryParam: s
   }
   crumbs.push({ label: categoryParam ? `${categoryParam}` : 'All Products' })
 
-  console.log('selected filters', selectedFilters)
-
   return (
     <main className="pb-16">
       {/* Breadcrumb */}
@@ -104,18 +108,15 @@ export function FilterProduct({ categoryParam, searchQuery }: { categoryParam: s
           items={crumbs}
         />
       </div>
+
       <div className="container-lumina">
         {/* Page Header */}
-        {Object.keys(selectedFilters).length > 0 &&
-          <div className="mb-8">
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-2">
-              {categoryParam ? `Results for "${categoryParam}"` : 'All Products'}
-            </h1>
-            <p className="text-warm-gray-dark">
-              {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
-            </p>
-          </div>
-        }
+        <FilteredProductsHeader
+          searchQuery={searchQuery}
+          categoryParam={categoryParam}
+          selectedFilters={selectedFilters}
+          productsCount={filteredProducts.length}
+        />
 
         <div className="flex gap-8">
           {/* Desktop Sidebar */}
@@ -207,9 +208,9 @@ export function FilterProduct({ categoryParam, searchQuery }: { categoryParam: s
             {filteredProducts.length > 0 ? (
               <div
                 className={cn(
-                  'gap-4 lg:gap-6',
+                  'gap-3 lg:gap-4',
                   viewMode === 'grid'
-                    ? 'grid grid-cols-2 lg:grid-cols-3'
+                    ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
                     : 'flex flex-col'
                 )}
               >
@@ -217,6 +218,7 @@ export function FilterProduct({ categoryParam, searchQuery }: { categoryParam: s
                   <ProductCard
                     key={product.id}
                     product={product}
+                    variant={viewMode === 'grid' ? 'compact' : 'full'}
                   // For list view, we could create a different card layout
                   />
                 ))}
@@ -263,5 +265,34 @@ export function FilterProduct({ categoryParam, searchQuery }: { categoryParam: s
         />
       )}
     </main>
+  )
+}
+
+
+const FilteredProductsHeader = ({
+  searchQuery,
+  categoryParam,
+  selectedFilters,
+  productsCount
+}: {
+  searchQuery: string | null
+  categoryParam: string | null
+  selectedFilters: Record<string, string[]>
+  productsCount: number
+}) => {
+  return (
+    (Object.keys(selectedFilters).length > 0 || searchQuery) &&
+    <div className="mb-8">
+      <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-2">
+        {searchQuery
+          ? `Search results for "${searchQuery}"`
+          : categoryParam
+            ? `Results for "${categoryParam}"`
+            : 'All Products'}
+      </h1>
+      <p className="text-warm-gray-dark">
+        {productsCount} {productsCount === 1 ? 'product' : 'products'} found
+      </p>
+    </div>
   )
 }

@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { SearchBar } from './SearchBar'
 import { CartButton } from './CartButton'
 import { WishlistButton } from './WishlistButton'
@@ -13,7 +14,9 @@ type NavbarActionsProps = {
 
 export const NavbarActions = ({ user, firstName, lastName, itemCount }: NavbarActionsProps) => (
   <div className="flex items-center gap-0.5 sm:gap-2">
-    <SearchBar />
+    <Suspense fallback={<div className="h-10 w-10" />}>
+      <SearchBar />
+    </Suspense>
     <UserMenu user={user} firstName={firstName} lastName={lastName} />
     <WishlistButton />
     <CartButton count={itemCount} />

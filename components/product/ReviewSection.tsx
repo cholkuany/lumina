@@ -90,7 +90,7 @@ export function ReviewSection({
   // }
 
   const handleHelpful = (reviewId: string, type: 'up' | 'down') => {
-    console.log(`Marked review ${reviewId} as ${type}helpful`)
+    void type
     setHelpfulReviews((prev) => {
       const updated = { ...prev };
       delete updated[reviewId];

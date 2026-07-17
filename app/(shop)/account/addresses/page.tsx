@@ -10,10 +10,10 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Checkbox } from '@/components/ui/Checkbox'
-import { Address } from '@/lib/types'
+import { TAddress } from '@/lib/types'
 
 // Mock addresses
-const initialAddresses: Address[] = [
+const initialAddresses: TAddress[] = [
   {
     id: '1',
     firstName: 'Sarah',
@@ -48,9 +48,9 @@ const countries = [
 ]
 
 export default function AddressesPage() {
-  const [addresses, setAddresses] = useState<Address[]>(initialAddresses)
+  const [addresses, setAddresses] = useState<TAddress[]>(initialAddresses)
   const [isFormOpen, setIsFormOpen] = useState(false)
-  const [editingAddress, setEditingAddress] = useState<Address | null>(null)
+  const [editingAddress, setEditingAddress] = useState<TAddress | null>(null)
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -64,7 +64,7 @@ export default function AddressesPage() {
     isDefault: false,
   })
 
-  const handleOpenForm = (address?: Address) => {
+  const handleOpenForm = (address?: TAddress) => {
     if (address) {
       setEditingAddress(address)
       setFormData({
@@ -116,7 +116,7 @@ export default function AddressesPage() {
         )
       )
     } else {
-      const newAddress: Address = {
+      const newAddress: TAddress = {
         id: Date.now().toString(),
         ...formData,
       }

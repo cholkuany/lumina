@@ -7,11 +7,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Heart, ShoppingBag, Star } from 'lucide-react'
 import { cn, formatPrice } from '@/lib/utils'
-import { Product } from '@/lib/types'
-import { WishlistButton } from '../layout/nav/WishlistButton'
+import { TProduct } from '@/lib/types'
+// import { WishlistButton } from '../layout/nav/WishlistButton'
 
 interface ProductCardProps {
-  product: Product
+  product: TProduct
   variant?: 'full' | 'compact'
 }
 
@@ -19,7 +19,7 @@ export function ProductCard({
   product,
   variant = 'full',
 }: ProductCardProps) {
-  const { addItem } = useWishlist()
+  const { addItem, state, removeItem } = useWishlist()
 
   const {
     addItem: addItemToCart,
@@ -40,6 +40,8 @@ export function ProductCard({
       currentVariant.images[0]?.secure_url
     )
   }
+
+  const isInWishlist = state.items.some((item) => item.product.id === product.id)
 
   const cartItem = items?.find(
     (item) => item.product.id === product.id
@@ -78,6 +80,9 @@ export function ProductCard({
             src={image}
             alt={product.name}
             fill
+            sizes={isCompact
+              ? '(max-width: 768px) 50vw, 180px'
+              : '(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw'}
             className={cn(
               'transition-transform duration-500 group-hover:scale-105',
               isCompact ? 'object-contain p-2' : 'object-cover'
@@ -113,22 +118,27 @@ export function ProductCard({
             )}
           </div>
 
-          {/* Wishlist */}
+          {/* Add to Wishlist */}
           <button
             className={cn(
               'absolute right-2 top-2 rounded-full bg-white/90 backdrop-blur-sm transition-all',
-              'hover:bg-gold hover:text-white',
-              isCompact ? 'p-1.5' : 'p-2'
+              isCompact ? 'p-1.5' : 'p-2',
             )}
             onClick={(e) => {
               e.preventDefault()
-              addItem(product)
+              if (isInWishlist) {
+                removeItem(product.id)
+              } else {
+                addItem(product)
+              }
             }}
           >
             <Heart
               className={cn(
-                isCompact ? 'h-3.5 w-3.5' : 'h-4 w-4'
+                isCompact ? 'h-4 w-4' : 'h-5 w-5',
               )}
+              fill={isInWishlist ? '#B8956C' : 'none'}
+              stroke={isInWishlist ? '#B8956C' : 'currentColor'}
             />
           </button>
 

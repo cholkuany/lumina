@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 // import { usePathname } from 'next/navigation'
 
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -24,18 +24,6 @@ export default function FetchProducts({
   const [sortBy, setSortBy] = useState('featured')
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500])
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  // const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({})
-
-  // ✅ sync URL → state
-  // useEffect(() => {
-  //   if (categoryParam) {
-  //     setSelectedFilters(prev => ({
-  //       ...prev,
-  //       category: [categoryParam],
-  //     }))
-  //   }
-  // }, [categoryParam])
-
 
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>(() => {
     const initial: Record<string, string[]> = {}
@@ -99,10 +87,14 @@ export default function FetchProducts({
 
       <div className="container-lumina">
         {/* Page Header */}
-        {Object.keys(selectedFilters).length > 0 &&
+        {(Object.keys(selectedFilters).length > 0 || searchQuery) &&
           <div className="mb-8">
             <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-2">
-              {categoryParam ? `Results for "${categoryParam}"` : 'All Products'}
+              {searchQuery
+                ? `Search results for "${searchQuery}"`
+                : categoryParam
+                  ? `Results for "${categoryParam}"`
+                  : 'All Products'}
             </h1>
             <p className="text-warm-gray-dark">
               {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found

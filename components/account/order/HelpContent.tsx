@@ -14,14 +14,14 @@ import {
   Loader2,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import type { OrderProps } from '@/lib/types'
+import type { TOrderProps } from '@/lib/types'
 
 // Help Modal Content
 export function HelpContent({
   order,
   onClose
 }: {
-  order: OrderProps
+  order: TOrderProps
   onClose: () => void
 }) {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null)

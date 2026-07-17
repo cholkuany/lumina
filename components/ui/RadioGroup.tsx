@@ -27,7 +27,7 @@ export function RadioGroup({ name, options, value, onChange, className }: RadioG
             'flex items-start gap-3 p-4 border rounded-brand cursor-pointer transition-all',
             value === option.value
               ? 'border-gold bg-gold/5'
-              : 'border-warm-grayhover:border-gold/50'
+              : 'border-warm-gray hover:border-gold/50'
           )}
         >
           <div className="relative mt-0.5">

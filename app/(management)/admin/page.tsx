@@ -4,107 +4,20 @@ import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import { getServerSession } from '@/lib/auth-server'
 import { AccessDenied } from '@/components/Access-Denied'
+import { getAdminDashboardData } from '@/lib/queries/get.admin.dashboard'
 
-import { UserRound, Handbag, Box, CircleDollarSignIcon, Clock, Star, Bell, UserPlus, Plus, Download } from 'lucide-react';
+import { UserRound, Handbag, Box, CircleDollarSignIcon, Clock, Star, Bell, Plus, ArrowRight, PackageX } from 'lucide-react';
 
-// Mock data - replace with actual data fetching
-const stats = {
-  totalRevenue: 124500,
-  totalOrders: 1284,
-  totalUsers: 3420,
-  totalProducts: 156,
-  pendingOrders: 12,
-  pendingReviews: 5,
+function formatRelativeTime(date: string) {
+  const seconds = Math.max(0, Math.floor((Date.now() - new Date(date).getTime()) / 1000))
+  if (seconds < 60) return 'Just now'
+  const minutes = Math.floor(seconds / 60)
+  if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'} ago`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`
+  const days = Math.floor(hours / 24)
+  return `${days} day${days === 1 ? '' : 's'} ago`
 }
-
-const recentOrders = [
-  {
-    id: '1',
-    orderNumber: 'LUM-2401-ABC123',
-    customer: 'Sarah Johnson',
-    email: 'sarah@example.com',
-    total: 299.99,
-    status: 'processing',
-    date: '2024-01-15T10:30:00Z',
-  },
-  {
-    id: '2',
-    orderNumber: 'LUM-2401-DEF456',
-    customer: 'Michael Chen',
-    email: 'michael@example.com',
-    total: 549.00,
-    status: 'shipped',
-    date: '2024-01-15T09:15:00Z',
-  },
-  {
-    id: '3',
-    orderNumber: 'LUM-2401-GHI789',
-    customer: 'Emily Davis',
-    email: 'emily@example.com',
-    total: 189.50,
-    status: 'delivered',
-    date: '2024-01-14T16:45:00Z',
-  },
-  {
-    id: '4',
-    orderNumber: 'LUM-2401-JKL012',
-    customer: 'James Wilson',
-    email: 'james@example.com',
-    total: 725.00,
-    status: 'processing',
-    date: '2024-01-14T14:20:00Z',
-  },
-  {
-    id: '5',
-    orderNumber: 'LUM-2401-MNO345',
-    customer: 'Anna Martinez',
-    email: 'anna@example.com',
-    total: 149.99,
-    status: 'cancelled',
-    date: '2024-01-14T11:00:00Z',
-  },
-]
-
-const recentActivity = [
-  {
-    id: '1',
-    type: 'order',
-    message: 'New order placed by Sarah Johnson',
-    time: '5 minutes ago',
-  },
-  {
-    id: '2',
-    type: 'review',
-    message: 'New 5-star review on "Lumina Pendant Light"',
-    time: '15 minutes ago',
-  },
-  {
-    id: '3',
-    type: 'user',
-    message: 'New user registration: michael@example.com',
-    time: '1 hour ago',
-  },
-  {
-    id: '4',
-    type: 'product',
-    message: 'Product "Velvet Armchair" is low on stock (3 left)',
-    time: '2 hours ago',
-  },
-  {
-    id: '5',
-    type: 'order',
-    message: 'Order #LUM-2401-XYZ shipped',
-    time: '3 hours ago',
-  },
-]
-
-const topProducts = [
-  { id: '1', name: 'Lumina Pendant Light', sales: 128, revenue: 25600, image: '/products/pendant.jpg' },
-  { id: '2', name: 'Velvet Armchair', sales: 96, revenue: 38400, image: '/products/chair.jpg' },
-  { id: '3', name: 'Marble Coffee Table', sales: 84, revenue: 33600, image: '/products/table.jpg' },
-  { id: '4', name: 'Ceramic Vase Set', sales: 156, revenue: 12480, image: '/products/vase.jpg' },
-  { id: '5', name: 'Linen Throw Pillow', sales: 234, revenue: 11700, image: '/products/pillow.jpg' },
-]
 
 export default async function AdminDashboard() {
   const session = await getServerSession()
@@ -113,6 +26,10 @@ export default async function AdminDashboard() {
       <AccessDenied />
     )
   }
+
+  const { stats, orderStatuses, recentOrders, recentActivity, topProducts } = await getAdminDashboardData()
+  const maxOrderStatus = Math.max(...Object.values(orderStatuses), 1)
+  const attentionCount = stats.pendingOrders + stats.pendingReviews + stats.lowStockItems + stats.outOfStockItems
 
   return (
     <div className="space-y-8">
@@ -123,14 +40,14 @@ export default async function AdminDashboard() {
             Welcome back, {session.user.name.split(' ')[0]}! 👋
           </h1>
           <p className="text-warm-gray-dark mt-1">
-            Here&apos;s what&apos;s happening with your store today.
+            Your store overview for {new Intl.DateTimeFormat('en-CA', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date())}.
           </p>
         </div>
-        <div className="flex gap-3">
-          <Button variant="secondary" size="sm">
-            <Download className="w-4 h-4 mr-2" />
-            Export Report
-          </Button>
+        <div className="flex items-center gap-3">
+          <span className="hidden md:inline-flex items-center gap-2 text-xs text-warm-gray-dark">
+            <span className="w-2 h-2 rounded-full bg-green-500" />
+            Live store data
+          </span>
           <Link href="/admin/products/new">
             <Button variant="primary" size="sm">
               <Plus className="w-4 h-4 mr-2" />
@@ -145,87 +62,100 @@ export default async function AdminDashboard() {
         <StatsCard
           title="Total Revenue"
           value={`$${stats.totalRevenue.toLocaleString()}`}
-          change={{ value: 12.5, type: 'increase' }}
+          description={`$${stats.monthRevenue.toLocaleString()} this month`}
           icon={<CircleDollarSignIcon className="w-6 h-6 text-gold" />}
           iconBg="bg-gold/10"
         />
         <StatsCard
           title="Total Orders"
           value={stats.totalOrders.toLocaleString()}
-          change={{ value: 8.2, type: 'increase' }}
+          description={`${stats.ordersToday} placed today`}
           icon={<Handbag className="w-6 h-6 text-blue-600" />}
           iconBg="bg-blue-100"
         />
         <StatsCard
           title="Total Users"
           value={stats.totalUsers.toLocaleString()}
-          change={{ value: 5.1, type: 'increase' }}
+          description={`${stats.newUsersToday} joined today`}
           icon={<UserRound className="w-6 h-6 text-green-600" />}
           iconBg="bg-green-100"
         />
         <StatsCard
           title="Total Products"
           value={stats.totalProducts}
-          change={{ value: 2.3, type: 'decrease' }}
+          description={`${stats.outOfStockItems} currently out of stock`}
           icon={<Box className="w-6 h-6 text-purple-600" />}
           iconBg="bg-purple-100"
         />
       </div>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      {/* Attention queue */}
+      <section className="space-y-3" aria-labelledby="attention-heading">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 id="attention-heading" className="text-lg font-semibold text-charcoal">Needs attention</h2>
+            <p className="text-sm text-warm-gray-dark">Tasks that may need an admin decision.</p>
+          </div>
+          <span className="text-sm font-medium text-charcoal">{attentionCount} open</span>
+        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <Link
           href="/admin/orders?status=processing"
-          className="flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-gold hover:shadow-soft transition-all"
+          className="group flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-amber-400 hover:shadow-soft transition-all"
         >
           <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
             <Clock className="w-5 h-5 text-amber-600" />
           </div>
-          <div>
-            <p className="text-2xl font-semibold text-charcoal">{stats.pendingOrders}</p>
-            <p className="text-xs text-warm-gray-dark">Pending Orders</p>
+          <div className="min-w-0 flex-1">
+            <p className="text-xl font-semibold text-charcoal">{stats.pendingOrders}</p>
+            <p className="text-xs text-warm-gray-dark">Orders to process</p>
           </div>
+          <ArrowRight className="w-4 h-4 text-warm-gray-dark group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
         </Link>
 
         <Link
           href="/admin/reviews?status=pending"
-          className="flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-gold hover:shadow-soft transition-all"
+          className="group flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-orange-400 hover:shadow-soft transition-all"
         >
           <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
             <Star className="w-5 h-5 text-orange-600" />
           </div>
-          <div>
-            <p className="text-2xl font-semibold text-charcoal">{stats.pendingReviews}</p>
-            <p className="text-xs text-warm-gray-dark">Pending Reviews</p>
+          <div className="min-w-0 flex-1">
+            <p className="text-xl font-semibold text-charcoal">{stats.pendingReviews}</p>
+            <p className="text-xs text-warm-gray-dark">Reviews to moderate</p>
           </div>
+          <ArrowRight className="w-4 h-4 text-warm-gray-dark group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
         </Link>
 
         <Link
           href="/admin/products?stock=low"
-          className="flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-gold hover:shadow-soft transition-all"
+          className="group flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-red-400 hover:shadow-soft transition-all"
         >
           <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
             <Bell className="w-5 h-5 text-red-600" />
           </div>
-          <div>
-            <p className="text-2xl font-semibold text-charcoal">8</p>
-            <p className="text-xs text-warm-gray-dark">Low Stock Items</p>
+          <div className="min-w-0 flex-1">
+            <p className="text-xl font-semibold text-charcoal">{stats.lowStockItems}</p>
+            <p className="text-xs text-warm-gray-dark">Products running low</p>
           </div>
+          <ArrowRight className="w-4 h-4 text-warm-gray-dark group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
         </Link>
 
         <Link
-          href="/admin/users?status=new"
-          className="flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-gold hover:shadow-soft transition-all"
+          href="/admin/products?stock=out"
+          className="group flex items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray hover:border-red-500 hover:shadow-soft transition-all"
         >
-          <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-            <UserPlus className="w-5 h-5 text-green-600" />
+          <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+            <PackageX className="w-5 h-5 text-red-600" />
           </div>
-          <div>
-            <p className="text-2xl font-semibold text-charcoal">24</p>
-            <p className="text-xs text-warm-gray-dark">New Users Today</p>
+          <div className="min-w-0 flex-1">
+            <p className="text-xl font-semibold text-charcoal">{stats.outOfStockItems}</p>
+            <p className="text-xs text-warm-gray-dark">Products out of stock</p>
           </div>
+          <ArrowRight className="w-4 h-4 text-warm-gray-dark group-hover:text-gold group-hover:translate-x-0.5 transition-all" />
         </Link>
       </div>
+      </section>
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -263,7 +193,7 @@ export default async function AdminDashboard() {
                   <tr key={order.id} className="hover:bg-linen/50 transition-colors">
                     <td className="px-4 py-3">
                       <Link
-                        href={`/admin/orders/${order.id}`}
+                        href="/admin/orders"
                         className="text-sm font-medium text-charcoal hover:text-gold"
                       >
                         {order.orderNumber}
@@ -286,8 +216,42 @@ export default async function AdminDashboard() {
                     </td>
                   </tr>
                 ))}
+                {recentOrders.length === 0 && (
+                  <tr><td colSpan={4} className="px-4 py-8 text-center text-sm text-warm-gray-dark">No orders yet.</td></tr>
+                )}
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <div className="space-y-6">
+        {/* Fulfillment snapshot */}
+        <div className="bg-white rounded-brand border border-warm-gray">
+          <div className="p-4 border-b border-warm-gray">
+            <h2 className="font-semibold text-charcoal">Order fulfillment</h2>
+            <p className="text-xs text-warm-gray-dark mt-0.5">All-time order status</p>
+          </div>
+          <div className="p-4 space-y-3">
+            {Object.entries(orderStatuses).map(([status, count]) => (
+              <div key={status}>
+                <div className="mb-1.5 flex items-center justify-between text-xs">
+                  <span className="capitalize text-charcoal">{status}</span>
+                  <span className="font-semibold text-charcoal">{count}</span>
+                </div>
+                <div className="h-1.5 overflow-hidden rounded-full bg-linen">
+                  <div
+                    className={cn(
+                      'h-full rounded-full',
+                      status === 'processing' && 'bg-blue-500',
+                      status === 'shipped' && 'bg-amber-500',
+                      status === 'delivered' && 'bg-green-500',
+                      status === 'cancelled' && 'bg-red-400'
+                    )}
+                    style={{ width: `${(count / maxOrderStatus) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -295,9 +259,7 @@ export default async function AdminDashboard() {
         <div className="bg-white rounded-brand border border-warm-gray">
           <div className="flex items-center justify-between p-4 border-b border-warm-gray">
             <h2 className="font-semibold text-charcoal">Recent Activity</h2>
-            <button className="text-sm text-gold hover:text-gold-dark font-medium">
-              View all
-            </button>
+            <span className="text-xs text-warm-gray-dark">Latest 5</span>
           </div>
           <div className="p-4 space-y-4">
             {recentActivity.map((activity) => (
@@ -327,12 +289,16 @@ export default async function AdminDashboard() {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-charcoal">{activity.message}</p>
                   <p className="text-xs text-warm-gray-dark mt-0.5">
-                    {activity.time}
+                    {formatRelativeTime(activity.date)}
                   </p>
                 </div>
               </div>
             ))}
+            {recentActivity.length === 0 && (
+              <p className="py-4 text-center text-sm text-warm-gray-dark">No recent activity.</p>
+            )}
           </div>
+        </div>
         </div>
       </div>
 
@@ -374,7 +340,12 @@ export default async function AdminDashboard() {
                         #{index + 1}
                       </span>
                       <div className="w-10 h-10 rounded-lg bg-linen shrink-0 overflow-hidden">
-                        <div className="w-full h-full bg-warm-gray-light" />
+                        {product.image ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={product.image} alt="" className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-warm-gray-light" />
+                        )}
                       </div>
                       <span className="text-sm font-medium text-charcoal">
                         {product.name}
@@ -391,7 +362,7 @@ export default async function AdminDashboard() {
                   </td>
                   <td className="px-4 py-3 text-right">
                     <Link
-                      href={`/admin/products/${product.id}/edit`}
+                      href={`/admin/products/${product.id}`}
                       className="text-sm text-gold hover:text-gold-dark font-medium"
                     >
                       Edit
@@ -399,6 +370,9 @@ export default async function AdminDashboard() {
                   </td>
                 </tr>
               ))}
+              {topProducts.length === 0 && (
+                <tr><td colSpan={4} className="px-4 py-8 text-center text-sm text-warm-gray-dark">No product sales yet.</td></tr>
+              )}
             </tbody>
           </table>
         </div>

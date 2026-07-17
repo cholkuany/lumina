@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { Product } from '@/lib/types'
+import type { TProduct } from '@/lib/types'
 import { normalizedValue } from '@/lib/utils'
 
 import { getProductStock } from '@/lib/utils'
@@ -11,7 +11,7 @@ export function useFilteredProducts({
   filterValues,
   searchQuery,
 }: {
-  products: Product[]
+  products: TProduct[]
   filterValues: Record<string, string>
   searchQuery: string
 }) {
@@ -24,7 +24,7 @@ export function filteredProducts({
   filterValues,
   searchQuery,
 }: {
-  products: Product[]
+  products: TProduct[]
   filterValues: Record<string, string>
   searchQuery: string
 }) {

@@ -8,7 +8,6 @@ export const useProductReviews = (productId: string) =>
   useQuery({
     queryKey: ['productReviews', productId],
     queryFn: async () => {
-      console.log('Fetching reviews for product ID:', productId)
       const reviewResult = await fetch(`/api/products/${productId}/reviews`)
       if (!reviewResult.ok) {
         throw new Error('Error fetching reviews')

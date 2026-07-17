@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { Product } from '@/lib/types'
-// import { ProductCard } from '../ui/ProductCard'
+import { TProduct } from '@/lib/types'
 import { HeroCarousel } from './HeroCarousel'
 import { HeaderBanner } from '../layout/nav/HeaderBanner'
 import { ChevronRight } from 'lucide-react'
 
-import { cn, formatPrice } from '@/lib/utils'
-import { ReactNode } from 'react'
+import { cn, formatPrice, getProductDiscount } from '@/lib/utils'
+import { Fragment, ReactNode } from 'react'
 
 const quickCards = [
   {
@@ -55,87 +54,87 @@ const quickCards = [
   },
 ]
 
-export function getDiscount(product?: Product) {
-  if (!product?.variants?.[0].originalPrice || !product?.variants?.[0].price) return null
-
-  const price = Number(product.variants?.[0].price)
-  const original = Number(product.variants?.[0].originalPrice)
-  if (!original || original <= price) return null
-
-  return Math.round(((original - price) / original) * 100)
-}
-
-export function Hero({ products }: { products: Product[] }) {
-  // const featured = products[0]
+export function Hero({ products }: { products: TProduct[] }) {
   const miniProducts = products.slice(0, 4)
 
   return (
-    <section className="bg-linen">
-      {/* Top marketplace strip */}
+    <section className="bg-[#e3e6e6]">
       <HeaderBanner />
 
-      <div className="container-lumina py-5">
-        {/* Big banner hero */}
+      <div className="container-lumina py-4">
         <HeroCarousel products={products.slice(0, 5)} />
 
-        {/* Amazon-style merchandising cards */}
-        <div className="relative z-10 mt-5 gap-5 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {/* Category collage card */}
+        <div className="relative z-10 mt-4 grid gap-4 sm:grid-cols-3 lg:grid-cols-4">
           <DisplayCard
-            title="Shop by category"
+            title="Shop by department"
             href="/categories"
-            footerText="Browse all departments →"
+            footerText="Browse all departments"
             showArrow
-            bgColor="bg-white"
-            imgBgColor='bg-red-400'
+            bgColor="bg-[#e7f5ff]"
+            imgBgColor="bg-[#f8fbff]"
             items={quickCards[0].items?.map(item => ({
               id: item.name,
               title: item.name,
               image: item.image,
               href: item.href,
             })) ?? []}
-            renderItem={CategoryGridItem}
+            renderItem={(item) => (
+              <MiniGridItem
+                {...item}
+                imageClassName="object-cover transition duration-300 group-hover:scale-105"
+                titleClassName="text-sm font-bold"
+              />
+            )}
           />
 
-          {/* Deals card */}
           <DisplayCard
             title="Today's Deals"
-            href="/deals"
-            footerText="Explore more →"
-            bgColor="bg-blue-300"
-            imgBgColor='bg-white'
+            href="/products?sort=sale"
+            footerText="Explore more deals"
+            bgColor="bg-[#fff1e6]"
+            imgBgColor="bg-[#fffaf5]"
             items={products.slice(0, 4).map(product => ({
               id: product.id,
               title: product.name,
               image: product?.variants?.[0]?.images?.[0]?.secure_url,
               href: `/products/${product.id}`,
             }))}
-            renderItem={ProductGridItem}
+            renderItem={(item) => (
+              <MiniGridItem
+                {...item}
+                imageClassName="object-contain p-3 transition duration-300 group-hover:scale-105"
+                titleClassName="line-clamp-2 text-xs font-semibold leading-snug"
+              />
+            )}
           />
 
-          {/* Best sellers card */}
           <DisplayCard
             title="Best Sellers"
             href="/products?sort=popular"
-            footerText="Explore more →"
-            bgColor="bg-blue-600"
-            imgBgColor='bg-white'
+            footerText="Shop best sellers"
+            bgColor="bg-[#eef7e8]"
+            imgBgColor="bg-[#fbfef8]"
             items={products.slice(0, 4).map(product => ({
               id: product.id,
               title: product.name,
               image: product?.variants?.[0]?.images?.[0]?.secure_url,
               href: `/products/${product.id}`,
             }))}
-            renderItem={ProductGridItem}
+            renderItem={(item) => (
+              <MiniGridItem
+                {...item}
+                imageClassName="object-contain p-3 transition duration-300 group-hover:scale-105"
+                titleClassName="line-clamp-2 text-xs font-semibold leading-snug"
+              />
+            )}
           />
 
-          {/* New arrivals card */}
           <DisplayCard
             title="New Arrivals"
             href="/products?sort=newest"
-            footerText="Explore more →"
-            bgColor="bg-green-200"
-            imgBgColor='bg-white'
+            footerText="See what just landed"
+            bgColor="bg-[#f3ecff]"
+            imgBgColor="bg-[#fcf9ff]"
             items={products.slice(0, 4).map(product => ({
               id: product.id,
               title: product.name,
@@ -143,24 +142,29 @@ export function Hero({ products }: { products: Product[] }) {
               href: `/products/${product.id}`,
             }))}
 
-            renderItem={ProductGridItem}
+            renderItem={(item) => (
+              <MiniGridItem
+                {...item}
+                imageClassName="object-contain p-3 transition duration-300 group-hover:scale-105"
+                titleClassName="line-clamp-2 text-xs font-semibold leading-snug"
+              />
+            )}
           />
         </div>
 
-        {/* Mini product row below cards */}
         {miniProducts.length > 0 && (
-          <div className="mt-5 rounded-[18px] bg-white p-5 shadow-soft">
+          <div className="mt-4 rounded-sm bg-white p-4 shadow-soft">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-wide text-gold-dark">
-                  Featured picks
+                <p className="text-xs font-bold uppercase text-[#007185]">
+                  Featured picks for you
                 </p>
-                <h2 className="text-2xl font-extrabold text-charcoal">
+                <h2 className="text-xl font-extrabold text-charcoal">
                   Popular products right now
                 </h2>
               </div>
-              <Link href="/products" className="text-sm font-bold text-gold-dark hover:text-gold">
-                Shop all →
+              <Link href="/products" className="text-sm font-bold text-[#007185] hover:text-gold-dark">
+                Shop all
               </Link>
             </div>
 
@@ -168,13 +172,13 @@ export function Hero({ products }: { products: Product[] }) {
               {miniProducts.map((product) => (
                 <Link
                   key={product.id}
-                  href={`/products/${product.slug}`}
-                  className="group rounded-xl border border-warm-gray-light p-3 transition hover:border-gold-light hover:shadow-soft"
+                  href={`/products/${product.id}`}
+                  className="group rounded-sm border border-slate-200 p-3 transition hover:border-[#febd69] hover:shadow-soft"
                 >
-                  <div className="relative h-40 overflow-hidden rounded-lg bg-linen">
-                    {getDiscount(product) && (
-                      <span className="absolute left-2 top-2 z-10 rounded-full bg-charcoal px-2.5 py-1 text-[10px] font-extrabold text-white">
-                        {getDiscount(product)}% OFF
+                  <div className="relative h-40 overflow-hidden rounded-sm bg-[#f7fafa]">
+                    {getProductDiscount(product) && (
+                      <span className="absolute left-2 top-2 z-10 rounded-sm bg-red-600 px-2.5 py-1 text-[10px] font-extrabold text-white">
+                        {getProductDiscount(product)}% OFF
                       </span>
                     )}
 
@@ -182,6 +186,7 @@ export function Hero({ products }: { products: Product[] }) {
                       src={product?.variants?.[0]?.images?.[0]?.secure_url || '/placeholder-product.jpg'}
                       alt={product.name}
                       fill
+                      sizes="(max-width: 768px) 50vw, 25vw"
                       className="object-contain p-4 transition duration-300 group-hover:scale-105"
                     />
                   </div>
@@ -191,7 +196,7 @@ export function Hero({ products }: { products: Product[] }) {
                   </h3>
 
                   <div className="mt-2 flex items-center gap-2">
-                    <span className="text-base font-extrabold text-charcoal">
+                    <span className="text-base font-extrabold text-[#b12704]">
                       {formatPrice(product.variants?.[0].price)}
                     </span>
                     {product.variants?.[0].originalPrice && (
@@ -210,7 +215,7 @@ export function Hero({ products }: { products: Product[] }) {
   )
 }
 
-interface DisplayCardProps<T> {
+interface DisplayCardProps<T extends { id: string }> {
   title: string
   href: string
   items: T[]
@@ -220,12 +225,12 @@ interface DisplayCardProps<T> {
   imgBgColor?: string
   showArrow?: boolean
 
-  renderItem: (item: T) => ReactNode
+  renderItem: (item: T & { imgBgColor?: string }) => ReactNode
 
   gridClassName?: string
 }
 
-export function DisplayCard<T>({
+export function DisplayCard<T extends { id: string }>({
   title,
   href,
   items,
@@ -237,27 +242,31 @@ export function DisplayCard<T>({
   renderItem,
 }: DisplayCardProps<T>) {
   return (
-    <div className={`rounded-sm ${bgColor} p-5 shadow-soft`}>
+    <div className={`rounded-sm ${bgColor} p-4 shadow-soft`}>
       <Link
         href={href}
         className="group flex items-center justify-between"
       >
-        <h2 className="text-xl font-extrabold text-charcoal">
+        <h2 className="text-lg font-extrabold text-charcoal">
           {title}
         </h2>
 
         {showArrow && (
-          <ChevronRight className="h-5 w-5 text-gold transition group-hover:text-blue-600" />
+          <ChevronRight className="h-5 w-5 text-[#007185] transition group-hover:text-gold-dark" />
         )}
       </Link>
 
-      <div className={cn('mt-4 grid gap-3', gridClassName)}>
-        {items.map((item) => renderItem({ ...item, imgBgColor }))}
+      <div className={cn('mt-3 grid gap-3', gridClassName)}>
+        {items.map((item) => (
+          <Fragment key={item.id}>
+            {renderItem({ ...item, imgBgColor })}
+          </Fragment>
+        ))}
       </div>
 
       <Link
         href={href}
-        className="mt-4 inline-block text-sm font-extrabold text-gold-dark hover:text-gold"
+        className="mt-4 inline-block text-sm font-bold text-[#007185] hover:text-gold-dark"
       >
         {footerText}
       </Link>
@@ -265,59 +274,38 @@ export function DisplayCard<T>({
   )
 }
 
-const ProductGridItem = ({
-  id, image, imgBgColor, title
+const MiniGridItem = ({
+  href,
+  image,
+  imageClassName,
+  imgBgColor = 'bg-gray-300',
+  title,
+  titleClassName,
 }: {
   id: string
+  href: string
   title: string
-  image: string
+  image?: string
+  imageClassName: string
   imgBgColor?: string
+  titleClassName: string
 }) => {
   return (
     <Link
-      key={id}
-      href={`/products/${id}`}
+      href={href}
       className="group block"
     >
       <div className={`relative h-28 overflow-hidden rounded-sm ${imgBgColor}`}>
         <Image
-          src={image}
+          src={image || '/placeholder-product.jpg'}
           alt={title}
           fill
-          className="object-contain p-3 transition duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 45vw, 160px"
+          className={imageClassName}
         />
       </div>
 
-      <p className="mt-2 line-clamp-2 text-xs font-bold text-charcoal">
-        {title}
-      </p>
-    </Link>
-  )
-}
-
-const CategoryGridItem = ({ id, title, image, href, imgBgColor = 'bg-gray-300', }: {
-  id: string
-  title: string
-  image: string
-  href: string
-  imgBgColor?: string
-}) => {
-  return (
-    <Link
-      key={id}
-      href={href}
-      className="group block"
-    >
-      <div className={`relative h-28 overflow-hidden rounded ${imgBgColor}`}>
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover transition duration-300 group-hover:scale-105"
-        />
-      </div>
-
-      <p className="mt-2 text-sm font-bold text-charcoal">
+      <p className={cn('mt-2 text-charcoal', titleClassName)}>
         {title}
       </p>
     </Link>

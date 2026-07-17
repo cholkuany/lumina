@@ -1,6 +1,6 @@
 import { Product } from "../db/models";
 import dbConnect from "../db/connection";
-import type { Product as ProductType } from "../types";
+import type { TProduct as ProductType } from "../types";
 import mongoose from "mongoose";
 
 export const productProjection = {
@@ -67,6 +67,7 @@ export async function getProducts() {
   await dbConnect()
   try {
     const products: ProductType[] = await Product.aggregate([
+      { $sort: { createdAt: -1, _id: -1 } },
       productProjection
     ])
     return products
@@ -85,6 +86,7 @@ export async function getProductsByCategory(categoryName: string, excludeProduct
           _id: { $ne: new mongoose.Types.ObjectId(excludeProductId) },
         }
       },
+      { $sort: { createdAt: -1, _id: -1 } },
       { $limit: limit },
       productProjection
     ])

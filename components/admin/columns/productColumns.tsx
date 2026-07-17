@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 
-import type { Product } from '@/lib/types'
+import type { TProduct } from '@/lib/types'
 import { StatusBadge } from '@/components/admin/StatusBadge'
 import { ProductCell } from '../products/ProductCell'
 import { ProductActions } from '../products/ProductAction'
@@ -14,7 +14,7 @@ export function useProductColumns({
     type: ActionType,
     ids: string | string[]
   ) => void
-}): ColumnDef<Product>[] {
+}): ColumnDef<TProduct>[] {
   return [
     {
       accessorKey: 'name',

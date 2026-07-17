@@ -4,11 +4,11 @@ import Image from 'next/image'
 import { ChevronRight, Package, Truck, CheckCircle, XCircle } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
-import { Order } from '@/lib/types'
+import { TOrder } from '@/lib/types'
 import { formatPrice } from '@/lib/utils'
 
 interface OrderCardProps {
-  order: Order
+  order: TOrder
 }
 
 const statusConfig = {

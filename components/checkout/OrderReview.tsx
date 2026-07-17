@@ -7,12 +7,10 @@ import { Button } from '@/components/ui/Button'
 import { useCart } from '@/context/CartContext'
 import { formatPrice } from '@/lib/utils'
 
-import type { ShippingFormData } from '@/components/checkout/ShippingForm'
-import type { PaymentFormData } from '@/components/checkout/PaymentForm'
+import { TShippingFormData } from '@/lib/types'
 
 interface OrderReviewProps {
-  shippingData: ShippingFormData
-  paymentData: PaymentFormData
+  shippingData: TShippingFormData
   onBack: () => void
   onSubmit: () => void
   isProcessing: boolean
@@ -20,14 +18,11 @@ interface OrderReviewProps {
 
 export function OrderReview({
   shippingData,
-  paymentData,
   onBack,
   onSubmit,
-  isProcessing
+  isProcessing,
 }: OrderReviewProps) {
   const { state, subtotal } = useCart()
-
-  console.log("cart state in OrderReview:", state)
 
   const shippingCost = shippingData.shippingMethod === 'standard'
     ? (subtotal >= 50 ? 0 : 5.99)
@@ -51,14 +46,16 @@ export function OrderReview({
         <div className="bg-linen rounded-brand p-4 space-y-4">
           {state.items.map((item) => (
             <div key={item.id} className="flex gap-4">
-              <div className="relative w-16 h-16 bg-white rounded-lg overflow-hidden shrink-0">
-                <Image
-                  src={item.product.variant.images[0].secure_url}
-                  alt={item.product.name}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute -top-1 -right-1 w-5 h-5 bg-charcoal text-white text-xs rounded-full flex items-center justify-center">
+              <div className='relative w-16 h-16'>
+                <div className="w-full h-full bg-white rounded-lg overflow-hidden shrink-0">
+                  <Image
+                    src={item.product.variant.images[0].secure_url}
+                    alt={item.product.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-charcoal text-white text-xs rounded-full flex items-center justify-center z-10">
                   {item.quantity}
                 </div>
               </div>
@@ -146,20 +143,10 @@ export function OrderReview({
           </button>
         </div>
         <div className="bg-linen rounded-brand p-4">
-          {paymentData.paymentMethod === 'card' && (
-            <>
-              <p className="text-charcoal font-medium">
-                •••• •••• •••• {paymentData.cardNumber.slice(-4)}
-              </p>
-              <p className="text-warm-gray-dark text-sm">{paymentData.cardName}</p>
-            </>
-          )}
-          {paymentData.paymentMethod === 'paypal' && (
-            <p className="text-charcoal font-medium">PayPal</p>
-          )}
-          {paymentData.paymentMethod === 'applepay' && (
-            <p className="text-charcoal font-medium">Apple Pay</p>
-          )}
+          <p className="text-charcoal font-medium">Stripe Checkout</p>
+          <p className="text-warm-gray-dark text-sm">
+            You&apos;ll be redirected to Stripe to enter payment details securely.
+          </p>
         </div>
       </div>
 
@@ -204,7 +191,7 @@ export function OrderReview({
           className="sm:flex-1"
           disabled={isProcessing}
         >
-          {isProcessing ? 'Processing...' : `Pay ${formatPrice(total)}`}
+          {isProcessing ? 'Redirecting...' : `Continue to Stripe - ${formatPrice(total)}`}
         </Button>
       </div>
 

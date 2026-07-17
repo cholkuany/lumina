@@ -51,7 +51,6 @@ export function WriteReviewForm({
           setIsSubmitted(true)
         },
         onError: (error: ApiError) => {
-          console.log('Error submitting review:', error?.errors?.fieldErrors || error.message)
           const fieldErrors = error?.errors?.fieldErrors || {}
           if (error.errors) {
             setErrors(fieldErrors)

@@ -78,7 +78,7 @@ export function useReviewVoting({
           downvotes: data.downvotes,
           userVote: data.userVote,
         })
-      } catch (err) {
+      } catch {
         // Revert optimistic update
         setVoteState(previousState)
         setError('Failed to submit vote')

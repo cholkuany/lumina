@@ -1,27 +1,27 @@
 'use client'
 
-import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
-import type { CartItem, Product, Attribute, ProductVariant, CartProduct } from '@/lib/types'
+import { createContext, useCallback, useContext, useReducer, useEffect, ReactNode } from 'react'
+import type { TCartItem, TProduct, Attribute, TProductVariant, TCartProduct } from '@/lib/types'
 import { buildKey } from '@/hooks/useVariant'
 
 interface CartState {
-  items: CartItem[]
+  items: TCartItem[]
   isOpen: boolean
 }
 
 type CartAction =
-  | { type: 'ADD_ITEM'; payload: { product: Product; quantity: number; variants?: Partial<Attribute>, image?: string } }
+  | { type: 'ADD_ITEM'; payload: { product: TProduct; quantity: number; variants?: Partial<Attribute>, image?: string } }
   | { type: 'REMOVE_ITEM'; payload: string }
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
   | { type: 'CLEAR_CART' }
   | { type: 'TOGGLE_CART' }
   | { type: 'OPEN_CART' }
   | { type: 'CLOSE_CART' }
-  | { type: 'LOAD_CART'; payload: CartItem[] }
+  | { type: 'LOAD_CART'; payload: TCartItem[] }
 
 interface CartContextType {
   state: CartState
-  addItem: (product: Product, quantity: number, variants?: Partial<Attribute>, image?: string) => void
+  addItem: (product: TProduct, quantity: number, variants?: Partial<Attribute>, image?: string) => void
   removeItem: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
   clearCart: () => void
@@ -64,7 +64,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         return Object.entries(variants).every(([key, value]) => v.attributes[key] === value)
       })
 
-      const productVariant: ProductVariant = {
+      const productVariant: TProductVariant = {
         id: selected!.id,
         attributes: selected!.attributes,
         price: selected!.price,
@@ -74,7 +74,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         stock: selected?.stock || 0
       }
 
-      const cartProduct: CartProduct = {
+      const cartProduct: TCartProduct = {
         id: product.id,
         name: product.name,
         // price: product.price,
@@ -132,22 +132,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('lumina-cart', JSON.stringify(state.items))
   }, [state.items])
   // variants?: Record<string, string>
-  const addItem = (product: Product, quantity: number, variants?: Partial<Attribute>, image?: string) => {
+  const addItem = useCallback((product: TProduct, quantity: number, variants?: Partial<Attribute>, image?: string) => {
     dispatch({ type: 'ADD_ITEM', payload: { product, quantity, variants, image } })
-  }
+  }, [])
 
-  const removeItem = (id: string) => {
+  const removeItem = useCallback((id: string) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id })
-  }
+  }, [])
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = useCallback((id: string, quantity: number) => {
     dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } })
-  }
+  }, [])
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART' })
-  const toggleCart = () => dispatch({ type: 'TOGGLE_CART' })
-  const openCart = () => dispatch({ type: 'OPEN_CART' })
-  const closeCart = () => dispatch({ type: 'CLOSE_CART' })
+  const clearCart = useCallback(() => dispatch({ type: 'CLEAR_CART' }), [])
+  const toggleCart = useCallback(() => dispatch({ type: 'TOGGLE_CART' }), [])
+  const openCart = useCallback(() => dispatch({ type: 'OPEN_CART' }), [])
+  const closeCart = useCallback(() => dispatch({ type: 'CLOSE_CART' }), [])
 
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0)
   const subtotal = state.items.reduce((sum, item) => sum + item.product.variant.price * item.quantity, 0)

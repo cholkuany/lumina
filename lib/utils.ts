@@ -2,7 +2,7 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { format } from 'date-fns'
-import { Product } from './types'
+import { TProduct } from './types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -37,22 +37,35 @@ export const formatDate = (dateString: string | Date) => {
   return format(date, 'PPP')
 }
 
-export function getDefaultVariant(product: Product) {
+export function getDefaultVariant(product: TProduct) {
   return (
     product.variants.find((variant) => variant.stock > 0) ||
     product.variants[0]
   )
 }
 
-export function getProductPrice(product: Product) {
+export function getProductPrice(product: TProduct) {
   return getDefaultVariant(product)?.price ?? 0
 }
 
-export function getProductOriginalPrice(product: Product) {
+export function getProductOriginalPrice(product: TProduct) {
   return getDefaultVariant(product)?.originalPrice ?? null
 }
 
-export function getProductStock(product: Product) {
+export function getProductDiscount(product?: TProduct) {
+  const currentVariant = product?.variants?.[0]
+
+  if (!currentVariant?.originalPrice || !currentVariant.price) return null
+
+  const price = Number(currentVariant.price)
+  const original = Number(currentVariant.originalPrice)
+
+  if (!original || original <= price) return null
+
+  return Math.round(((original - price) / original) * 100)
+}
+
+export function getProductStock(product: TProduct) {
   return product.variants.reduce(
     (total, variant) => total + Number(variant.stock || 0),
     0

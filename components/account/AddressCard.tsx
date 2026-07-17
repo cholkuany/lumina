@@ -1,10 +1,10 @@
 // components/account/AddressCard.tsx
 import { MapPin, Edit2, Trash2 } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
-import { Address } from '@/lib/types'
+import { TAddress } from '@/lib/types'
 
 interface AddressCardProps {
-  address: Address
+  address: TAddress
   onEdit: () => void
   onDelete: () => void
 }

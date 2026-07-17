@@ -6,7 +6,7 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { ProductCard } from '@/components/ui/ProductCard'
 import { Button } from '@/components/ui/Button'
 import { ChevronRight } from 'lucide-react'
-import { Product } from '@/lib/types'
+import { TProduct } from '@/lib/types'
 
 type categoryData = {
   id: string,
@@ -15,7 +15,7 @@ type categoryData = {
   image: string,
   itemCount: number,
   subcategories: { name: string, slug: string, count: number, image: string }[],
-  featuredProducts: Product[]
+  featuredProducts: TProduct[]
 }
 
 // Mock data - replace with actual data fetching

@@ -1,8 +1,7 @@
 // components/sections/Categories.tsx
 import Link from 'next/link'
-// import { CategoryCard } from '@/components/ui/CategoryCard'
-
 import Image from 'next/image'
+import { ChevronRight } from 'lucide-react'
 
 const categories = [
   {
@@ -33,40 +32,90 @@ const categories = [
 
 export function Categories() {
   return (
-    <section className="bg-linen py-5">
+    <section className="bg-[#e3e6e6] py-4">
       <div className="container-lumina">
-        <div className="grid gap-5 lg:grid-cols-2">
-          {categories.map((category) => (
+        <div className="rounded-sm bg-white p-4 shadow-soft">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-extrabold text-charcoal">
+                Explore popular departments
+              </h2>
+              <p className="mt-1 text-sm text-charcoal/60">
+                Shop the categories customers browse most.
+              </p>
+            </div>
             <Link
-              key={category.category}
-              href={`/products?category=${category.category}`}
-              className="group overflow-hidden rounded-[20px] bg-white shadow-soft transition hover:-translate-y-1 hover:shadow-hover"
+              href="/categories"
+              className="flex items-center gap-1 text-sm font-bold text-[#007185] hover:text-gold-dark"
             >
-              <div className="grid md:grid-cols-[1.1fr_0.9fr]">
-                <div className="relative min-h-65 bg-linen">
+              View all departments
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            {categories.map((category) => (
+              <Link
+                key={category.category}
+                href={`/products?category=${category.category}`}
+                className="group rounded-sm border border-slate-200 bg-[#f7fafa] p-3 transition hover:border-[#febd69] hover:bg-white hover:shadow-soft"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-white">
                   <Image
                     src={category.image}
                     alt={category.name}
                     fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-contain p-3 transition duration-300 group-hover:scale-105"
                   />
                 </div>
 
-                <div className="flex items-center p-6 md:p-8">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-gold-dark">
-                      Category spotlight
-                    </p>
-                    <h3 className="mt-3 font-serif text-4xl text-charcoal">
-                      {category.name}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-charcoal/65">
-                      {category.promo}
-                    </p>
-                    <span className="mt-5 inline-block text-sm font-extrabold text-gold-dark group-hover:text-gold">
-                      Shop now →
-                    </span>
-                  </div>
+                <h3 className="mt-3 text-base font-extrabold text-charcoal">
+                  {category.name}
+                </h3>
+                <p className="mt-1 line-clamp-2 text-xs leading-5 text-charcoal/60">
+                  {category.promo}
+                </p>
+                <span className="mt-3 inline-block text-sm font-bold text-[#007185] group-hover:text-gold-dark">
+                  Shop now
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+          {categories.slice(0, 2).map((category) => (
+            <Link
+              key={category.category}
+              href={`/products?category=${category.category}`}
+              className="group grid overflow-hidden rounded-sm bg-white shadow-soft transition hover:shadow-hover sm:grid-cols-[0.85fr_1fr]"
+            >
+              <div className="relative min-h-52 bg-[#f7fafa]">
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-contain p-6 transition duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <div className="flex items-center p-5">
+                <div>
+                  <p className="text-xs font-bold uppercase text-red-600">
+                    Featured department
+                  </p>
+                  <h3 className="mt-2 text-2xl font-extrabold text-charcoal">
+                    More to discover in {category.name}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-charcoal/65">
+                    {category.promo}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#007185] group-hover:text-gold-dark">
+                    Browse {category.name}
+                    <ChevronRight className="h-4 w-4" />
+                  </span>
                 </div>
               </div>
             </Link>
@@ -76,43 +125,3 @@ export function Categories() {
     </section>
   )
 }
-
-// export function Categories() {
-//   return (
-//     <section className="py-16 lg:py-24">
-//       <div className="container-lumina">
-//         {/* Header */}
-//         <div className="flex items-end justify-between mb-10">
-//           <div>
-//             <span className="text-gold text-sm font-medium tracking-wider">
-//               BROWSE
-//             </span>
-//             <h2 className="font-serif text-3xl lg:text-4xl text-charcoal mt-2">
-//               Shop by Category
-//             </h2>
-//           </div>
-//           <Link
-//             href="/categories"
-//             className="hidden sm:flex items-center gap-2 text-sm font-medium text-charcoal hover:text-gold transition-colors"
-//           >
-//             View All
-//             <span>→</span>
-//           </Link>
-//         </div>
-
-//         {/* Grid */}
-//         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
-//           {categories.map((category) => (
-//             <CategoryCard
-//               key={category.name}
-//               name={category.name}
-//               image={category.image}
-//               category={category.category}
-//               itemCount={category.itemCount}
-//             />
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }

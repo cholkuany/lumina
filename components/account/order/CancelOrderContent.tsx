@@ -8,7 +8,7 @@ import {
   AlertTriangle
 } from 'lucide-react'
 
-import type { OrderProps } from '@/lib/types'
+import type { TOrderProps } from '@/lib/types'
 import { Button } from '@/components/ui/Button'
 
 // Cancel Order Modal Content
@@ -16,7 +16,7 @@ export function CancelOrderContent({
   order,
   onClose
 }: {
-  order: OrderProps
+  order: TOrderProps
   onClose: () => void
 }) {
   const [reason, setReason] = useState('')
@@ -56,7 +56,7 @@ export function CancelOrderContent({
         </div>
         <h3 className="font-serif text-xl text-charcoal mb-2">Order Cancelled</h3>
         <p className="text-warm-gray-dark mb-6">
-          Your order has been successfully cancelled. A refund of {formatPrice(order.total + order.tax)} will be processed within 5-7 business days.
+          Your order has been successfully cancelled. A refund of {formatPrice(order.total)} will be processed within 5-7 business days.
         </p>
         <Button onClick={onClose}>Close</Button>
       </div>
@@ -110,7 +110,7 @@ export function CancelOrderContent({
 
       <div className="bg-linen rounded-lg p-4 mb-6">
         <p className="text-sm text-warm-gray-dark">
-          <strong className="text-charcoal">Refund Amount:</strong> {formatPrice(order.total + order.tax)}
+          <strong className="text-charcoal">Refund Amount:</strong> {formatPrice(order.total)}
         </p>
         <p className="text-sm text-warm-gray-dark mt-1">
           Refunds are typically processed within 5-7 business days.

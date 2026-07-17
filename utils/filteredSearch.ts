@@ -1,7 +1,7 @@
-import type { Product } from "@/lib/types"
+import type { TProduct } from "@/lib/types"
 
 export const filteredSearch = (
-  allProducts: Product[],
+  allProducts: TProduct[],
   selectedFilters: Record<string, string[]>,
   priceRange: [number, number],
   sortBy: string,
@@ -11,20 +11,35 @@ export const filteredSearch = (
 
   // Search query
   if (searchQuery) {
-    const query = searchQuery.toLowerCase()
+    const query = searchQuery.trim().toLowerCase()
     result = result.filter(
       p =>
         p.name.toLowerCase().includes(query) ||
+        p.description?.toLowerCase().includes(query) ||
+        p.brand?.toLowerCase().includes(query) ||
         p.category.name.toLowerCase().includes(query) ||
-        // p.brand.toLowerCase().includes(query) ||
-        searchQuery === "new" && p.isNewArrival ||
-        searchQuery === "sale" && p.isSale
+        p.category.ancestors?.some(ancestor => ancestor.toLowerCase().includes(query)) ||
+        query === "new" && p.isNewArrival ||
+        query === "sale" && p.isSale
     )
   }
 
   // Category filter
-  if (selectedFilters.category?.length) {
-    result = result.filter(p => selectedFilters.category.includes(p.category.name) || p.category.ancestors?.some(ancestor => selectedFilters.category?.includes(ancestor)))
+  const selectedCategories = Object.entries(selectedFilters)
+    .filter(([key]) => !['rating', 'availability'].includes(key))
+    .flatMap(([, values]) => values)
+    .map(value => value.toLowerCase())
+
+  if (selectedCategories.length) {
+    result = result.filter(p => {
+      const categoryName = p.category.name.toLowerCase()
+      const ancestors = p.category.ancestors?.map(ancestor => ancestor.toLowerCase()) ?? []
+
+      return (
+        selectedCategories.includes(categoryName) ||
+        ancestors.some(ancestor => selectedCategories.includes(ancestor))
+      )
+    })
   }
 
   // Rating filter

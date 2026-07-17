@@ -27,7 +27,7 @@ export default function ForgotPasswordPage() {
     setIsLoading(true);
 
     try {
-      const { data, error } = await authClient.requestPasswordReset(
+      const { error } = await authClient.requestPasswordReset(
         { email, redirectTo: "/reset-password" }
       );
 
@@ -36,8 +36,6 @@ export default function ForgotPasswordPage() {
         return;
       }
       setSuccess(true);
-
-      console.log(data);
 
     } catch (err: unknown) {
       if (err instanceof Error) {

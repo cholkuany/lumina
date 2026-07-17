@@ -1,8 +1,8 @@
-import type { Product } from '@/lib/types'
+import type { TProduct } from '@/lib/types'
 import { ProductImage } from './ProductImage'
 import { ProductInfo } from './ProductInfo'
 
-export function ProductCell({ product }: { product: Product }) {
+export function ProductCell({ product }: { product: TProduct }) {
   return (
     <div className="flex items-center gap-3">
       <ProductImage

@@ -2,9 +2,8 @@
 'use client'
 
 import { useState } from 'react'
-import { CheckCircle, XCircle, AlertTriangle, Trash2 } from 'lucide-react'
+import { CheckCircle, XCircle, AlertTriangle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { cn } from '@/lib/utils'
 
 interface BulkModerationActionsProps {
   selectedCount: number

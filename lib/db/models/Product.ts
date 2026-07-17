@@ -71,6 +71,7 @@ export interface Attributes {
 }
 
 export interface IProductVariant {
+  _id?: mongoose.Types.ObjectId;
   attributes: Attributes;
   price: number;
   originalPrice?: number;
@@ -169,11 +170,6 @@ const ProductSchema = new Schema<IProduct>(
       4: { type: Number, default: 0 },
       5: { type: Number, default: 0 },
     },
-    // stockCount: {
-    //   type: Number,
-    //   min: [0, 'Stock count cannot be negative'],
-    //   default: 0,
-    // },
     unitsSold: {
       type: Number,
       min: [0, 'units sold cannot be negative'],

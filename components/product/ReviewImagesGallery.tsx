@@ -6,10 +6,10 @@ import Image from 'next/image'
 import { Camera, ChevronRight } from 'lucide-react'
 import { ImageLightbox } from './ImageLightbox'
 import { Button } from '@/components/ui/Button'
-import { Review } from '@/lib/types'
+import { TReview } from '@/lib/types'
 
 interface ReviewImagesGalleryProps {
-  reviews: Review[]
+  reviews: TReview[]
 }
 
 export function ReviewImagesGallery({ reviews }: ReviewImagesGalleryProps) {

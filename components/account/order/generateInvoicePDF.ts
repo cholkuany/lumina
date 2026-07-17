@@ -1,6 +1,6 @@
-import type { OrderProps } from '@/lib/types'
+import type { TOrderProps } from '@/lib/types'
 // Invoice Generator
-export function generateInvoicePDF(order: OrderProps) {
+export function generateInvoicePDF(order: TOrderProps) {
   const formatPrice = (price: number) => `$${price.toFixed(2)}`
 
   const invoiceHTML = `
@@ -119,7 +119,7 @@ export function generateInvoicePDF(order: OrderProps) {
         </div>
         <div class="summary-row total">
           <span>Total</span>
-          <span>${formatPrice(order.total + order.tax)}</span>
+          <span>${formatPrice(order.total)}</span>
         </div>
       </div>
 

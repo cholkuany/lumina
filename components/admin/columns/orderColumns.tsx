@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import type { ColumnDef } from '@tanstack/react-table'
 
 import { StatusBadge } from '@/components/admin/StatusBadge'
-import { TOrder } from '@/app/(management)/admin/orders/page'
+import type { TAdminOrder } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { Eye, Printer } from 'lucide-react'
 
@@ -10,8 +10,8 @@ import { Eye, Printer } from 'lucide-react'
 export function useOrderColumns({
   setOrderDetail,
 }: {
-  setOrderDetail: (val: TOrder) => void
-}): ColumnDef<TOrder>[] {
+  setOrderDetail: (val: TAdminOrder) => void
+}): ColumnDef<TAdminOrder>[] {
   return useMemo(() => [
     {
       accessorKey: 'id',

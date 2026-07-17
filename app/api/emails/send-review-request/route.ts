@@ -49,9 +49,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
     }
 
-    // Log email sent for tracking
-    console.log('Review request email sent:', { to, orderNumber, emailId: data?.id })
-
     return NextResponse.json({
       success: true,
       emailId: data?.id,

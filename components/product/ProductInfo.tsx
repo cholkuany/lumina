@@ -6,27 +6,22 @@ import { Button } from '@/components/ui/Button'
 import { VariantSelector } from './VariantSelector'
 import { useCart } from '@/context/CartContext'
 import { useWishlist } from '@/context/WishlistContext'
-import { Product } from '@/lib/types'
+import { TProduct } from '@/lib/types'
 import { formatPrice, cn } from '@/lib/utils'
 import { ImageGallery } from '@/components/product/ImageGallery'
 import { useVariantSelector } from '@/hooks/useVariant'
 import { ShareDropdown } from './ShareDropdown'
 
-export function ProductInfo({ product }: { product: Product }) {
+export function ProductInfo({ product }: { product: TProduct }) {
 
   const {
     selectedVariants,
     setAttribute,
     currentVariant,
-    getOptions
   } = useVariantSelector(product.variants)
 
   const { addItem, state } = useCart()
   const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist()
-
-  console.log('options', getOptions('color'))
-  console.log('current variant', currentVariant)
-  console.log('selected variants', selectedVariants)
 
   // Get images for the current color
   const currentImages = useMemo(() => {

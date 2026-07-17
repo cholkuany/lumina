@@ -1,9 +1,7 @@
 // lib/db/models/Address.ts
 import mongoose, { Schema, Model } from 'mongoose';
 
-export interface IAddress {
-  _id: mongoose.Types.ObjectId;
-  user: mongoose.Types.ObjectId;
+export interface IAddressDetails {
   firstName: string;
   lastName: string;
   street: string;
@@ -13,19 +11,20 @@ export interface IAddress {
   zipCode: string;
   country: string;
   phone: string;
+}
+
+export interface IAddress extends IAddressDetails {
+  _id: mongoose.Types.ObjectId;
+  user: mongoose.Types.ObjectId;
   isDefault: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const AddressSchema = new Schema<IAddress>(
+export type IShippingAddress = IAddressDetails;
+
+export const AddressSnapshotSchema = new Schema<IAddressDetails>(
   {
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-      index: true,
-    },
     firstName: {
       type: String,
       required: [true, 'First name is required'],
@@ -78,6 +77,18 @@ const AddressSchema = new Schema<IAddress>(
       required: [true, 'Phone number is required'],
       match: [/^[\d\s\-+()]+$/, 'Please enter a valid phone number'],
     },
+  },
+  { _id: false }
+);
+
+const AddressSchema = new Schema<IAddress>(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+      index: true,
+    },
     isDefault: {
       type: Boolean,
       default: false,
@@ -89,6 +100,8 @@ const AddressSchema = new Schema<IAddress>(
     toObject: { virtuals: true },
   }
 );
+
+AddressSchema.add(AddressSnapshotSchema);
 
 // Ensure only one default address per user
 AddressSchema.pre('save', async function () {

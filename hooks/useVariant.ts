@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import type { ProductVariant, Attribute } from '@/lib/types'
+import type { TProductVariant, Attribute } from '@/lib/types'
 import { normalizedValue } from '@/lib/utils'
 
 export const buildKey = (attrs: Attribute) =>
@@ -24,11 +24,11 @@ const filterAttributes = (attrs: Attribute) => {
   return result
 }
 
-export function useVariantSelector(variants: ProductVariant[]) {
+export function useVariantSelector(variants: TProductVariant[]) {
   // look up map
   const { variantKeyMap, attributeValues } = useMemo(() => {
 
-    const variantKeyMap = new Map<string, ProductVariant>()
+    const variantKeyMap = new Map<string, TProductVariant>()
     const attributeValues: Record<string, Set<string>> = {}
 
     for (const variant of variants) {
@@ -50,8 +50,6 @@ export function useVariantSelector(variants: ProductVariant[]) {
         }
       }
     }
-
-    console.log('Attribute Values:', attributeValues)
 
     return { variantKeyMap, attributeValues }
 

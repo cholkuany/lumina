@@ -23,8 +23,11 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
+type LoginFormProps = {
+  redirectTo?: string
+}
 
-export default function LoginForm() {
+export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
   const router = useRouter()
 
   const [error, setError] = useState("");
@@ -52,7 +55,7 @@ export default function LoginForm() {
       if (result.error) {
         setError(result.error.message || "Invalid credentials");
       } else {
-        router.push("/account");
+        router.push(redirectTo);
         router.refresh();
       }
     } catch (err: unknown) {
@@ -168,7 +171,10 @@ export default function LoginForm() {
           {/* Sign Up Link */}
           <p className="text-center text-sm text-warm-gray-dark mt-8">
             Don&apos;t have an account?{' '}
-            <Link href="/register" className="text-gold font-medium hover:underline">
+            <Link
+              href={`/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
+              className="text-gold font-medium hover:underline"
+            >
               Create one
             </Link>
           </p>

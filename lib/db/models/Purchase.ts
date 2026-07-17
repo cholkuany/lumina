@@ -15,15 +15,18 @@ export interface IPurchase {
     email: string
   }
   items: {
-    product: Schema.Types.ObjectId
+    product: mongoose.Types.ObjectId
+    variant: mongoose.Types.ObjectId
     quantity: number
     cost: number
-  }
+  }[]
   total: number
   status: PurchaseStatus
   expectedDate: Date
   receivedDate: Date | null
   date: Date
+  notes?: string
+  inventoryAppliedAt?: Date
 }
 
 const PurchaseSchema = new Schema<IPurchase>(
@@ -55,9 +58,14 @@ const PurchaseSchema = new Schema<IPurchase>(
         product: {
           type: Schema.Types.ObjectId,
           ref: 'Product',
+          required: true,
         },
-        quantity: Number,
-        cost: Number,
+        variant: {
+          type: Schema.Types.ObjectId,
+          required: true,
+        },
+        quantity: { type: Number, required: true, min: 1 },
+        cost: { type: Number, required: true, min: 0 },
       },
     ],
 
@@ -95,6 +103,8 @@ const PurchaseSchema = new Schema<IPurchase>(
       required: true,
       default: Date.now,
     },
+    notes: { type: String, trim: true, maxlength: 1000 },
+    inventoryAppliedAt: { type: Date },
   },
   {
     timestamps: true,

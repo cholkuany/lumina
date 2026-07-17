@@ -63,7 +63,7 @@ const categorySchema = new Schema(
     toJSON: {
       virtuals: true,
       transform: (_doc, ret): CategoryJSON => {
-        const { _id, __v, ancestors, ...rest } = ret
+        const { _id, ancestors, ...rest } = ret
 
         return {
           ...rest,

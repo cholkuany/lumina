@@ -19,7 +19,6 @@ export default function CategoriesPage() {
   if (isError) {
     return <div>Error loading categories.</div>
   }
-  console.log('Categories data:', data)
   const categories = data?.categories || []
   const featuredCategories = categories.slice(0, 5)
   // const otherCategories = categories.slice(5)

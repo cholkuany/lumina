@@ -9,7 +9,6 @@ import {
   MessageSquare,
   ThumbsUp,
   Camera,
-  Calendar,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -183,7 +182,7 @@ export function ReviewAnalytics() {
       <div className="bg-white rounded-brand p-6 border border-warm-gray-light">
         <h3 className="font-medium text-charcoal mb-4">Monthly Trend</h3>
         <div className="flex items-end gap-2 h-40">
-          {data.monthlyTrend.map((month, index) => {
+          {data.monthlyTrend.map((month) => {
             const maxCount = Math.max(...data.monthlyTrend.map((m) => m.count))
             const height = (month.count / maxCount) * 100
 

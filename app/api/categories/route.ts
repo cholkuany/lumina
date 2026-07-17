@@ -83,7 +83,6 @@ export async function GET(request: NextRequest) {
 
     // Tree mode (Option B)
     if (!flat) {
-      console.log('inside !PARENTID')
       const map = new Map<string, FlatCategory & { children: FlatCategory[] }>()
       const roots: FlatCategory[] = []
 
@@ -133,7 +132,6 @@ export async function POST(request: NextRequest) {
     const validatedData = categorySchema.safeParse(body)
 
     if (!validatedData.success) {
-      console.log("category data", validatedData)
       return NextResponse.json(
         {
           error: "Invalid category data!",
@@ -199,4 +197,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-

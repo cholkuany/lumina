@@ -1,21 +1,26 @@
 import { useMemo } from "react"
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table"
-import { IPurchase, statusConfig } from "@/app/(management)/admin/purchases/page"
+import type { AdminPurchase } from '@/lib/purchase-types'
 import { cn } from "@/lib/utils"
 import { Eye, X } from "lucide-react"
 
 // Hook parameter types
+const statusConfig = {
+  pending: { label: 'Draft', className: 'bg-gray-100 text-gray-700' }, ordered: { label: 'Ordered', className: 'bg-blue-100 text-blue-700' },
+  in_transit: { label: 'In Transit', className: 'bg-amber-100 text-amber-700' }, received: { label: 'Received', className: 'bg-green-100 text-green-700' },
+  cancelled: { label: 'Cancelled', className: 'bg-red-100 text-red-700' },
+}
 type UsePurchaseColumnsProps = {
-  setPurchaseDetail: (val: IPurchase | null) => void
+  setPurchaseDetail: (val: AdminPurchase | null) => void
   setCancelModal: (val: { open: boolean; purchaseId?: string }) => void
 }
 
-const columnHelper = createColumnHelper<IPurchase>()
+const columnHelper = createColumnHelper<AdminPurchase>()
 
 export const usePurchaseColumns = ({
   setPurchaseDetail,
   setCancelModal,
-}: UsePurchaseColumnsProps): ColumnDef<IPurchase>[] => {
+}: UsePurchaseColumnsProps): ColumnDef<AdminPurchase>[] => {
   return useMemo(() => {
     return [
       // 1. Purchase Order Column
@@ -57,7 +62,7 @@ export const usePurchaseColumns = ({
       }),
 
       // 3. Items Column
-      columnHelper.accessor('items', {
+      columnHelper.accessor('itemCount', {
         header: 'Items',
         cell: ({ getValue }) => (
           <span className="text-charcoal">{getValue()}</span>
@@ -145,6 +150,6 @@ export const usePurchaseColumns = ({
           )
         },
       }),
-    ] as ColumnDef<IPurchase>[]
+    ] as ColumnDef<AdminPurchase>[]
   }, [setPurchaseDetail, setCancelModal])
 }

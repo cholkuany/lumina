@@ -3,11 +3,11 @@
 import { useMemo } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { ProductVariant, Attribute } from '@/lib/types'
+import { TProductVariant, Attribute } from '@/lib/types'
 import { Check } from 'lucide-react'
 
 interface VariantSelectorProps {
-  variants: ProductVariant[]
+  variants: TProductVariant[]
   selected: Partial<Attribute>
   onChange: (attributes: Record<string, string>) => void
 }
@@ -15,7 +15,7 @@ interface VariantSelectorProps {
 export function VariantSelector({ variants, selected, onChange }: VariantSelectorProps) {
 
   const variantIndex = useMemo(() => {
-    const index: Record<string, Record<string, ProductVariant>> = {}
+    const index: Record<string, Record<string, TProductVariant>> = {}
 
     for (const variant of variants) {
       const color = variant.attributes?.color
@@ -57,8 +57,6 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
     selected.color &&
     selected.size &&
     variantIndex[selected.color]?.[selected.size]
-
-  console.log('selected ===> ', selected)
 
   const currentStock = currentVariant ? currentVariant.stock : 0
 

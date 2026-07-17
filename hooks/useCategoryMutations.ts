@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { CategoryFormData } from '@/lib/validations/category.validation'
 
-export const useCategoryMutations = (showInactive: boolean) => {
+export const useCategoryMutations = () => {
   const queryClient = useQueryClient()
 
   const invalidate = () =>

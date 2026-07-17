@@ -1,12 +1,10 @@
-// import { Product } from "./db/models"
 import { IImage } from "./db/models/Product"
 import { DBReview } from "./queries/get.reviews"
 import { ProductFormData } from "./validations/product.validation/product.schema"
 import { ZUser } from "./validations/user.validation"
-import { TOrder } from "@/app/(management)/admin/orders/page"
 import { PurchaseFormValues } from "./validations/purchase.validation"
 
-export interface Product {
+export interface TProduct {
   id: string
   name: string
   description: string
@@ -20,7 +18,7 @@ export interface Product {
   unitsSold?: number
   rating: number
   reviewCount: number
-  variants: ProductVariant[]
+  variants: TProductVariant[]
   specifications?: {
     key: string,
     value: string
@@ -45,7 +43,7 @@ export type Attribute = {
   // [key: string]: string | undefined
 } & Record<string, string>
 
-export interface ProductVariant {
+export interface TProductVariant {
   id: string
   attributes: Attribute
   price: number
@@ -56,28 +54,28 @@ export interface ProductVariant {
 }
 
 
-// export type CartProductVariant = Omit<ProductVariant, 'stock'>
+// export type CartProductVariant = Omit<TProductVariant, 'stock'>
 
-export type CartProduct = Pick<Product, 'id' | 'name'>
+export type TCartProduct = Pick<TProduct, 'id' | 'name'>
   & {
     // variant: CartProductVariant
-    variant: ProductVariant
+    variant: TProductVariant
   }
 
-export interface CartItem {
+export interface TCartItem {
   id: string
-  product: CartProduct
+  product: TCartProduct
   quantity: number
   variantImage?: string
 }
 
-export interface WishlistItem {
+export interface TWishlistItem {
   id: string
-  product: Product
+  product: TProduct
   addedAt: Date
 }
 
-export interface Review {
+export interface TReview {
   id: string
   author: string
   avatar?: string
@@ -96,7 +94,7 @@ export interface Review {
   }
 }
 
-export interface ReviewSubmission {
+export interface TReviewSubmission {
   productId: string
   rating: number
   title: string
@@ -105,7 +103,7 @@ export interface ReviewSubmission {
   recommendProduct: boolean | null
 }
 
-export interface ReviewForModeration extends Review {
+export interface TReviewForModeration extends TReview {
   product: {
     id: string
     name: string
@@ -118,13 +116,13 @@ export interface ReviewForModeration extends Review {
     totalOrders: number
     totalReviews: number
   }
-  reports: ReviewReport[]
-  moderationHistory: ModerationAction[]
+  reports: TReviewReport[]
+  moderationHistory: TModerationAction[]
   status: 'pending' | 'approved' | 'rejected' | 'flagged'
   createdAt: string
 }
 
-export interface ReviewReport {
+export interface TReviewReport {
   id: string
   reason: string
   details?: string
@@ -132,7 +130,7 @@ export interface ReviewReport {
   createdAt: string
 }
 
-export interface ModerationAction {
+export interface TModerationAction {
   id: string
   action: 'approved' | 'rejected' | 'flagged' | 'edited'
   reason?: string
@@ -141,7 +139,7 @@ export interface ModerationAction {
   createdAt: string
 }
 
-export interface ModerationStats {
+export interface TModerationStats {
   pending: number
   approved: number
   rejected: number
@@ -150,7 +148,7 @@ export interface ModerationStats {
   averageResponseTime: string
 }
 
-export interface Address {
+export interface TAddress {
   id: string
   firstName: string
   lastName: string
@@ -164,26 +162,26 @@ export interface Address {
   isDefault: boolean
 }
 
-export type ShippingAddress = Address
-export type BillingAddress = Omit<Address, 'isDefault' | 'phone'>
+export type TShippingAddress = TAddress
+export type TBillingAddress = Omit<TAddress, 'isDefault' | 'phone'>
 
-export interface Order {
+export interface TOrder {
   id: string
   orderNumber: string
   date: string
   status: OrderStatus
-  items: CartItem[]
+  items: TCartItem[]
   subtotal: number
   shipping: number
   tax: number
   total: number
-  shippingAddress: ShippingAddress
+  shippingAddress: TShippingAddress
   trackingNumber?: string
 }
 
 export type OrderStatus = 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
-export interface OrderProps {
+export interface TOrderProps {
   id: string
   orderNumber: string
   date: string
@@ -207,8 +205,8 @@ export interface OrderProps {
     }
     quantity: number
   }>
-  shippingAddress: ShippingAddress
-  billingAddress: BillingAddress
+  shippingAddress: TShippingAddress
+  billingAddress: TBillingAddress
   paymentMethod: {
     type: string
     brand: string
@@ -237,6 +235,64 @@ export type LoginUser = {
 }
 
 export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'refunded'
+export type AdminOrderStatus = OrderStatus
+export type ReturnStatus = 'pending' | 'approved' | 'rejected' | 'received'
+
+export interface TAdminOrder {
+  id: string
+  orderNumber: string
+  customer: { name: string; email: string }
+  items: number
+  orderItems: Array<{
+    id: string
+    productId: string
+    name: string
+    variant: string
+    quantity: number
+    price: number
+    image: string
+  }>
+  subtotal: number
+  shipping: number
+  tax: number
+  discount: number
+  total: number
+  status: AdminOrderStatus
+  paymentStatus: PaymentStatus
+  date: string
+  shippingAddress: {
+    firstName: string
+    lastName: string
+    street: string
+    apartment?: string
+    city: string
+    state: string
+    zipCode: string
+    country: string
+    phone: string
+  }
+  statusHistory: Array<{
+    status: AdminOrderStatus
+    date: string
+    note?: string
+  }>
+  returnRequests: Array<{
+    id: string
+    returnNumber: string
+    status: ReturnStatus
+    adminNote?: string
+    createdAt: string
+    items: Array<{
+      orderItemId: string
+      productName: string
+      image?: string
+      quantity: number
+      reason: string
+    }>
+  }>
+}
+
+export type AdminOrderStats = Record<AdminOrderStatus, number>
 export type ReviewStatus = 'pending' | 'approved' | 'rejected' | 'flagged'
 export type UserStatus = 'active' | 'inactive' | 'suspended'
 export type StockStatus = 'in_stock' | 'low_stock' | 'out_of_stock'
@@ -327,7 +383,7 @@ export interface ResourceMap {
   review: DBReview
   product: DBProduct
   user: DBUser
-  order: TOrder
+  order: TAdminOrder
   purchase: DBPurchase
 }
 
@@ -373,4 +429,46 @@ export const RESOURCE_CONFIG = {
 export interface ApiError {
   message: string;
   errors?: Record<string, string>;
+}
+
+export type RedirectProps = {
+  searchParams?: Promise<{
+    redirectTo?: string
+  }>
+}
+
+
+// Shipping form data type
+export type TShippingMethod = 'standard' | 'express' | 'overnight'
+
+export type TShippingFormData = {
+  email: string,
+  firstName: string,
+  lastName: string,
+  address: string,
+  apartment: string,
+  city: string,
+  state: string,
+  zipCode: string,
+  country: string,
+  phone: string,
+  shippingMethod: TShippingMethod,
+  saveAddress: boolean,
+  createAccount: boolean,
+}
+
+export interface TPaymentFormProps {
+  onSubmit: (data: TPaymentFormData) => void
+  onBack: () => void
+  isProcessing?: boolean
+}
+
+export type TPaymentMethod = 'stripe'
+export type TPaymentFormData = {
+  paymentMethod: TPaymentMethod,
+  sameAsShipping: boolean,
+  billingAddress: string,
+  billingCity: string,
+  billingState: string,
+  billingZip: string,
 }

@@ -1,6 +1,6 @@
 import dbConnect from '@/lib/db/connection'
 import { Product } from '@/lib/db/models'
-import type { Product as ProductType } from '../types'
+import type { TProduct as ProductType } from '../types'
 import { productProjection } from './get.products'
 import mongoose from 'mongoose'
 

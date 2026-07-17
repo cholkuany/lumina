@@ -70,9 +70,9 @@ export const actions = (user: User) => [
 
 export default function UsersPage() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [filters, setFilters] = useState<Record<string, string>>({})
+  const [currentPage] = useState(1)
+  const [searchQuery] = useState("")
+  const [filters] = useState<Record<string, string>>({})
   const [modal, setModal] = useState<ModalState>({ type: "none" })
 
   const { ban, unban, remove } = useUserActions()

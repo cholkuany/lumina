@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import dbConnect from '@/lib/db/connection'
 import { Review } from '@/lib/db/models'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Connect to database
     await dbConnect()

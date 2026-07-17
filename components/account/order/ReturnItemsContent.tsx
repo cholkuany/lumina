@@ -8,19 +8,21 @@ import {
   Loader2
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { OrderProps } from '@/lib/types'
+import { TOrderProps } from '@/lib/types'
 
 // Return Items Modal Content
 export function ReturnItemsContent({
   order,
   onClose,
 }: {
-  order: OrderProps
+  order: TOrderProps
   onClose: () => void
 }) {
   const [selectedItems, setSelectedItems] = useState<Record<string, { selected: boolean; quantity: number; reason: string }>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [returnNumber, setReturnNumber] = useState('')
+  const [submitError, setSubmitError] = useState('')
 
   const returnReasons = [
     'Item not as described',
@@ -32,7 +34,7 @@ export function ReturnItemsContent({
     'Other',
   ]
 
-  const handleToggleItem = (itemId: string, maxQty: number) => {
+  const handleToggleItem = (itemId: string) => {
     setSelectedItems(prev => ({
       ...prev,
       [itemId]: prev[itemId]?.selected
@@ -57,15 +59,39 @@ export function ReturnItemsContent({
 
   const hasSelectedItems = Object.values(selectedItems).some(item => item.selected)
   const allSelectedHaveReasons = Object.entries(selectedItems)
-    .filter(([_, item]) => item.selected)
-    .every(([_, item]) => item.reason)
+    .filter(([, item]) => item.selected)
+    .every(([, item]) => item.reason)
 
   const handleSubmit = async () => {
     setIsSubmitting(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setSubmitted(true)
+    setSubmitError('')
+
+    try {
+      const items = Object.entries(selectedItems)
+        .filter(([, item]) => item.selected)
+        .map(([orderItemId, item]) => ({
+          orderItemId,
+          quantity: item.quantity,
+          reason: item.reason,
+        }))
+      const response = await fetch(`/api/orders/${order.id}/returns`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items }),
+      })
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Could not submit the return request')
+      }
+
+      setReturnNumber(result.returnNumber)
+      setSubmitted(true)
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Could not submit the return request')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -79,7 +105,7 @@ export function ReturnItemsContent({
           We&apos;ve received your return request. You&apos;ll receive an email with return instructions shortly.
         </p>
         <p className="text-sm text-warm-gray-dark mb-6">
-          Return ID: <span className="font-mono font-medium">RET-{new Date().toString().slice(-8)}</span>
+          Return ID: <span className="font-mono font-medium">{returnNumber}</span>
         </p>
         <Button onClick={onClose}>Close</Button>
       </div>
@@ -118,7 +144,7 @@ export function ReturnItemsContent({
                   <input
                     type="checkbox"
                     checked={selectedItems[item.id]?.selected || false}
-                    onChange={() => handleToggleItem(item.id, item.quantity)}
+                    onChange={() => handleToggleItem(item.id)}
                     className="w-5 h-5 rounded border-warm-gray accent-gold"
                   />
                 </div>
@@ -186,6 +212,9 @@ export function ReturnItemsContent({
           )}
         </Button>
       </div>
+      {submitError && (
+        <p className="mt-3 text-sm text-red-600">{submitError}</p>
+      )}
     </div>
   )
 }

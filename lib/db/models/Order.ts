@@ -1,5 +1,8 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import { createNotification } from '@/lib/queries/notification.queries';
+import { AddressSnapshotSchema, type IShippingAddress } from './Address';
+
+export type { IShippingAddress } from './Address';
 
 export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
 
@@ -10,11 +13,15 @@ const OrderItemSchema = new Schema({
     ref: 'Product',
     required: true,
   },
+  variant: {
+    type: Schema.Types.ObjectId,
+  },
   // Snapshot of product details at time of order
   productSnapshot: {
     name: { type: String, required: true },
     price: { type: Number, required: true },
     image: { type: String, required: true },
+    sku: String,
   },
   quantity: {
     type: Number,
@@ -26,19 +33,6 @@ const OrderItemSchema = new Schema({
     of: String,
   },
 });
-
-// Shipping Address
-const ShippingAddressSchema = new Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  street: { type: String, required: true },
-  apartment: String,
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  zipCode: { type: String, required: true },
-  country: { type: String, required: true },
-  phone: { type: String, required: true },
-}, { _id: false });
 
 // Status History
 const StatusHistorySchema = new Schema({
@@ -57,26 +51,16 @@ const StatusHistorySchema = new Schema({
 export interface IOrderItem {
   _id?: mongoose.Types.ObjectId;
   product: mongoose.Types.ObjectId;
+  variant?: mongoose.Types.ObjectId;
   productSnapshot: {
     name: string;
     price: number;
     image: string;
+    sku?: string;
   };
   quantity: number;
   selectedVariants?: Map<string, string>;
   // itemTotal: number;
-}
-
-export interface IShippingAddress {
-  firstName: string;
-  lastName: string;
-  street: string;
-  apartment?: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-  phone: string;
 }
 
 export interface IStatusHistory {
@@ -87,20 +71,18 @@ export interface IStatusHistory {
 }
 
 export interface PaymentMethod {
-  type: {
-    type: string,
-    enum: ['card', 'paypal'];
-  },
-  brand: string,
-  last4: string,
-  expiryMonth: number,
-  expiryYear: number,
+  type: 'card' | 'paypal';
+  brand: string;
+  last4: string;
+  expiryMonth?: number;
+  expiryYear?: number;
 }
 
 export interface IOrder {
   _id: mongoose.Types.ObjectId;
   orderNumber: string;
   user: mongoose.Types.ObjectId;
+  customerEmail?: string;
   items: IOrderItem[];
   subtotal: number;
   shipping: number;
@@ -114,6 +96,10 @@ export interface IOrder {
   trackingNumber?: string;
   paymentMethod: PaymentMethod;
   paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+  stripeCheckoutSessionId: string;
+  stripePaymentIntentId?: string;
+  inventoryStatus: 'pending' | 'adjusted' | 'failed';
+  inventoryAdjustedAt?: Date;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -132,6 +118,11 @@ const OrderSchema = new Schema<IOrder>(
       ref: 'User',
       required: true,
       index: true,
+    },
+    customerEmail: {
+      type: String,
+      trim: true,
+      lowercase: true,
     },
     items: {
       type: [OrderItemSchema],
@@ -174,15 +165,11 @@ const OrderSchema = new Schema<IOrder>(
     },
     statusHistory: [StatusHistorySchema],
     shippingAddress: {
-      type: ShippingAddressSchema,
+      type: AddressSnapshotSchema,
       required: true,
     },
-    billingAddress: ShippingAddressSchema,
+    billingAddress: AddressSnapshotSchema,
     trackingNumber: String,
-    // paymentMethod: {
-    //   type: String,
-    //   required: true,
-    // },
     paymentMethod: {
       type: {
         type: String,
@@ -190,12 +177,28 @@ const OrderSchema = new Schema<IOrder>(
       },
       brand: String,
       last4: String,
+      expiryMonth: Number,
+      expiryYear: Number,
     },
     paymentStatus: {
       type: String,
       enum: ['pending', 'paid', 'failed', 'refunded'],
       default: 'pending',
     },
+    stripeCheckoutSessionId: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+      sparse: true,
+    },
+    stripePaymentIntentId: String,
+    inventoryStatus: {
+      type: String,
+      enum: ['pending', 'adjusted', 'failed'],
+      default: 'pending',
+    },
+    inventoryAdjustedAt: Date,
     notes: String,
   },
   {
@@ -205,8 +208,8 @@ const OrderSchema = new Schema<IOrder>(
   }
 );
 
-// Generate order number before saving
-OrderSchema.pre('save', async function () {
+// Generate required values before Mongoose runs validation.
+OrderSchema.pre('validate', async function () {
   if (this.isNew && !this.orderNumber) {
     const date = new Date();
     const year = date.getFullYear().toString().slice(-2);

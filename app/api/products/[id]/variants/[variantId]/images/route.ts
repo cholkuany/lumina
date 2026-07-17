@@ -91,8 +91,7 @@ export async function DELETE(
       return Response.json({ message: 'Failed to update product' }, { status: 500 })
     }
 
-    const result = await deleteImages([public_id])
-    console.log('Deleted image result:', result)
+    await deleteImages([public_id])
 
   } catch (error) {
     console.error('Error deleting image:', error)
