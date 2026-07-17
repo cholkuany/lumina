@@ -35,11 +35,11 @@ export function Navbar() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-ivory/95 backdrop-blur-md border-b border-warm-gray-light">
+    <header className="sticky top-0 z-50 border-b border-[#172a22]/10 bg-white/95 backdrop-blur-md">
       {/* <HeaderBanner /> */}
 
       <nav className="container-lumina">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex h-16 items-center justify-between lg:h-[76px]">
           <MobileMenuToggle open={toggleMobileMenu} setOpen={setToggleMobileMenu} />
           <Logo />
           <DesktopNavigationWrapper navigation={navigationItems} />

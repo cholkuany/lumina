@@ -78,7 +78,7 @@ export const DesktopNavigationWrapper = ({ navigation }: { navigation: NavItem[]
         {/* Nav Item Link */}
         <Link
           href={item.href}
-          className="flex items-center gap-1 text-sm font-medium text-charcoal hover:text-gold transition-colors link-hover py-2"
+          className="flex items-center gap-1 py-2 text-sm font-black text-[#172a22] transition-colors hover:text-[#57720a]"
         >
           {item.name}
           {item.children && item.children.length > 0 && (
