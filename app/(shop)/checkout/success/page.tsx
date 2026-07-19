@@ -36,25 +36,25 @@ export default async function CheckoutSuccessPage({
       />
 
       <div className="max-w-lg mx-auto text-center">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle className="w-10 h-10 text-green-600" />
+        <div className="w-20 h-20 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="w-10 h-10 text-success-600" />
         </div>
 
-        <h1 className="font-serif text-3xl text-charcoal mb-4">
+        <h1 className="font-serif text-3xl text-text-primary mb-4">
           Thank You for Your Order!
         </h1>
-        <p className="text-warm-gray-dark mb-2">
+        <p className="text-border-dark mb-2">
           Your payment was completed securely with Stripe.
         </p>
 
         {stripeSession && (
-          <div className="bg-linen rounded-brand p-4 my-8 text-left">
-            <p className="text-sm text-warm-gray-dark">Confirmation</p>
-            <p className="text-charcoal font-medium break-all">{stripeSession.id}</p>
+          <div className="bg-surface rounded-brand p-4 my-8 text-left">
+            <p className="text-sm text-border-dark">Confirmation</p>
+            <p className="text-text-primary font-medium break-all">{stripeSession.id}</p>
             {amountTotal !== null && amountTotal !== undefined && (
               <>
-                <p className="text-sm text-warm-gray-dark mt-4">Total paid</p>
-                <p className="text-charcoal font-semibold">
+                <p className="text-sm text-border-dark mt-4">Total paid</p>
+                <p className="text-text-primary font-semibold">
                   {formatPrice(amountTotal / 100)}
                 </p>
               </>
@@ -62,7 +62,7 @@ export default async function CheckoutSuccessPage({
           </div>
         )}
 
-        <p className="text-sm text-warm-gray-dark mb-8">
+        <p className="text-sm text-border-dark mb-8">
           We&apos;ve sent a confirmation email with your order details.
           You can track your order status in your account.
         </p>

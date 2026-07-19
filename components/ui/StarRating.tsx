@@ -50,7 +50,7 @@ export function StarRating({
             <svg
               className={cn(
                 sizes[size],
-                star <= displayValue ? 'text-gold' : 'text-warm-gray-light',
+                star <= displayValue ? 'text-primary' : 'text-border-light',
                 'transition-colors duration-150'
               )}
               fill="currentColor"
@@ -62,7 +62,7 @@ export function StarRating({
         ))}
       </div>
       {showLabel && displayValue > 0 && (
-        <span className="text-sm text-charcoal font-medium">
+        <span className="text-sm text-text-primary font-medium">
           {labels[displayValue]}
         </span>
       )}

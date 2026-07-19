@@ -13,24 +13,24 @@ interface StatusBadgeProps {
 
 const statusConfig: Record<StatusType, { label: string; className: string }> = {
   // Order statuses
-  processing: { label: 'Processing', className: 'bg-blue-100 text-blue-700 border-blue-200' },
+  processing: { label: 'Processing', className: 'bg-primary-100 text-primary-700 border-primary-200' },
   shipped: { label: 'Shipped', className: 'bg-amber-100 text-amber-700 border-amber-200' },
-  delivered: { label: 'Delivered', className: 'bg-green-100 text-green-700 border-green-200' },
+  delivered: { label: 'Delivered', className: 'bg-success-100 text-success-700 border-success-200' },
   cancelled: { label: 'Cancelled', className: 'bg-red-100 text-red-700 border-red-200' },
 
   // Review statuses
   pending: { label: 'Pending', className: 'bg-amber-100 text-amber-700 border-amber-200' },
-  approved: { label: 'Approved', className: 'bg-green-100 text-green-700 border-green-200' },
+  approved: { label: 'Approved', className: 'bg-success-100 text-success-700 border-success-200' },
   rejected: { label: 'Rejected', className: 'bg-red-100 text-red-700 border-red-200' },
   flagged: { label: 'Flagged', className: 'bg-orange-100 text-orange-700 border-orange-200' },
 
   // User statuses
-  active: { label: 'Active', className: 'bg-green-100 text-green-700 border-green-200' },
+  active: { label: 'Active', className: 'bg-success-100 text-success-700 border-success-200' },
   inactive: { label: 'Inactive', className: 'bg-gray-100 text-gray-700 border-gray-200' },
   suspended: { label: 'Suspended', className: 'bg-red-100 text-red-700 border-red-200' },
 
   // Stock statuses
-  in_stock: { label: 'In Stock', className: 'bg-green-100 text-green-700 border-green-200' },
+  in_stock: { label: 'In Stock', className: 'bg-success-100 text-success-700 border-success-200' },
   low_stock: { label: 'Low Stock', className: 'bg-amber-100 text-amber-700 border-amber-200' },
   out_of_stock: { label: 'Out of Stock', className: 'bg-red-100 text-red-700 border-red-200' },
 }

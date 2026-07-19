@@ -18,11 +18,11 @@ export default function ProductsGrid({
   if (!products.length) {
     return (
       <div className="text-center py-16">
-        <div className="w-20 h-20 bg-linen rounded-full flex items-center justify-center mx-auto mb-6">
-          <SlidersHorizontal className="w-8 h-8 text-warm-gray-dark" />
+        <div className="w-20 h-20 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
+          <SlidersHorizontal className="w-8 h-8 text-border-dark" />
         </div>
-        <h2 className="font-serif text-xl text-charcoal mb-2">No products found</h2>
-        <p className="text-warm-gray-dark mb-6">
+        <h2 className="font-serif text-xl text-text-primary mb-2">No products found</h2>
+        <p className="text-border-dark mb-6">
           Try adjusting your filters or search terms.
         </p>
         <Button variant="secondary" onClick={onClearAll}>

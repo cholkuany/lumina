@@ -10,10 +10,10 @@ export const ToggleButton = (
       onClick={() => toggleGroup(id)}
       className="flex items-center justify-between w-full py-2"
     >
-      <span className="font-medium text-charcoal">{label}</span>
+      <span className="font-medium text-text-primary">{label}</span>
       <ChevronDown
         className={cn(
-          'w-5 h-5 text-warm-gray-dark transition-transform',
+          'w-5 h-5 text-border-dark transition-transform',
           included && 'rotate-180'
         )}
       />

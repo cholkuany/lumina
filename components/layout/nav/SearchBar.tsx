@@ -62,7 +62,7 @@ export const SearchBar = () => {
           <input
             type="text"
             placeholder="Search products..."
-            className="w-full h-10 pl-10 pr-16 bg-linen rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-gold"
+            className="w-full h-10 pl-10 pr-16 bg-surface rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -76,13 +76,13 @@ export const SearchBar = () => {
               }
             }}
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-warm-gray-dark" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-border-dark" />
           {query && (
             <button
               type="button"
               aria-label="Clear search"
               onClick={clearSearch}
-              className="absolute right-8 top-1/2 -translate-y-1/2 text-warm-gray-dark hover:text-charcoal transition-colors"
+              className="absolute right-8 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -90,7 +90,7 @@ export const SearchBar = () => {
           <button
             type="submit"
             aria-label="Submit search"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-warm-gray-dark hover:text-gold transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-border-dark hover:text-primary transition-colors"
           >
             <Search className="w-4 h-4" />
           </button>

@@ -31,19 +31,19 @@ export function BulkActionsBar({ selectedIds, onClearSelection }: BulkActionsBar
   return (
     <>
       <div
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-charcoal text-ivory rounded-brand shadow-2xl px-5 py-3 animate-in slide-in-from-bottom-4 duration-300"
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 bg-text-primary text-background rounded-brand shadow-2xl px-5 py-3 animate-in slide-in-from-bottom-4 duration-300"
       >
         {/* Count */}
-        <span className="text-sm font-medium text-warm-gray-light">
+        <span className="text-sm font-medium text-border-light">
           {count} user{count !== 1 ? "s" : ""} selected
         </span>
 
-        <div className="w-px h-5 bg-warm-gray-dark/40" />
+        <div className="w-px h-5 bg-border-dark/40" />
 
         {/* Ban */}
         <button
           onClick={() => setConfirmAction("ban")}
-          className="text-sm font-medium text-gold hover:text-gold-light transition-colors px-2 py-1 rounded-lg hover:bg-white/10"
+          className="text-sm font-medium text-primary hover:text-primary-light transition-colors px-2 py-1 rounded-lg hover:bg-white/10"
         >
           Ban Selected
         </button>
@@ -51,17 +51,17 @@ export function BulkActionsBar({ selectedIds, onClearSelection }: BulkActionsBar
         {/* Delete */}
         <button
           onClick={() => setConfirmAction("delete")}
-          className="text-sm font-medium text-gold-dark hover:text-gold transition-colors px-2 py-1 rounded-lg hover:bg-white/10"
+          className="text-sm font-medium text-primary-dark hover:text-primary transition-colors px-2 py-1 rounded-lg hover:bg-white/10"
         >
           Delete Selected
         </button>
 
-        <div className="w-px h-5 bg-warm-gray-dark/40" />
+        <div className="w-px h-5 bg-border-dark/40" />
 
         {/* Clear */}
         <button
           onClick={onClearSelection}
-          className="text-sm text-warm-gray-dark hover:text-ivory transition-colors px-2 py-1 rounded-lg hover:bg-white/10"
+          className="text-sm text-border-dark hover:text-background transition-colors px-2 py-1 rounded-lg hover:bg-white/10"
         >
           Clear
         </button>

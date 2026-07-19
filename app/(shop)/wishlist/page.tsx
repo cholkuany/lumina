@@ -31,10 +31,10 @@ export default function WishlistPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal pt-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary pt-4">
               My Wishlist
             </h1>
-            <p className="text-warm-gray-dark mt-1">
+            <p className="text-border-dark mt-1">
               {itemCount} {itemCount === 1 ? 'item' : 'items'} saved
             </p>
           </div>
@@ -57,12 +57,12 @@ export default function WishlistPage() {
             {state.items.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border border-warm-gray-light rounded-brand overflow-hidden group"
+                className="bg-white border border-border-light rounded-brand overflow-hidden group"
               >
                 {/* Image */}
                 <Link
                   href={`/products/${item.product.id}`}
-                  className="relative aspect-square block bg-linen overflow-hidden"
+                  className="relative aspect-square block bg-surface overflow-hidden"
                 >
                   <Image
                     src={item.product.variants[0].images[0].secure_url}
@@ -85,7 +85,7 @@ export default function WishlistPage() {
 
                   {/* Badges */}
                   {item.product.isSale && (
-                    <span className="absolute top-3 left-3 bg-gold text-white text-xs px-2 py-1 rounded-full">
+                    <span className="absolute top-3 left-3 bg-primary text-white text-xs px-2 py-1 rounded-full">
                       SALE
                     </span>
                   )}
@@ -94,17 +94,17 @@ export default function WishlistPage() {
                 {/* Content */}
                 <div className="p-4">
                   <Link href={`/products/${item.product.id}`}>
-                    <h3 className="font-medium text-charcoal text-sm mb-1 line-clamp-2 hover:text-gold transition-colors">
+                    <h3 className="font-medium text-text-primary text-sm mb-1 line-clamp-2 hover:text-primary transition-colors">
                       {item.product.name}
                     </h3>
                   </Link>
 
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="font-semibold text-charcoal">
+                    <span className="font-semibold text-text-primary">
                       {formatPrice(item.product.variants?.[0].price)}
                     </span>
                     {item.product.variants?.[0].originalPrice && (
-                      <span className="text-sm text-warm-gray-dark line-through">
+                      <span className="text-sm text-border-dark line-through">
                         {formatPrice(item.product.variants?.[0].originalPrice)}
                       </span>
                     )}
@@ -112,7 +112,7 @@ export default function WishlistPage() {
 
                   {/* Stock Status */}
                   {item.product.variants?.[0].stock ? (
-                    <p className="text-xs text-green-600 mb-3">In Stock</p>
+                    <p className="text-xs text-success-600 mb-3">In Stock</p>
                   ) : (
                     <p className="text-xs text-red-500 mb-3">Out of Stock</p>
                   )}
@@ -134,13 +134,13 @@ export default function WishlistPage() {
         ) : (
           /* Empty Wishlist */
           <div className="text-center py-16">
-            <div className="w-24 h-24 bg-linen rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart className="w-12 h-12 text-warm-gray-dark" />
+            <div className="w-24 h-24 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
+              <Heart className="w-12 h-12 text-border-dark" />
             </div>
-            <h2 className="font-serif text-2xl text-charcoal mb-3">
+            <h2 className="font-serif text-2xl text-text-primary mb-3">
               Your wishlist is empty
             </h2>
-            <p className="text-warm-gray-dark mb-8 max-w-md mx-auto">
+            <p className="text-border-dark mb-8 max-w-md mx-auto">
               Save items you love by clicking the heart icon on any product.
               They&apos;ll appear here for easy access later.
             </p>

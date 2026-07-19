@@ -29,10 +29,10 @@ const FormSelect = (
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-sm font-medium text-charcoal"
+            className="block text-sm font-medium text-text-primary"
           >
             {label}
-            {props.required && <span className="text-gold ml-1">*</span>}
+            {props.required && <span className="text-primary ml-1">*</span>}
           </label>
         )}
         <div className="relative">
@@ -40,12 +40,12 @@ const FormSelect = (
             id={selectId}
             className={cn(
               'w-full px-4 py-3 rounded-brand',
-              'bg-white border border-warm-gray',
-              'text-charcoal',
+              'bg-white border border-border',
+              'text-text-primary',
               'transition-all duration-200',
-              'focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold',
-              'hover:border-warm-gray-dark',
-              'disabled:bg-linen disabled:cursor-not-allowed disabled:opacity-60',
+              'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
+              'hover:border-border-dark',
+              'disabled:bg-surface disabled:cursor-not-allowed disabled:opacity-60',
               'appearance-none cursor-pointer',
               error && 'border-red-400 focus:ring-red-400/30 focus:border-red-400',
               className
@@ -68,11 +68,11 @@ const FormSelect = (
             ))}
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
-            <ChevronDown className="w-5 h-5 text-warm-gray-dark" />
+            <ChevronDown className="w-5 h-5 text-border-dark" />
           </div>
         </div>
         {hint && !error && (
-          <p className="text-xs text-warm-gray-dark">{hint}</p>
+          <p className="text-xs text-border-dark">{hint}</p>
         )}
         {error && (
           <div className="text-xs text-red-500 flex items-center gap-1">

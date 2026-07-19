@@ -312,7 +312,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-r from-charcoal/70 via-charcoal/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-text-primary/70 via-text-primary/50 to-transparent" />
 
         <div className="container-lumina relative z-10">
           {/* Breadcrumb */}
@@ -340,7 +340,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <div className="container-lumina">
         {/* Subcategories */}
         <section className="py-12 lg:py-16">
-          <h2 className="font-serif text-2xl text-charcoal mb-6">
+          <h2 className="font-serif text-2xl text-text-primary mb-6">
             Shop by Subcategory
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -350,19 +350,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 href={`/products?category=${category.id}&subcategory=${sub.slug}`}
                 className="group text-center"
               >
-                <div className="relative aspect-square rounded-brand overflow-hidden bg-linen mb-3">
+                <div className="relative aspect-square rounded-brand overflow-hidden bg-surface mb-3">
                   <Image
                     src={sub.image}
                     alt={sub.name}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/40 transition-colors" />
+                  <div className="absolute inset-0 bg-text-primary/20 group-hover:bg-text-primary/40 transition-colors" />
                 </div>
-                <h3 className="font-medium text-charcoal text-sm group-hover:text-gold transition-colors">
+                <h3 className="font-medium text-text-primary text-sm group-hover:text-primary transition-colors">
                   {sub.name}
                 </h3>
-                <p className="text-warm-gray-dark text-xs">
+                <p className="text-border-dark text-xs">
                   {sub.count} items
                 </p>
               </Link>
@@ -372,14 +372,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* Featured Products */}
         {category.featuredProducts.length > 0 && (
-          <section className="py-12 lg:py-16 border-t border-warm-gray-light">
+          <section className="py-12 lg:py-16 border-t border-border-light">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-serif text-2xl text-charcoal">
+              <h2 className="font-serif text-2xl text-text-primary">
                 Featured in {category.name}
               </h2>
               <Link
                 href={`/products?category=${category.id}`}
-                className="flex items-center gap-1 text-sm text-gold hover:underline"
+                className="flex items-center gap-1 text-sm text-primary hover:underline"
               >
                 View All
                 <ChevronRight className="w-4 h-4" />
@@ -395,11 +395,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* CTA Section */}
         <section className="py-12 lg:py-16">
-          <div className="bg-linen rounded-brand p-8 lg:p-12 text-center">
-            <h2 className="font-serif text-2xl lg:text-3xl text-charcoal mb-4">
+          <div className="bg-surface rounded-brand p-8 lg:p-12 text-center">
+            <h2 className="font-serif text-2xl lg:text-3xl text-text-primary mb-4">
               Explore All {category.name}
             </h2>
-            <p className="text-warm-gray-dark mb-6 max-w-lg mx-auto">
+            <p className="text-border-dark mb-6 max-w-lg mx-auto">
               Browse our complete collection with filters for price, brand, ratings, and more.
             </p>
             <Link href={`/products?category=${category.id}`}>

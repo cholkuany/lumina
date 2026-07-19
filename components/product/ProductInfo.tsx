@@ -76,7 +76,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
         {/* Title & Badges */}
         <div>
           <div className="flex items-start justify-between gap-4">
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-charcoal font-semibold leading-tight">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-text-primary font-semibold leading-tight">
               {product.name}
             </h1>
             <button
@@ -85,12 +85,12 @@ export function ProductInfo({ product }: { product: TProduct }) {
                 'p-2 rounded-full border transition-all duration-200 shrink-0',
                 inWishlist
                   ? 'border-red-200 bg-red-50'
-                  : 'border-warm-gray-light hover:border-warm-gray'
+                  : 'border-border-light hover:border-border'
               )}
             >
               <Heart className={cn(
                 'w-5 h-5 transition-colors',
-                inWishlist ? 'fill-red-500 text-red-500' : 'text-warm-gray-dark'
+                inWishlist ? 'fill-red-500 text-red-500' : 'text-border-dark'
               )} />
             </button>
           </div>
@@ -98,7 +98,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
           {/* Badges */}
           <div className="flex items-center gap-2 mt-3">
             {product.isNewArrival && (
-              <span className="bg-charcoal text-white text-xs font-medium px-2.5 py-1 rounded">
+              <span className="bg-text-primary text-white text-xs font-medium px-2.5 py-1 rounded">
                 NEW ARRIVAL
               </span>
             )}
@@ -108,7 +108,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
               </span>
             )}
             {product.isFeatured && (
-              <span className="bg-gold/20 text-gold text-xs font-medium px-2.5 py-1 rounded border border-gold/30">
+              <span className="bg-primary/20 text-primary text-xs font-medium px-2.5 py-1 rounded border border-primary/30">
                 BESTSELLER
               </span>
             )}
@@ -116,7 +116,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
         </div>
 
         {/* Rating */}
-        <div className="flex items-center gap-3 pb-4 border-b border-warm-gray-light">
+        <div className="flex items-center gap-3 pb-4 border-b border-border-light">
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
               <Star
@@ -132,8 +132,8 @@ export function ProductInfo({ product }: { product: TProduct }) {
               />
             ))}
           </div>
-          <span className="text-sm font-medium text-charcoal">{product.rating.toFixed(1)}</span>
-          <span className="text-sm text-warm-gray-dark">
+          <span className="text-sm font-medium text-text-primary">{product.rating.toFixed(1)}</span>
+          <span className="text-sm text-border-dark">
             ({product.reviewCount.toLocaleString()} reviews)
           </span>
         </div>
@@ -141,30 +141,30 @@ export function ProductInfo({ product }: { product: TProduct }) {
         {/* Price */}
         <div className="space-y-1">
           <div className="flex items-baseline gap-3">
-            <span className="text-3xl font-bold text-charcoal">
+            <span className="text-3xl font-bold text-text-primary">
               {formatPrice(displayPrice)}
             </span>
             {displayOriginalPrice && displayOriginalPrice > displayPrice && (
-              <span className="text-lg text-warm-gray line-through">
+              <span className="text-lg text-border line-through">
                 {formatPrice(displayOriginalPrice)}
               </span>
             )}
           </div>
           {discount > 0 && (
-            <p className="text-sm text-green-600 font-medium">
+            <p className="text-sm text-success-600 font-medium">
               You save {formatPrice(displayOriginalPrice! - displayPrice)} ({discount}% off)
             </p>
           )}
         </div>
 
         {/* Description */}
-        <p className="text-warm-gray-dark leading-relaxed">
+        <p className="text-border-dark leading-relaxed">
           {product.description}
         </p>
 
         {/* Variant Selector */}
         {product.variants && product.variants.length > 0 && (
-          <div className="pt-4 border-t border-warm-gray-light">
+          <div className="pt-4 border-t border-border-light">
             <VariantSelector
               variants={product.variants}
               selected={selectedVariants}
@@ -177,21 +177,21 @@ export function ProductInfo({ product }: { product: TProduct }) {
         <div className="pt-6 space-y-4">
           <div className="flex items-center gap-4">
             {/* Quantity Selector */}
-            <div className="flex items-center border border-warm-gray-light rounded-lg">
+            <div className="flex items-center border border-border-light rounded-lg">
               <button
                 onClick={() => handleAddToCart(-1)}
                 disabled={cartQuantity === 0}
-                className="p-3 text-charcoal hover:bg-warm-gray-light/50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="p-3 text-text-primary hover:bg-border-light/50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 <Minus className="w-4 h-4" />
               </button>
-              <span className="w-12 text-center font-medium text-charcoal">
+              <span className="w-12 text-center font-medium text-text-primary">
                 {cartQuantity > 0 ? cartQuantity : 1}
               </span>
               <button
                 onClick={() => handleAddToCart(1)}
                 disabled={cartQuantity === stockCount}
-                className="p-3 text-charcoal hover:bg-warm-gray-light/50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="p-3 text-text-primary hover:bg-border-light/50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -202,7 +202,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
               size="lg"
               className={cn(
                 'flex-1 gap-2 h-12 text-base font-semibold',
-                !isInStock && 'bg-warm-gray cursor-not-allowed'
+                !isInStock && 'bg-border cursor-not-allowed'
               )}
               onClick={() => handleAddToCart(1)}
               disabled={!isInStock || cartQuantity === stockCount}

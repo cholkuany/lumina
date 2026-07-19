@@ -58,8 +58,8 @@ export function StarRatingInput({
                 sizeClasses[size],
                 'transition-colors',
                 star <= displayValue
-                  ? 'fill-gold text-gold'
-                  : 'fill-warm-gray-light text-warm-gray-light'
+                  ? 'fill-primary text-primary'
+                  : 'fill-border-light text-border-light'
               )}
             />
           </button>
@@ -70,7 +70,7 @@ export function StarRatingInput({
         <span
           className={cn(
             'text-sm font-medium transition-colors',
-            hoverValue ? 'text-gold' : 'text-charcoal'
+            hoverValue ? 'text-primary' : 'text-text-primary'
           )}
         >
           {ratingLabels[displayValue]}

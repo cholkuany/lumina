@@ -24,7 +24,7 @@ export function createActionsColumn<T>(
           {options.editHref && (
             <Link
               href={options.editHref(original)}
-              className="text-blue-500"
+              className="text-primary-500"
             >
               Edit
             </Link>

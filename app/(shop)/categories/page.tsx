@@ -33,10 +33,10 @@ export default function CategoriesPage() {
       <div className="container-lumina">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-4">
+          <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
             Shop by Category
           </h1>
-          <p className="text-warm-gray-dark max-w-2xl mx-auto">
+          <p className="text-border-dark max-w-2xl mx-auto">
             Explore our wide range of products across various categories.
             Find exactly what you&apos;re looking for.
           </p>
@@ -44,7 +44,7 @@ export default function CategoriesPage() {
 
         {/* Featured Categories - Large Cards */}
         <section className="mb-16">
-          <h2 className="font-serif text-2xl text-charcoal mb-6">
+          <h2 className="font-serif text-2xl text-text-primary mb-6">
             Featured Categories
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -52,7 +52,7 @@ export default function CategoriesPage() {
               <Link
                 key={category.id}
                 href={`/products?category=${category.name}`}
-                className="group relative overflow-hidden rounded-brand aspect-video bg-linen"
+                className="group relative overflow-hidden rounded-brand aspect-video bg-surface"
               >
                 {/* Background Image */}
                 <Image
@@ -63,7 +63,7 @@ export default function CategoriesPage() {
                 />
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-linear-to-t from-charcoal/80 via-charcoal/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-text-primary/80 via-text-primary/40 to-transparent" />
 
                 {/* Content */}
                 <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-end">
@@ -90,19 +90,19 @@ export default function CategoriesPage() {
 
         {/* All Categories with Subcategories */}
         <section>
-          <h2 className="font-serif text-2xl text-charcoal mb-6">
+          <h2 className="font-serif text-2xl text-text-primary mb-6">
             All Categories
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category) => (
               <div
                 key={category.id}
-                className="bg-white border border-warm-gray-light rounded-brand overflow-hidden hover:shadow-hover transition-shadow"
+                className="bg-white border border-border-light rounded-brand overflow-hidden hover:shadow-hover transition-shadow"
               >
                 {/* Category Header */}
                 <Link
                   href={`/products?category=${category.name}`}
-                  className="block relative aspect-video bg-linen group"
+                  className="block relative aspect-video bg-surface group"
                 >
                   <Image
                     src={category?.image || '/images/categories/placeholder.jpg'}
@@ -110,7 +110,7 @@ export default function CategoriesPage() {
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-charcoal/60 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-text-primary/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <h3 className="font-serif text-xl text-white font-semibold">
                       {category.name}
@@ -128,10 +128,10 @@ export default function CategoriesPage() {
                       <li key={sub.id}>
                         <Link
                           href={`/products?category=${sub.name}`}
-                          className="flex items-center justify-between text-sm text-charcoal hover:text-gold transition-colors py-1"
+                          className="flex items-center justify-between text-sm text-text-primary hover:text-primary transition-colors py-1"
                         >
                           <span>{sub.name}</span>
-                          <span className="text-warm-gray-dark text-xs">
+                          <span className="text-border-dark text-xs">
                             ({sub.productCount})
                           </span>
                         </Link>
@@ -142,7 +142,7 @@ export default function CategoriesPage() {
                   {category.children.length > 5 && (
                     <Link
                       href={`/products?category=${category.name}`}
-                      className="inline-flex items-center gap-1 text-sm text-gold hover:underline mt-3"
+                      className="inline-flex items-center gap-1 text-sm text-primary hover:underline mt-3"
                     >
                       View all {category.children.length} subcategories
                       <ChevronRight className="w-3 h-3" />

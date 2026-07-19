@@ -22,7 +22,7 @@ export const MobileNavLinks = ({ navigation, setOpen }: Props) => {
 
           {/* Level 0 — Static nav items (Home, Categories, Deals...) */}
           <div
-            className="flex items-center justify-between py-3 border-b border-warm-gray-light cursor-pointer"
+            className="flex items-center justify-between py-3 border-b border-border-light cursor-pointer"
             onClick={() =>
               item.children?.length
                 ? setOpenL1(openL1 === item.name ? null : item.name)
@@ -31,7 +31,7 @@ export const MobileNavLinks = ({ navigation, setOpen }: Props) => {
           >
             <Link
               href={item.href}
-              className="text-lg font-medium text-charcoal hover:text-gold transition-colors"
+              className="text-lg font-medium text-text-primary hover:text-primary transition-colors"
               onClick={(e) => item.children?.length && e.preventDefault()}
             >
               {item.name}
@@ -39,7 +39,7 @@ export const MobileNavLinks = ({ navigation, setOpen }: Props) => {
             {item.children && item.children.length > 0 && (
               <ChevronDown
                 className={cn(
-                  'w-5 h-5 text-charcoal transition-transform duration-200',
+                  'w-5 h-5 text-text-primary transition-transform duration-200',
                   openL1 === item.name && 'rotate-180'
                 )}
               />
@@ -62,7 +62,7 @@ export const MobileNavLinks = ({ navigation, setOpen }: Props) => {
                   >
                     <Link
                       href={`/categories/${category.slug}`}
-                      className="text-base font-medium text-charcoal hover:text-gold transition-colors"
+                      className="text-base font-medium text-text-primary hover:text-primary transition-colors"
                       onClick={(e) => category.children?.length && e.preventDefault()}
                     >
                       {category.name}
@@ -70,7 +70,7 @@ export const MobileNavLinks = ({ navigation, setOpen }: Props) => {
                     {category.children?.length > 0 && (
                       <ChevronDown
                         className={cn(
-                          'w-4 h-4 text-warm-gray-dark transition-transform duration-200',
+                          'w-4 h-4 text-border-dark transition-transform duration-200',
                           openL2 === category.id && 'rotate-180'
                         )}
                       />
@@ -84,7 +84,7 @@ export const MobileNavLinks = ({ navigation, setOpen }: Props) => {
                         <Link
                           key={child.id}
                           href={`/categories/${child.slug}`}
-                          className="block py-2 text-sm text-warm-gray-dark hover:text-gold transition-colors"
+                          className="block py-2 text-sm text-border-dark hover:text-primary transition-colors"
                           onClick={() => setOpen(false)}
                         >
                           {child.name}

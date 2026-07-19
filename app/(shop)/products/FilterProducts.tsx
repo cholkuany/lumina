@@ -135,28 +135,28 @@ export function FilterProduct({
           {/* Main Content */}
           <div className="flex-1">
             {/* Toolbar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-warm-gray-light">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-border-light">
               {/* Mobile Filter Button */}
               <button
                 onClick={() => setMobileFiltersOpen(true)}
-                className="lg:hidden flex items-center gap-2 text-sm font-medium text-charcoal"
+                className="lg:hidden flex items-center gap-2 text-sm font-medium text-text-primary"
               >
                 <SlidersHorizontal className="w-4 h-4" />
                 Filters
                 {activeFilters.length > 0 && (
-                  <span className="w-5 h-5 bg-gold text-white text-xs rounded-full flex items-center justify-center">
+                  <span className="w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center">
                     {activeFilters.length}
                   </span>
                 )}
               </button>
 
               {/* View Mode Toggle */}
-              <div className="hidden sm:flex items-center gap-1 border border-warm-grayrounded-lg p-1">
+              <div className="hidden sm:flex items-center gap-1 border border-borderrounded-lg p-1">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={cn(
                     'p-1.5 rounded transition-colors',
-                    viewMode === 'grid' ? 'bg-charcoal text-white' : 'text-warm-gray-dark hover:text-charcoal'
+                    viewMode === 'grid' ? 'bg-text-primary text-white' : 'text-border-dark hover:text-text-primary'
                   )}
                 >
                   <Grid className="w-4 h-4" />
@@ -166,7 +166,7 @@ export function FilterProduct({
                   onClick={() => setViewMode('flex')}
                   className={cn(
                     'p-1.5 rounded transition-colors',
-                    viewMode === 'flex' ? 'bg-charcoal text-white' : 'text-warm-gray-dark hover:text-charcoal'
+                    viewMode === 'flex' ? 'bg-text-primary text-white' : 'text-border-dark hover:text-text-primary'
                   )}
                 >
                   <LayoutList className="w-4 h-4" />
@@ -184,12 +184,12 @@ export function FilterProduct({
             {/* Active Filters */}
             {activeFilters.length > 0 && (
               <div className="flex flex-wrap items-center gap-2 mb-6">
-                <span className="text-sm text-warm-gray-dark">Active filters:</span>
+                <span className="text-sm text-border-dark">Active filters:</span>
                 {activeFilters.map(({ name, value, label }) => (
                   <button
                     key={`${name}-${value}`}
                     onClick={() => removeFilter(name, value)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-linen text-sm text-charcoal rounded-full hover:bg-warm-gray-light transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface text-sm text-text-primary rounded-full hover:bg-border-light transition-colors"
                   >
                     {label}
                     <X className="w-3 h-3" />
@@ -197,7 +197,7 @@ export function FilterProduct({
                 ))}
                 <button
                   onClick={clearAllFilters}
-                  className="text-sm text-gold hover:underline"
+                  className="text-sm text-primary hover:underline"
                 >
                   Clear all
                 </button>
@@ -226,11 +226,11 @@ export function FilterProduct({
             ) : (
               /* No Results */
               <div className="text-center py-16">
-                <div className="w-20 h-20 bg-linen rounded-full flex items-center justify-center mx-auto mb-6">
-                  <SlidersHorizontal className="w-8 h-8 text-warm-gray-dark" />
+                <div className="w-20 h-20 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
+                  <SlidersHorizontal className="w-8 h-8 text-border-dark" />
                 </div>
-                <h2 className="font-serif text-xl text-charcoal mb-2">No products found</h2>
-                <p className="text-warm-gray-dark mb-6">
+                <h2 className="font-serif text-xl text-text-primary mb-2">No products found</h2>
+                <p className="text-border-dark mb-6">
                   Try adjusting your filters or search terms.
                 </p>
                 <Button variant="secondary" onClick={clearAllFilters}>
@@ -283,14 +283,14 @@ const FilteredProductsHeader = ({
   return (
     (Object.keys(selectedFilters).length > 0 || searchQuery) &&
     <div className="mb-8">
-      <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-2">
+      <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-2">
         {searchQuery
           ? `Search results for "${searchQuery}"`
           : categoryParam
             ? `Results for "${categoryParam}"`
             : 'All Products'}
       </h1>
-      <p className="text-warm-gray-dark">
+      <p className="text-border-dark">
         {productsCount} {productsCount === 1 ? 'product' : 'products'} found
       </p>
     </div>

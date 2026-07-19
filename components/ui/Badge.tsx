@@ -3,17 +3,17 @@ import { cn } from '@/lib/utils'
 
 interface BadgeProps {
   children: React.ReactNode
-  variant?: 'default' | 'success' | 'warning' | 'error' | 'gold'
+  variant?: 'default' | 'success' | 'warning' | 'error' | 'primary'
   className?: string
 }
 
 export function Badge({ children, variant = 'default', className }: BadgeProps) {
   const variants = {
-    default: 'bg-linen text-charcoal',
-    success: 'bg-green-100 text-green-700',
+    default: 'bg-surface text-text-primary',
+    success: 'bg-success-100 text-success-700',
     warning: 'bg-amber-100 text-amber-700',
     error: 'bg-red-100 text-red-700',
-    gold: 'bg-gold/20 text-gold-dark',
+    primary: 'bg-primary/20 text-primary-dark',
   }
 
   return (

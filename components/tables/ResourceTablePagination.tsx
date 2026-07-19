@@ -28,9 +28,9 @@ export function ResourceTablePagination<T>({
   )
 
   return (
-    <div className="flex flex-col gap-4 border-t border-warm-gray bg-white p-4 md:flex-row md:items-center md:justify-between">
+    <div className="flex flex-col gap-4 border-t border-border bg-white p-4 md:flex-row md:items-center md:justify-between">
       {/* Left */}
-      <div className="text-sm text-warm-gray-dark">
+      <div className="text-sm text-border-dark">
         Showing {startRow} to {endRow} of{' '}
         {totalCount} results
       </div>
@@ -43,7 +43,7 @@ export function ResourceTablePagination<T>({
           onChange={(e) =>
             table.setPageSize(Number(e.target.value))
           }
-          className="rounded-brand border border-warm-gray px-2 py-1 text-sm"
+          className="rounded-brand border border-border px-2 py-1 text-sm"
         >
           {[1, 10, 20, 50, 100].map((size) => (
             <option
@@ -57,7 +57,7 @@ export function ResourceTablePagination<T>({
         {/* )} */}
 
         {/* Page info */}
-        <span className="text-sm text-charcoal">
+        <span className="text-sm text-text-primary">
           Page {pageIndex + 1} of {totalPages}
         </span>
 
@@ -69,7 +69,7 @@ export function ResourceTablePagination<T>({
               table.previousPage()
             }
             disabled={!table.getCanPreviousPage()}
-            className="rounded-brand border border-warm-gray p-2 disabled:opacity-50"
+            className="rounded-brand border border-border p-2 disabled:opacity-50"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -81,7 +81,7 @@ export function ResourceTablePagination<T>({
             disabled={
               !table.getCanNextPage()
             }
-            className="rounded-brand border border-warm-gray p-2 disabled:opacity-50"
+            className="rounded-brand border border-border p-2 disabled:opacity-50"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>

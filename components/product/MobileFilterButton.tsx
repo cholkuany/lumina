@@ -17,12 +17,12 @@ export const MobileFilterButton = (
   return (
     <button
       onClick={() => setMobileFiltersOpen(true)}
-      className="lg:hidden flex items-center gap-2 text-sm font-medium text-charcoal"
+      className="lg:hidden flex items-center gap-2 text-sm font-medium text-text-primary"
     >
       <SlidersHorizontal className="w-4 h-4" />
       Filters
       {currentFilters.length > 0 && (
-        <span className="w-5 h-5 bg-gold text-white text-xs rounded-full flex items-center justify-center">
+        <span className="w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center">
           {currentFilters.length}
         </span>
       )}

@@ -28,7 +28,7 @@ export function useReviewColumns(
       title: 'Review',
       cell: ({ row }) => (
         <div className="flex items-start gap-3">
-          <div className="w-12 h-12 rounded-lg bg-linen shrink-0 overflow-hidden">
+          <div className="w-12 h-12 rounded-lg bg-surface shrink-0 overflow-hidden">
             {row.original.productInfo.image ? (
               <Image
                 src={row.original.productInfo.image}
@@ -38,15 +38,15 @@ export function useReviewColumns(
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full bg-warm-gray-light" />
+              <div className="w-full h-full bg-border-light" />
             )}
 
           </div>
           <div className="min-w-0">
-            <p className="font-medium text-charcoal truncate">{row.original.productInfo.name}</p>
+            <p className="font-medium text-text-primary truncate">{row.original.productInfo.name}</p>
             <div className="flex items-center gap-2 mt-0.5">
               <StarRating value={row.original.rating} readonly size="sm" />
-              <span className="text-xs text-warm-gray-dark">
+              <span className="text-xs text-border-dark">
                 by {row.original.authorName}
               </span>
             </div>
@@ -59,8 +59,8 @@ export function useReviewColumns(
       header: 'Content',
       cell: ({ row }) => (
         <div className="max-w-xs">
-          <p className="font-medium text-charcoal text-sm truncate">{row.original.title}</p>
-          <p className="text-xs text-warm-gray-dark line-clamp-2 mt-0.5">
+          <p className="font-medium text-text-primary text-sm truncate">{row.original.title}</p>
+          <p className="text-xs text-border-dark line-clamp-2 mt-0.5">
             {row.original.content}
           </p>
         </div>
@@ -85,11 +85,11 @@ export function useReviewColumns(
       header: 'Verified',
       cell: ({ row }) => (
         row.original.verified ? (
-          <span className="text-green-600">
+          <span className="text-success-600">
             <BadgeCheck className="w-5 h-5" />
           </span>
         ) : (
-          <span className="text-warm-gray-light">
+          <span className="text-border-light">
             <Shield className="w-5 h-5" />
           </span>
         )
@@ -99,7 +99,7 @@ export function useReviewColumns(
       accessorKey: 'date',
       header: 'Date',
       cell: ({ row }) => (
-        <span className="text-sm text-warm-gray-dark">
+        <span className="text-sm text-border-dark">
           {new Date(row.original.createdAt).toLocaleDateString()}
         </span>
       ),
@@ -115,7 +115,7 @@ export function useReviewColumns(
               e.stopPropagation()
               setReviewDetail(row.original)
             }}
-            className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
+            className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors"
             title="View details"
           >
             <Eye className="w-4 h-4" />
@@ -128,7 +128,7 @@ export function useReviewColumns(
                   // setActionModal({ open: true, type: 'approve', reviewId: review.id })
                   confirm.open('approve', row.original.id)
                 }}
-                className="p-2 text-warm-gray-dark hover:text-green-500 hover:bg-green-50 rounded-lg transition-colors"
+                className="p-2 text-border-dark hover:text-success-500 hover:bg-success-50 rounded-lg transition-colors"
                 title="Approve"
               >
                 <Check className="w-4 h-4" />
@@ -139,7 +139,7 @@ export function useReviewColumns(
                   // setActionModal({ open: true, type: 'reject', reviewId: review.id })
                   confirm.open('reject', row.original.id)
                 }}
-                className="p-2 text-warm-gray-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                className="p-2 text-border-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                 title="Reject"
               >
                 <X className="w-4 h-4" />

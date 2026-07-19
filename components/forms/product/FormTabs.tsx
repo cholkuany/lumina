@@ -18,7 +18,7 @@ export function FormTabs({
   onChange,
 }: FormTabsProps) {
   return (
-    <div className="border-b border-warm-gray">
+    <div className="border-b border-border">
       <nav className="flex gap-8">
         {tabs.map((tab) => (
           <button
@@ -28,15 +28,15 @@ export function FormTabs({
             className={cn(
               'flex items-center gap-2 pb-4 text-sm font-medium transition-colors relative',
               activeTab === tab.id
-                ? 'text-gold'
-                : 'text-warm-gray-dark hover:text-charcoal'
+                ? 'text-primary'
+                : 'text-border-dark hover:text-text-primary'
             )}
           >
             <tab.icon className="w-4 h-4" />
             {tab.label}
 
             {activeTab === tab.id && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
         ))}

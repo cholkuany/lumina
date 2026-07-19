@@ -43,14 +43,14 @@ const statusConfig: Record<OrderStatus, {
   },
   shipped: {
     label: 'Shipped',
-    color: 'text-blue-700',
-    bgColor: 'bg-blue-50',
+    color: 'text-primary-700',
+    bgColor: 'bg-primary-50',
     icon: Truck,
   },
   delivered: {
     label: 'Delivered',
-    color: 'text-green-700',
-    bgColor: 'bg-green-50',
+    color: 'text-success-700',
+    bgColor: 'bg-success-50',
     icon: CheckCircle,
   },
   cancelled: {
@@ -95,12 +95,12 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
         </div>
 
         <div className="container-lumina">
-          <div className="text-center py-16 bg-linen rounded-brand">
-            <Package className="w-16 h-16 text-warm-gray-dark mx-auto mb-4" />
-            <h2 className="font-serif text-xl text-charcoal mb-2">
+          <div className="text-center py-16 bg-surface rounded-brand">
+            <Package className="w-16 h-16 text-border-dark mx-auto mb-4" />
+            <h2 className="font-serif text-xl text-text-primary mb-2">
               Order Not Found
             </h2>
-            <p className="text-warm-gray-dark mb-6">
+            <p className="text-border-dark mb-6">
               We couldn&apos;t find an order with that number.
             </p>
             <Link href="/account/orders">
@@ -163,10 +163,10 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div>
-                <h1 className="font-serif text-2xl lg:text-3xl text-charcoal">
+                <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
                   Order {order.orderNumber}
                 </h1>
-                <p className="text-warm-gray-dark mt-1">
+                <p className="text-border-dark mt-1">
                   Placed on {order.date}
                 </p>
               </div>
@@ -181,34 +181,34 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
 
             {/* Tracking Information */}
             {order.trackingNumber && (
-              <div className="bg-linen rounded-brand p-6">
+              <div className="bg-surface rounded-brand p-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <h2 className="font-medium text-charcoal mb-1">
+                    <h2 className="font-medium text-text-primary mb-1">
                       Tracking Information
                     </h2>
-                    <div className="flex items-center gap-2 text-warm-gray-dark">
+                    <div className="flex items-center gap-2 text-border-dark">
                       <span>{order.carrier}</span>
                       <span>•</span>
                       <span className="font-mono text-sm">{order.trackingNumber}</span>
                       <button
                         onClick={handleCopyTracking}
-                        className="p-1 hover:bg-warm-gray-light rounded transition-colors"
+                        className="p-1 hover:bg-border-light rounded transition-colors"
                         title="Copy tracking number"
                       >
                         <Copy className="w-4 h-4" />
                       </button>
                       {copiedTracking && (
-                        <span className="text-xs text-green-600">Copied!</span>
+                        <span className="text-xs text-success-600">Copied!</span>
                       )}
                     </div>
                     {order.estimatedDelivery && order.status === 'shipped' && (
-                      <p className="text-sm text-warm-gray-dark mt-1">
+                      <p className="text-sm text-border-dark mt-1">
                         Estimated delivery: {order.estimatedDelivery}
                       </p>
                     )}
                     {order.deliveredDate && order.status === 'delivered' && (
-                      <p className="text-sm text-green-700 mt-1">
+                      <p className="text-sm text-success-700 mt-1">
                         Delivered on {order.deliveredDate}
                       </p>
                     )}
@@ -227,8 +227,8 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
             )}
 
             {/* Order Timeline */}
-            <div className="bg-white border border-warm-gray-light rounded-brand p-6">
-              <h2 className="font-serif text-lg text-charcoal mb-6">
+            <div className="bg-white border border-border-light rounded-brand p-6">
+              <h2 className="font-serif text-lg text-text-primary mb-6">
                 Order Timeline
               </h2>
               <div className="relative">
@@ -243,15 +243,15 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                       <div className="flex flex-col items-center">
                         <div
                           className={`w-8 h-8 rounded-full flex items-center justify-center ${event.completed
-                            ? 'bg-gold text-white'
-                            : 'bg-warm-gray-light text-warm-gray-dark'
+                            ? 'bg-primary text-white'
+                            : 'bg-border-light text-border-dark'
                             }`}
                         >
                           <Icon className="w-4 h-4" />
                         </div>
                         {!isLast && (
                           <div
-                            className={`w-0.5 h-12 ${event.completed ? 'bg-gold' : 'bg-warm-gray-light'
+                            className={`w-0.5 h-12 ${event.completed ? 'bg-primary' : 'bg-border-light'
                               }`}
                           />
                         )}
@@ -260,12 +260,12 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                       {/* Content */}
                       <div className="pb-8">
                         <p
-                          className={`font-medium ${event.completed ? 'text-charcoal' : 'text-warm-gray-dark'
+                          className={`font-medium ${event.completed ? 'text-text-primary' : 'text-border-dark'
                             }`}
                         >
                           {config.label}
                         </p>
-                        <p className="text-sm text-warm-gray-dark">
+                        <p className="text-sm text-border-dark">
                           {event.date}
                         </p>
                       </div>
@@ -276,18 +276,18 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
             </div>
 
             {/* Order Items */}
-            <div className="bg-white border border-warm-gray-light rounded-brand overflow-hidden">
-              <div className="p-6 border-b border-warm-gray-light">
-                <h2 className="font-serif text-lg text-charcoal">
+            <div className="bg-white border border-border-light rounded-brand overflow-hidden">
+              <div className="p-6 border-b border-border-light">
+                <h2 className="font-serif text-lg text-text-primary">
                   Items ({order.items.length})
                 </h2>
               </div>
 
-              <div className="divide-y divide-warm-gray-light">
+              <div className="divide-y divide-border-light">
                 {order.items.map((item) => (
                   <div key={item.id} className="p-6 flex gap-4">
                     {/* Product Image */}
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-linen rounded-lg overflow-hidden shrink-0">
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-surface rounded-lg overflow-hidden shrink-0">
                       <Image
                         src={item.product.images[0].secure_url}
                         alt={item.product.name}
@@ -300,11 +300,11 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                     <div className="flex-1 min-w-0">
                       <Link
                         href={`/products/${item.product.id}`}
-                        className="font-medium text-charcoal hover:text-gold transition-colors line-clamp-2"
+                        className="font-medium text-text-primary hover:text-primary transition-colors line-clamp-2"
                       >
                         {item.product.name}
                       </Link>
-                      <div className="mt-1 text-sm text-warm-gray-dark space-y-0.5">
+                      <div className="mt-1 text-sm text-border-dark space-y-0.5">
                         {item.product.color && (
                           <p>Color: {item.product.color}</p>
                         )}
@@ -317,11 +317,11 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
 
                     {/* Price */}
                     <div className="text-right">
-                      <p className="font-medium text-charcoal">
+                      <p className="font-medium text-text-primary">
                         {formatPrice(item.product.price * item.quantity)}
                       </p>
                       {item.quantity > 1 && (
-                        <p className="text-sm text-warm-gray-dark">
+                        <p className="text-sm text-border-dark">
                           {formatPrice(item.product.price)} each
                         </p>
                       )}
@@ -331,27 +331,27 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
               </div>
 
               {/* Order Summary */}
-              <div className="p-6 bg-linen">
+              <div className="p-6 bg-surface">
                 <div className="space-y-2">
-                  <div className="flex justify-between text-warm-gray-dark">
+                  <div className="flex justify-between text-border-dark">
                     <span>Subtotal</span>
                     <span>{formatPrice(order.subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-warm-gray-dark">
+                  <div className="flex justify-between text-border-dark">
                     <span>Shipping</span>
                     <span>{order.shipping === 0 ? 'Free' : formatPrice(order.shipping)}</span>
                   </div>
                   {order.discount > 0 && (
-                    <div className="flex justify-between text-green-700">
+                    <div className="flex justify-between text-success-700">
                       <span>Discount</span>
                       <span>-{formatPrice(order.discount)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between text-warm-gray-dark">
+                  <div className="flex justify-between text-border-dark">
                     <span>Tax</span>
                     <span>{formatPrice(order.tax)}</span>
                   </div>
-                  <div className="flex justify-between text-charcoal font-medium text-lg pt-2 border-t border-warm-gray">
+                  <div className="flex justify-between text-text-primary font-medium text-lg pt-2 border-t border-border">
                     <span>Total</span>
                     <span>{formatPrice(order.total)}</span>
                   </div>
@@ -362,15 +362,15 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
             {/* Shipping & Payment Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Shipping Address */}
-              <div className="bg-white border border-warm-gray-light rounded-brand p-6">
+              <div className="bg-white border border-border-light rounded-brand p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <MapPin className="w-5 h-5 text-gold" />
-                  <h2 className="font-serif text-lg text-charcoal">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <h2 className="font-serif text-lg text-text-primary">
                     Shipping Address
                   </h2>
                 </div>
-                <address className="not-italic text-warm-gray-dark leading-relaxed">
-                  <p className="font-medium text-charcoal">
+                <address className="not-italic text-border-dark leading-relaxed">
+                  <p className="font-medium text-text-primary">
                     {order.shippingAddress.firstName} {order.shippingAddress.lastName}
                   </p>
                   <p>{order.shippingAddress.street}</p>
@@ -388,15 +388,15 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
               </div>
 
               {/* Payment Method */}
-              <div className="bg-white border border-warm-gray-light rounded-brand p-6">
+              <div className="bg-white border border-border-light rounded-brand p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <CreditCard className="w-5 h-5 text-gold" />
-                  <h2 className="font-serif text-lg text-charcoal">
+                  <CreditCard className="w-5 h-5 text-primary" />
+                  <h2 className="font-serif text-lg text-text-primary">
                     Payment Method
                   </h2>
                 </div>
-                <div className="text-warm-gray-dark">
-                  <p className="font-medium text-charcoal">
+                <div className="text-border-dark">
+                  <p className="font-medium text-text-primary">
                     {order.paymentMethod.brand} •••• {order.paymentMethod.last4}
                   </p>
                   <p className="text-sm">
@@ -405,9 +405,9 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                 </div>
 
                 {/* Billing Address */}
-                <div className="mt-4 pt-4 border-t border-warm-gray-light">
-                  <p className="text-sm font-medium text-charcoal mb-2">Billing Address</p>
-                  <address className="not-italic text-sm text-warm-gray-dark leading-relaxed">
+                <div className="mt-4 pt-4 border-t border-border-light">
+                  <p className="text-sm font-medium text-text-primary mb-2">Billing Address</p>
+                  <address className="not-italic text-sm text-border-dark leading-relaxed">
                     <p>
                       {order.billingAddress.firstName} {order.billingAddress.lastName}
                     </p>

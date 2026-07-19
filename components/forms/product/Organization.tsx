@@ -43,8 +43,8 @@ export function Organization({
   const watchedCategory = watch('category')
 
   return (
-    <div className="bg-white rounded-brand border border-warm-gray p-6 space-y-5">
-      <h2 className="text-lg font-medium text-charcoal">Organization</h2>
+    <div className="bg-white rounded-brand border border-border p-6 space-y-5">
+      <h2 className="text-lg font-medium text-text-primary">Organization</h2>
 
       <Controller
         name="category.name"

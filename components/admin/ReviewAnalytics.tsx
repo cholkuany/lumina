@@ -50,7 +50,7 @@ export function ReviewAnalytics() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="animate-spin w-8 h-8 border-2 border-gold border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full" />
       </div>
     )
   }
@@ -61,7 +61,7 @@ export function ReviewAnalytics() {
     <div className="space-y-6">
       {/* Time Range Selector */}
       <div className="flex items-center justify-between">
-        <h2 className="font-serif text-xl text-charcoal">Review Analytics</h2>
+        <h2 className="font-serif text-xl text-text-primary">Review Analytics</h2>
         <div className="flex items-center gap-2">
           {(['7d', '30d', '90d', '1y'] as const).map((range) => (
             <button
@@ -70,8 +70,8 @@ export function ReviewAnalytics() {
               className={cn(
                 'px-3 py-1.5 text-sm rounded-lg transition-colors',
                 timeRange === range
-                  ? 'bg-charcoal text-white'
-                  : 'bg-linen text-charcoal hover:bg-warm-gray-light'
+                  ? 'bg-text-primary text-white'
+                  : 'bg-surface text-text-primary hover:bg-border-light'
               )}
             >
               {range === '7d' && 'Week'}
@@ -85,14 +85,14 @@ export function ReviewAnalytics() {
 
       {/* Key Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-brand p-5 border border-warm-gray-light">
+        <div className="bg-white rounded-brand p-5 border border-border-light">
           <div className="flex items-center justify-between mb-2">
-            <MessageSquare className="w-5 h-5 text-gold" />
+            <MessageSquare className="w-5 h-5 text-primary" />
             {data.monthlyChange !== 0 && (
               <span
                 className={cn(
                   'flex items-center text-xs font-medium',
-                  data.monthlyChange > 0 ? 'text-green-600' : 'text-red-600'
+                  data.monthlyChange > 0 ? 'text-success-600' : 'text-red-600'
                 )}
               >
                 {data.monthlyChange > 0 ? (
@@ -104,18 +104,18 @@ export function ReviewAnalytics() {
               </span>
             )}
           </div>
-          <p className="text-3xl font-semibold text-charcoal">{data.totalReviews}</p>
-          <p className="text-sm text-warm-gray-dark">Total Reviews</p>
+          <p className="text-3xl font-semibold text-text-primary">{data.totalReviews}</p>
+          <p className="text-sm text-border-dark">Total Reviews</p>
         </div>
 
-        <div className="bg-white rounded-brand p-5 border border-warm-gray-light">
+        <div className="bg-white rounded-brand p-5 border border-border-light">
           <div className="flex items-center justify-between mb-2">
-            <Star className="w-5 h-5 text-gold fill-gold" />
+            <Star className="w-5 h-5 text-primary fill-primary" />
             {data.ratingChange !== 0 && (
               <span
                 className={cn(
                   'flex items-center text-xs font-medium',
-                  data.ratingChange > 0 ? 'text-green-600' : 'text-red-600'
+                  data.ratingChange > 0 ? 'text-success-600' : 'text-red-600'
                 )}
               >
                 {data.ratingChange > 0 ? (
@@ -127,50 +127,50 @@ export function ReviewAnalytics() {
               </span>
             )}
           </div>
-          <p className="text-3xl font-semibold text-charcoal">
+          <p className="text-3xl font-semibold text-text-primary">
             {data.averageRating.toFixed(1)}
           </p>
-          <p className="text-sm text-warm-gray-dark">Average Rating</p>
+          <p className="text-sm text-border-dark">Average Rating</p>
         </div>
 
-        <div className="bg-white rounded-brand p-5 border border-warm-gray-light">
+        <div className="bg-white rounded-brand p-5 border border-border-light">
           <div className="flex items-center justify-between mb-2">
-            <ThumbsUp className="w-5 h-5 text-gold" />
+            <ThumbsUp className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-3xl font-semibold text-charcoal">
+          <p className="text-3xl font-semibold text-text-primary">
             {data.verifiedPercentage}%
           </p>
-          <p className="text-sm text-warm-gray-dark">Verified Purchases</p>
+          <p className="text-sm text-border-dark">Verified Purchases</p>
         </div>
 
-        <div className="bg-white rounded-brand p-5 border border-warm-gray-light">
+        <div className="bg-white rounded-brand p-5 border border-border-light">
           <div className="flex items-center justify-between mb-2">
-            <Camera className="w-5 h-5 text-gold" />
+            <Camera className="w-5 h-5 text-primary" />
           </div>
-          <p className="text-3xl font-semibold text-charcoal">
+          <p className="text-3xl font-semibold text-text-primary">
             {data.withImagesPercentage}%
           </p>
-          <p className="text-sm text-warm-gray-dark">With Photos</p>
+          <p className="text-sm text-border-dark">With Photos</p>
         </div>
       </div>
 
       {/* Rating Distribution */}
-      <div className="bg-white rounded-brand p-6 border border-warm-gray-light">
-        <h3 className="font-medium text-charcoal mb-4">Rating Distribution</h3>
+      <div className="bg-white rounded-brand p-6 border border-border-light">
+        <h3 className="font-medium text-text-primary mb-4">Rating Distribution</h3>
         <div className="space-y-3">
           {data.ratingDistribution.map(({ rating, count, percentage }) => (
             <div key={rating} className="flex items-center gap-3">
-              <span className="text-sm text-warm-gray-dark w-12">{rating} star</span>
-              <div className="flex-1 h-4 bg-linen rounded-full overflow-hidden">
+              <span className="text-sm text-border-dark w-12">{rating} star</span>
+              <div className="flex-1 h-4 bg-surface rounded-full overflow-hidden">
                 <div
                   className={cn(
                     'h-full rounded-full transition-all duration-500',
-                    rating >= 4 ? 'bg-green-500' : rating >= 3 ? 'bg-amber-500' : 'bg-red-500'
+                    rating >= 4 ? 'bg-success-500' : rating >= 3 ? 'bg-amber-500' : 'bg-red-500'
                   )}
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <span className="text-sm text-charcoal w-16 text-right">
+              <span className="text-sm text-text-primary w-16 text-right">
                 {count} ({percentage}%)
               </span>
             </div>
@@ -179,8 +179,8 @@ export function ReviewAnalytics() {
       </div>
 
       {/* Monthly Trend */}
-      <div className="bg-white rounded-brand p-6 border border-warm-gray-light">
-        <h3 className="font-medium text-charcoal mb-4">Monthly Trend</h3>
+      <div className="bg-white rounded-brand p-6 border border-border-light">
+        <h3 className="font-medium text-text-primary mb-4">Monthly Trend</h3>
         <div className="flex items-end gap-2 h-40">
           {data.monthlyTrend.map((month) => {
             const maxCount = Math.max(...data.monthlyTrend.map((m) => m.count))
@@ -188,12 +188,12 @@ export function ReviewAnalytics() {
 
             return (
               <div key={month.month} className="flex-1 flex flex-col items-center gap-1">
-                <div className="text-xs text-charcoal font-medium">{month.count}</div>
+                <div className="text-xs text-text-primary font-medium">{month.count}</div>
                 <div
-                  className="w-full bg-gold/80 rounded-t-sm transition-all duration-300 hover:bg-gold"
+                  className="w-full bg-primary/80 rounded-t-sm transition-all duration-300 hover:bg-primary"
                   style={{ height: `${height}%` }}
                 />
-                <div className="text-xs text-warm-gray-dark">{month.month}</div>
+                <div className="text-xs text-border-dark">{month.month}</div>
               </div>
             )
           })}
@@ -201,27 +201,27 @@ export function ReviewAnalytics() {
       </div>
 
       {/* Top Reviewed Products */}
-      <div className="bg-white rounded-brand p-6 border border-warm-gray-light">
-        <h3 className="font-medium text-charcoal mb-4">Top Reviewed Products</h3>
+      <div className="bg-white rounded-brand p-6 border border-border-light">
+        <h3 className="font-medium text-text-primary mb-4">Top Reviewed Products</h3>
         <div className="space-y-3">
           {data.topReviewedProducts.map((product, index) => (
             <div
               key={product.id}
-              className="flex items-center justify-between py-2 border-b border-warm-gray-light last:border-0"
+              className="flex items-center justify-between py-2 border-b border-border-light last:border-0"
             >
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-warm-gray-dark w-6">
+                <span className="text-sm font-medium text-border-dark w-6">
                   #{index + 1}
                 </span>
-                <span className="text-charcoal">{product.name}</span>
+                <span className="text-text-primary">{product.name}</span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm text-warm-gray-dark">
+                <span className="text-sm text-border-dark">
                   {product.reviewCount} reviews
                 </span>
                 <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 fill-gold text-gold" />
-                  <span className="text-sm font-medium text-charcoal">
+                  <Star className="w-4 h-4 fill-primary text-primary" />
+                  <span className="text-sm font-medium text-text-primary">
                     {product.avgRating.toFixed(1)}
                   </span>
                 </div>

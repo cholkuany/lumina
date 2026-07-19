@@ -75,8 +75,8 @@ const variantConfig = {
   },
   info: {
     icon: Info,
-    iconBg: 'bg-blue-100',
-    iconColor: 'text-blue-600',
+    iconBg: 'bg-primary-100',
+    iconColor: 'text-primary-600',
     buttonVariant: 'primary' as const,
   },
 }
@@ -146,7 +146,7 @@ export function ConfirmModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-charcoal/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-text-primary/50 backdrop-blur-sm"
         onClick={() => !isLoading && onClose()}
       />
 
@@ -173,8 +173,8 @@ export function ConfirmModal({
             <Icon className={cn('w-6 h-6', config.iconColor)} />
           </div>
           <div className="flex-1">
-            <h3 id='confirm-title' className="text-lg font-semibold text-charcoal">{finalTitle}</h3>
-            <p className="mt-2 text-sm text-warm-gray-dark">{finalMessage}</p>
+            <h3 id='confirm-title' className="text-lg font-semibold text-text-primary">{finalTitle}</h3>
+            <p className="mt-2 text-sm text-border-dark">{finalMessage}</p>
           </div>
         </div>
 

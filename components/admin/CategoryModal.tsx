@@ -73,7 +73,7 @@ export function CategoryModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-charcoal/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-text-primary/50 backdrop-blur-sm"
         onClick={() => !isSubmitting && onClose()}
       />
 
@@ -87,11 +87,11 @@ export function CategoryModal({
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-warm-gray">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           <div>
-            <h2 className="text-lg font-semibold text-charcoal">{title}</h2>
+            <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
             {parentCategory && (
-              <p className="text-sm text-warm-gray-dark">
+              <p className="text-sm text-border-dark">
                 Parent: {parentCategory.name}
               </p>
             )}
@@ -99,7 +99,7 @@ export function CategoryModal({
           <button
             onClick={onClose}
             disabled={isSubmitting}
-            className="p-2 text-warm-gray-dark hover:text-charcoal hover:bg-linen rounded-lg transition-colors disabled:opacity-50"
+            className="p-2 text-border-dark hover:text-text-primary hover:bg-surface rounded-lg transition-colors disabled:opacity-50"
           >
             <X className="w-5 h-5" />
           </button>

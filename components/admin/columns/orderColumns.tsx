@@ -23,11 +23,11 @@ export function useOrderColumns({
               e.stopPropagation()
               setOrderDetail(row.original)
             }}
-            className="font-medium text-charcoal hover:text-gold transition-colors"
+            className="font-medium text-text-primary hover:text-primary transition-colors"
           >
             {row.original.orderNumber}
           </button>
-          <p className="text-xs text-warm-gray-dark">
+          <p className="text-xs text-border-dark">
             {new Date(row.original.date).toLocaleDateString('en-US', {
               month: 'short',
               day: 'numeric',
@@ -45,8 +45,8 @@ export function useOrderColumns({
       header: 'Customer',
       cell: ({ row }) => (
         <div>
-          <p className="text-sm font-medium text-charcoal">{row.original.customer.name}</p>
-          <p className="text-xs text-warm-gray-dark">{row.original.customer.email}</p>
+          <p className="text-sm font-medium text-text-primary">{row.original.customer.name}</p>
+          <p className="text-xs text-border-dark">{row.original.customer.email}</p>
         </div>
       ),
       enableSorting: true,
@@ -55,14 +55,14 @@ export function useOrderColumns({
       accessorKey: 'items',
       header: 'Items',
       cell: ({ row }) => (
-        <span className="text-charcoal">{row.original.items}</span>
+        <span className="text-text-primary">{row.original.items}</span>
       ),
     },
     {
       accessorKey: 'total',
       header: 'Total',
       cell: ({ row }) => (
-        <span className="font-medium text-charcoal">${row.original.total.toFixed(2)}</span>
+        <span className="font-medium text-text-primary">${row.original.total.toFixed(2)}</span>
       ),
       enableSorting: true,
     },
@@ -73,7 +73,7 @@ export function useOrderColumns({
         <span
           className={cn(
             'px-2 py-1 text-xs font-medium rounded-full capitalize',
-            row.original.paymentStatus === 'paid' && 'bg-green-100 text-green-700',
+            row.original.paymentStatus === 'paid' && 'bg-success-100 text-success-700',
             row.original.paymentStatus === 'pending' && 'bg-amber-100 text-amber-700',
             row.original.paymentStatus === 'failed' && 'bg-red-100 text-red-700',
             row.original.paymentStatus === 'refunded' && 'bg-gray-100 text-gray-700'
@@ -98,7 +98,7 @@ export function useOrderColumns({
               e.stopPropagation()
               setOrderDetail(row.original)
             }}
-            className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
+            className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors"
             title="View details"
           >
             <Eye className="w-4 h-4" />
@@ -108,7 +108,7 @@ export function useOrderColumns({
               e.stopPropagation()
               // Handle print
             }}
-            className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
+            className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors"
             title="Print invoice"
           >
             <Printer className="w-4 h-4" />

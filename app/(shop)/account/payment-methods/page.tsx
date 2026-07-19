@@ -54,9 +54,9 @@ const initialPaymentMethods: PaymentMethod[] = [
 
 // Card brand logos/icons
 const cardBrandConfig: Record<string, { name: string; color: string; bgColor: string }> = {
-  visa: { name: 'Visa', color: 'text-blue-700', bgColor: 'bg-blue-50' },
+  visa: { name: 'Visa', color: 'text-primary-700', bgColor: 'bg-primary-50' },
   mastercard: { name: 'Mastercard', color: 'text-orange-600', bgColor: 'bg-orange-50' },
-  amex: { name: 'American Express', color: 'text-blue-500', bgColor: 'bg-blue-50' },
+  amex: { name: 'American Express', color: 'text-primary-500', bgColor: 'bg-primary-50' },
   discover: { name: 'Discover', color: 'text-orange-500', bgColor: 'bg-orange-50' },
 }
 
@@ -78,17 +78,17 @@ function Modal({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-full items-center justify-center p-4">
         <div
-          className="fixed inset-0 bg-charcoal/50 transition-opacity"
+          className="fixed inset-0 bg-text-primary/50 transition-opacity"
           onClick={onClose}
         />
         <div className="relative bg-white rounded-brand shadow-hover max-w-lg w-full max-h-[90vh] overflow-y-auto">
-          <div className="flex items-center justify-between p-6 border-b border-warm-gray-light">
-            <h2 className="font-serif text-xl text-charcoal">{title}</h2>
+          <div className="flex items-center justify-between p-6 border-b border-border-light">
+            <h2 className="font-serif text-xl text-text-primary">{title}</h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-linen rounded-full transition-colors"
+              className="p-2 hover:bg-surface rounded-full transition-colors"
             >
-              <X className="w-5 h-5 text-warm-gray-dark" />
+              <X className="w-5 h-5 text-border-dark" />
             </button>
           </div>
           <div className="p-6">
@@ -227,11 +227,11 @@ function AddPaymentMethodForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Security Notice */}
-      <div className="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
-        <Shield className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
+      <div className="flex items-start gap-3 p-4 bg-success-50 border border-success-200 rounded-lg">
+        <Shield className="w-5 h-5 text-success-600 shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm font-medium text-green-800">Secure Payment</p>
-          <p className="text-xs text-green-700 mt-0.5">
+          <p className="text-sm font-medium text-success-800">Secure Payment</p>
+          <p className="text-xs text-success-700 mt-0.5">
             Your card information is encrypted and secure.
           </p>
         </div>
@@ -239,7 +239,7 @@ function AddPaymentMethodForm({
 
       {/* Card Number */}
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Card Number *
         </label>
         <div className="relative">
@@ -250,10 +250,10 @@ function AddPaymentMethodForm({
             onChange={handleChange}
             placeholder="1234 5678 9012 3456"
             maxLength={19}
-            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.cardNumber ? 'border-red-500' : 'border-warm-gray-light'
+            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.cardNumber ? 'border-red-500' : 'border-border-light'
               }`}
           />
-          <CreditCard className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-warm-gray-dark" />
+          <CreditCard className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-border-dark" />
         </div>
         {errors.cardNumber && (
           <p className="text-sm text-red-600 mt-1">{errors.cardNumber}</p>
@@ -262,7 +262,7 @@ function AddPaymentMethodForm({
 
       {/* Cardholder Name */}
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Cardholder Name *
         </label>
         <input
@@ -271,7 +271,7 @@ function AddPaymentMethodForm({
           value={formData.cardholderName}
           onChange={handleChange}
           placeholder="John Smith"
-          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.cardholderName ? 'border-red-500' : 'border-warm-gray-light'
+          className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.cardholderName ? 'border-red-500' : 'border-border-light'
             }`}
         />
         {errors.cardholderName && (
@@ -282,7 +282,7 @@ function AddPaymentMethodForm({
       {/* Expiry & CVV */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             Expiry Date *
           </label>
           <input
@@ -292,7 +292,7 @@ function AddPaymentMethodForm({
             onChange={handleChange}
             placeholder="MM/YY"
             maxLength={5}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.expiryDate ? 'border-red-500' : 'border-warm-gray-light'
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.expiryDate ? 'border-red-500' : 'border-border-light'
               }`}
           />
           {errors.expiryDate && (
@@ -300,7 +300,7 @@ function AddPaymentMethodForm({
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             CVV *
           </label>
           <input
@@ -310,7 +310,7 @@ function AddPaymentMethodForm({
             onChange={handleChange}
             placeholder="123"
             maxLength={4}
-            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.cvv ? 'border-red-500' : 'border-warm-gray-light'
+            className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.cvv ? 'border-red-500' : 'border-border-light'
               }`}
           />
           {errors.cvv && (
@@ -326,9 +326,9 @@ function AddPaymentMethodForm({
           name="setAsDefault"
           checked={formData.setAsDefault}
           onChange={handleChange}
-          className="w-5 h-5 rounded border-warm-gray accent-gold"
+          className="w-5 h-5 rounded border-border accent-primary"
         />
-        <span className="text-sm text-charcoal">Set as default payment method</span>
+        <span className="text-sm text-text-primary">Set as default payment method</span>
       </label>
 
       {/* Actions */}
@@ -383,17 +383,17 @@ function DeleteConfirmation({
         </div>
       </div>
 
-      <div className="flex items-center gap-4 p-4 bg-linen rounded-lg mb-6">
+      <div className="flex items-center gap-4 p-4 bg-surface rounded-lg mb-6">
         <div className={`w-12 h-8 ${brand.bgColor} rounded flex items-center justify-center`}>
           <span className={`text-xs font-bold ${brand.color}`}>
             {brand.name.substring(0, 4).toUpperCase()}
           </span>
         </div>
         <div>
-          <p className="font-medium text-charcoal">
+          <p className="font-medium text-text-primary">
             {brand.name} •••• {method.last4}
           </p>
-          <p className="text-sm text-warm-gray-dark">
+          <p className="text-sm text-border-dark">
             Expires {method.expiryMonth.toString().padStart(2, '0')}/{method.expiryYear}
           </p>
         </div>
@@ -448,7 +448,7 @@ function PaymentMethodCard({
   }
 
   return (
-    <div className={`bg-white border rounded-brand p-6 transition-all ${method.isDefault ? 'border-gold shadow-soft' : 'border-warm-gray-light hover:border-gold/50'
+    <div className={`bg-white border rounded-brand p-6 transition-all ${method.isDefault ? 'border-primary shadow-soft' : 'border-border-light hover:border-primary/50'
       }`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">
@@ -462,20 +462,20 @@ function PaymentMethodCard({
           {/* Card Details */}
           <div>
             <div className="flex items-center gap-2">
-              <p className="font-medium text-charcoal">
+              <p className="font-medium text-text-primary">
                 {brand.name} •••• {method.last4}
               </p>
               {method.isDefault && (
-                <span className="px-2 py-0.5 bg-gold/10 text-gold text-xs font-medium rounded-full">
+                <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs font-medium rounded-full">
                   Default
                 </span>
               )}
             </div>
-            <p className="text-sm text-warm-gray-dark mt-0.5">
+            <p className="text-sm text-border-dark mt-0.5">
               {method.cardholderName}
             </p>
             <div className="flex items-center gap-2 mt-1">
-              <p className={`text-sm ${isExpired() ? 'text-red-600' : isExpiringSoon() ? 'text-amber-600' : 'text-warm-gray-dark'}`}>
+              <p className={`text-sm ${isExpired() ? 'text-red-600' : isExpiringSoon() ? 'text-amber-600' : 'text-border-dark'}`}>
                 {isExpired() ? 'Expired' : 'Expires'} {method.expiryMonth.toString().padStart(2, '0')}/{method.expiryYear}
               </p>
               {isExpiringSoon() && !isExpired() && (
@@ -492,7 +492,7 @@ function PaymentMethodCard({
           {!method.isDefault && (
             <button
               onClick={onSetDefault}
-              className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
+              className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors"
               title="Set as default"
             >
               <Check className="w-5 h-5" />
@@ -500,7 +500,7 @@ function PaymentMethodCard({
           )}
           <button
             onClick={onDelete}
-            className="p-2 text-warm-gray-dark hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            className="p-2 text-border-dark hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
             title="Delete"
           >
             <Trash2 className="w-5 h-5" />
@@ -578,10 +578,10 @@ export default function PaymentMethodsPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
-                <h1 className="font-serif text-2xl lg:text-3xl text-charcoal">
+                <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
                   Payment Methods
                 </h1>
-                <p className="text-warm-gray-dark mt-1">
+                <p className="text-border-dark mt-1">
                   Manage your saved payment methods
                 </p>
               </div>
@@ -607,12 +607,12 @@ export default function PaymentMethodsPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-linen rounded-brand">
-                <CreditCard className="w-16 h-16 text-warm-gray-dark mx-auto mb-4" />
-                <h2 className="font-serif text-xl text-charcoal mb-2">
+              <div className="text-center py-16 bg-surface rounded-brand">
+                <CreditCard className="w-16 h-16 text-border-dark mx-auto mb-4" />
+                <h2 className="font-serif text-xl text-text-primary mb-2">
                   No Payment Methods
                 </h2>
-                <p className="text-warm-gray-dark mb-6">
+                <p className="text-border-dark mb-6">
                   Add a payment method for faster checkout.
                 </p>
                 <Button onClick={() => setShowAddModal(true)}>
@@ -623,12 +623,12 @@ export default function PaymentMethodsPage() {
             )}
 
             {/* Security Info */}
-            <div className="mt-8 p-6 bg-linen rounded-brand">
+            <div className="mt-8 p-6 bg-surface rounded-brand">
               <div className="flex items-start gap-4">
-                <Shield className="w-8 h-8 text-gold shrink-0" />
+                <Shield className="w-8 h-8 text-primary shrink-0" />
                 <div>
-                  <h3 className="font-medium text-charcoal mb-1">Your payment information is secure</h3>
-                  <p className="text-sm text-warm-gray-dark">
+                  <h3 className="font-medium text-text-primary mb-1">Your payment information is secure</h3>
+                  <p className="text-sm text-border-dark">
                     We use industry-standard encryption to protect your payment details. Your full card number is never stored on our servers.
                   </p>
                 </div>

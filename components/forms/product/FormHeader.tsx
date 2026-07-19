@@ -16,10 +16,10 @@ export function FormHeader({
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold text-charcoal">
+        <h1 className="text-2xl font-semibold text-text-primary">
           {isEditMode ? 'Edit Product' : 'Create New Product'}
         </h1>
-        <p className="text-warm-gray-dark mt-1">
+        <p className="text-border-dark mt-1">
           {isEditMode
             ? 'Update your product information'
             : 'Add a new product to your catalog'}

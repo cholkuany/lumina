@@ -28,7 +28,7 @@ export const UserDropdownMenu = ({
   return (
     <div
       className={cn(
-        "absolute top-full right-0 mt-2 w-72 bg-white rounded-brand shadow-hover border border-warm-gray-light overflow-hidden transition-all duration-200",
+        "absolute top-full right-0 mt-2 w-72 bg-white rounded-brand shadow-hover border border-border-light overflow-hidden transition-all duration-200",
         userMenuOpen
           ? "opacity-100 visible translate-y-0"
           : "opacity-0 invisible -translate-y-2"

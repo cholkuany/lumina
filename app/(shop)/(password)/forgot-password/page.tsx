@@ -52,9 +52,9 @@ export default function ForgotPasswordPage() {
     return (
       <div className="min-h-[70vh] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 text-center">
-          <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+          <div className="mx-auto w-16 h-16 bg-success-100 rounded-full flex items-center justify-center">
             <svg
-              className="w-8 h-8 text-green-600"
+              className="w-8 h-8 text-success-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

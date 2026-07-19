@@ -6,8 +6,8 @@ export const ProductsHeader = () => {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold text-charcoal">Products</h1>
-        <p className="text-warm-gray-dark mt-1">
+        <h1 className="text-2xl font-semibold text-text-primary">Products</h1>
+        <p className="text-border-dark mt-1">
           Manage your product catalog
         </p>
       </div>

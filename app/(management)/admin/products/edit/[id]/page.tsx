@@ -42,19 +42,19 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
       <nav className="flex items-center gap-2 text-sm">
         <Link
           href="/admin/products"
-          className="text-warm-gray-dark hover:text-gold transition-colors"
+          className="text-border-dark hover:text-primary transition-colors"
         >
           Products
         </Link>
-        <ChevronRight className="w-4 h-4 text-warm-gray-dark" />
+        <ChevronRight className="w-4 h-4 text-border-dark" />
         <Link
           href={`/admin/products/${product.id}`}
-          className="text-warm-gray-dark hover:text-gold transition-colors max-w-50 truncate"
+          className="text-border-dark hover:text-primary transition-colors max-w-50 truncate"
         >
           {product.name}
         </Link>
-        <ChevronRight className="w-4 h-4 text-warm-gray-dark" />
-        <span className="text-charcoal font-medium">Edit</span>
+        <ChevronRight className="w-4 h-4 text-border-dark" />
+        <span className="text-text-primary font-medium">Edit</span>
       </nav>
 
       {/* Edit Form */}

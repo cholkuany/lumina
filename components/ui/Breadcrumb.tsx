@@ -13,16 +13,16 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
     <nav className="flex items-center gap-2 text-sm flex-wrap">
       {items.map((item, index) => (
-        <div key={index} className="flex items-center not-last:after:ml-2 not-last:after:content-['/'] not-last:after:text-warm-gray group">
+        <div key={index} className="flex items-center not-last:after:ml-2 not-last:after:content-['/'] not-last:after:text-border group">
           {item.href ? (
             <Link
               href={item.href}
-              className="text-warm-gray-dark hover:text-gold transition-colors group-last:text-charcoal underline underline-offset-[3px]"
+              className="text-border-dark hover:text-primary transition-colors group-last:text-text-primary underline underline-offset-[3px]"
             >
               {item.label}
             </Link>
           ) : (
-            <span className="text-charcoal font-medium">{item.label}</span>
+            <span className="text-text-primary font-medium">{item.label}</span>
           )}
         </div>
       ))}

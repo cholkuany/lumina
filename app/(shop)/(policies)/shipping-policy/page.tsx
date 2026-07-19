@@ -65,19 +65,19 @@ export default function ShippingPolicyPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-linen py-12 lg:py-16">
+      <section className="bg-surface py-12 lg:py-16">
         <div className="container-lumina">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Truck className="w-8 h-8 text-gold" />
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Truck className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
               Shipping Policy
             </h1>
-            <p className="text-warm-gray-dark">
+            <p className="text-border-dark">
               Fast, reliable shipping to your doorstep. Learn about our delivery options and policies.
             </p>
-            <p className="text-sm text-warm-gray-dark mt-4">Last Updated: {lastUpdated}</p>
+            <p className="text-sm text-border-dark mt-4">Last Updated: {lastUpdated}</p>
           </div>
         </div>
       </section>
@@ -85,25 +85,25 @@ export default function ShippingPolicyPage() {
       {/* Quick Info Cards */}
       <section className="container-lumina py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white border border-warm-gray-light rounded-brand p-5 text-center">
-            <DollarSign className="w-8 h-8 text-gold mx-auto mb-3" />
-            <h3 className="font-medium text-charcoal mb-1">Free Shipping</h3>
-            <p className="text-sm text-warm-gray-dark">On orders $75+</p>
+          <div className="bg-white border border-border-light rounded-brand p-5 text-center">
+            <DollarSign className="w-8 h-8 text-primary mx-auto mb-3" />
+            <h3 className="font-medium text-text-primary mb-1">Free Shipping</h3>
+            <p className="text-sm text-border-dark">On orders $75+</p>
           </div>
-          <div className="bg-white border border-warm-gray-light rounded-brand p-5 text-center">
-            <Clock className="w-8 h-8 text-gold mx-auto mb-3" />
-            <h3 className="font-medium text-charcoal mb-1">Fast Processing</h3>
-            <p className="text-sm text-warm-gray-dark">Ships within 1-2 days</p>
+          <div className="bg-white border border-border-light rounded-brand p-5 text-center">
+            <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
+            <h3 className="font-medium text-text-primary mb-1">Fast Processing</h3>
+            <p className="text-sm text-border-dark">Ships within 1-2 days</p>
           </div>
-          <div className="bg-white border border-warm-gray-light rounded-brand p-5 text-center">
-            <Globe className="w-8 h-8 text-gold mx-auto mb-3" />
-            <h3 className="font-medium text-charcoal mb-1">Global Delivery</h3>
-            <p className="text-sm text-warm-gray-dark">Ships to 100+ countries</p>
+          <div className="bg-white border border-border-light rounded-brand p-5 text-center">
+            <Globe className="w-8 h-8 text-primary mx-auto mb-3" />
+            <h3 className="font-medium text-text-primary mb-1">Global Delivery</h3>
+            <p className="text-sm text-border-dark">Ships to 100+ countries</p>
           </div>
-          <div className="bg-white border border-warm-gray-light rounded-brand p-5 text-center">
-            <MapPin className="w-8 h-8 text-gold mx-auto mb-3" />
-            <h3 className="font-medium text-charcoal mb-1">Order Tracking</h3>
-            <p className="text-sm text-warm-gray-dark">Real-time updates</p>
+          <div className="bg-white border border-border-light rounded-brand p-5 text-center">
+            <MapPin className="w-8 h-8 text-primary mx-auto mb-3" />
+            <h3 className="font-medium text-text-primary mb-1">Order Tracking</h3>
+            <p className="text-sm text-border-dark">Real-time updates</p>
           </div>
         </div>
       </section>
@@ -113,33 +113,33 @@ export default function ShippingPolicyPage() {
 
           {/* Domestic Shipping */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <Package className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <Package className="w-6 h-6 text-primary" />
               Domestic Shipping (United States)
             </h2>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand overflow-hidden">
+            <div className="bg-white border border-border-light rounded-brand overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-linen">
+                  <thead className="bg-surface">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-charcoal">Shipping Method</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-charcoal">Delivery Time</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-charcoal">Cost</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Shipping Method</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Delivery Time</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Cost</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-warm-gray-light">
+                  <tbody className="divide-y divide-border-light">
                     {shippingMethods.map((method, index) => (
-                      <tr key={index} className="hover:bg-linen/50 transition-colors">
+                      <tr key={index} className="hover:bg-surface/50 transition-colors">
                         <td className="px-6 py-4">
-                          <p className="font-medium text-charcoal">{method.name}</p>
-                          <p className="text-sm text-warm-gray-dark">{method.description}</p>
+                          <p className="font-medium text-text-primary">{method.name}</p>
+                          <p className="text-sm text-border-dark">{method.description}</p>
                         </td>
-                        <td className="px-6 py-4 text-warm-gray-dark">{method.time}</td>
+                        <td className="px-6 py-4 text-border-dark">{method.time}</td>
                         <td className="px-6 py-4">
-                          <span className="font-medium text-charcoal">{method.cost}</span>
+                          <span className="font-medium text-text-primary">{method.cost}</span>
                           {method.cost.includes('Free') && (
-                            <p className="text-sm text-warm-gray-dark">{method.costBelow} under $75</p>
+                            <p className="text-sm text-border-dark">{method.costBelow} under $75</p>
                           )}
                         </td>
                       </tr>
@@ -150,23 +150,23 @@ export default function ShippingPolicyPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="bg-success-50 border border-success-200 rounded-lg p-4">
                 <div className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-success-600 shrink-0" />
                   <div>
-                    <p className="font-medium text-green-800">Free Shipping Threshold</p>
-                    <p className="text-sm text-green-700 mt-1">
+                    <p className="font-medium text-success-800">Free Shipping Threshold</p>
+                    <p className="text-sm text-success-700 mt-1">
                       Spend $75 or more to qualify for free standard shipping on your order.
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
                 <div className="flex gap-3">
-                  <Info className="w-5 h-5 text-blue-600 shrink-0" />
+                  <Info className="w-5 h-5 text-primary-600 shrink-0" />
                   <div>
-                    <p className="font-medium text-blue-800">Processing Time</p>
-                    <p className="text-sm text-blue-700 mt-1">
+                    <p className="font-medium text-primary-800">Processing Time</p>
+                    <p className="text-sm text-primary-700 mt-1">
                       Orders placed before 2 PM EST are processed the same business day.
                     </p>
                   </div>
@@ -177,31 +177,31 @@ export default function ShippingPolicyPage() {
 
           {/* International Shipping */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <Globe className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <Globe className="w-6 h-6 text-primary" />
               International Shipping
             </h2>
 
-            <p className="text-warm-gray-dark mb-6">
+            <p className="text-border-dark mb-6">
               We ship to over 100 countries worldwide. International shipping rates and delivery times vary by destination.
             </p>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand overflow-hidden">
+            <div className="bg-white border border-border-light rounded-brand overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-linen">
+                  <thead className="bg-surface">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-charcoal">Destination</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-charcoal">Delivery Time</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-charcoal">Shipping Cost</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Destination</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Delivery Time</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Shipping Cost</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-warm-gray-light">
+                  <tbody className="divide-y divide-border-light">
                     {internationalZones.map((zone, index) => (
-                      <tr key={index} className="hover:bg-linen/50 transition-colors">
-                        <td className="px-6 py-4 font-medium text-charcoal">{zone.zone}</td>
-                        <td className="px-6 py-4 text-warm-gray-dark">{zone.time}</td>
-                        <td className="px-6 py-4 text-warm-gray-dark">{zone.cost}</td>
+                      <tr key={index} className="hover:bg-surface/50 transition-colors">
+                        <td className="px-6 py-4 font-medium text-text-primary">{zone.zone}</td>
+                        <td className="px-6 py-4 text-border-dark">{zone.time}</td>
+                        <td className="px-6 py-4 text-border-dark">{zone.cost}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -225,15 +225,15 @@ export default function ShippingPolicyPage() {
 
           {/* Order Processing */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <Clock className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <Clock className="w-6 h-6 text-primary" />
               Order Processing
             </h2>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand p-6 space-y-4">
+            <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Processing Times</h3>
-                <ul className="list-disc pl-6 text-warm-gray-dark space-y-2">
+                <h3 className="font-medium text-text-primary mb-2">Processing Times</h3>
+                <ul className="list-disc pl-6 text-border-dark space-y-2">
                   <li>Orders are processed Monday through Friday, excluding holidays</li>
                   <li>Orders placed before 2:00 PM EST ship the same business day</li>
                   <li>Orders placed after 2:00 PM EST or on weekends ship the next business day</li>
@@ -242,16 +242,16 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Order Confirmation</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Order Confirmation</h3>
+                <p className="text-border-dark">
                   You will receive an email confirmation when your order is placed and another when it ships with
                   tracking information. You can also track your order in your account dashboard.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Multiple Items</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Multiple Items</h3>
+                <p className="text-border-dark">
                   If your order contains multiple items, they may ship separately from different warehouses.
                   You will receive tracking information for each shipment.
                 </p>
@@ -261,39 +261,39 @@ export default function ShippingPolicyPage() {
 
           {/* Shipping Restrictions */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <AlertTriangle className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <AlertTriangle className="w-6 h-6 text-primary" />
               Shipping Restrictions
             </h2>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand p-6 space-y-4">
+            <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
               <div>
-                <h3 className="font-medium text-charcoal mb-2">PO Boxes & APO/FPO Addresses</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">PO Boxes & APO/FPO Addresses</h3>
+                <p className="text-border-dark">
                   We can ship to PO Boxes and APO/FPO addresses via USPS. Express and Next Day shipping options
                   are not available for these addresses.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Restricted Destinations</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Restricted Destinations</h3>
+                <p className="text-border-dark">
                   Due to shipping carrier restrictions, we cannot ship to certain countries. If your country is not
                   available at checkout, we are unable to deliver to that location at this time.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Hazardous Materials</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Hazardous Materials</h3>
+                <p className="text-border-dark">
                   Some products containing batteries, liquids, or aerosols may have shipping restrictions and
                   may not be available for all shipping methods or international destinations.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Large or Heavy Items</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Large or Heavy Items</h3>
+                <p className="text-border-dark">
                   Oversized or heavy items may incur additional shipping charges. These charges will be displayed
                   at checkout before you complete your order.
                 </p>
@@ -303,21 +303,21 @@ export default function ShippingPolicyPage() {
 
           {/* Tracking Your Order */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <MapPin className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <MapPin className="w-6 h-6 text-primary" />
               Tracking Your Order
             </h2>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand p-6 space-y-4">
-              <p className="text-warm-gray-dark">
+            <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
+              <p className="text-border-dark">
                 Once your order ships, you will receive an email with tracking information. You can track your order by:
               </p>
-              <ul className="list-disc pl-6 text-warm-gray-dark space-y-2">
+              <ul className="list-disc pl-6 text-border-dark space-y-2">
                 <li>Clicking the tracking link in your shipping confirmation email</li>
                 <li>Logging into your account and viewing your order history</li>
                 <li>Entering your tracking number on the carrier&apos;s website</li>
               </ul>
-              <p className="text-warm-gray-dark">
+              <p className="text-border-dark">
                 Please allow up to 24 hours for tracking information to become active after receiving your
                 shipping confirmation.
               </p>
@@ -326,15 +326,15 @@ export default function ShippingPolicyPage() {
 
           {/* Delivery Issues */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <Package className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <Package className="w-6 h-6 text-primary" />
               Delivery Issues
             </h2>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand p-6 space-y-6">
+            <div className="bg-white border border-border-light rounded-brand p-6 space-y-6">
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Lost or Stolen Packages</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Lost or Stolen Packages</h3>
+                <p className="text-border-dark">
                   If your package is marked as delivered but you haven&apos;t received it, please check with neighbors
                   and any secure locations at your address. If you still can&apos;t locate your package, contact us
                   within 7 days of the delivery date and we will work with the carrier to resolve the issue.
@@ -342,16 +342,16 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Damaged Packages</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Damaged Packages</h3>
+                <p className="text-border-dark">
                   If your order arrives damaged, please take photos of the packaging and products, then contact
                   our customer service team within 48 hours. We will arrange for a replacement or refund.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Incorrect Address</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Incorrect Address</h3>
+                <p className="text-border-dark">
                   Please ensure your shipping address is correct before placing your order. If you need to change
                   the address after placing an order, contact us immediately. Once the order has shipped, we cannot
                   guarantee address changes.
@@ -359,8 +359,8 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-charcoal mb-2">Delayed Shipments</h3>
-                <p className="text-warm-gray-dark">
+                <h3 className="font-medium text-text-primary mb-2">Delayed Shipments</h3>
+                <p className="text-border-dark">
                   Occasionally, shipments may be delayed due to weather, carrier issues, or customs processing.
                   If your order is significantly delayed, please contact our customer service team for assistance.
                 </p>
@@ -370,48 +370,48 @@ export default function ShippingPolicyPage() {
 
           {/* Holiday Shipping */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6 flex items-center gap-3">
-              <Calendar className="w-6 h-6 text-gold" />
+            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+              <Calendar className="w-6 h-6 text-primary" />
               Holiday Shipping Deadlines
             </h2>
 
-            <div className="bg-white border border-warm-gray-light rounded-brand p-6">
-              <p className="text-warm-gray-dark mb-4">
+            <div className="bg-white border border-border-light rounded-brand p-6">
+              <p className="text-border-dark mb-4">
                 To ensure your gifts arrive on time for the holidays, please order by the following dates:
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-linen">
+                  <thead className="bg-surface">
                     <tr>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-charcoal">Holiday</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-charcoal">Standard</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-charcoal">Express</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-charcoal">Next Day</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Holiday</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Standard</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Express</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Next Day</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-warm-gray-light">
+                  <tbody className="divide-y divide-border-light">
                     <tr>
-                      <td className="px-4 py-3 font-medium text-charcoal">Christmas</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">Dec 14</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">Dec 20</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">Dec 23</td>
+                      <td className="px-4 py-3 font-medium text-text-primary">Christmas</td>
+                      <td className="px-4 py-3 text-border-dark">Dec 14</td>
+                      <td className="px-4 py-3 text-border-dark">Dec 20</td>
+                      <td className="px-4 py-3 text-border-dark">Dec 23</td>
                     </tr>
-                    <tr className="bg-linen/50">
-                      <td className="px-4 py-3 font-medium text-charcoal">Valentine&apos;s Day</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">Feb 7</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">Feb 11</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">Feb 13</td>
+                    <tr className="bg-surface/50">
+                      <td className="px-4 py-3 font-medium text-text-primary">Valentine&apos;s Day</td>
+                      <td className="px-4 py-3 text-border-dark">Feb 7</td>
+                      <td className="px-4 py-3 text-border-dark">Feb 11</td>
+                      <td className="px-4 py-3 text-border-dark">Feb 13</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-3 font-medium text-charcoal">Mother&apos;s Day</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">May 3</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">May 8</td>
-                      <td className="px-4 py-3 text-warm-gray-dark">May 10</td>
+                      <td className="px-4 py-3 font-medium text-text-primary">Mother&apos;s Day</td>
+                      <td className="px-4 py-3 text-border-dark">May 3</td>
+                      <td className="px-4 py-3 text-border-dark">May 8</td>
+                      <td className="px-4 py-3 text-border-dark">May 10</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <p className="text-sm text-warm-gray-dark mt-4">
+              <p className="text-sm text-border-dark mt-4">
                 * Dates are subject to change. Check our website for current holiday deadlines.
               </p>
             </div>
@@ -419,19 +419,19 @@ export default function ShippingPolicyPage() {
 
           {/* Contact */}
           <section>
-            <h2 className="font-serif text-2xl text-charcoal mb-6">Questions?</h2>
-            <div className="bg-linen rounded-brand p-6">
-              <p className="text-warm-gray-dark mb-4">
+            <h2 className="font-serif text-2xl text-text-primary mb-6">Questions?</h2>
+            <div className="bg-surface rounded-brand p-6">
+              <p className="text-border-dark mb-4">
                 If you have any questions about shipping or need help with an order, our customer service team is here to help.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/contact" className="inline-flex items-center gap-2 text-gold hover:underline">
+                <Link href="/contact" className="inline-flex items-center gap-2 text-primary hover:underline">
                   Contact Us
                 </Link>
-                <a href="mailto:shipping@lumina.com" className="inline-flex items-center gap-2 text-gold hover:underline">
+                <a href="mailto:shipping@lumina.com" className="inline-flex items-center gap-2 text-primary hover:underline">
                   shipping@lumina.com
                 </a>
-                <a href="tel:1-800-LUMINA" className="inline-flex items-center gap-2 text-gold hover:underline">
+                <a href="tel:1-800-LUMINA" className="inline-flex items-center gap-2 text-primary hover:underline">
                   1-800-LUMINA
                 </a>
               </div>
@@ -439,16 +439,16 @@ export default function ShippingPolicyPage() {
           </section>
 
           {/* Related Links */}
-          <div className="p-6 bg-white border border-warm-gray-light rounded-brand">
-            <h3 className="font-serif text-lg text-charcoal mb-4">Related Policies</h3>
+          <div className="p-6 bg-white border border-border-light rounded-brand">
+            <h3 className="font-serif text-lg text-text-primary mb-4">Related Policies</h3>
             <div className="flex flex-wrap gap-4">
-              <Link href="/return-policy" className="inline-flex items-center gap-2 text-gold hover:underline">
+              <Link href="/return-policy" className="inline-flex items-center gap-2 text-primary hover:underline">
                 Return Policy
               </Link>
-              <Link href="/terms" className="inline-flex items-center gap-2 text-gold hover:underline">
+              <Link href="/terms" className="inline-flex items-center gap-2 text-primary hover:underline">
                 Terms of Service
               </Link>
-              <Link href="/privacy" className="inline-flex items-center gap-2 text-gold hover:underline">
+              <Link href="/privacy" className="inline-flex items-center gap-2 text-primary hover:underline">
                 Privacy Policy
               </Link>
             </div>

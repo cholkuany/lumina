@@ -18,11 +18,11 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
   const { updateQuantity, removeItem } = useCart()
 
   return (
-    <div className="flex gap-4 py-4 border-b border-warm-gray-light last:border-0">
+    <div className="flex gap-4 py-4 border-b border-border-light last:border-0">
       {/* Image */}
       <Link
         href={`/products/${item.product.id}`}
-        className="relative w-20 h-20 shrink-0 bg-linen rounded-lg overflow-hidden"
+        className="relative w-20 h-20 shrink-0 bg-surface rounded-lg overflow-hidden"
       >
         <Image
           src={item.product.variant.images[0].secure_url}
@@ -35,14 +35,14 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
       {/* Details */}
       <div className="flex-1 min-w-0">
         <Link href={`/products/${item.product.id}`}>
-          <h4 className="font-medium text-charcoal text-sm leading-tight mb-1 hover:text-gold transition-colors line-clamp-2">
+          <h4 className="font-medium text-text-primary text-sm leading-tight mb-1 hover:text-primary transition-colors line-clamp-2">
             {item.product.name}
           </h4>
         </Link>
 
         {/* Variants */}
         {item.product.variant.attributes && Object.keys(item.product.variant.attributes).length > 0 && (
-          <p className="text-xs text-warm-gray-dark mb-2">
+          <p className="text-xs text-border-dark mb-2">
             {Object.entries(item.product.variant.attributes)
               .map(([key, value]) => `${key}: ${value}`)
               .join(' / ')}
@@ -58,15 +58,15 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
               stock={item.product.variant.stock}
             />
           ) : (
-            <span className="text-sm text-warm-gray-dark">Qty: {item.quantity}</span>
+            <span className="text-sm text-border-dark">Qty: {item.quantity}</span>
           )}
 
           <div className="text-right">
-            <p className="font-semibold text-charcoal">
+            <p className="font-semibold text-text-primary">
               {formatPrice(item.product.variant.price * item.quantity)}
             </p>
             {item.quantity > 1 && (
-              <p className="text-xs text-warm-gray-dark">
+              <p className="text-xs text-border-dark">
                 {formatPrice(item.product.variant.price)} each
               </p>
             )}
@@ -78,7 +78,7 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
       {showControls && (
         <button
           onClick={() => removeItem(item.id)}
-          className="p-1 text-warm-gray-dark hover:text-red-500 transition-colors self-start"
+          className="p-1 text-border-dark hover:text-red-500 transition-colors self-start"
         >
           <Trash2 className="w-4 h-4" />
         </button>

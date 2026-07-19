@@ -13,8 +13,8 @@ export function BasicFields({
   errors,
 }: BasicFieldsProps) {
   return (
-    <div className="bg-white rounded-brand border border-warm-gray p-6 space-y-5">
-      <h2 className="text-lg font-medium text-charcoal">Product Details</h2>
+    <div className="bg-white rounded-brand border border-border p-6 space-y-5">
+      <h2 className="text-lg font-medium text-text-primary">Product Details</h2>
 
       <FormInput
         label="Product Name"

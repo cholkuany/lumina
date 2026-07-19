@@ -28,15 +28,15 @@ export function SortDropdown({ options, value, onChange }: SortDropdownProps) {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 text-sm text-charcoal hover:text-gold transition-colors"
+        className="flex items-center gap-2 text-sm text-text-primary hover:text-primary transition-colors"
       >
-        <span className="text-warm-gray-dark">Sort by:</span>
+        <span className="text-border-dark">Sort by:</span>
         <span className="font-medium">{selectedOption?.label}</span>
         <ChevronDown className={cn('w-4 h-4 transition-transform', isOpen && 'rotate-180')} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-warm-gray-light rounded-brand shadow-hover z-20">
+        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-border-light rounded-brand shadow-hover z-20">
           {options.map((option) => (
             <button
               key={option.value}
@@ -47,8 +47,8 @@ export function SortDropdown({ options, value, onChange }: SortDropdownProps) {
               className={cn(
                 'flex items-center justify-between w-full px-4 py-2.5 text-sm transition-colors',
                 option.value === value
-                  ? 'text-gold bg-linen'
-                  : 'text-charcoal hover:bg-linen'
+                  ? 'text-primary bg-surface'
+                  : 'text-text-primary hover:bg-surface'
               )}
             >
               {option.label}

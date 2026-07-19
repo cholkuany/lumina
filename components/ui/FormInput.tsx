@@ -21,29 +21,29 @@ const FormInput = ({ label, error, hint, className, id, optional = true, ...prop
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-charcoal capitalize"
+          className="block text-sm font-medium text-text-primary capitalize"
         >
           {label}
-          {!optional && <span className="text-gold ml-1">*</span>}
+          {!optional && <span className="text-primary ml-1">*</span>}
         </label>
       )}
       <input
         id={inputId}
         className={cn(
           'w-full px-4 py-3 rounded-brand',
-          'bg-white border border-warm-gray',
-          'text-charcoal placeholder:text-warm-gray-dark',
+          'bg-white border border-border',
+          'text-text-primary placeholder:text-border-dark',
           'transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold',
-          'hover:border-warm-gray-dark',
-          'disabled:bg-linen disabled:cursor-not-allowed disabled:opacity-60',
+          'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
+          'hover:border-border-dark',
+          'disabled:bg-surface disabled:cursor-not-allowed disabled:opacity-60',
           error && 'border-red-400 focus:ring-red-400/30 focus:border-red-400',
           className
         )}
         {...props}
       />
       {hint && !error && (
-        <p className="text-xs text-warm-gray-dark">{hint}</p>
+        <p className="text-xs text-border-dark">{hint}</p>
       )}
       {error && (
         <div className="text-xs text-red-500 flex items-center gap-1">

@@ -25,10 +25,10 @@ const FormTextarea =
         {label && (
           <label
             htmlFor={textareaId}
-            className="block text-sm font-medium text-charcoal"
+            className="block text-sm font-medium text-text-primary"
           >
             {label}
-            {!optional && <span className="text-gold ml-1">*</span>}
+            {!optional && <span className="text-primary ml-1">*</span>}
           </label>
         )}
         <textarea
@@ -38,12 +38,12 @@ const FormTextarea =
           maxLength={maxLength}
           className={cn(
             'w-full px-4 py-3 rounded-brand',
-            'bg-white border border-warm-gray',
-            'text-charcoal placeholder:text-warm-gray-dark',
+            'bg-white border border-border',
+            'text-text-primary placeholder:text-border-dark',
             'transition-all duration-200',
-            'focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold',
-            'hover:border-warm-gray-dark',
-            'disabled:bg-linen disabled:cursor-not-allowed disabled:opacity-60',
+            'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
+            'hover:border-border-dark',
+            'disabled:bg-surface disabled:cursor-not-allowed disabled:opacity-60',
             'resize-none',
             error && 'border-red-400 focus:ring-red-400/30 focus:border-red-400',
             className
@@ -53,7 +53,7 @@ const FormTextarea =
         <div className="flex justify-between items-center">
           <div>
             {hint && !error && (
-              <p className="text-xs text-warm-gray-dark">{hint}</p>
+              <p className="text-xs text-border-dark">{hint}</p>
             )}
             {error && (
               <div className="text-xs text-red-500 flex items-center gap-1">
@@ -68,7 +68,7 @@ const FormTextarea =
                 'text-xs',
                 currentLength > maxLength * 0.9
                   ? 'text-red-500'
-                  : 'text-warm-gray-dark'
+                  : 'text-border-dark'
               )}
             >
               {currentLength}/{maxLength}

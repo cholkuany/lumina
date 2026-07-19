@@ -43,26 +43,26 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div
-        className="absolute inset-0 bg-charcoal/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-text-primary/50 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      <div className="relative bg-ivory rounded-brand shadow-xl w-full max-w-md p-6">
+      <div className="relative bg-background rounded-brand shadow-xl w-full max-w-md p-6">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-warm-gray-dark 
-                     hover:text-charcoal hover:bg-linen transition-colors"
+          className="absolute top-4 right-4 p-1.5 rounded-lg text-border-dark 
+                     hover:text-text-primary hover:bg-surface transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
 
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-charcoal">Change Role</h2>
-          <p className="text-sm text-warm-gray-dark mt-0.5">
+          <h2 className="text-lg font-semibold text-text-primary">Change Role</h2>
+          <p className="text-sm text-border-dark mt-0.5">
             Updating role for{" "}
-            <span className="font-medium text-charcoal">{user.name}</span>
+            <span className="font-medium text-text-primary">{user.name}</span>
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                 aria-disabled="true"
                 className={cn(
                   "relative w-full p-4 rounded-lg border-2 select-none",
-                  "border-dashed border-warm-gray bg-linen/60 opacity-60",
+                  "border-dashed border-border bg-surface/60 opacity-60",
                   "cursor-not-allowed"
                 )}
               >
@@ -91,7 +91,7 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                     "text-[10px] font-semibold uppercase tracking-wide",
                     role.value === "admin"
                       ? "bg-purple-100 text-purple-500"
-                      : "bg-warm-gray-light text-warm-gray-dark"
+                      : "bg-border-light text-border-dark"
                   )}
                 >
                   <LockKeyhole className="w-2.5 h-2.5" />
@@ -100,10 +100,10 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
 
                 <div className="flex items-center justify-between pr-16">
                   <div>
-                    <p className="font-medium text-sm text-charcoal/50">
+                    <p className="font-medium text-sm text-text-primary/50">
                       {role.label}
                     </p>
-                    <p className="text-xs text-warm-gray-dark/70 mt-0.5">
+                    <p className="text-xs text-border-dark/70 mt-0.5">
                       {role.description}
                     </p>
                   </div>
@@ -112,10 +112,10 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                     className={cn(
                       "w-4 h-4 rounded-full border-2 flex items-center",
                       "justify-center shrink-0 ml-3",
-                      "border-warm-gray bg-warm-gray"
+                      "border-border bg-border"
                     )}
                   >
-                    <div className="w-1.5 h-1.5 rounded-full bg-ivory" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-background" />
                   </div>
                 </div>
               </div>
@@ -126,12 +126,12 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                 onClick={() => setSelectedRole(role.value)}
                 className={cn(
                   "w-full text-left p-4 rounded-lg border-2 transition-all duration-150",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-gold/50",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
                   isSelected
                     ? role.value === "admin"
                       ? "border-purple-400 bg-purple-50 shadow-sm"
-                      : "border-gold bg-linen shadow-sm"
-                    : "border-warm-gray bg-white hover:border-warm-gray-dark hover:bg-linen/40"
+                      : "border-primary bg-surface shadow-sm"
+                    : "border-border bg-white hover:border-border-dark hover:bg-surface/40"
                 )}
               >
                 <div className="flex items-center justify-between">
@@ -142,13 +142,13 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                         isSelected
                           ? role.value === "admin"
                             ? "text-purple-700"
-                            : "text-charcoal"
-                          : "text-charcoal"
+                            : "text-text-primary"
+                          : "text-text-primary"
                       )}
                     >
                       {role.label}
                     </p>
-                    <p className="text-xs text-warm-gray-dark mt-0.5">
+                    <p className="text-xs text-border-dark mt-0.5">
                       {role.description}
                     </p>
                   </div>
@@ -161,8 +161,8 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                       isSelected
                         ? role.value === "admin"
                           ? "border-purple-500 bg-purple-500"
-                          : "border-gold bg-gold"
-                        : "border-warm-gray-dark bg-white"
+                          : "border-primary bg-primary"
+                        : "border-border-dark bg-white"
                     )}
                   >
                     {isSelected && (
@@ -176,15 +176,15 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
         </div>
 
         {/* Helper text */}
-        <p className="text-xs text-warm-gray-dark text-center mb-5">
+        <p className="text-xs text-border-dark text-center mb-5">
           {canSave ? (
             <>
               Changing role from{" "}
-              <span className="font-medium text-charcoal capitalize">
+              <span className="font-medium text-text-primary capitalize">
                 {currentRole === "user" ? "Customer" : currentRole}
               </span>{" "}
               →{" "}
-              <span className="font-medium text-charcoal capitalize">
+              <span className="font-medium text-text-primary capitalize">
                 {selectedRole === "user" ? "Customer" : selectedRole}
               </span>
             </>

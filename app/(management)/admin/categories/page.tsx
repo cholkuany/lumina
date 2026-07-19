@@ -142,8 +142,8 @@ export default function CategoriesPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-charcoal">Categories</h1>
-          <p className="text-warm-gray-dark mt-1">
+          <h1 className="text-2xl font-semibold text-text-primary">Categories</h1>
+          <p className="text-border-dark mt-1">
             Products categories
           </p>
         </div>
@@ -158,19 +158,19 @@ export default function CategoriesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-white rounded-brand border border-warm-gray p-4">
-          <p className="text-2xl font-semibold text-charcoal">{categoryMap.size}</p>
-          <p className="text-sm text-warm-gray-dark">Total Categories</p>
+        <div className="bg-white rounded-brand border border-border p-4">
+          <p className="text-2xl font-semibold text-text-primary">{categoryMap.size}</p>
+          <p className="text-sm text-border-dark">Total Categories</p>
         </div>
-        <div className="bg-white rounded-brand border border-warm-gray p-4">
-          <p className="text-2xl font-semibold text-charcoal">{stats.root}</p>
-          <p className="text-sm text-warm-gray-dark">Root Categories</p>
+        <div className="bg-white rounded-brand border border-border p-4">
+          <p className="text-2xl font-semibold text-text-primary">{stats.root}</p>
+          <p className="text-sm text-border-dark">Root Categories</p>
         </div>
-        <div className="bg-white rounded-brand border border-warm-gray p-4">
-          <p className="text-2xl font-semibold text-charcoal">
+        <div className="bg-white rounded-brand border border-border p-4">
+          <p className="text-2xl font-semibold text-text-primary">
             {categoryMap.size - stats.root}
           </p>
-          <p className="text-sm text-warm-gray-dark">Subcategories</p>
+          <p className="text-sm text-border-dark">Subcategories</p>
         </div>
       </div>
 
@@ -183,19 +183,19 @@ export default function CategoriesPage() {
             onSearchChange={setSearchQuery}
           />
         </div>
-        <label className="flex items-center gap-2 px-4 py-2 bg-white rounded-brand border border-warm-gray cursor-pointer">
+        <label className="flex items-center gap-2 px-4 py-2 bg-white rounded-brand border border-border cursor-pointer">
           <input
             type="checkbox"
             checked={showInactive}
             onChange={(e) => setShowInactive(e.target.checked)}
-            className="w-4 h-4 rounded border-warm-gray text-gold focus:ring-gold/30"
+            className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30"
           />
-          <span className="text-sm text-charcoal">Show inactive</span>
+          <span className="text-sm text-text-primary">Show inactive</span>
         </label>
       </div>
 
       {/* Category Tree */}
-      <div className="bg-white rounded-brand border border-warm-gray p-4">
+      <div className="bg-white rounded-brand border border-border p-4">
         <CategoryTree
           categories={filteredCategories}
           onEdit={(category) => setModal({ type: 'edit', category })}

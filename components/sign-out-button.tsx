@@ -19,7 +19,7 @@ export function SignOutButton({ closeMenu }: { closeMenu?: () => void }) {
   };
 
   return (
-    <div className="p-2 border-t border-warm-gray-light">
+    <div className="p-2 border-t border-border-light">
       <button
         onClick={handleSignOut}
         disabled={isLoading}

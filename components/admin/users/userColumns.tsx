@@ -18,9 +18,9 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
         cell: ({ row }) => (
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center shrink-0"
+              className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0"
             >
-              <span className="text-gold font-semibold text-sm">
+              <span className="text-primary font-semibold text-sm">
                 {row.original.name
                   .split(" ")
                   .map((n) => n[0])
@@ -29,8 +29,8 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
               </span>
             </div>
             <div className="min-w-0">
-              <p className="font-medium text-charcoal truncate">{row.original.name}</p>
-              <p className="text-xs text-warm-gray-dark truncate">{row.original.email}</p>
+              <p className="font-medium text-text-primary truncate">{row.original.name}</p>
+              <p className="text-xs text-border-dark truncate">{row.original.email}</p>
             </div>
           </div>
         ),
@@ -51,7 +51,7 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
               "transition-all hover:ring-2 hover:ring-offset-1 cursor-pointer",
               row.original.role === "admin"
                 ? "bg-purple-100 text-purple-700 hover:ring-purple-300"
-                : "bg-linen text-charcoal hover:ring-warm-gray"
+                : "bg-surface text-text-primary hover:ring-border"
             )}
           >
             {row.original.role}
@@ -73,8 +73,8 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
             className={cn(
               "text-xs",
               (row.original).subscribeNewsletter
-                ? "text-green-600 font-medium"
-                : "text-warm-gray-dark"
+                ? "text-success-600 font-medium"
+                : "text-border-dark"
             )}
           >
             {(row.original).subscribeNewsletter ? "Subscribed" : "—"}
@@ -85,7 +85,7 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
         accessorkey: "createdAt",
         header: "Joined",
         cell: ({ row }) => (
-          <span className="text-warm-gray-dark text-sm">
+          <span className="text-border-dark text-sm">
             {new Date(row.original.createdAt).toLocaleDateString()}
           </span>
         ),

@@ -116,36 +116,36 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div className="absolute inset-0 bg-charcoal/50 backdrop-blur-sm" onClick={onClose} />
+        <div className="absolute inset-0 bg-text-primary/50 backdrop-blur-sm" onClick={onClose} />
 
-        <div className="relative bg-ivory rounded-brand shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div className="relative bg-background rounded-brand shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
           {/* ── Sticky Header ── */}
-          <div className="sticky top-0 bg-ivory border-b border-warm-gray px-6 pt-6 pb-0 z-10">
+          <div className="sticky top-0 bg-background border-b border-border px-6 pt-6 pb-0 z-10">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 text-warm-gray-dark
-                         hover:text-charcoal hover:bg-linen rounded-lg transition-colors"
+              className="absolute top-4 right-4 p-2 text-border-dark
+                         hover:text-text-primary hover:bg-surface rounded-lg transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-start gap-4 mb-5">
-              <div className="w-16 h-16 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center shrink-0">
-                <span className="text-gold font-semibold text-xl">{initials}</span>
+              <div className="w-16 h-16 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center shrink-0">
+                <span className="text-primary font-semibold text-xl">{initials}</span>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="text-xl font-semibold text-charcoal">{user.name}</h2>
+                  <h2 className="text-xl font-semibold text-text-primary">{user.name}</h2>
                   <span className={cn(
                     "px-2 py-0.5 text-xs font-medium rounded-full capitalize border",
                     user.role === "admin"
-                      ? "bg-gold/15 text-gold-dark border-gold/30"
-                      : "bg-linen text-warm-gray-dark border-warm-gray"
+                      ? "bg-primary/15 text-primary-dark border-primary/30"
+                      : "bg-surface text-border-dark border-border"
                   )}>
                     {user.role}
                   </span>
                 </div>
-                <p className="text-warm-gray-dark text-sm truncate mt-0.5">{user.email}</p>
+                <p className="text-border-dark text-sm truncate mt-0.5">{user.email}</p>
                 <div className="mt-1.5">
                   <StatusBadge status={isBanned ? "suspended" : "active"} size="sm" />
                 </div>
@@ -160,8 +160,8 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                   className={cn(
                     "px-4 py-2 text-sm font-medium border-b-2 transition-colors",
                     activeTab === tab.key
-                      ? "border-gold text-gold"
-                      : "border-transparent text-warm-gray-dark hover:text-charcoal"
+                      ? "border-primary text-primary"
+                      : "border-transparent text-border-dark hover:text-text-primary"
                   )}
                 >
                   {tab.label}
@@ -175,7 +175,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
             {activeTab === "overview" && (
               <div className="space-y-5">
                 {/* Details */}
-                <div className="divide-y divide-warm-gray-light">
+                <div className="divide-y divide-border-light">
                   <DetailRow label="User ID" value={user.id} mono />
                   <DetailRow label="Email Verified" value={user.emailVerified ? "Yes" : "No"} />
                   <DetailRow label="Joined" value={new Date(user.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })} />
@@ -187,7 +187,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
 
                 {/* Quick Actions */}
                 <div>
-                  <p className="text-xs font-medium text-warm-gray-dark uppercase tracking-wider mb-3">
+                  <p className="text-xs font-medium text-border-dark uppercase tracking-wider mb-3">
                     Quick Actions
                   </p>
                   <div className="grid grid-cols-2 gap-2">
@@ -202,7 +202,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                       onClick={toggleEmailForm}
                       className={cn(
                         "text-sm transition-colors",
-                        showEmailForm && "bg-gold/10 border-gold/40 text-gold-dark"
+                        showEmailForm && "bg-primary/10 border-primary/40 text-primary-dark"
                       )}
                     >
                       <Mail className="w-4 h-4 mr-2" />
@@ -213,20 +213,20 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
 
                 {/* ── Inline Email Form ── */}
                 {showEmailForm && (
-                  <div className="rounded-brand border border-warm-gray bg-white overflow-hidden">
+                  <div className="rounded-brand border border-border bg-white overflow-hidden">
 
                     {/* Form header */}
-                    <div className="flex items-center justify-between px-4 py-3 bg-linen/60 border-b border-warm-gray">
+                    <div className="flex items-center justify-between px-4 py-3 bg-surface/60 border-b border-border">
                       <div>
-                        <p className="text-sm font-medium text-charcoal">New Message</p>
-                        <p className="text-xs text-warm-gray-dark mt-0.5">
+                        <p className="text-sm font-medium text-text-primary">New Message</p>
+                        <p className="text-xs text-border-dark mt-0.5">
                           To:{" "}
-                          <span className="text-charcoal">{user.email}</span>
+                          <span className="text-text-primary">{user.email}</span>
                         </p>
                       </div>
                       {/* Envelope decoration */}
-                      <div className="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center">
-                        <Mail className="w-4 h-4 text-gold" />
+                      <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Mail className="w-4 h-4 text-primary" />
                       </div>
                     </div>
 
@@ -234,7 +234,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
 
                       {/* Quick-fill templates */}
                       <div>
-                        <p className="text-xs font-medium text-warm-gray-dark uppercase tracking-wider mb-2">
+                        <p className="text-xs font-medium text-border-dark uppercase tracking-wider mb-2">
                           Templates
                         </p>
                         <div className="flex flex-wrap gap-1.5">
@@ -249,8 +249,8 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                               className={cn(
                                 "text-xs px-2.5 py-1 rounded-full border transition-colors",
                                 emailForm.subject === t.subject
-                                  ? "bg-gold/15 border-gold/50 text-gold-dark font-medium"
-                                  : "border-warm-gray text-warm-gray-dark hover:border-gold/40 hover:text-charcoal bg-ivory"
+                                  ? "bg-primary/15 border-primary/50 text-primary-dark font-medium"
+                                  : "border-border text-border-dark hover:border-primary/40 hover:text-text-primary bg-background"
                               )}
                             >
                               {t.label}
@@ -261,8 +261,8 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
 
                       {/* Subject */}
                       <div>
-                        <label className="text-xs font-medium text-warm-gray-dark block mb-1.5">
-                          Subject <span className="text-gold">*</span>
+                        <label className="text-xs font-medium text-border-dark block mb-1.5">
+                          Subject <span className="text-primary">*</span>
                         </label>
                         <input
                           type="text"
@@ -271,10 +271,10 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                             setEmailForm((f) => ({ ...f, subject: e.target.value }))
                           }
                           placeholder="Email subject…"
-                          className="w-full text-sm border border-warm-gray rounded-lg
-                           bg-ivory px-3 py-2 text-charcoal
-                           placeholder:text-warm-gray-dark
-                           focus:outline-none focus:border-gold
+                          className="w-full text-sm border border-border rounded-lg
+                           bg-background px-3 py-2 text-text-primary
+                           placeholder:text-border-dark
+                           focus:outline-none focus:border-primary
                            transition-colors"
                         />
                       </div>
@@ -282,10 +282,10 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                       {/* Message */}
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
-                          <label className="text-xs font-medium text-warm-gray-dark">
-                            Message <span className="text-gold">*</span>
+                          <label className="text-xs font-medium text-border-dark">
+                            Message <span className="text-primary">*</span>
                           </label>
-                          <span className="text-xs text-warm-gray-dark">
+                          <span className="text-xs text-border-dark">
                             {emailForm.message.length} chars
                           </span>
                         </div>
@@ -296,14 +296,14 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                             setEmailForm((f) => ({ ...f, message: e.target.value }))
                           }
                           placeholder={`Hi ${user.name.split(" ")[0]}, …`}
-                          className="w-full text-sm border border-warm-gray rounded-lg
-                           bg-ivory px-3 py-2.5 resize-none text-charcoal
-                           leading-relaxed placeholder:text-warm-gray-dark
-                           focus:outline-none focus:border-gold
+                          className="w-full text-sm border border-border rounded-lg
+                           bg-background px-3 py-2.5 resize-none text-text-primary
+                           leading-relaxed placeholder:text-border-dark
+                           focus:outline-none focus:border-primary
                            transition-colors"
                         />
                         {/* Preview hint */}
-                        <p className="text-xs text-warm-gray-dark mt-1.5 flex items-center gap-1">
+                        <p className="text-xs text-border-dark mt-1.5 flex items-center gap-1">
                           <Info className="w-3 h-3 shrink-0" />
                           Line breaks are preserved in the email. No formatting needed.
                         </p>
@@ -331,10 +331,10 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                           "w-full flex items-center justify-center gap-2",
                           "text-sm font-medium py-2.5 rounded-lg transition-all duration-200",
                           emailStatus === "sent"
-                            ? "bg-charcoal/10 text-charcoal cursor-default"
+                            ? "bg-text-primary/10 text-text-primary cursor-default"
                             : canSendEmail
-                              ? "bg-gold text-ivory hover:bg-gold-dark shadow-sm hover:shadow"
-                              : "bg-warm-gray-light text-warm-gray-dark cursor-not-allowed"
+                              ? "bg-primary text-background hover:bg-primary-dark shadow-sm hover:shadow"
+                              : "bg-border-light text-border-dark cursor-not-allowed"
                         )}
                       >
                         {emailStatus === "sending" && (
@@ -360,34 +360,34 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
             {/* Security tab — unchanged */}
             {activeTab === "security" && (
               <div className="space-y-3">
-                <div className="rounded-brand border border-warm-gray overflow-hidden bg-white">
+                <div className="rounded-brand border border-border overflow-hidden bg-white">
                   {/* Revoke Sessions */}
                   <div className="p-4 flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-sm font-medium text-charcoal">Active Sessions</p>
-                      <p className="text-xs text-warm-gray-dark mt-0.5">
+                      <p className="text-sm font-medium text-text-primary">Active Sessions</p>
+                      <p className="text-xs text-border-dark mt-0.5">
                         Force the user to log out from all devices immediately.
                       </p>
                     </div>
                     <button
                       onClick={() => revokeSessions.mutate({ userId: user.id })}
                       disabled={revokeSessions.isPending}
-                      className="shrink-0 text-sm font-medium text-gold-dark hover:text-gold-dark/80 disabled:opacity-50 transition-colors border border-warm-gray hover:border-gold/40 hover:bg-linen px-3 py-1.5 rounded-lg"
+                      className="shrink-0 text-sm font-medium text-primary-dark hover:text-primary-dark/80 disabled:opacity-50 transition-colors border border-border hover:border-primary/40 hover:bg-surface px-3 py-1.5 rounded-lg"
                     >
                       {revokeSessions.isPending ? "Revoking…" : "Revoke Sessions"}
                     </button>
                   </div>
 
-                  <div className="border-t border-warm-gray" />
+                  <div className="border-t border-border" />
 
                   {/* Ban / Unban */}
                   <div className="p-4">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-sm font-medium text-charcoal">
+                        <p className="text-sm font-medium text-text-primary">
                           {isBanned ? "Unban Account" : "Ban Account"}
                         </p>
-                        <p className="text-xs text-warm-gray-dark mt-0.5">
+                        <p className="text-xs text-border-dark mt-0.5">
                           {isBanned
                             ? "Restore access to this user's account."
                             : "Prevent this user from accessing their account."}
@@ -397,14 +397,14 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                         <button
                           onClick={handleUnban}
                           disabled={unban.isPending}
-                          className="shrink-0 text-sm font-medium text-charcoal hover:text-charcoal/80 disabled:opacity-50 transition-colors border border-warm-gray hover:border-charcoal/30 hover:bg-linen px-3 py-1.5 rounded-lg"
+                          className="shrink-0 text-sm font-medium text-text-primary hover:text-text-primary/80 disabled:opacity-50 transition-colors border border-border hover:border-text-primary/30 hover:bg-surface px-3 py-1.5 rounded-lg"
                         >
                           {unban.isPending ? "Unbanning…" : "Unban User"}
                         </button>
                       ) : (
                         <button
                           onClick={() => setShowBanConfirm(true)}
-                          className="shrink-0 text-sm font-medium text-gold hover:text-gold-dark transition-colors border border-gold/40 hover:border-gold/60 hover:bg-gold/5 px-3 py-1.5 rounded-lg"
+                          className="shrink-0 text-sm font-medium text-primary hover:text-primary-dark transition-colors border border-primary/40 hover:border-primary/60 hover:bg-primary/5 px-3 py-1.5 rounded-lg"
                         >
                           Ban User
                         </button>
@@ -413,27 +413,27 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
 
                     {showBanConfirm && !isBanned && (
                       <div className="mt-4 space-y-2">
-                        <label className="text-xs text-warm-gray-dark">
-                          Ban reason <span className="text-warm-gray">(optional)</span>
+                        <label className="text-xs text-border-dark">
+                          Ban reason <span className="text-border">(optional)</span>
                         </label>
                         <textarea
                           value={banReason}
                           onChange={(e) => setBanReason(e.target.value)}
                           placeholder="e.g. Violation of terms of service"
                           rows={2}
-                          className="w-full text-sm border border-warm-gray rounded-lg bg-ivory px-3 py-2 resize-none placeholder:text-warm-gray-dark focus:outline-none focus:border-gold transition-colors"
+                          className="w-full text-sm border border-border rounded-lg bg-background px-3 py-2 resize-none placeholder:text-border-dark focus:outline-none focus:border-primary transition-colors"
                         />
                         <div className="flex gap-2 pt-1">
                           <button
                             onClick={() => setShowBanConfirm(false)}
-                            className="flex-1 text-sm py-1.5 border border-warm-gray rounded-lg hover:bg-linen transition-colors text-charcoal"
+                            className="flex-1 text-sm py-1.5 border border-border rounded-lg hover:bg-surface transition-colors text-text-primary"
                           >
                             Cancel
                           </button>
                           <button
                             onClick={handleBan}
                             disabled={ban.isPending}
-                            className="flex-1 text-sm py-1.5 bg-gold text-ivory rounded-lg hover:bg-gold-dark disabled:opacity-50 transition-colors font-medium"
+                            className="flex-1 text-sm py-1.5 bg-primary text-background rounded-lg hover:bg-primary-dark disabled:opacity-50 transition-colors font-medium"
                           >
                             {ban.isPending ? "Banning…" : "Confirm Ban"}
                           </button>
@@ -442,13 +442,13 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                     )}
                   </div>
 
-                  <div className="border-t border-warm-gray" />
+                  <div className="border-t border-border" />
 
                   {/* Delete */}
                   <div className="p-4 flex items-start justify-between gap-4 bg-red-50/40">
                     <div>
                       <p className="text-sm font-medium text-red-600">Delete Account</p>
-                      <p className="text-xs text-warm-gray-dark mt-0.5">
+                      <p className="text-xs text-border-dark mt-0.5">
                         Permanently delete this user and all their data. Cannot be undone.
                       </p>
                     </div>
@@ -490,11 +490,11 @@ function DetailRow({ label, value, mono = false, highlight = false }: {
 }) {
   return (
     <div className="flex justify-between items-start py-2.5 gap-4">
-      <span className="text-sm text-warm-gray-dark shrink-0">{label}</span>
+      <span className="text-sm text-border-dark shrink-0">{label}</span>
       <span className={cn(
         "text-sm text-right break-all",
-        mono ? "font-mono text-xs text-warm-gray-dark" : "text-charcoal",
-        highlight && "text-gold font-medium"
+        mono ? "font-mono text-xs text-border-dark" : "text-text-primary",
+        highlight && "text-primary font-medium"
       )}>
         {value}
       </span>

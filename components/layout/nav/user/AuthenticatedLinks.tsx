@@ -11,7 +11,7 @@ export const AuthenticatedLinks = ({ setUserMenuOpen }: AuthenticatedLinksProps)
         key={item.name}
         href={item.href}
         onClick={() => setUserMenuOpen(false)}
-        className="flex items-center gap-3 px-3 py-2.5 text-sm text-charcoal hover:bg-linen hover:text-gold rounded-lg transition-colors"
+        className="flex items-center gap-3 px-3 py-2.5 text-sm text-text-primary hover:bg-surface hover:text-primary rounded-lg transition-colors"
       >
         <item.icon className="w-4 h-4" />
         {item.name}

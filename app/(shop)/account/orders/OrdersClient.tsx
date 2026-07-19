@@ -43,7 +43,7 @@ export function OrdersClient({ orders }: { orders: TOrder[] }) {
 
           <div className="lg:col-span-3">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <h1 className="font-serif text-2xl lg:text-3xl text-charcoal">
+              <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
                 My Orders
               </h1>
               <Select
@@ -61,12 +61,12 @@ export function OrdersClient({ orders }: { orders: TOrder[] }) {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-linen rounded-brand">
-                <Package className="w-16 h-16 text-warm-gray-dark mx-auto mb-4" />
-                <h2 className="font-serif text-xl text-charcoal mb-2">
+              <div className="text-center py-16 bg-surface rounded-brand">
+                <Package className="w-16 h-16 text-border-dark mx-auto mb-4" />
+                <h2 className="font-serif text-xl text-text-primary mb-2">
                   No orders found
                 </h2>
-                <p className="text-warm-gray-dark mb-6">
+                <p className="text-border-dark mb-6">
                   {filter === 'all'
                     ? "You haven't placed any orders yet."
                     : `No ${filter} orders found.`}

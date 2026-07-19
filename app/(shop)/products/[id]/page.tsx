@@ -44,8 +44,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               id: 'product-details',
               title: 'Product Details',
               content: (
-                <div className="prose prose-warm-gray max-w-none">
-                  <p className="text-warm-gray-dark leading-relaxed whitespace-pre-line">
+                <div className="prose prose-border max-w-none">
+                  <p className="text-border-dark leading-relaxed whitespace-pre-line">
                     {product.longDescription}
                   </p>
                 </div>
@@ -57,9 +57,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
               content: (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
                   {product.specifications && product.specifications.map((spec) => (
-                    <div key={spec.key} className="flex justify-between py-3 border-b border-warm-gray-light">
-                      <span className="text-warm-gray-dark">{spec.key}</span>
-                      <span className="font-medium text-charcoal">{spec.value}</span>
+                    <div key={spec.key} className="flex justify-between py-3 border-b border-border-light">
+                      <span className="text-border-dark">{spec.key}</span>
+                      <span className="font-medium text-text-primary">{spec.value}</span>
                     </div>
                   ))}
                 </div>

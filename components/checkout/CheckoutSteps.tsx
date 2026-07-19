@@ -23,10 +23,10 @@ export function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
                 className={cn(
                   'w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-colors',
                   currentStep > step.id
-                    ? 'bg-green-500 text-white'
+                    ? 'bg-success-500 text-white'
                     : currentStep === step.id
-                      ? 'bg-charcoal text-white'
-                      : 'bg-linen text-warm-gray-dark'
+                      ? 'bg-text-primary text-white'
+                      : 'bg-surface text-border-dark'
                 )}
               >
                 {currentStep > step.id ? (
@@ -38,7 +38,7 @@ export function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
               <span
                 className={cn(
                   'ml-3 text-sm font-medium hidden sm:block',
-                  currentStep >= step.id ? 'text-charcoal' : 'text-warm-gray-dark'
+                  currentStep >= step.id ? 'text-text-primary' : 'text-border-dark'
                 )}
               >
                 {step.name}
@@ -49,7 +49,7 @@ export function CheckoutSteps({ currentStep }: CheckoutStepsProps) {
               <div
                 className={cn(
                   'w-12 sm:w-24 h-0.5 mx-4',
-                  currentStep > step.id ? 'bg-green-500' : 'bg-warm-gray-light'
+                  currentStep > step.id ? 'bg-success-500' : 'bg-border-light'
                 )}
               />
             )}

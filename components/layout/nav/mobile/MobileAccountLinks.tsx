@@ -14,8 +14,8 @@ export const MobileAccountLinks = ({ user, setOpen }: MobileAccountLinksProps) =
   if (!user) return null
 
   return (
-    <div className="mt-6 pt-6 border-t border-warm-gray-light">
-      <p className="text-xs font-medium text-warm-gray-dark uppercase tracking-wider mb-3">
+    <div className="mt-6 pt-6 border-t border-border-light">
+      <p className="text-xs font-medium text-border-dark uppercase tracking-wider mb-3">
         My Account
       </p>
       {user &&
@@ -24,7 +24,7 @@ export const MobileAccountLinks = ({ user, setOpen }: MobileAccountLinksProps) =
             <Link
               key={item.name}
               href={item.href}
-              className="flex items-center gap-3 py-3 text-charcoal hover:text-gold transition-colors"
+              className="flex items-center gap-3 py-3 text-text-primary hover:text-primary transition-colors"
               onClick={() => setOpen(false)}
             >
               <item.icon className="w-5 h-5" />

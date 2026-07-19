@@ -154,7 +154,7 @@ export function buildEmailTemplate({
           <tr>
             <td style="background-color:#ffffff;border-radius:12px;border:1px solid #D6D0C7;overflow:hidden;">
 
-              <!-- Gold accent bar -->
+              <!-- primary accent bar -->
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="height:4px;background:linear-gradient(90deg,#B8956C,#D4B896);"></td>

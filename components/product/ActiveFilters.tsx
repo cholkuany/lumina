@@ -35,7 +35,7 @@ export default function ActiveFilters({
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
-      <span className="text-sm text-warm-gray-dark">
+      <span className="text-sm text-border-dark">
         Active filters:
       </span>
 
@@ -43,7 +43,7 @@ export default function ActiveFilters({
         <button
           key={`${group}-${value}`}
           onClick={() => onRemove(group, value)}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-linen text-sm text-charcoal rounded-full hover:bg-warm-gray-light transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-surface text-sm text-text-primary rounded-full hover:bg-border-light transition-colors"
         >
           {label}
           <X className="w-3 h-3" />
@@ -52,7 +52,7 @@ export default function ActiveFilters({
 
       <button
         onClick={onClearAll}
-        className="text-sm text-gold hover:underline"
+        className="text-sm text-primary hover:underline"
       >
         Clear all
       </button>

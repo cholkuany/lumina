@@ -26,8 +26,8 @@ export function RadioGroup({ name, options, value, onChange, className }: RadioG
           className={cn(
             'flex items-start gap-3 p-4 border rounded-brand cursor-pointer transition-all',
             value === option.value
-              ? 'border-gold bg-gold/5'
-              : 'border-warm-gray hover:border-gold/50'
+              ? 'border-primary bg-primary/5'
+              : 'border-border hover:border-primary/50'
           )}
         >
           <div className="relative mt-0.5">
@@ -42,18 +42,18 @@ export function RadioGroup({ name, options, value, onChange, className }: RadioG
             <div
               className={cn(
                 'w-5 h-5 rounded-full border-2 transition-all',
-                value === option.value ? 'border-gold' : 'border-warm-gray'
+                value === option.value ? 'border-primary' : 'border-border'
               )}
             >
               {value === option.value && (
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-gold rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-primary rounded-full" />
               )}
             </div>
           </div>
           <div className="flex-1">
-            <span className="text-sm font-medium text-charcoal">{option.label}</span>
+            <span className="text-sm font-medium text-text-primary">{option.label}</span>
             {option.description && (
-              <p className="text-xs text-warm-gray-dark mt-0.5">{option.description}</p>
+              <p className="text-xs text-border-dark mt-0.5">{option.description}</p>
             )}
           </div>
         </label>

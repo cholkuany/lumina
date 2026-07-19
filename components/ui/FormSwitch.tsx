@@ -23,11 +23,11 @@ const FormSwitch = forwardRef<HTMLInputElement, FormSwitchProps>(
         )}
       >
         <div className="flex-1">
-          <span className="block text-sm font-medium text-charcoal group-hover:text-gold transition-colors">
+          <span className="block text-sm font-medium text-text-primary group-hover:text-primary transition-colors">
             {label}
           </span>
           {description && (
-            <span className="block text-xs text-warm-gray-dark mt-0.5">
+            <span className="block text-xs text-border-dark mt-0.5">
               {description}
             </span>
           )}
@@ -43,9 +43,9 @@ const FormSwitch = forwardRef<HTMLInputElement, FormSwitchProps>(
           <div
             className={cn(
               'w-11 h-6 rounded-full',
-              'bg-warm-gray-light',
-              'peer-checked:bg-gold',
-              'peer-focus:ring-2 peer-focus:ring-gold/30',
+              'bg-border-light',
+              'peer-checked:bg-primary',
+              'peer-focus:ring-2 peer-focus:ring-primary/30',
               'transition-colors duration-200'
             )}
           />

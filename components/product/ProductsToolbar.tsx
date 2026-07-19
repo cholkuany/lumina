@@ -33,7 +33,7 @@ export default function ProductsToolbar({
   selectedFilters: Record<string, string[]>
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-warm-gray-light">
+    <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-border-light">
       {/* Mobile Filter Button */}
       <MobileFilterButton
         setMobileFiltersOpen={setMobileFiltersOpen}
@@ -42,12 +42,12 @@ export default function ProductsToolbar({
       />
 
       {/* View Mode Toggle */}
-      <div className="hidden sm:flex items-center gap-1 border border-warm-grayrounded-lg p-1">
+      <div className="hidden sm:flex items-center gap-1 border border-borderrounded-lg p-1">
         <button
           onClick={() => setViewMode('grid')}
           className={cn(
             'p-1.5 rounded transition-colors',
-            viewMode === 'grid' ? 'bg-charcoal text-white' : 'text-warm-gray-dark hover:text-charcoal'
+            viewMode === 'grid' ? 'bg-text-primary text-white' : 'text-border-dark hover:text-text-primary'
           )}
         >
           <Grid className="w-4 h-4" />
@@ -57,7 +57,7 @@ export default function ProductsToolbar({
           onClick={() => setViewMode('flex')}
           className={cn(
             'p-1.5 rounded transition-colors',
-            viewMode === 'flex' ? 'bg-charcoal text-white' : 'text-warm-gray-dark hover:text-charcoal'
+            viewMode === 'flex' ? 'bg-text-primary text-white' : 'text-border-dark hover:text-text-primary'
           )}
         >
           <LayoutList className="w-4 h-4" />

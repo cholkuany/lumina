@@ -49,7 +49,7 @@ export const CategoryFilter = ({
                   <span className="flex items-center justify-between w-full">
                     <span>{child.name}</span>
                     {child.productCount !== undefined && (
-                      <span className="text-warm-gray-dark text-xs">
+                      <span className="text-border-dark text-xs">
                         ({child.productCount})
                       </span>
                     )}

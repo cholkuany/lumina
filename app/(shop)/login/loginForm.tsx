@@ -67,12 +67,12 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
     <main className="min-h-screen flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
         {/* Form Card */}
-        <div className="bg-white border border-warm-gray-light rounded-brand p-8 shadow-soft">
+        <div className="bg-white border border-border-light rounded-brand p-8 shadow-soft">
           <div className="text-center mb-8">
-            <h1 className="font-serif text-2xl text-charcoal mb-2">
+            <h1 className="font-serif text-2xl text-text-primary mb-2">
               Welcome Back
             </h1>
-            <p className="text-warm-gray-dark">
+            <p className="text-border-dark">
               Sign in to your account to continue
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-gray-dark hover:text-charcoal transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary transition-colors"
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
@@ -130,7 +130,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
               />
               <Link
                 href="/forgot-password"
-                className="text-sm text-gold hover:underline"
+                className="text-sm text-primary hover:underline"
               >
                 Forgot password?
               </Link>
@@ -156,10 +156,10 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
           {/* Divider */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-warm-gray-light" />
+              <div className="w-full border-t border-border-light" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-warm-gray-dark">
+              <span className="px-4 bg-white text-border-dark">
                 Or continue with
               </span>
             </div>
@@ -169,11 +169,11 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
           <SocialLogins />
 
           {/* Sign Up Link */}
-          <p className="text-center text-sm text-warm-gray-dark mt-8">
+          <p className="text-center text-sm text-border-dark mt-8">
             Don&apos;t have an account?{' '}
             <Link
               href={`/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`}
-              className="text-gold font-medium hover:underline"
+              className="text-primary font-medium hover:underline"
             >
               Create one
             </Link>

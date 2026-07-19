@@ -148,12 +148,12 @@ export function ShareDropdown({
     {
       label: copied ? 'Copied!' : 'Copy Link',
       icon: copied ? (
-        <Check className="w-4 h-4 text-green-500" />
+        <Check className="w-4 h-4 text-success-500" />
       ) : (
         <Link2 className="w-4 h-4" />
       ),
       action: handleCopyLink,
-      className: copied ? 'text-green-600' : '',
+      className: copied ? 'text-success-600' : '',
     },
     {
       label: 'Twitter / X',
@@ -165,13 +165,13 @@ export function ShareDropdown({
       label: 'Facebook',
       icon: <FacebookIcon className="w-4 h-4 text-[#0866FF]" />,
       action: handleFacebookShare,
-      className: 'hover:text-blue-600',
+      className: 'hover:text-primary-600',
     },
     {
       label: 'WhatsApp',
       icon: <WhatsAppIcon className='w-4 h-4 text-[#25D366]' />,
       action: handleWhatsAppShare,
-      className: 'hover:text-green-500',
+      className: 'hover:text-success-500',
     },
     {
       label: 'Pinterest',
@@ -190,7 +190,7 @@ export function ShareDropdown({
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-label="Share this product"
-        className="flex items-center gap-2 text-sm text-warm-gray-dark hover:text-charcoal transition-colors"
+        className="flex items-center gap-2 text-sm text-border-dark hover:text-text-primary transition-colors"
       >
         <Share2 className="w-4 h-4" />
         Share this product
@@ -212,20 +212,20 @@ export function ShareDropdown({
           aria-label="Share options"
           className={cn(
             'absolute bottom-full mb-3 left-0 z-50',
-            'w-52 bg-white border border-warm-gray-light rounded-xl shadow-lg',
+            'w-52 bg-white border border-border-light rounded-xl shadow-lg',
             'py-2 overflow-hidden',
             'animate-in fade-in slide-in-from-bottom-2 duration-150'
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-2 border-b border-warm-gray-light mb-1">
-            <span className="text-xs font-semibold text-charcoal uppercase tracking-wide">
+          <div className="flex items-center justify-between px-4 py-2 border-b border-border-light mb-1">
+            <span className="text-xs font-semibold text-text-primary uppercase tracking-wide">
               Share via
             </span>
             <button
               onClick={() => setIsOpen(false)}
               aria-label="Close share menu"
-              className="text-warm-gray-dark hover:text-charcoal transition-colors"
+              className="text-border-dark hover:text-text-primary transition-colors"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -239,8 +239,8 @@ export function ShareDropdown({
               onClick={option.action}
               className={cn(
                 'w-full flex items-center gap-3 px-4 py-2.5',
-                'text-sm text-warm-gray-dark transition-colors',
-                'hover:bg-linen/60 hover:text-charcoal',
+                'text-sm text-border-dark transition-colors',
+                'hover:bg-surface/60 hover:text-text-primary',
                 option.className
               )}
             >

@@ -51,11 +51,11 @@ export function CancelOrderContent({
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-green-600" />
+        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-8 h-8 text-success-600" />
         </div>
-        <h3 className="font-serif text-xl text-charcoal mb-2">Order Cancelled</h3>
-        <p className="text-warm-gray-dark mb-6">
+        <h3 className="font-serif text-xl text-text-primary mb-2">Order Cancelled</h3>
+        <p className="text-border-dark mb-6">
           Your order has been successfully cancelled. A refund of {formatPrice(order.total)} will be processed within 5-7 business days.
         </p>
         <Button onClick={onClose}>Close</Button>
@@ -79,13 +79,13 @@ export function CancelOrderContent({
 
       <div className="space-y-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             Reason for Cancellation *
           </label>
           <select
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            className="w-full px-3 py-2 border border-warm-gray-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-gold/20 focus:border-gold"
+            className="w-full px-3 py-2 border border-border-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
           >
             <option value="">Select a reason</option>
             {cancelReasons.map(r => (
@@ -95,7 +95,7 @@ export function CancelOrderContent({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             Additional Comments (Optional)
           </label>
           <textarea
@@ -103,16 +103,16 @@ export function CancelOrderContent({
             onChange={(e) => setAdditionalComments(e.target.value)}
             rows={3}
             placeholder="Tell us more about why you're cancelling..."
-            className="w-full px-3 py-2 border border-warm-gray-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-gold/20 focus:border-gold resize-none"
+            className="w-full px-3 py-2 border border-border-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
           />
         </div>
       </div>
 
-      <div className="bg-linen rounded-lg p-4 mb-6">
-        <p className="text-sm text-warm-gray-dark">
-          <strong className="text-charcoal">Refund Amount:</strong> {formatPrice(order.total)}
+      <div className="bg-surface rounded-lg p-4 mb-6">
+        <p className="text-sm text-border-dark">
+          <strong className="text-text-primary">Refund Amount:</strong> {formatPrice(order.total)}
         </p>
-        <p className="text-sm text-warm-gray-dark mt-1">
+        <p className="text-sm text-border-dark mt-1">
           Refunds are typically processed within 5-7 business days.
         </p>
       </div>

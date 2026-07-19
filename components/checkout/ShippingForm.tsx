@@ -67,7 +67,7 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Contact Information */}
       <div>
-        <h3 className="font-serif text-lg text-charcoal mb-4">Contact Information</h3>
+        <h3 className="font-serif text-lg text-text-primary mb-4">Contact Information</h3>
         <div className="space-y-4">
           <Input
             label="Email Address"
@@ -88,7 +88,7 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
 
       {/* Shipping Address */}
       <div>
-        <h3 className="font-serif text-lg text-charcoal mb-4">Shipping Address</h3>
+        <h3 className="font-serif text-lg text-text-primary mb-4">Shipping Address</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input
             label="First Name"
@@ -166,7 +166,7 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
 
       {/* Shipping Method */}
       <div>
-        <h3 className="font-serif text-lg text-charcoal mb-4">Shipping Method</h3>
+        <h3 className="font-serif text-lg text-text-primary mb-4">Shipping Method</h3>
         <RadioGroup
           name="shippingMethod"
           options={shippingMethods}

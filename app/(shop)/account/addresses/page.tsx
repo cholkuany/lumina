@@ -159,7 +159,7 @@ export default function AddressesPage() {
           <div className="lg:col-span-3">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h1 className="font-serif text-2xl lg:text-3xl text-charcoal">
+              <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
                 My Addresses
               </h1>
               <Button onClick={() => handleOpenForm()}>
@@ -170,8 +170,8 @@ export default function AddressesPage() {
 
             {/* Address Form Modal/Section */}
             {isFormOpen && (
-              <div className="bg-linen rounded-brand p-6 mb-8">
-                <h2 className="font-serif text-xl text-charcoal mb-6">
+              <div className="bg-surface rounded-brand p-6 mb-8">
+                <h2 className="font-serif text-xl text-text-primary mb-6">
                   {editingAddress ? 'Edit Address' : 'Add New Address'}
                 </h2>
                 <form onSubmit={handleSubmit}>
@@ -271,12 +271,12 @@ export default function AddressesPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-linen rounded-brand">
-                <MapPin className="w-16 h-16 text-warm-gray-dark mx-auto mb-4" />
-                <h2 className="font-serif text-xl text-charcoal mb-2">
+              <div className="text-center py-16 bg-surface rounded-brand">
+                <MapPin className="w-16 h-16 text-border-dark mx-auto mb-4" />
+                <h2 className="font-serif text-xl text-text-primary mb-2">
                   No addresses saved
                 </h2>
-                <p className="text-warm-gray-dark mb-6">
+                <p className="text-border-dark mb-6">
                   Add an address to make checkout faster.
                 </p>
                 <Button onClick={() => handleOpenForm()}>

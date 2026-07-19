@@ -31,7 +31,7 @@ export function useProductColumns({
       accessorKey: 'price',
       header: 'Price',
       cell: ({ row }) => (
-        <span className="font-medium text-charcoal">
+        <span className="font-medium text-text-primary">
           ${getProductPrice(row.original).toFixed(2)}
         </span>
       ),
@@ -46,7 +46,7 @@ export function useProductColumns({
         const stock = getProductStock(product)
         return (
           <div className="flex items-center gap-2">
-            <span className="text-charcoal">
+            <span className="text-text-primary">
               {stock}
             </span>
 
@@ -70,7 +70,7 @@ export function useProductColumns({
       accessorKey: 'unitsSold',
       header: 'Sales',
       cell: ({ row }) => (
-        <span className="text-charcoal">
+        <span className="text-text-primary">
           {row.original.unitsSold} units
         </span>
       ),

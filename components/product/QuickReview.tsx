@@ -42,19 +42,19 @@ export function QuickReview({
 
   if (isSubmitted) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-brand p-4 text-center">
-        <p className="text-green-700 font-medium">Thanks for your feedback!</p>
+      <div className="bg-success-50 border border-success-200 rounded-brand p-4 text-center">
+        <p className="text-success-700 font-medium">Thanks for your feedback!</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-linen rounded-brand p-4">
+    <div className="bg-surface rounded-brand p-4">
       {onClose && (
         <div className="flex justify-end -mt-2 -mr-2 mb-2">
           <button
             onClick={onClose}
-            className="p-1 text-warm-gray-dark hover:text-charcoal"
+            className="p-1 text-border-dark hover:text-text-primary"
           >
             <X className="w-4 h-4" />
           </button>
@@ -62,7 +62,7 @@ export function QuickReview({
       )}
 
       <div className="text-center">
-        <p className="text-sm text-charcoal font-medium mb-3">
+        <p className="text-sm text-text-primary font-medium mb-3">
           How would you rate this product?
         </p>
 
@@ -82,8 +82,8 @@ export function QuickReview({
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a quick comment (optional)"
               rows={2}
-              className="w-full px-3 py-2 text-sm bg-white border border-warm-grayrounded-lg 
-                         focus:outline-none focus:border-gold resize-none"
+              className="w-full px-3 py-2 text-sm bg-white border border-borderrounded-lg 
+                         focus:outline-none focus:border-primary resize-none"
               maxLength={200}
             />
           </div>

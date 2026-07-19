@@ -106,10 +106,10 @@ export default function ReviewsPage() {
           bgColor="bg-amber-100"
         />
         <StatWrapper
-          icon={<Check className="w-5 h-5 text-green-600" />}
+          icon={<Check className="w-5 h-5 text-success-600" />}
           label="Approved"
           value={stats?.approved ?? '-'}
-          bgColor="bg-green-100"
+          bgColor="bg-success-100"
         />
         <StatWrapper
           icon={<Flag className="w-5 h-5 text-orange-600" />}
@@ -119,10 +119,10 @@ export default function ReviewsPage() {
         />
 
         <StatWrapper
-          icon={<Star className="w-5 h-5 text-gold" />}
+          icon={<Star className="w-5 h-5 text-primary" />}
           label="Avg Rating"
           value={stats?.avgRating.toFixed(2) ?? '-'}
-          bgColor="bg-gold/10"
+          bgColor="bg-primary/10"
         />
       </div>
 
@@ -143,7 +143,7 @@ export default function ReviewsPage() {
                 variant="secondary"
                 size="sm"
                 onClick={() => handleBulkAction('approve')}
-                className="text-green-600 border-green-200 hover:bg-green-50"
+                className="text-success-600 border-success-200 hover:bg-success-50"
               >
                 <Check className="w-4 h-4 mr-1" />
                 Approve ({selectedIds.length})
@@ -206,14 +206,14 @@ const StatWrapper = (
   { icon, label, value, bgColor }:
     { icon: React.ReactNode; label: string; value: string | number; bgColor: string }
 ) => (
-  <div className="bg-white rounded-brand border border-warm-gray p-4">
+  <div className="bg-white rounded-brand border border-border p-4">
     <div className="flex items-center gap-3">
       <div className={`w-10 h-10 ${bgColor} rounded-lg flex items-center justify-center`}>
         {icon}
       </div>
       <div>
-        <p className="text-2xl font-semibold text-charcoal">{value}</p>
-        <p className="text-xs text-warm-gray-dark">{label}</p>
+        <p className="text-2xl font-semibold text-text-primary">{value}</p>
+        <p className="text-xs text-border-dark">{label}</p>
       </div>
     </div>
   </div>

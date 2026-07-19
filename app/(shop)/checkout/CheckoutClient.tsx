@@ -86,8 +86,8 @@ export default function CheckoutClient() {
   if (state.items.length === 0) {
     return (
       <main className="container-lumina py-16 text-center">
-        <h1 className="font-serif text-2xl text-charcoal mb-4">Your cart is empty</h1>
-        <p className="text-warm-gray-dark mb-8">Add some items to checkout.</p>
+        <h1 className="font-serif text-2xl text-text-primary mb-4">Your cart is empty</h1>
+        <p className="text-border-dark mb-8">Add some items to checkout.</p>
         <Link href="/products">
           <Button>Continue Shopping</Button>
         </Link>
@@ -101,7 +101,7 @@ export default function CheckoutClient() {
         {/* Back Link */}
         <Link
           href="/cart"
-          className="inline-flex items-center gap-2 text-sm text-warm-gray-dark hover:text-charcoal transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-sm text-border-dark hover:text-text-primary transition-colors mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Cart
@@ -110,7 +110,7 @@ export default function CheckoutClient() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <span className="font-serif text-3xl font-semibold text-charcoal">
+            <span className="font-serif text-3xl font-semibold text-text-primary">
               LUMINA
             </span>
           </Link>
@@ -154,8 +154,8 @@ export default function CheckoutClient() {
 
           {/* Order Summary Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-linen rounded-brand p-6 sticky top-24">
-              <h3 className="font-serif text-lg text-charcoal mb-4">
+            <div className="bg-surface rounded-brand p-6 sticky top-24">
+              <h3 className="font-serif text-lg text-text-primary mb-4">
                 Order Summary
               </h3>
 
@@ -167,24 +167,24 @@ export default function CheckoutClient() {
               </div>
 
               {/* Totals */}
-              <div className="border-t border-warm-graypt-4 space-y-2">
+              <div className="border-t border-borderpt-4 space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-warm-gray-dark">Subtotal</span>
-                  <span className="text-charcoal">{formatPrice(subtotal)}</span>
+                  <span className="text-border-dark">Subtotal</span>
+                  <span className="text-text-primary">{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-warm-gray-dark">Shipping</span>
-                  <span className="text-charcoal">
+                  <span className="text-border-dark">Shipping</span>
+                  <span className="text-text-primary">
                     {shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-warm-gray-dark">Tax</span>
-                  <span className="text-charcoal">{formatPrice(tax)}</span>
+                  <span className="text-border-dark">Tax</span>
+                  <span className="text-text-primary">{formatPrice(tax)}</span>
                 </div>
-                <div className="flex justify-between font-semibold pt-2 border-t border-warm-gray">
-                  <span className="text-charcoal">Total</span>
-                  <span className="text-charcoal">{formatPrice(total)}</span>
+                <div className="flex justify-between font-semibold pt-2 border-t border-border">
+                  <span className="text-text-primary">Total</span>
+                  <span className="text-text-primary">{formatPrice(total)}</span>
                 </div>
               </div>
             </div>

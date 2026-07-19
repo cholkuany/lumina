@@ -19,7 +19,7 @@ const statusConfig = {
   },
   shipped: {
     label: 'Shipped',
-    variant: 'gold' as const,
+    variant: 'primary' as const,
     icon: Truck,
   },
   delivered: {
@@ -39,21 +39,21 @@ export function OrderCard({ order }: OrderCardProps) {
   const StatusIcon = status.icon
 
   return (
-    <div className="border border-warm-gray-light rounded-brand overflow-hidden">
+    <div className="border border-border-light rounded-brand overflow-hidden">
       {/* Header */}
-      <div className="bg-linen px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-surface px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-4 sm:gap-8">
           <div>
-            <p className="text-xs text-warm-gray-dark">Order Number</p>
-            <p className="font-medium text-charcoal">{order.orderNumber}</p>
+            <p className="text-xs text-border-dark">Order Number</p>
+            <p className="font-medium text-text-primary">{order.orderNumber}</p>
           </div>
           <div>
-            <p className="text-xs text-warm-gray-dark">Date Placed</p>
-            <p className="font-medium text-charcoal">{order.date}</p>
+            <p className="text-xs text-border-dark">Date Placed</p>
+            <p className="font-medium text-text-primary">{order.date}</p>
           </div>
           <div>
-            <p className="text-xs text-warm-gray-dark">Total</p>
-            <p className="font-medium text-charcoal">{formatPrice(order.total)}</p>
+            <p className="text-xs text-border-dark">Total</p>
+            <p className="font-medium text-text-primary">{formatPrice(order.total)}</p>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ export function OrderCard({ order }: OrderCardProps) {
             <div key={item.id} className="flex gap-4">
               <Link
                 href={`/products/${item.product.id}`}
-                className="relative w-16 h-16 sm:w-20 sm:h-20 bg-linen rounded-lg overflow-hidden shrink-0"
+                className="relative w-16 h-16 sm:w-20 sm:h-20 bg-surface rounded-lg overflow-hidden shrink-0"
               >
                 <Image
                   src={item.product.variant.images[0].secure_url}
@@ -81,12 +81,12 @@ export function OrderCard({ order }: OrderCardProps) {
               </Link>
               <div className="flex-1 min-w-0">
                 <Link href={`/products/${item.product.id}`}>
-                  <h4 className="font-medium text-charcoal text-sm hover:text-gold transition-colors line-clamp-1">
+                  <h4 className="font-medium text-text-primary text-sm hover:text-primary transition-colors line-clamp-1">
                     {item.product.name}
                   </h4>
                 </Link>
-                <p className="text-sm text-warm-gray-dark">Qty: {item.quantity}</p>
-                <p className="text-sm font-medium text-charcoal">
+                <p className="text-sm text-border-dark">Qty: {item.quantity}</p>
+                <p className="text-sm font-medium text-text-primary">
                   {formatPrice(item.product.variant.price * item.quantity)}
                 </p>
               </div>
@@ -94,14 +94,14 @@ export function OrderCard({ order }: OrderCardProps) {
           ))}
 
           {order.items.length > 3 && (
-            <p className="text-sm text-warm-gray-dark">
+            <p className="text-sm text-border-dark">
               + {order.items.length - 3} more item(s)
             </p>
           )}
         </div>
 
         {/* Actions */}
-        <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-warm-gray-light">
+        <div className="flex flex-wrap items-center gap-3 mt-6 pt-4 border-t border-border-light">
           <Link href={`/account/orders/${order.id}`}>
             <Button variant="secondary" size="sm">
               View Order Details

@@ -8,7 +8,7 @@ export default async function Home() {
   const trendingProducts = (await getProducts()) || []
 
   return (
-    <main className="min-h-screen bg-linen">
+    <main className="min-h-screen bg-surface">
       <Hero products={trendingProducts} />
       <Categories />
       <TrendingProducts trendingProducts={trendingProducts} />

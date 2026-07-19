@@ -21,7 +21,7 @@ export async function RelatedProducts({
 
   return (
     <section className="container-lumina mt-16">
-      <h2 className="font-serif text-2xl text-charcoal mb-8">You May Also Like</h2>
+      <h2 className="font-serif text-2xl text-text-primary mb-8">You May Also Like</h2>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         {relatedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />

@@ -98,7 +98,7 @@ export function ImageLightbox({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-charcoal/95" />
+          <div className="fixed inset-0 bg-text-primary/95" />
         </Transition.Child>
 
         {/* Modal */}
@@ -115,7 +115,7 @@ export function ImageLightbox({
             >
               <Dialog.Panel className="w-full h-full flex flex-col">
                 {/* Header */}
-                <div className="flex items-center justify-between px-4 py-3 bg-charcoal/50">
+                <div className="flex items-center justify-between px-4 py-3 bg-text-primary/50">
                   <span className="text-white text-sm">
                     {currentIndex + 1} of {images.length}
                   </span>
@@ -208,7 +208,7 @@ export function ImageLightbox({
 
                 {/* Thumbnails */}
                 {images.length > 1 && (
-                  <div className="flex items-center justify-center gap-2 px-4 py-4 bg-charcoal/50">
+                  <div className="flex items-center justify-center gap-2 px-4 py-4 bg-text-primary/50">
                     {images.map((image, index) => (
                       <button
                         key={index}
@@ -219,7 +219,7 @@ export function ImageLightbox({
                         className={cn(
                           'relative w-16 h-16 rounded-lg overflow-hidden transition-all',
                           currentIndex === index
-                            ? 'ring-2 ring-gold'
+                            ? 'ring-2 ring-primary'
                             : 'opacity-50 hover:opacity-100'
                         )}
                       >

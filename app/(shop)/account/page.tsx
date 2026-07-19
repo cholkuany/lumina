@@ -49,9 +49,9 @@ export default async function AccountPage() {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-8">
             {/* Welcome Section */}
-            <div className="bg-linen rounded-brand p-6 lg:p-8">
+            <div className="bg-surface rounded-brand p-6 lg:p-8">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center text-white text-xl font-serif font-semibold">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-xl font-serif font-semibold">
                   {
                     userSession.image ? (
                       <Image
@@ -66,10 +66,10 @@ export default async function AccountPage() {
                   }
                 </div>
                 <div>
-                  <h1 className="font-serif text-2xl text-charcoal">
+                  <h1 className="font-serif text-2xl text-text-primary">
                     Welcome back, {firstName}!
                   </h1>
-                  <p className="text-warm-gray-dark">
+                  <p className="text-border-dark">
                     Member since {userSession.createdAt.toLocaleString('default', { month: 'long', year: 'numeric' })}
                   </p>
                 </div>
@@ -78,20 +78,20 @@ export default async function AccountPage() {
 
             {/* Quick Actions */}
             <div>
-              <h2 className="font-serif text-xl text-charcoal mb-4">Quick Actions</h2>
+              <h2 className="font-serif text-xl text-text-primary mb-4">Quick Actions</h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {accountQuickActions.map((action) => (
                   <Link
                     key={action.href}
                     href={action.href}
-                    className="bg-white border border-warm-gray-light rounded-brand p-4 
-                               hover:border-gold hover:shadow-soft transition-all text-center"
+                    className="bg-white border border-border-light rounded-brand p-4 
+                               hover:border-primary hover:shadow-soft transition-all text-center"
                   >
-                    <div className="w-12 h-12 bg-linen rounded-full flex items-center justify-center mx-auto mb-3">
-                      <action.icon className="w-6 h-6 text-gold" />
+                    <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center mx-auto mb-3">
+                      <action.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <p className="font-medium text-charcoal text-sm">{action.label}</p>
-                    <p className="text-xs text-warm-gray-dark">{action.count} items</p>
+                    <p className="font-medium text-text-primary text-sm">{action.label}</p>
+                    <p className="text-xs text-border-dark">{action.count} items</p>
                   </Link>
                 ))}
               </div>
@@ -100,10 +100,10 @@ export default async function AccountPage() {
             {/* Recent Orders */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-serif text-xl text-charcoal">Recent Orders</h2>
+                <h2 className="font-serif text-xl text-text-primary">Recent Orders</h2>
                 <Link
                   href="/account/orders"
-                  className="text-sm text-gold hover:underline flex items-center gap-1 group"
+                  className="text-sm text-primary hover:underline flex items-center gap-1 group"
                 >
                   View All
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5" />
@@ -117,9 +117,9 @@ export default async function AccountPage() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-12 bg-linen rounded-brand">
-                  <Package className="w-12 h-12 text-warm-gray-dark mx-auto mb-4" />
-                  <p className="text-warm-gray-dark mb-4">No orders yet</p>
+                <div className="text-center py-12 bg-surface rounded-brand">
+                  <Package className="w-12 h-12 text-border-dark mx-auto mb-4" />
+                  <p className="text-border-dark mb-4">No orders yet</p>
                   <Link href="/products">
                     <Button>Start Shopping</Button>
                   </Link>
@@ -129,7 +129,7 @@ export default async function AccountPage() {
 
             {/* Mobile Navigation */}
             <div className="lg:hidden">
-              <h2 className="font-serif text-xl text-charcoal mb-4">Account Menu</h2>
+              <h2 className="font-serif text-xl text-text-primary mb-4">Account Menu</h2>
               <AccountSidebar />
             </div>
           </div>

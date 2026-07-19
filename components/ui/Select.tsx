@@ -26,22 +26,22 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
   return (
     <div className={className}>
       {label && (
-        <label className="block text-sm font-medium text-charcoal mb-2">
+        <label className="block text-sm font-medium text-text-primary mb-2">
           {label}
         </label>
       )}
       <Listbox value={value} onChange={onChange}>
         <div className="relative">
           <Listbox.Button
-            className="relative w-full h-12 pl-4 pr-10 text-left bg-white border border-warm-gray
-                       rounded-brand cursor-pointer focus:outline-none focus:border-gold focus:ring-1 
-                       focus:ring-gold transition-colors"
+            className="relative w-full h-12 pl-4 pr-10 text-left bg-white border border-border
+                       rounded-brand cursor-pointer focus:outline-none focus:border-primary focus:ring-1 
+                       focus:ring-primary transition-colors"
           >
-            <span className={cn('block truncate', !selectedOption && 'text-warm-gray-dark')}>
+            <span className={cn('block truncate', !selectedOption && 'text-border-dark')}>
               {selectedOption?.label || placeholder}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <ChevronDown className="w-5 h-5 text-warm-gray-dark" />
+              <ChevronDown className="w-5 h-5 text-border-dark" />
             </span>
           </Listbox.Button>
 
@@ -52,7 +52,7 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
             leaveTo="opacity-0"
           >
             <Listbox.Options
-              className="absolute z-10 w-full mt-1 overflow-auto bg-white border border-warm-gray-light 
+              className="absolute z-10 w-full mt-1 overflow-auto bg-white border border-border-light 
                          rounded-brand shadow-hover max-h-60 focus:outline-none"
             >
               {options.map((option) => (
@@ -62,7 +62,7 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
                   className={({ active }) =>
                     cn(
                       'relative cursor-pointer select-none py-3 pl-10 pr-4 transition-colors',
-                      active ? 'bg-linen text-charcoal' : 'text-charcoal'
+                      active ? 'bg-surface text-text-primary' : 'text-text-primary'
                     )
                   }
                 >
@@ -72,7 +72,7 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
                         {option.label}
                       </span>
                       {selected && (
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gold">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary">
                           <Check className="w-5 h-5" />
                         </span>
                       )}

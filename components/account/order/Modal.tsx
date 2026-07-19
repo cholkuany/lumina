@@ -22,20 +22,20 @@ export function Modal({
       <div className="flex min-h-full items-center justify-center p-4">
         {/* Backdrop */}
         <div
-          className="fixed inset-0 bg-charcoal/50 transition-opacity"
+          className="fixed inset-0 bg-text-primary/50 transition-opacity"
           onClick={onClose}
         />
 
         {/* Modal */}
         <div className="relative bg-white rounded-brand shadow-hover max-w-lg w-full max-h-[90vh] overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-warm-gray-light">
-            <h2 className="font-serif text-xl text-charcoal">{title}</h2>
+          <div className="flex items-center justify-between p-6 border-b border-border-light">
+            <h2 className="font-serif text-xl text-text-primary">{title}</h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-linen rounded-full transition-colors"
+              className="p-2 hover:bg-surface rounded-full transition-colors"
             >
-              <X className="w-5 h-5 text-warm-gray-dark" />
+              <X className="w-5 h-5 text-border-dark" />
             </button>
           </div>
 

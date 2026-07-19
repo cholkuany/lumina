@@ -39,14 +39,14 @@ export function ResourceTable<T>({
   }
 
   return (
-    <div className="bg-white rounded-brand border border-warm-gray overflow-hidden">
+    <div className="bg-white rounded-brand border border-border overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
                 key={headerGroup.id}
-                className="bg-linen border-b border-warm-gray"
+                className="bg-surface border-b border-border"
               >
                 {selectable && (
                   <th className="w-12 px-4 py-3">
@@ -67,9 +67,9 @@ export function ResourceTable<T>({
                     <th
                       key={header.id}
                       className={cn(
-                        'px-4 py-3 text-left text-xs font-semibold text-charcoal uppercase tracking-wider',
+                        'px-4 py-3 text-left text-xs font-semibold text-text-primary uppercase tracking-wider',
                         header.column.getCanSort() &&
-                        'cursor-pointer hover:bg-warm-gray-light/50',
+                        'cursor-pointer hover:bg-border-light/50',
                         meta?.className
                       )}
                       onClick={header.column.getToggleSortingHandler()}
@@ -98,7 +98,7 @@ export function ResourceTable<T>({
               </tr>
             ))}
           </thead>
-          <tbody className="divide-y divide-warm-gray-light">
+          <tbody className="divide-y divide-border-light">
             {table.getRowModel().rows.map((row) => {
               const item = row.original
               const isSelected = row.getIsSelected()
@@ -111,8 +111,8 @@ export function ResourceTable<T>({
                     'transition-colors',
                     onRowClick && 'cursor-pointer',
                     isSelected
-                      ? 'bg-gold/5'
-                      : 'hover:bg-linen/50'
+                      ? 'bg-primary/5'
+                      : 'hover:bg-surface/50'
                   )}
                 >
                   {selectable && (
@@ -137,7 +137,7 @@ export function ResourceTable<T>({
                       <td
                         key={cell.id}
                         className={cn(
-                          'px-4 py-4 text-sm text-charcoal',
+                          'px-4 py-4 text-sm text-text-primary',
                           meta?.className
                         )}
                       >

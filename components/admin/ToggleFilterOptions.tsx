@@ -23,14 +23,14 @@ export const ToggleFilterOptions = ({ activeFilterCount, showFilters, setShowFil
         className={cn(
           'flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-brand border transition-colors',
           showFilters || activeFilterCount > 0
-            ? 'bg-gold/10 border-gold text-gold'
-            : 'bg-white border-warm-gray text-charcoal hover:bg-linen'
+            ? 'bg-primary/10 border-primary text-primary'
+            : 'bg-white border-border text-text-primary hover:bg-surface'
         )}
       >
         <Funnel className="w-5 h-5" />
         Filters
         {activeFilterCount > 0 && (
-          <span className="px-1.5 py-0.5 text-xs bg-gold text-white rounded-full">
+          <span className="px-1.5 py-0.5 text-xs bg-primary text-white rounded-full">
             {activeFilterCount}
           </span>
         )}

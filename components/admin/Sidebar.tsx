@@ -39,7 +39,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
       {/* Mobile backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-charcoal/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-text-primary/50 z-40 lg:hidden"
           onClick={close}
         />
       )}
@@ -47,7 +47,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-warm-gray',
+          'fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-border',
           'transform transition-transform duration-300 ease-in-out lg:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
@@ -55,16 +55,16 @@ export function Sidebar({ user }: { user: LoginUser }) {
         <div className="flex flex-col h-full">
 
           {/* Logo + close button */}
-          <div className="flex items-center justify-between h-16 px-6 border-b border-warm-gray">
+          <div className="flex items-center justify-between h-16 px-6 border-b border-border">
             <Link href="/admin" className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gold rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">L</span>
               </div>
               <div>
-                <span className="text-lg font-semibold text-charcoal tracking-wide">
+                <span className="text-lg font-semibold text-text-primary tracking-wide">
                   LUMINA
                 </span>
-                <span className="block text-xs text-warm-gray-dark -mt-0.5">
+                <span className="block text-xs text-border-dark -mt-0.5">
                   Admin Panel
                 </span>
               </div>
@@ -73,7 +73,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
             {/* Close button — mobile only */}
             <button
               onClick={close}
-              className="lg:hidden p-1.5 rounded-lg text-warm-gray-dark hover:text-charcoal hover:bg-linen transition-colors"
+              className="lg:hidden p-1.5 rounded-lg text-border-dark hover:text-text-primary hover:bg-surface transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -81,7 +81,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
 
           {/* Main navigation */}
           <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
-            <p className="px-3 mb-2 text-xs font-semibold text-warm-gray-dark uppercase tracking-wider">
+            <p className="px-3 mb-2 text-xs font-semibold text-border-dark uppercase tracking-wider">
               Main Menu
             </p>
 
@@ -95,14 +95,14 @@ export function Sidebar({ user }: { user: LoginUser }) {
                   className={cn(
                     'flex items-center gap-3 px-3 py-2.5 rounded-brand text-sm font-medium transition-all duration-200',
                     active
-                      ? 'bg-gold/10 text-gold'
-                      : 'text-charcoal/70 hover:bg-linen hover:text-charcoal'
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-text-primary/70 hover:bg-surface hover:text-text-primary'
                   )}
                 >
                   <item.icon
                     className={cn(
                       'w-5 h-5 shrink-0',
-                      active ? 'text-gold' : 'text-warm-gray-dark'
+                      active ? 'text-primary' : 'text-border-dark'
                     )}
                   />
                   <span className="flex-1">{item.name}</span>
@@ -111,7 +111,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
             })}
 
             <div className="pt-6">
-              <p className="px-3 mb-2 text-xs font-semibold text-warm-gray-dark uppercase tracking-wider">
+              <p className="px-3 mb-2 text-xs font-semibold text-border-dark uppercase tracking-wider">
                 Support
               </p>
               {secondaryNavigation.map((item) => {
@@ -124,14 +124,14 @@ export function Sidebar({ user }: { user: LoginUser }) {
                     className={cn(
                       'flex items-center gap-3 px-3 py-2.5 rounded-brand text-sm font-medium transition-all duration-200',
                       active
-                        ? 'bg-gold/10 text-gold'
-                        : 'text-charcoal/70 hover:bg-linen hover:text-charcoal'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-text-primary/70 hover:bg-surface hover:text-text-primary'
                     )}
                   >
                     <item.icon
                       className={cn(
                         'w-5 h-5 shrink-0',
-                        active ? 'text-gold' : 'text-warm-gray-dark'
+                        active ? 'text-primary' : 'text-border-dark'
                       )}
                     />
                     {item.name}
@@ -142,22 +142,22 @@ export function Sidebar({ user }: { user: LoginUser }) {
           </nav>
 
           {/* User section */}
-          <div className="p-4 border-t border-warm-gray">
-            <div className="flex items-center gap-3 p-3 rounded-brand bg-linen">
-              <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
-                <span className="text-gold font-semibold">
+          <div className="p-4 border-t border-border">
+            <div className="flex items-center gap-3 p-3 rounded-brand bg-surface">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                <span className="text-primary font-semibold">
                   {user.name.split(' ').map((n) => n.charAt(0))}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-charcoal truncate">{user.name}</p>
-                <p className="text-xs text-warm-gray-dark truncate">Administrator</p>
+                <p className="text-sm font-medium text-text-primary truncate">{user.name}</p>
+                <p className="text-xs text-border-dark truncate">Administrator</p>
               </div>
               <button onClick={() => signOut({
                 fetchOptions: {
                   onSuccess: () => redirect('/login')
                 }
-              })} className="p-1.5 text-warm-gray-dark hover:text-charcoal transition-colors">
+              })} className="p-1.5 text-border-dark hover:text-text-primary transition-colors">
                 <LogOut className="w-5 h-5" />
               </button>
             </div>

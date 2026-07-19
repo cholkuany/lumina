@@ -54,8 +54,8 @@ export function FilterSidebar({
     )}>
       {/* Mobile Header */}
       {isMobile && (
-        <div className="sticky top-0 bg-white border-b border-warm-gray-light px-4 py-4 flex items-center justify-between">
-          <h2 className="font-serif text-xl text-charcoal">Filters</h2>
+        <div className="sticky top-0 bg-white border-b border-border-light px-4 py-4 flex items-center justify-between">
+          <h2 className="font-serif text-xl text-text-primary">Filters</h2>
           <button onClick={onClose} className="p-2 -mr-2">
             <X className="w-5 h-5" />
           </button>
@@ -67,7 +67,7 @@ export function FilterSidebar({
         {hasActiveFilters && (
           <button
             onClick={onClearAll}
-            className="text-sm text-gold hover:underline"
+            className="text-sm text-primary hover:underline"
           >
             Clear all filters
           </button>
@@ -86,23 +86,23 @@ export function FilterSidebar({
             <div className="pt-4 pb-2">
               <div className="flex items-center gap-4">
                 <div className="flex-1">
-                  <label className="text-xs text-warm-gray-dark">Min</label>
+                  <label className="text-xs text-border-dark">Min</label>
                   <input
                     type="number"
                     value={priceRange[0]}
                     onChange={(e) => onPriceChange([Number(e.target.value), priceRange[1]])}
-                    className="w-full h-10 px-3 border border-warm-grayrounded-lg text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 border border-borderrounded-lg text-sm focus:outline-none focus:border-primary"
                     min={0}
                   />
                 </div>
-                <span className="text-warm-gray-dark mt-4">—</span>
+                <span className="text-border-dark mt-4">—</span>
                 <div className="flex-1">
-                  <label className="text-xs text-warm-gray-dark">Max</label>
+                  <label className="text-xs text-border-dark">Max</label>
                   <input
                     type="number"
                     value={priceRange[1]}
                     onChange={(e) => onPriceChange([priceRange[0], Number(e.target.value)])}
-                    className="w-full h-10 px-3 border border-warm-grayrounded-lg text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 border border-borderrounded-lg text-sm focus:outline-none focus:border-primary"
                     min={0}
                   />
                 </div>
@@ -115,7 +115,7 @@ export function FilterSidebar({
         {filters.map((category) => (
           <div
             key={category.id}
-            className="border-t border-warm-gray-light pt-4"
+            className="border-t border-border-light pt-4"
           >
             <CategoryFilter
               key={category.id}
@@ -133,7 +133,7 @@ export function FilterSidebar({
 
       {/* Mobile Apply Button */}
       {isMobile && (
-        <div className="sticky bottom-0 bg-white border-t border-warm-gray-light p-4">
+        <div className="sticky bottom-0 bg-white border-t border-border-light p-4">
           <Button onClick={onClose} className="w-full">
             Apply Filters
           </Button>

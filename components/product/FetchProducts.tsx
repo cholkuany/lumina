@@ -89,14 +89,14 @@ export default function FetchProducts({
         {/* Page Header */}
         {(Object.keys(selectedFilters).length > 0 || searchQuery) &&
           <div className="mb-8">
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-2">
+            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-2">
               {searchQuery
                 ? `Search results for "${searchQuery}"`
                 : categoryParam
                   ? `Results for "${categoryParam}"`
                   : 'All Products'}
             </h1>
-            <p className="text-warm-gray-dark">
+            <p className="text-border-dark">
               {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
             </p>
           </div>

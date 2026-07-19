@@ -35,7 +35,7 @@ export function BulkModerationActions({
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-      <div className="bg-charcoal text-white rounded-brand shadow-hover px-6 py-4 flex items-center gap-6">
+      <div className="bg-text-primary text-white rounded-brand shadow-hover px-6 py-4 flex items-center gap-6">
         <div className="flex items-center gap-3">
           <span className="text-sm">
             <strong>{selectedCount}</strong> review{selectedCount > 1 ? 's' : ''} selected
@@ -55,7 +55,7 @@ export function BulkModerationActions({
             size="sm"
             onClick={() => handleAction('approve', onApprove)}
             disabled={isLoading !== null}
-            className="bg-green-600 hover:bg-green-700"
+            className="bg-success-600 hover:bg-success-700"
           >
             {isLoading === 'approve' ? (
               <span className="animate-spin">⏳</span>

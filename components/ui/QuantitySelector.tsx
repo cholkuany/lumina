@@ -27,18 +27,18 @@ export function QuantitySelector({
   return (
     <div>
       <div
-        className='inline-flex justify-between items-center border border-warm-gray'
+        className='inline-flex justify-between items-center border border-border'
       >
         <Button
           onClick={decrease}
           disabled={value <= min}
           size={size}
-          className='flex items-center justify-center bg-warm-gray hover:bg-warm-gray-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+          className='flex items-center justify-center bg-border hover:bg-border-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
         >
           <Minus className="w-4 h-4" />
         </Button>
 
-        <div className="flex items-center justify-center w-12 font-medium text-charcoal">
+        <div className="flex items-center justify-center w-12 font-medium text-text-primary">
           {value}
         </div>
 
@@ -46,7 +46,7 @@ export function QuantitySelector({
           onClick={increase}
           disabled={value >= stock}
           size={size}
-          className='flex items-center justify-center bg-warm-gray hover:bg-warm-gray-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+          className='flex items-center justify-center bg-border hover:bg-border-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
         >
           <Plus className="w-4 h-4" />
         </Button>

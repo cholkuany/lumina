@@ -45,19 +45,19 @@ export const actions = (user: User) => [
   {
     type: "view" as const,
     title: "View details",
-    hoverClass: "hover:text-gold hover:bg-linen",
+    hoverClass: "hover:text-primary hover:bg-surface",
     icon: <Eye className="w-4 h-4" />,
   },
   {
     type: "role" as const,
     title: "Change role",
-    hoverClass: "hover:text-gold-dark hover:bg-linen",
+    hoverClass: "hover:text-primary-dark hover:bg-surface",
     icon: <ShieldCheck className="w-4 h-4" />,
   },
   {
     type: "ban" as const,
     title: user.banned ? "Unban user" : "Ban user",
-    hoverClass: "hover:text-gold hover:bg-gold/10",
+    hoverClass: "hover:text-primary hover:bg-primary/10",
     icon: <Ban className="w-4 h-4" />,
   },
   {
@@ -297,8 +297,8 @@ type StatProps = {
 
 const Stats = ({ total = 0, isLoading, active = 0, users, banned }: StatProps) => (
   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-    <StatCard label="Total Users" value={total ?? "—"} valueClass="text-charcoal" isLoading={isLoading} />
-    <StatCard label="Active Users" value={active} valueClass="text-green-600" isLoading={isLoading} />
+    <StatCard label="Total Users" value={total ?? "—"} valueClass="text-text-primary" isLoading={isLoading} />
+    <StatCard label="Active Users" value={active} valueClass="text-success-600" isLoading={isLoading} />
     <StatCard label="Banned" value={banned} valueClass="text-red-600" isLoading={isLoading} />
     <StatCard
       label="Admins"
@@ -313,10 +313,10 @@ const Stats = ({ total = 0, isLoading, active = 0, users, banned }: StatProps) =
 
 function StatCard({ label, value, valueClass, isLoading }: StatCardProps) {
   return (
-    <div className="bg-white rounded-brand border border-warm-gray p-4">
-      <p className="text-sm text-warm-gray-dark">{label}</p>
+    <div className="bg-white rounded-brand border border-border p-4">
+      <p className="text-sm text-border-dark">{label}</p>
       {isLoading ? (
-        <div className="h-8 w-16 bg-warm-gray-light animate-pulse rounded mt-1" />
+        <div className="h-8 w-16 bg-border-light animate-pulse rounded mt-1" />
       ) : (
         <p className={cn("text-2xl font-semibold mt-1", valueClass)}>{value}</p>
       )}
@@ -330,7 +330,7 @@ export function ActionButton({ onClick, title, hoverClass, children }: ActionBut
       onClick={onClick}
       title={title}
       className={cn(
-        "p-2 text-warm-gray-dark rounded-lg transition-colors",
+        "p-2 text-border-dark rounded-lg transition-colors",
         hoverClass
       )}
     >

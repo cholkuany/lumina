@@ -31,17 +31,17 @@ export function Accordion({ items, allowMultiple = true, className }: AccordionP
   }
 
   return (
-    <div className={cn('divide-y divide-warm-gray-light', className)}>
+    <div className={cn('divide-y divide-border-light', className)}>
       {items.map((item) => (
         <div key={item.id}>
           <button
             onClick={() => toggleItem(item.id)}
             className="flex items-center justify-between w-full py-4 text-left"
           >
-            <span className="font-medium text-charcoal">{item.title}</span>
+            <span className="font-medium text-text-primary">{item.title}</span>
             <ChevronDown
               className={cn(
-                'w-5 h-5 text-warm-gray-dark transition-transform duration-300',
+                'w-5 h-5 text-border-dark transition-transform duration-300',
                 openItems.includes(item.id) && 'rotate-180'
               )}
             />
@@ -52,7 +52,7 @@ export function Accordion({ items, allowMultiple = true, className }: AccordionP
               openItems.includes(item.id) ? 'max-h-96 pb-4' : 'max-h-0'
             )}
           >
-            <div className="text-sm text-warm-gray-dark leading-relaxed">
+            <div className="text-sm text-border-dark leading-relaxed">
               {item.content}
             </div>
           </div>

@@ -74,17 +74,17 @@ function Modal({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex min-h-full items-center justify-center p-4">
         <div
-          className="fixed inset-0 bg-charcoal/50 transition-opacity"
+          className="fixed inset-0 bg-text-primary/50 transition-opacity"
           onClick={onClose}
         />
         <div className="relative bg-white rounded-brand shadow-hover max-w-lg w-full max-h-[90vh] overflow-y-auto">
-          <div className="flex items-center justify-between p-6 border-b border-warm-gray-light">
-            <h2 className="font-serif text-xl text-charcoal">{title}</h2>
+          <div className="flex items-center justify-between p-6 border-b border-border-light">
+            <h2 className="font-serif text-xl text-text-primary">{title}</h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-linen rounded-full transition-colors"
+              className="p-2 hover:bg-surface rounded-full transition-colors"
             >
-              <X className="w-5 h-5 text-warm-gray-dark" />
+              <X className="w-5 h-5 text-border-dark" />
             </button>
           </div>
           <div className="p-6">
@@ -111,7 +111,7 @@ function Toggle({
       type="button"
       onClick={() => !disabled && onChange(!enabled)}
       disabled={disabled}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${enabled ? 'bg-gold' : 'bg-warm-gray-light'
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${enabled ? 'bg-primary' : 'bg-border-light'
         } ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
     >
       <span
@@ -133,11 +133,11 @@ function SettingsSection({
   children: React.ReactNode
 }) {
   return (
-    <div className="bg-white border border-warm-gray-light rounded-brand overflow-hidden">
-      <div className="p-6 border-b border-warm-gray-light">
-        <h2 className="font-serif text-lg text-charcoal">{title}</h2>
+    <div className="bg-white border border-border-light rounded-brand overflow-hidden">
+      <div className="p-6 border-b border-border-light">
+        <h2 className="font-serif text-lg text-text-primary">{title}</h2>
         {description && (
-          <p className="text-sm text-warm-gray-dark mt-1">{description}</p>
+          <p className="text-sm text-border-dark mt-1">{description}</p>
         )}
       </div>
       <div className="p-6">
@@ -201,7 +201,7 @@ function ProfileSettings({
     <div className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             First Name
           </label>
           {isEditing ? (
@@ -211,7 +211,7 @@ function ProfileSettings({
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.firstName ? 'border-red-500' : 'border-warm-gray-light'
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.firstName ? 'border-red-500' : 'border-border-light'
                   }`}
               />
               {errors.firstName && (
@@ -219,11 +219,11 @@ function ProfileSettings({
               )}
             </>
           ) : (
-            <p className="text-warm-gray-dark py-3">{profile.firstName}</p>
+            <p className="text-border-dark py-3">{profile.firstName}</p>
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             Last Name
           </label>
           {isEditing ? (
@@ -233,7 +233,7 @@ function ProfileSettings({
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.lastName ? 'border-red-500' : 'border-warm-gray-light'
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.lastName ? 'border-red-500' : 'border-border-light'
                   }`}
               />
               {errors.lastName && (
@@ -241,13 +241,13 @@ function ProfileSettings({
               )}
             </>
           ) : (
-            <p className="text-warm-gray-dark py-3">{profile.lastName}</p>
+            <p className="text-border-dark py-3">{profile.lastName}</p>
           )}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Email Address
         </label>
         {isEditing ? (
@@ -257,7 +257,7 @@ function ProfileSettings({
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.email ? 'border-red-500' : 'border-warm-gray-light'
+              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.email ? 'border-red-500' : 'border-border-light'
                 }`}
             />
             {errors.email && (
@@ -265,12 +265,12 @@ function ProfileSettings({
             )}
           </>
         ) : (
-          <p className="text-warm-gray-dark py-3">{profile.email}</p>
+          <p className="text-border-dark py-3">{profile.email}</p>
         )}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Phone Number
         </label>
         {isEditing ? (
@@ -279,10 +279,10 @@ function ProfileSettings({
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-3 border border-warm-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors"
+            className="w-full px-4 py-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
           />
         ) : (
-          <p className="text-warm-gray-dark py-3">{profile.phone || 'Not provided'}</p>
+          <p className="text-border-dark py-3">{profile.phone || 'Not provided'}</p>
         )}
       </div>
 
@@ -375,11 +375,11 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
   if (success) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Check className="w-8 h-8 text-green-600" />
+        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Check className="w-8 h-8 text-success-600" />
         </div>
-        <h3 className="font-serif text-xl text-charcoal mb-2">Password Changed</h3>
-        <p className="text-warm-gray-dark mb-6">
+        <h3 className="font-serif text-xl text-text-primary mb-2">Password Changed</h3>
+        <p className="text-border-dark mb-6">
           Your password has been successfully updated.
         </p>
         <Button onClick={onClose}>Close</Button>
@@ -390,7 +390,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Current Password
         </label>
         <div className="relative">
@@ -399,13 +399,13 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
             name="currentPassword"
             value={formData.currentPassword}
             onChange={handleChange}
-            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.currentPassword ? 'border-red-500' : 'border-warm-gray-light'
+            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.currentPassword ? 'border-red-500' : 'border-border-light'
               }`}
           />
           <button
             type="button"
             onClick={() => toggleShowPassword('current')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-gray-dark hover:text-charcoal"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary"
           >
             {showPasswords.current ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -416,7 +416,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           New Password
         </label>
         <div className="relative">
@@ -425,13 +425,13 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
             name="newPassword"
             value={formData.newPassword}
             onChange={handleChange}
-            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.newPassword ? 'border-red-500' : 'border-warm-gray-light'
+            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.newPassword ? 'border-red-500' : 'border-border-light'
               }`}
           />
           <button
             type="button"
             onClick={() => toggleShowPassword('new')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-gray-dark hover:text-charcoal"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary"
           >
             {showPasswords.new ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -439,13 +439,13 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
         {errors.newPassword && (
           <p className="text-sm text-red-600 mt-1">{errors.newPassword}</p>
         )}
-        <p className="text-xs text-warm-gray-dark mt-1">
+        <p className="text-xs text-border-dark mt-1">
           Must be at least 8 characters with uppercase, lowercase, and number
         </p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Confirm New Password
         </label>
         <div className="relative">
@@ -454,13 +454,13 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors ${errors.confirmPassword ? 'border-red-500' : 'border-warm-gray-light'
+            className={`w-full px-4 py-3 pr-12 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors ${errors.confirmPassword ? 'border-red-500' : 'border-border-light'
               }`}
           />
           <button
             type="button"
             onClick={() => toggleShowPassword('confirm')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-gray-dark hover:text-charcoal"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary"
           >
             {showPasswords.confirm ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -530,7 +530,7 @@ function DeleteAccountForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Type DELETE to confirm
         </label>
         <input
@@ -541,12 +541,12 @@ function DeleteAccountForm({ onClose }: { onClose: () => void }) {
             setError('')
           }}
           placeholder="DELETE"
-          className="w-full px-4 py-3 border border-warm-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors"
+          className="w-full px-4 py-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-1">
+        <label className="block text-sm font-medium text-text-primary mb-1">
           Enter your password
         </label>
         <input
@@ -557,7 +557,7 @@ function DeleteAccountForm({ onClose }: { onClose: () => void }) {
             setError('')
           }}
           placeholder="Your password"
-          className="w-full px-4 py-3 border border-warm-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold transition-colors"
+          className="w-full px-4 py-3 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
         />
       </div>
 
@@ -636,10 +636,10 @@ export default function SettingsPage() {
           <div className="lg:col-span-3 space-y-6">
             {/* Header */}
             <div>
-              <h1 className="font-serif text-2xl lg:text-3xl text-charcoal">
+              <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
                 Account Settings
               </h1>
-              <p className="text-warm-gray-dark mt-1">
+              <p className="text-border-dark mt-1">
                 Manage your account preferences and security
               </p>
             </div>
@@ -661,12 +661,12 @@ export default function SettingsPage() {
               description="Manage your password and security settings"
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div className="flex items-center gap-3">
-                    <Lock className="w-5 h-5 text-gold" />
+                    <Lock className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="font-medium text-charcoal">Password</p>
-                      <p className="text-sm text-warm-gray-dark">Last changed 3 months ago</p>
+                      <p className="font-medium text-text-primary">Password</p>
+                      <p className="text-sm text-border-dark">Last changed 3 months ago</p>
                     </div>
                   </div>
                   <Button
@@ -678,12 +678,12 @@ export default function SettingsPage() {
                   </Button>
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div className="flex items-center gap-3">
-                    <Smartphone className="w-5 h-5 text-gold" />
+                    <Smartphone className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="font-medium text-charcoal">Two-Factor Authentication</p>
-                      <p className="text-sm text-warm-gray-dark">Add an extra layer of security</p>
+                      <p className="font-medium text-text-primary">Two-Factor Authentication</p>
+                      <p className="text-sm text-border-dark">Add an extra layer of security</p>
                     </div>
                   </div>
                   <Button variant="secondary" size="sm">
@@ -693,10 +693,10 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3">
                   <div className="flex items-center gap-3">
-                    <Shield className="w-5 h-5 text-gold" />
+                    <Shield className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="font-medium text-charcoal">Active Sessions</p>
-                      <p className="text-sm text-warm-gray-dark">Manage devices logged into your account</p>
+                      <p className="font-medium text-text-primary">Active Sessions</p>
+                      <p className="text-sm text-border-dark">Manage devices logged into your account</p>
                     </div>
                   </div>
                   <Button variant="secondary" size="sm">
@@ -712,10 +712,10 @@ export default function SettingsPage() {
               description="Choose how you want to be notified"
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Order Updates</p>
-                    <p className="text-sm text-warm-gray-dark">Get notified about your order status</p>
+                    <p className="font-medium text-text-primary">Order Updates</p>
+                    <p className="text-sm text-border-dark">Get notified about your order status</p>
                   </div>
                   <Toggle
                     enabled={notifications.orderUpdates}
@@ -723,10 +723,10 @@ export default function SettingsPage() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Promotions & Offers</p>
-                    <p className="text-sm text-warm-gray-dark">Receive exclusive deals and discounts</p>
+                    <p className="font-medium text-text-primary">Promotions & Offers</p>
+                    <p className="text-sm text-border-dark">Receive exclusive deals and discounts</p>
                   </div>
                   <Toggle
                     enabled={notifications.promotions}
@@ -734,10 +734,10 @@ export default function SettingsPage() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">New Arrivals</p>
-                    <p className="text-sm text-warm-gray-dark">Be the first to know about new products</p>
+                    <p className="font-medium text-text-primary">New Arrivals</p>
+                    <p className="text-sm text-border-dark">Be the first to know about new products</p>
                   </div>
                   <Toggle
                     enabled={notifications.newArrivals}
@@ -745,10 +745,10 @@ export default function SettingsPage() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Price Drops</p>
-                    <p className="text-sm text-warm-gray-dark">Get alerts when wishlist items go on sale</p>
+                    <p className="font-medium text-text-primary">Price Drops</p>
+                    <p className="text-sm text-border-dark">Get alerts when wishlist items go on sale</p>
                   </div>
                   <Toggle
                     enabled={notifications.priceDrops}
@@ -756,10 +756,10 @@ export default function SettingsPage() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Newsletter</p>
-                    <p className="text-sm text-warm-gray-dark">Weekly updates and curated content</p>
+                    <p className="font-medium text-text-primary">Newsletter</p>
+                    <p className="text-sm text-border-dark">Weekly updates and curated content</p>
                   </div>
                   <Toggle
                     enabled={notifications.newsletter}
@@ -769,8 +769,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3">
                   <div>
-                    <p className="font-medium text-charcoal">SMS Notifications</p>
-                    <p className="text-sm text-warm-gray-dark">Receive text messages for important updates</p>
+                    <p className="font-medium text-text-primary">SMS Notifications</p>
+                    <p className="text-sm text-border-dark">Receive text messages for important updates</p>
                   </div>
                   <Toggle
                     enabled={notifications.smsNotifications}
@@ -779,7 +779,7 @@ export default function SettingsPage() {
                 </div>
 
                 {savingNotifications && (
-                  <p className="text-sm text-gold flex items-center gap-2">
+                  <p className="text-sm text-primary flex items-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" />
                     Saving...
                   </p>
@@ -793,25 +793,25 @@ export default function SettingsPage() {
               description="Control your data and privacy preferences"
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Profile Visibility</p>
-                    <p className="text-sm text-warm-gray-dark">Control who can see your profile</p>
+                    <p className="font-medium text-text-primary">Profile Visibility</p>
+                    <p className="text-sm text-border-dark">Control who can see your profile</p>
                   </div>
                   <select
                     value={privacy.profileVisibility}
                     onChange={(e) => handlePrivacyChange('profileVisibility', e.target.value)}
-                    className="px-3 py-2 border border-warm-gray-light rounded-lg focus:outline-none focus:ring-2 focus:ring-gold/20 focus:border-gold"
+                    className="px-3 py-2 border border-border-light rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   >
                     <option value="public">Public</option>
                     <option value="private">Private</option>
                   </select>
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Show Wishlist</p>
-                    <p className="text-sm text-warm-gray-dark">Allow others to see your wishlist</p>
+                    <p className="font-medium text-text-primary">Show Wishlist</p>
+                    <p className="text-sm text-border-dark">Allow others to see your wishlist</p>
                   </div>
                   <Toggle
                     enabled={privacy.showWishlist}
@@ -819,10 +819,10 @@ export default function SettingsPage() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-charcoal">Analytics</p>
-                    <p className="text-sm text-warm-gray-dark">Help us improve by sharing usage data</p>
+                    <p className="font-medium text-text-primary">Analytics</p>
+                    <p className="text-sm text-border-dark">Help us improve by sharing usage data</p>
                   </div>
                   <Toggle
                     enabled={privacy.allowAnalytics}
@@ -832,8 +832,8 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3">
                   <div>
-                    <p className="font-medium text-charcoal">Personalized Ads</p>
-                    <p className="text-sm text-warm-gray-dark">See ads based on your interests</p>
+                    <p className="font-medium text-text-primary">Personalized Ads</p>
+                    <p className="text-sm text-border-dark">See ads based on your interests</p>
                   </div>
                   <Toggle
                     enabled={privacy.personalizedAds}
@@ -842,7 +842,7 @@ export default function SettingsPage() {
                 </div>
 
                 {savingPrivacy && (
-                  <p className="text-sm text-gold flex items-center gap-2">
+                  <p className="text-sm text-primary flex items-center gap-2">
                     <Loader2 className="w-4 h-4 animate-spin" />
                     Saving...
                   </p>
@@ -856,12 +856,12 @@ export default function SettingsPage() {
               description="Irreversible account actions"
             >
               <div className="space-y-4">
-                <div className="flex items-center justify-between py-3 border-b border-warm-gray-light">
+                <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div className="flex items-center gap-3">
-                    <LogOut className="w-5 h-5 text-warm-gray-dark" />
+                    <LogOut className="w-5 h-5 text-border-dark" />
                     <div>
-                      <p className="font-medium text-charcoal">Sign Out Everywhere</p>
-                      <p className="text-sm text-warm-gray-dark">Log out of all devices</p>
+                      <p className="font-medium text-text-primary">Sign Out Everywhere</p>
+                      <p className="text-sm text-border-dark">Log out of all devices</p>
                     </div>
                   </div>
                   <Button variant="secondary" size="sm">
@@ -874,7 +874,7 @@ export default function SettingsPage() {
                     <Trash2 className="w-5 h-5 text-red-500" />
                     <div>
                       <p className="font-medium text-red-600">Delete Account</p>
-                      <p className="text-sm text-warm-gray-dark">Permanently delete your account and data</p>
+                      <p className="text-sm text-border-dark">Permanently delete your account and data</p>
                     </div>
                   </div>
                   <Button

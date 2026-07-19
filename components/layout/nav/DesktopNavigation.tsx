@@ -17,7 +17,7 @@ const CategoryMegaMenuPanel = ({ categories }: { categories: NestedCategory[] })
   return (
     <div
       className={cn(
-        'bg-background rounded-brand shadow-hover border border-warm-gray-light p-6 gap-6 grid',
+        'bg-background rounded-brand shadow-hover border border-border-light p-6 gap-6 grid',
         categories.length <= 2 ? 'min-w-75' : 'min-w-125',
         gridColsMap[cols] ?? 'grid-cols-4'
       )}
@@ -28,7 +28,7 @@ const CategoryMegaMenuPanel = ({ categories }: { categories: NestedCategory[] })
           {/* Level 1 — Column Header */}
           <Link
             href={`/categories/${category.slug}`}
-            className="font-semibold text-sm text-charcoal hover:text-gold transition-colors pb-2 border-b border-warm-gray-light"
+            className="font-semibold text-sm text-text-primary hover:text-primary transition-colors pb-2 border-b border-border-light"
           >
             {category.name}
           </Link>
@@ -38,7 +38,7 @@ const CategoryMegaMenuPanel = ({ categories }: { categories: NestedCategory[] })
             <div key={child.id} className="flex flex-col gap-1 mt-1">
               <Link
                 href={`/categories/${child.slug}`}
-                className="text-sm text-warm-gray-dark hover:text-gold transition-colors py-1"
+                className="text-sm text-border-dark hover:text-primary transition-colors py-1"
               >
                 {child.name}
               </Link>
@@ -48,7 +48,7 @@ const CategoryMegaMenuPanel = ({ categories }: { categories: NestedCategory[] })
                 <Link
                   key={grandchild.id}
                   href={`/categories/${grandchild.slug}`}
-                  className="text-xs text-warm-gray-dark hover:text-gold transition-colors py-0.5 pl-2 border-l border-warm-gray-light"
+                  className="text-xs text-border-dark hover:text-primary transition-colors py-0.5 pl-2 border-l border-border-light"
                 >
                   {grandchild.name}
                 </Link>
@@ -57,7 +57,7 @@ const CategoryMegaMenuPanel = ({ categories }: { categories: NestedCategory[] })
               {/* View All */}
               <Link
                 href={`/categories/${child.slug}`}
-                className="text-xs text-gold font-medium mt-1 hover:underline"
+                className="text-xs text-primary font-medium mt-1 hover:underline"
               >
                 View all →
               </Link>

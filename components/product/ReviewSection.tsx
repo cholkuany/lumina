@@ -110,7 +110,7 @@ export function ReviewSection({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Average Rating */}
         <div className="lg:col-span-3 text-center lg:text-left">
-          <div className="text-5xl font-serif font-semibold text-charcoal mb-2">
+          <div className="text-5xl font-serif font-semibold text-text-primary mb-2">
             {averageRating.toFixed(1)}
           </div>
           <div className="flex items-center justify-center lg:justify-start gap-1 mb-2">
@@ -120,15 +120,15 @@ export function ReviewSection({
                 className={cn(
                   'w-5 h-5',
                   i < Math.floor(averageRating)
-                    ? 'fill-gold text-gold'
+                    ? 'fill-primary text-primary'
                     : i < averageRating
-                      ? 'fill-gold/50 text-gold'
-                      : 'fill-warm-gray-light text-warm-gray-light'
+                      ? 'fill-primary/50 text-primary'
+                      : 'fill-border-light text-border-light'
                 )}
               />
             ))}
           </div>
-          <p className="text-sm text-warm-gray-dark">
+          <p className="text-sm text-border-dark">
             Based on {totalReviews} reviews
           </p>
         </div>
@@ -141,19 +141,19 @@ export function ReviewSection({
               onClick={() => handleFilterByRating(stars)}
               className={cn(
                 'flex items-center gap-3 w-full group transition-colors rounded p-1 -mx-1',
-                filterRating === stars && 'bg-linen'
+                filterRating === stars && 'bg-surface'
               )}
             >
-              <span className="text-sm text-warm-gray-dark w-12 text-left group-hover:text-gold transition-colors">
+              <span className="text-sm text-border-dark w-12 text-left group-hover:text-primary transition-colors">
                 {stars} star
               </span>
-              <div className="flex-1 h-2.5 bg-warm-gray-light rounded-full overflow-hidden">
+              <div className="flex-1 h-2.5 bg-border-light rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gold rounded-full transition-all duration-500"
+                  className="h-full bg-primary rounded-full transition-all duration-500"
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <span className="text-sm text-warm-gray-dark w-12 text-right group-hover:text-gold transition-colors">
+              <span className="text-sm text-border-dark w-12 text-right group-hover:text-primary transition-colors">
                 {count}
               </span>
             </button>
@@ -162,7 +162,7 @@ export function ReviewSection({
           {filterRating && (
             <button
               onClick={() => setFilterRating(null)}
-              className="text-sm text-gold hover:underline mt-2"
+              className="text-sm text-primary hover:underline mt-2"
             >
               Clear filter
             </button>
@@ -171,9 +171,9 @@ export function ReviewSection({
 
         {/* Write Review CTA */}
         <div className="lg:col-span-4">
-          <div className="bg-linen rounded-brand p-6 text-center">
-            <h4 className="font-medium text-charcoal mb-2">Share your thoughts</h4>
-            <p className="text-sm text-warm-gray-dark mb-4">
+          <div className="bg-surface rounded-brand p-6 text-center">
+            <h4 className="font-medium text-text-primary mb-2">Share your thoughts</h4>
+            <p className="text-sm text-border-dark mb-4">
               If you&apos;ve used this product, help others by sharing your experience.
             </p>
             <Button onClick={() => setIsWriteReviewOpen(true)} className="w-full">
@@ -184,11 +184,11 @@ export function ReviewSection({
       </div>
 
       {/* Filters & Sort */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-warm-gray-light">
-        <h3 className="font-serif text-xl text-charcoal">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-border-light">
+        <h3 className="font-serif text-xl text-text-primary">
           Customer Reviews
           {filterRating && (
-            <span className="text-gold text-base font-normal ml-2">
+            <span className="text-primary text-base font-normal ml-2">
               ({filterRating} stars)
             </span>
           )}
@@ -209,7 +209,7 @@ export function ReviewSection({
 
       {/* Reviews List */}
       {filteredReviews.length > 0 ? (
-        <div className="divide-y divide-warm-gray-light">
+        <div className="divide-y divide-border-light">
           {filteredReviews.slice(0, visibleCount).map((review) => (
             <ReviewCard
               key={review.id}
@@ -221,7 +221,7 @@ export function ReviewSection({
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-warm-gray-dark">
+          <p className="text-border-dark">
             {filterRating
               ? `No ${filterRating}-star reviews yet.`
               : 'No reviews yet. Be the first to review this product!'}
@@ -269,8 +269,8 @@ interface HeadingProps {
 }
 export const Header = ({ title, as: Tag }: HeadingProps) => {
   return (
-    <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-warm-gray-light'>
-      <Tag className="font-serif text-xl text-charcoal">
+    <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-border-light'>
+      <Tag className="font-serif text-xl text-text-primary">
         {title}
       </Tag>
     </div>

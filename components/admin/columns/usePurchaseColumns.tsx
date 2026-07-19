@@ -6,8 +6,8 @@ import { Eye, X } from "lucide-react"
 
 // Hook parameter types
 const statusConfig = {
-  pending: { label: 'Draft', className: 'bg-gray-100 text-gray-700' }, ordered: { label: 'Ordered', className: 'bg-blue-100 text-blue-700' },
-  in_transit: { label: 'In Transit', className: 'bg-amber-100 text-amber-700' }, received: { label: 'Received', className: 'bg-green-100 text-green-700' },
+  pending: { label: 'Draft', className: 'bg-gray-100 text-gray-700' }, ordered: { label: 'Ordered', className: 'bg-primary-100 text-primary-700' },
+  in_transit: { label: 'In Transit', className: 'bg-amber-100 text-amber-700' }, received: { label: 'Received', className: 'bg-success-100 text-success-700' },
   cancelled: { label: 'Cancelled', className: 'bg-red-100 text-red-700' },
 }
 type UsePurchaseColumnsProps = {
@@ -34,11 +34,11 @@ export const usePurchaseColumns = ({
                 e.stopPropagation()
                 setPurchaseDetail(row.original)
               }}
-              className="font-medium text-charcoal hover:text-gold transition-colors"
+              className="font-medium text-text-primary hover:text-primary transition-colors"
             >
               {getValue()}
             </button>
-            <p className="text-xs text-warm-gray-dark">
+            <p className="text-xs text-border-dark">
               {new Date(row.original.date).toLocaleDateString()}
             </p>
           </div>
@@ -54,8 +54,8 @@ export const usePurchaseColumns = ({
           const supplier = getValue()
           return (
             <div>
-              <p className="text-sm font-medium text-charcoal">{supplier.name}</p>
-              <p className="text-xs text-warm-gray-dark">{supplier.email}</p>
+              <p className="text-sm font-medium text-text-primary">{supplier.name}</p>
+              <p className="text-xs text-border-dark">{supplier.email}</p>
             </div>
           )
         },
@@ -65,7 +65,7 @@ export const usePurchaseColumns = ({
       columnHelper.accessor('itemCount', {
         header: 'Items',
         cell: ({ getValue }) => (
-          <span className="text-charcoal">{getValue()}</span>
+          <span className="text-text-primary">{getValue()}</span>
         ),
       }),
 
@@ -74,7 +74,7 @@ export const usePurchaseColumns = ({
         header: 'Total',
         enableSorting: true,
         cell: ({ getValue }) => (
-          <span className="font-medium text-charcoal">
+          <span className="font-medium text-text-primary">
             ${getValue().toLocaleString()}
           </span>
         ),
@@ -85,7 +85,7 @@ export const usePurchaseColumns = ({
         header: 'Expected',
         enableSorting: true,
         cell: ({ getValue }) => (
-          <span className="text-sm text-warm-gray-dark">
+          <span className="text-sm text-border-dark">
             {new Date(getValue()).toLocaleDateString()}
           </span>
         ),
@@ -128,7 +128,7 @@ export const usePurchaseColumns = ({
                   e.stopPropagation()
                   setPurchaseDetail(row.original)
                 }}
-                className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
+                className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors"
                 title="View details"
               >
                 <Eye className="w-4 h-4" />
@@ -140,7 +140,7 @@ export const usePurchaseColumns = ({
                     e.stopPropagation()
                     setCancelModal({ open: true, purchaseId: id })
                   }}
-                  className="p-2 text-warm-gray-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-2 text-border-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                   title="Cancel order"
                 >
                   <X className="w-4 h-4" />

@@ -72,9 +72,9 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-linen border-t border-warm-gray-light">
+    <footer className="bg-surface border-t border-border-light">
       {/* Newsletter Section */}
-      <div className="bg-charcoal text-white py-12">
+      <div className="bg-text-primary text-white py-12">
         <div className="container-lumina">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
             <div className="text-center lg:text-left">
@@ -105,11 +105,11 @@ export function Footer() {
                   aria-label="Email address"
                   aria-describedby={message ? 'newsletter-message' : undefined}
                   required
-                  className="flex-1 h-12 px-4 bg-white/10 border border-white/20 rounded-brand text-white placeholder:text-white/50 focus:outline-none focus:border-gold focus:bg-white/15 transition-colors"
+                  className="flex-1 h-12 px-4 bg-white/10 border border-white/20 rounded-brand text-white placeholder:text-white/50 focus:outline-none focus:border-primary focus:bg-white/15 transition-colors"
                 />
                 <Button
                   type="submit"
-                  variant="gold"
+                  variant="primary"
                   className="whitespace-nowrap"
                   isLoading={status === 'loading'}
                 >
@@ -136,11 +136,11 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
             <Link href="/" className="inline-block mb-4">
-              <span className="font-serif text-2xl font-semibold text-charcoal">
+              <span className="font-serif text-2xl font-semibold text-text-primary">
                 LUMINA
               </span>
             </Link>
-            <p className="text-warm-gray-dark text-sm mb-6 max-w-xs">
+            <p className="text-border-dark text-sm mb-6 max-w-xs">
               Your destination for quality products.
               Curated with care, delivered with love.
             </p>
@@ -149,9 +149,9 @@ export function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-charcoal text-white
+                  className="w-10 h-10 rounded-full bg-text-primary text-white
                              flex items-center justify-center
-                             hover:bg-gold transition-colors"
+                             hover:bg-primary transition-colors"
                   aria-label={social.name}
                 >
                   <social.icon className="w-4 h-4" />
@@ -162,13 +162,13 @@ export function Footer() {
 
           {/* Shop Links */}
           <div>
-            <h4 className="font-serif font-semibold text-charcoal mb-4">Shop</h4>
+            <h4 className="font-serif font-semibold text-text-primary mb-4">Shop</h4>
             <ul className="space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-warm-gray-dark hover:text-gold transition-colors"
+                    className="text-sm text-border-dark hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -179,13 +179,13 @@ export function Footer() {
 
           {/* Help Links */}
           <div>
-            <h4 className="font-serif font-semibold text-charcoal mb-4">Help</h4>
+            <h4 className="font-serif font-semibold text-text-primary mb-4">Help</h4>
             <ul className="space-y-3">
               {footerLinks.help.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-warm-gray-dark hover:text-gold transition-colors"
+                    className="text-sm text-border-dark hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -196,13 +196,13 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-serif font-semibold text-charcoal mb-4">Company</h4>
+            <h4 className="font-serif font-semibold text-text-primary mb-4">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-warm-gray-dark hover:text-gold transition-colors"
+                    className="text-sm text-border-dark hover:text-primary transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -214,17 +214,17 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-warm-gray">
+      <div className="border-t border-border">
         <div className="container-lumina py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-warm-gray-dark">
+            <p className="text-sm text-border-dark">
               © 2025 LUMINA. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm text-warm-gray-dark">
-              <Link href="/privacy" className="hover:text-gold transition-colors">
+            <div className="flex items-center gap-6 text-sm text-border-dark">
+              <Link href="/privacy" className="hover:text-primary transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="hover:text-gold transition-colors">
+              <Link href="/terms" className="hover:text-primary transition-colors">
                 Terms of Service
               </Link>
             </div>

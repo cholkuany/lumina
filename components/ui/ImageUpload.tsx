@@ -71,7 +71,7 @@ export function ImageUpload({
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative w-20 h-20 rounded-lg overflow-hidden bg-linen group"
+            className="relative w-20 h-20 rounded-lg overflow-hidden bg-surface group"
           >
             <Image
               src={image}
@@ -82,7 +82,7 @@ export function ImageUpload({
             <button
               type="button"
               onClick={() => removeImage(index)}
-              className="absolute top-1 right-1 p-1 bg-charcoal/80 text-white rounded-full 
+              className="absolute top-1 right-1 p-1 bg-text-primary/80 text-white rounded-full 
               opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500"
             >
               <X className="w-3 h-3" />
@@ -101,12 +101,12 @@ export function ImageUpload({
             className={cn(
               'w-20 h-20 border-2 border-dashed rounded-lg flex flex-col items-center justify-center gap-1 transition-colors',
               isDragging
-                ? 'border-gold bg-gold/10'
-                : 'border-warm-gray hover:border-gold hover:bg-linen'
+                ? 'border-primary bg-primary/10'
+                : 'border-border hover:border-primary hover:bg-surface'
             )}
           >
-            <ImagePlus className="w-5 h-5 text-warm-gray-dark" />
-            <span className="text-xs text-warm-gray-dark">Add</span>
+            <ImagePlus className="w-5 h-5 text-border-dark" />
+            <span className="text-xs text-border-dark">Add</span>
           </button>
         )}
       </div>
@@ -122,7 +122,7 @@ export function ImageUpload({
       />
 
       {/* Helper Text */}
-      <p className="text-xs text-warm-gray-dark mt-2">
+      <p className="text-xs text-border-dark mt-2">
         Add up to {maxImages} {maxImages > 1 ? 'images' : 'image'}. Drag & drop or click to upload.
       </p>
     </div>

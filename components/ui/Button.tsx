@@ -5,20 +5,20 @@ const buttonVariants = cva(
   // Base styles
   `inline-flex items-center justify-center font-sans font-medium 
    tracking-wide transition-all duration-300 ease-out
-   focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2
+   focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
    disabled:opacity-50 disabled:pointer-events-none`,
   {
     variants: {
       variant: {
-        primary: `bg-charcoal text-white hover:bg-gold`,
-        secondary: `bg-transparent border-2 border-charcoal text-charcoal
-        hover:bg-charcoal hover:text-white`,
-        ghost: `bg-transparent text-charcoal hover:bg-linen`,
-        gold: `bg-gold text-white hover:bg-gold-dark`,
-        link: `bg-transparent text-charcoal underline-offset-4 
-        hover:text-gold hover:underline p-0`,
-        outline: `bg-transparent text-charcoal border-2 border-charcoal
-        hover:bg-charcoal hover:text-white focus:ring-charcoal/30`,
+        primary: `bg-text-primary text-white hover:bg-primary`,
+        secondary: `bg-transparent border-2 border-text-primary text-text-primary
+        hover:bg-text-primary hover:text-white`,
+        ghost: `bg-transparent text-text-primary hover:bg-surface`,
+        muted: `bg-primary text-white hover:bg-primary-dark`,
+        link: `bg-transparent text-text-primary underline-offset-4 
+        hover:text-primary hover:underline p-0`,
+        outline: `bg-transparent text-text-primary border-2 border-text-primary
+        hover:bg-text-primary hover:text-white focus:ring-text-primary/30`,
         danger: `bg-red-500 text-white hover:bg-red-600 active:bg-red-700 focus:ring-red-500/30`
       },
       size: {

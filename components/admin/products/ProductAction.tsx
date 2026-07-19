@@ -15,7 +15,7 @@ export function ProductActions({
     <div className="flex items-center justify-end gap-2">
       <Link
         href={`/admin/products/edit/${id}`}
-        className="p-2 text-warm-gray-dark hover:text-gold hover:bg-linen rounded-lg transition-colors"
+        className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors"
       >
         <SquarePen className="w-4 h-4" />
       </Link>
@@ -25,7 +25,7 @@ export function ProductActions({
           e.stopPropagation()
           onDelete(actionText, id)
         }}
-        className="p-2 text-warm-gray-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+        className="p-2 text-border-dark hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
       >
         <Trash2 className="w-4 h-4" />
       </button>

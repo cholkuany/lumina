@@ -30,10 +30,10 @@ export function Filters({
 
       {/* Filter options */}
       {showFilters && filters.length > 0 && (
-        <div className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-brand border border-warm-gray">
+        <div className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-brand border border-border">
           {filters.map((filter) => (
             <div key={filter.key} className="flex items-center gap-2">
-              <label className="text-sm text-warm-gray-dark whitespace-nowrap">
+              <label className="text-sm text-border-dark whitespace-nowrap">
                 {filter.label}:
               </label>
               <select
@@ -41,9 +41,9 @@ export function Filters({
                 onChange={(e) => handleFilterChange(filter.key, e.target.value)}
                 className={cn(
                   'px-3 py-1.5 text-sm',
-                  'bg-linen border border-transparent rounded-lg',
-                  'text-charcoal',
-                  'focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30',
+                  'bg-surface border border-transparent rounded-lg',
+                  'text-text-primary',
+                  'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30',
                   'cursor-pointer'
                 )}
               >
@@ -60,7 +60,7 @@ export function Filters({
           {activeFilterCount > 0 && (
             <button
               onClick={clearFilters}
-              className="ml-auto text-sm text-gold hover:text-gold-dark font-medium"
+              className="ml-auto text-sm text-primary hover:text-primary-dark font-medium"
             >
               Clear all
             </button>

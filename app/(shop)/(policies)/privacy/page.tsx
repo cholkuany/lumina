@@ -44,19 +44,19 @@ export default function PrivacyPolicyPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-linen py-12 lg:py-16">
+      <section className="bg-surface py-12 lg:py-16">
         <div className="container-lumina">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Shield className="w-8 h-8 text-gold" />
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Shield className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
               Privacy Policy
             </h1>
-            <p className="text-warm-gray-dark">
+            <p className="text-border-dark">
               Your privacy is important to us. This policy explains how we collect, use, and protect your information.
             </p>
-            <div className="flex items-center justify-center gap-6 mt-6 text-sm text-warm-gray-dark">
+            <div className="flex items-center justify-center gap-6 mt-6 text-sm text-border-dark">
               <span>Last Updated: {lastUpdated}</span>
               <span>•</span>
               <span>Effective: {effectiveDate}</span>
@@ -68,30 +68,30 @@ export default function PrivacyPolicyPage() {
       {/* Privacy Highlights */}
       <section className="container-lumina py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white border border-warm-gray-light rounded-brand p-6 text-center">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Lock className="w-6 h-6 text-green-600" />
+          <div className="bg-white border border-border-light rounded-brand p-6 text-center">
+            <div className="w-12 h-12 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Lock className="w-6 h-6 text-success-600" />
             </div>
-            <h3 className="font-medium text-charcoal mb-2">Secure Data</h3>
-            <p className="text-sm text-warm-gray-dark">
+            <h3 className="font-medium text-text-primary mb-2">Secure Data</h3>
+            <p className="text-sm text-border-dark">
               Your data is encrypted and protected with industry-standard security measures.
             </p>
           </div>
-          <div className="bg-white border border-warm-gray-light rounded-brand p-6 text-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <UserCheck className="w-6 h-6 text-blue-600" />
+          <div className="bg-white border border-border-light rounded-brand p-6 text-center">
+            <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <UserCheck className="w-6 h-6 text-primary-600" />
             </div>
-            <h3 className="font-medium text-charcoal mb-2">Your Control</h3>
-            <p className="text-sm text-warm-gray-dark">
+            <h3 className="font-medium text-text-primary mb-2">Your Control</h3>
+            <p className="text-sm text-border-dark">
               You have full control over your data with easy access, update, and deletion options.
             </p>
           </div>
-          <div className="bg-white border border-warm-gray-light rounded-brand p-6 text-center">
+          <div className="bg-white border border-border-light rounded-brand p-6 text-center">
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Eye className="w-6 h-6 text-purple-600" />
             </div>
-            <h3 className="font-medium text-charcoal mb-2">Transparency</h3>
-            <p className="text-sm text-warm-gray-dark">
+            <h3 className="font-medium text-text-primary mb-2">Transparency</h3>
+            <p className="text-sm text-border-dark">
               We&apos;re clear about what data we collect and how we use it.
             </p>
           </div>
@@ -102,14 +102,14 @@ export default function PrivacyPolicyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Table of Contents - Sidebar */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 bg-white border border-warm-gray-light rounded-brand p-6">
-              <h2 className="font-serif text-lg text-charcoal mb-4">Table of Contents</h2>
+            <div className="sticky top-24 bg-white border border-border-light rounded-brand p-6">
+              <h2 className="font-serif text-lg text-text-primary mb-4">Table of Contents</h2>
               <nav className="space-y-2">
                 {tableOfContents.map((item) => (
                   <a
                     key={item.id}
                     href={`#${item.id}`}
-                    className="block text-sm text-warm-gray-dark hover:text-gold transition-colors py-1"
+                    className="block text-sm text-border-dark hover:text-primary transition-colors py-1"
                   >
                     {item.title}
                   </a>
@@ -120,15 +120,15 @@ export default function PrivacyPolicyPage() {
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <div className="bg-white border border-warm-gray-light rounded-brand p-8 lg:p-12 space-y-12">
+            <div className="bg-white border border-border-light rounded-brand p-8 lg:p-12 space-y-12">
 
               {/* Section 1 */}
               <section id="introduction" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">1</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">1</span>
                   Introduction
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     Welcome to LUMINA (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). We are committed to protecting your privacy and personal
                     information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information
@@ -138,10 +138,10 @@ export default function PrivacyPolicyPage() {
                     By using our Services, you consent to the data practices described in this policy. If you do not agree
                     with the terms of this Privacy Policy, please do not access or use our Services.
                   </p>
-                  <div className="bg-linen rounded-lg p-4">
+                  <div className="bg-surface rounded-lg p-4">
                     <p className="text-sm">
                       <strong>Data Controller:</strong> Lumina Commerce Inc., 123 Commerce Street, New York, NY 10001,
-                      United States. Contact: <a href="mailto:privacy@lumina.com" className="text-gold hover:underline">privacy@lumina.com</a>
+                      United States. Contact: <a href="mailto:privacy@lumina.com" className="text-primary hover:underline">privacy@lumina.com</a>
                     </p>
                   </div>
                 </div>
@@ -149,13 +149,13 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 2 */}
               <section id="information-collected" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">2</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">2</span>
                   Information We Collect
                 </h2>
-                <div className="pl-11 space-y-6 text-warm-gray-dark">
+                <div className="pl-11 space-y-6 text-border-dark">
                   <div>
-                    <h3 className="font-medium text-charcoal mb-3">2.1 Information You Provide</h3>
+                    <h3 className="font-medium text-text-primary mb-3">2.1 Information You Provide</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li><strong>Account information:</strong> Name, email, password, phone number</li>
                       <li><strong>Purchase information:</strong> Billing/shipping addresses, payment details</li>
@@ -164,7 +164,7 @@ export default function PrivacyPolicyPage() {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-medium text-charcoal mb-3">2.2 Automatically Collected Information</h3>
+                    <h3 className="font-medium text-text-primary mb-3">2.2 Automatically Collected Information</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li><strong>Device data:</strong> Device type, OS, browser, unique identifiers</li>
                       <li><strong>Usage data:</strong> Pages visited, clicks, time spent, search queries</li>
@@ -172,7 +172,7 @@ export default function PrivacyPolicyPage() {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-medium text-charcoal mb-3">2.3 Third-Party Information</h3>
+                    <h3 className="font-medium text-text-primary mb-3">2.3 Third-Party Information</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>Social media data (when you connect accounts)</li>
                       <li>Payment processor confirmations</li>
@@ -184,14 +184,14 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 3 */}
               <section id="how-we-use" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">3</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">3</span>
                   How We Use Your Information
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-linen rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Order Fulfillment</h4>
+                    <div className="bg-surface rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Order Fulfillment</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Process and ship orders</li>
                         <li>• Send order confirmations</li>
@@ -199,8 +199,8 @@ export default function PrivacyPolicyPage() {
                         <li>• Provide customer support</li>
                       </ul>
                     </div>
-                    <div className="bg-linen rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Account Management</h4>
+                    <div className="bg-surface rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Account Management</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Create/manage accounts</li>
                         <li>• Authenticate users</li>
@@ -208,8 +208,8 @@ export default function PrivacyPolicyPage() {
                         <li>• Maintain wish lists</li>
                       </ul>
                     </div>
-                    <div className="bg-linen rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Marketing</h4>
+                    <div className="bg-surface rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Marketing</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Send promotional emails</li>
                         <li>• Personalize recommendations</li>
@@ -217,8 +217,8 @@ export default function PrivacyPolicyPage() {
                         <li>• Conduct surveys</li>
                       </ul>
                     </div>
-                    <div className="bg-linen rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Security</h4>
+                    <div className="bg-surface rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Security</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Detect fraud</li>
                         <li>• Prevent abuse</li>
@@ -232,13 +232,13 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 4 */}
               <section id="information-sharing" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">4</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">4</span>
                   Information Sharing
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
-                    <p className="text-sm text-green-800 font-medium">We do not sell your personal information.</p>
+                <div className="pl-11 space-y-4 text-border-dark">
+                  <div className="bg-success-50 border border-success-200 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-success-800 font-medium">We do not sell your personal information.</p>
                   </div>
                   <p>We may share your information with:</p>
                   <ul className="list-disc pl-6 space-y-2">
@@ -252,31 +252,31 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 5 */}
               <section id="cookies" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">5</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">5</span>
                   Cookies & Tracking
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>We use cookies and similar technologies for:</p>
                   <div className="space-y-3">
-                    <div className="flex items-start gap-3 p-3 border border-warm-gray-light rounded-lg">
-                      <Cookie className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-3 p-3 border border-border-light rounded-lg">
+                      <Cookie className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-charcoal">Essential Cookies</p>
+                        <p className="font-medium text-text-primary">Essential Cookies</p>
                         <p className="text-sm">Required for core functionality (cart, login, checkout)</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-3 border border-warm-gray-light rounded-lg">
-                      <Eye className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-3 p-3 border border-border-light rounded-lg">
+                      <Eye className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-charcoal">Analytics Cookies</p>
+                        <p className="font-medium text-text-primary">Analytics Cookies</p>
                         <p className="text-sm">Help us understand how visitors use our site</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-3 border border-warm-gray-light rounded-lg">
-                      <Share2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-3 p-3 border border-border-light rounded-lg">
+                      <Share2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-charcoal">Marketing Cookies</p>
+                        <p className="font-medium text-text-primary">Marketing Cookies</p>
                         <p className="text-sm">Used for targeted advertising across websites</p>
                       </div>
                     </div>
@@ -289,11 +289,11 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 6 */}
               <section id="data-security" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">6</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">6</span>
                   Data Security
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>We protect your information with:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li><strong>TLS/SSL encryption</strong> for all data transmission</li>
@@ -315,43 +315,43 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 7 */}
               <section id="data-retention" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">7</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">7</span>
                   Data Retention
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse">
                       <thead>
-                        <tr className="bg-linen">
-                          <th className="border border-warm-gray-light px-4 py-3 text-left text-sm font-medium text-charcoal">Data Type</th>
-                          <th className="border border-warm-gray-light px-4 py-3 text-left text-sm font-medium text-charcoal">Retention Period</th>
+                        <tr className="bg-surface">
+                          <th className="border border-border-light px-4 py-3 text-left text-sm font-medium text-text-primary">Data Type</th>
+                          <th className="border border-border-light px-4 py-3 text-left text-sm font-medium text-text-primary">Retention Period</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Account information</td>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Until deletion + 30 days</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">Account information</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">Until deletion + 30 days</td>
                         </tr>
-                        <tr className="bg-linen/50">
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Order history</td>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">7 years (legal requirement)</td>
-                        </tr>
-                        <tr>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Payment records</td>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">7 years (legal requirement)</td>
-                        </tr>
-                        <tr className="bg-linen/50">
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Support communications</td>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">3 years</td>
+                        <tr className="bg-surface/50">
+                          <td className="border border-border-light px-4 py-3 text-sm">Order history</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">7 years (legal requirement)</td>
                         </tr>
                         <tr>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Marketing preferences</td>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Until consent withdrawn</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">Payment records</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">7 years (legal requirement)</td>
                         </tr>
-                        <tr className="bg-linen/50">
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">Analytics data</td>
-                          <td className="border border-warm-gray-light px-4 py-3 text-sm">26 months</td>
+                        <tr className="bg-surface/50">
+                          <td className="border border-border-light px-4 py-3 text-sm">Support communications</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">3 years</td>
+                        </tr>
+                        <tr>
+                          <td className="border border-border-light px-4 py-3 text-sm">Marketing preferences</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">Until consent withdrawn</td>
+                        </tr>
+                        <tr className="bg-surface/50">
+                          <td className="border border-border-light px-4 py-3 text-sm">Analytics data</td>
+                          <td className="border border-border-light px-4 py-3 text-sm">26 months</td>
                         </tr>
                       </tbody>
                     </table>
@@ -361,44 +361,44 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 8 */}
               <section id="your-rights" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">8</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">8</span>
                   Your Rights & Choices
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>Depending on your location, you may have the following rights:</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="border border-warm-gray-light rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Access</h4>
+                    <div className="border border-border-light rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Access</h4>
                       <p className="text-sm">Request a copy of your personal data</p>
                     </div>
-                    <div className="border border-warm-gray-light rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Correction</h4>
+                    <div className="border border-border-light rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Correction</h4>
                       <p className="text-sm">Request correction of inaccurate data</p>
                     </div>
-                    <div className="border border-warm-gray-light rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Deletion</h4>
+                    <div className="border border-border-light rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Deletion</h4>
                       <p className="text-sm">Request deletion of your data</p>
                     </div>
-                    <div className="border border-warm-gray-light rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Portability</h4>
+                    <div className="border border-border-light rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Portability</h4>
                       <p className="text-sm">Receive your data in a portable format</p>
                     </div>
-                    <div className="border border-warm-gray-light rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Restriction</h4>
+                    <div className="border border-border-light rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Restriction</h4>
                       <p className="text-sm">Limit how we process your data</p>
                     </div>
-                    <div className="border border-warm-gray-light rounded-lg p-4">
-                      <h4 className="font-medium text-charcoal mb-2">Objection</h4>
+                    <div className="border border-border-light rounded-lg p-4">
+                      <h4 className="font-medium text-text-primary mb-2">Objection</h4>
                       <p className="text-sm">Object to certain processing activities</p>
                     </div>
                   </div>
                   <p className="mt-4">
                     To exercise these rights, contact us at{' '}
-                    <a href="mailto:privacy@lumina.com" className="text-gold hover:underline">privacy@lumina.com</a>
+                    <a href="mailto:privacy@lumina.com" className="text-primary hover:underline">privacy@lumina.com</a>
                     {' '}or through your account settings.
                   </p>
-                  <h3 className="font-medium text-charcoal mt-6">Marketing Communications</h3>
+                  <h3 className="font-medium text-text-primary mt-6">Marketing Communications</h3>
                   <p>You can opt out of marketing emails by:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Clicking &quot;unsubscribe&quot; in any marketing email</li>
@@ -410,11 +410,11 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 9 */}
               <section id="childrens-privacy" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">9</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">9</span>
                   Children&apos;s Privacy
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     Our Services are not directed to children under 13 (or 16 in certain jurisdictions). We do not
                     knowingly collect personal information from children. If you believe a child has provided us with
@@ -425,11 +425,11 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 10 */}
               <section id="international" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">10</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">10</span>
                   International Transfers
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     Your information may be transferred to and processed in countries other than your own. We ensure
                     appropriate safeguards are in place, including:
@@ -444,11 +444,11 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 11 */}
               <section id="third-party" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">11</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">11</span>
                   Third-Party Links
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     Our Services may contain links to third-party websites or services. We are not responsible for the
                     privacy practices of these third parties. We encourage you to review their privacy policies before
@@ -459,11 +459,11 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 12 */}
               <section id="california" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">12</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">12</span>
                   California Privacy Rights (CCPA)
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>California residents have additional rights under the CCPA:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li><strong>Right to Know:</strong> What personal information we collect, use, and disclose</li>
@@ -473,7 +473,7 @@ export default function PrivacyPolicyPage() {
                   </ul>
                   <p className="mt-4">
                     To exercise your CCPA rights, email{' '}
-                    <a href="mailto:privacy@lumina.com" className="text-gold hover:underline">privacy@lumina.com</a>
+                    <a href="mailto:privacy@lumina.com" className="text-primary hover:underline">privacy@lumina.com</a>
                     {' '}or call 1-800-LUMINA.
                   </p>
                 </div>
@@ -481,11 +481,11 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 13 */}
               <section id="european" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">13</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">13</span>
                   European Privacy Rights (GDPR)
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>If you are in the European Economic Area, UK, or Switzerland, you have additional rights:</p>
                   <ul className="list-disc pl-6 space-y-2">
                     <li>Right to lodge a complaint with your local data protection authority</li>
@@ -495,18 +495,18 @@ export default function PrivacyPolicyPage() {
                   </ul>
                   <p className="mt-4">
                     Our EU representative can be contacted at{' '}
-                    <a href="mailto:eu-privacy@lumina.com" className="text-gold hover:underline">eu-privacy@lumina.com</a>.
+                    <a href="mailto:eu-privacy@lumina.com" className="text-primary hover:underline">eu-privacy@lumina.com</a>.
                   </p>
                 </div>
               </section>
 
               {/* Section 14 */}
               <section id="changes" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">14</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">14</span>
                   Changes to This Policy
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     We may update this Privacy Policy from time to time. We will notify you of any material changes by
                     posting the new policy on this page and updating the &quot;Last Updated&quot; date. For significant changes,
@@ -521,22 +521,22 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 15 */}
               <section id="contact" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">15</span>
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">15</span>
                   Contact Us
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>If you have questions about this Privacy Policy or our data practices, contact us:</p>
-                  <div className="bg-linen rounded-lg p-6">
-                    <p className="font-medium text-charcoal mb-3">Lumina Commerce Inc.</p>
+                  <div className="bg-surface rounded-lg p-6">
+                    <p className="font-medium text-text-primary mb-3">Lumina Commerce Inc.</p>
                     <div className="space-y-2 text-sm">
                       <p>Privacy Team</p>
                       <p>123 Commerce Street</p>
                       <p>New York, NY 10001</p>
                       <p>United States</p>
                       <div className="pt-3 space-y-1">
-                        <p><strong>Email:</strong> <a href="mailto:privacy@lumina.com" className="text-gold hover:underline">privacy@lumina.com</a></p>
-                        <p><strong>Phone:</strong> <a href="tel:1-800-LUMINA" className="text-gold hover:underline">1-800-LUMINA</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:privacy@lumina.com" className="text-primary hover:underline">privacy@lumina.com</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:1-800-LUMINA" className="text-primary hover:underline">1-800-LUMINA</a></p>
                       </div>
                     </div>
                   </div>
@@ -545,18 +545,18 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* Related Links */}
-            <div className="mt-8 p-6 bg-linen rounded-brand">
-              <h3 className="font-serif text-lg text-charcoal mb-4">Related Policies</h3>
+            <div className="mt-8 p-6 bg-surface rounded-brand">
+              <h3 className="font-serif text-lg text-text-primary mb-4">Related Policies</h3>
               <div className="flex flex-wrap gap-4">
-                <Link href="/terms" className="inline-flex items-center gap-2 text-gold hover:underline">
+                <Link href="/terms" className="inline-flex items-center gap-2 text-primary hover:underline">
                   <FileText className="w-4 h-4" />
                   Terms of Service
                 </Link>
-                <Link href="/shipping-policy" className="inline-flex items-center gap-2 text-gold hover:underline">
+                <Link href="/shipping-policy" className="inline-flex items-center gap-2 text-primary hover:underline">
                   <Globe className="w-4 h-4" />
                   Shipping Policy
                 </Link>
-                <Link href="/return-policy" className="inline-flex items-center gap-2 text-gold hover:underline">
+                <Link href="/return-policy" className="inline-flex items-center gap-2 text-primary hover:underline">
                   <Mail className="w-4 h-4" />
                   Return Policy
                 </Link>

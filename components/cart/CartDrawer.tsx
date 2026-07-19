@@ -29,7 +29,7 @@ export function CartDrawer() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-charcoal/50" />
+          <div className="fixed inset-0 bg-text-primary/50" />
         </Transition.Child>
 
         {/* Drawer */}
@@ -46,15 +46,15 @@ export function CartDrawer() {
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel className="w-screen max-w-md">
-                  <div className="flex h-full flex-col bg-ivory shadow-xl">
+                  <div className="flex h-full flex-col bg-background shadow-xl">
                     {/* Header */}
-                    <div className="flex items-center justify-between px-6 py-4 border-b border-warm-gray-light">
-                      <Dialog.Title className="font-serif text-xl text-charcoal">
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-border-light">
+                      <Dialog.Title className="font-serif text-xl text-text-primary">
                         Shopping Cart ({itemCount})
                       </Dialog.Title>
                       <button
                         onClick={closeCart}
-                        className="p-2 -mr-2 text-warm-gray-dark hover:text-charcoal transition-colors"
+                        className="p-2 -mr-2 text-border-dark hover:text-text-primary transition-colors"
                       >
                         <X className="w-5 h-5" />
                       </button>
@@ -73,18 +73,18 @@ export function CartDrawer() {
 
                         {/* Free Shipping Progress */}
                         {subtotal < 50 && (
-                          <div className="px-6 py-3 bg-linen">
+                          <div className="px-6 py-3 bg-surface">
                             <div className="flex justify-between text-sm mb-2">
-                              <span className="text-warm-gray-dark">
+                              <span className="text-border-dark">
                                 Add {formatPrice(50 - subtotal)} for free shipping
                               </span>
-                              <span className="text-gold font-medium">
+                              <span className="text-primary font-medium">
                                 {Math.round((subtotal / 50) * 100)}%
                               </span>
                             </div>
-                            <div className="h-2 bg-warm-gray-light rounded-full overflow-hidden">
+                            <div className="h-2 bg-border-light rounded-full overflow-hidden">
                               <div
-                                className="h-full bg-gold rounded-full transition-all duration-500"
+                                className="h-full bg-primary rounded-full transition-all duration-500"
                                 style={{ width: `${Math.min((subtotal / 50) * 100, 100)}%` }}
                               />
                             </div>
@@ -92,21 +92,21 @@ export function CartDrawer() {
                         )}
 
                         {/* Summary & Checkout */}
-                        <div className="border-t border-warm-gray-light px-6 py-6 space-y-4">
+                        <div className="border-t border-border-light px-6 py-6 space-y-4">
                           <div className="space-y-2">
                             <div className="flex justify-between text-sm">
-                              <span className="text-warm-gray-dark">Subtotal</span>
-                              <span className="text-charcoal">{formatPrice(subtotal)}</span>
+                              <span className="text-border-dark">Subtotal</span>
+                              <span className="text-text-primary">{formatPrice(subtotal)}</span>
                             </div>
                             <div className="flex justify-between text-sm">
-                              <span className="text-warm-gray-dark">Shipping</span>
-                              <span className="text-charcoal">
+                              <span className="text-border-dark">Shipping</span>
+                              <span className="text-text-primary">
                                 {shipping === 0 ? 'Free' : formatPrice(shipping)}
                               </span>
                             </div>
-                            <div className="flex justify-between text-lg font-semibold pt-2 border-t border-warm-gray-light">
-                              <span className="text-charcoal">Total</span>
-                              <span className="text-charcoal">{formatPrice(total)}</span>
+                            <div className="flex justify-between text-lg font-semibold pt-2 border-t border-border-light">
+                              <span className="text-text-primary">Total</span>
+                              <span className="text-text-primary">{formatPrice(total)}</span>
                             </div>
                           </div>
 
@@ -120,7 +120,7 @@ export function CartDrawer() {
                           <Link
                             href="/cart"
                             onClick={closeCart}
-                            className="block text-center text-sm text-warm-gray-dark hover:text-charcoal transition-colors"
+                            className="block text-center text-sm text-border-dark hover:text-text-primary transition-colors"
                           >
                             View Full Cart
                           </Link>
@@ -129,13 +129,13 @@ export function CartDrawer() {
                     ) : (
                       /* Empty Cart */
                       <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-                        <div className="w-20 h-20 bg-linen rounded-full flex items-center justify-center mb-6">
-                          <ShoppingBag className="w-10 h-10 text-warm-gray-dark" />
+                        <div className="w-20 h-20 bg-surface rounded-full flex items-center justify-center mb-6">
+                          <ShoppingBag className="w-10 h-10 text-border-dark" />
                         </div>
-                        <h3 className="font-serif text-xl text-charcoal mb-2">
+                        <h3 className="font-serif text-xl text-text-primary mb-2">
                           Your cart is empty
                         </h3>
-                        <p className="text-warm-gray-dark text-center mb-6">
+                        <p className="text-border-dark text-center mb-6">
                           Looks like you haven&apos;t added anything yet.
                         </p>
                         <Link href="/products" onClick={closeCart}>

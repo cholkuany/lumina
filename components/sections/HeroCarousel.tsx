@@ -25,7 +25,7 @@ export function HeroCarousel({ products }: { products: TProduct[] }) {
   const originalPrice = getProductOriginalPrice(activeProduct)
   const image =
     activeProduct?.variants?.[0]?.images?.[0]?.secure_url ||
-    '/placeholder-product.jpg'
+    '/grocery.svg'
 
   const goPrev = () => {
     setActiveIndex((prev) => (prev - 1 + items.length) % items.length)
@@ -95,7 +95,9 @@ export function HeroCarousel({ products }: { products: TProduct[] }) {
         <div className="order-1 relative min-h-36 overflow-hidden md:order-2 md:min-h-64">
           {/* DISCOUNT BADGE */}
           {discount && (
-            <div className="absolute left-4 top-4 z-10 flex h-13 w-13 items-center justify-center rounded-full bg-red-600 text-[10px] font-extrabold text-white shadow-lg md:h-14 md:w-14">
+            <div
+              className="absolute left-4 top-4 z-10 flex h-13 w-13 items-center justify-center rounded-full bg-red-600 text-[10px] font-extrabold text-white shadow-lg md:h-14 md:w-14"
+            >
               {discount}% OFF
             </div>
           )}
@@ -121,8 +123,8 @@ export function HeroCarousel({ products }: { products: TProduct[] }) {
               onClick={() => setActiveIndex(index)}
               aria-label={`Go to slide ${index + 1}`}
               className={`
-                h-2 rounded-full transition-all duration-300
-                ${isActive ? 'w-7 bg-[#FFD814]' : 'w-2 bg-slate-300 hover:bg-[#FFD814]'}
+                h-2 w-2 rounded-full transition-all duration-300
+                ${isActive ? 'h-4 w-4 bg-[#FFD814] ring-[#FFD814] ring-offset-2 ring-2' : 'bg-slate-300 hover:bg-[#FFD814]'}
               `}
             />
           )
@@ -135,23 +137,20 @@ export function HeroCarousel({ products }: { products: TProduct[] }) {
           <button
             onClick={goPrev}
             aria-label="Previous product"
-            className="absolute left-0 top-0 z-20 hidden h-full w-14 items-center justify-center text-4xl text-slate-700 transition hover:bg-black/5 md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 hidden h-14 w-14 items-center justify-center text-4xl text-slate-700 transition hover:bg-black/5 md:flex rounded-full bg-primary"
           >
-            <ChevronLeft size={40} className='text-amber-400' />
+            <ChevronLeft size={40} className='text-white' />
           </button>
 
           <button
             onClick={goNext}
             aria-label="Next product"
-            className="absolute right-0 top-0 z-20 hidden h-full w-14 items-center justify-center text-4xl text-slate-700 transition hover:bg-black/5 md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 hidden h-14 w-14 items-center justify-center text-4xl text-slate-700 transition hover:bg-black/5 md:flex rounded-full bg-primary"
           >
-            <ChevronRight size={40} className='text-amber-400' />
+            <ChevronRight size={40} className='text-white' />
           </button>
         </>
       )}
-
-      {/* FADE TO NEXT SECTION */}
-      <div className="pointer-events-none absolute bottom-0 left-0 h-12 w-full bg-linear-to-t from-white/60 to-transparent" />
     </div>
   )
 }

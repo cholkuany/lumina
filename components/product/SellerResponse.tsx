@@ -18,28 +18,28 @@ export function SellerResponse({
   isOfficial = true,
 }: SellerResponseProps) {
   return (
-    <div className="ml-14 mt-4 bg-linen/50 border-l-4 border-gold rounded-r-brand p-4">
+    <div className="ml-14 mt-4 bg-surface/50 border-l-4 border-primary rounded-r-brand p-4">
       <div className="flex items-start gap-3">
         {/* Seller Icon */}
-        <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center shrink-0">
+        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shrink-0">
           <Store className="w-4 h-4 text-white" />
         </div>
 
         <div className="flex-1 min-w-0">
           {/* Header */}
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="font-medium text-charcoal text-sm">{sellerName}</span>
+            <span className="font-medium text-text-primary text-sm">{sellerName}</span>
             {isOfficial && (
-              <span className="inline-flex items-center gap-1 text-xs bg-gold/20 text-gold-dark px-2 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-xs bg-primary/20 text-primary-dark px-2 py-0.5 rounded-full">
                 <MessageSquare className="w-3 h-3" />
                 Official Response
               </span>
             )}
-            <span className="text-xs text-warm-gray-dark">{date}</span>
+            <span className="text-xs text-border-dark">{date}</span>
           </div>
 
           {/* Response Content */}
-          <p className="text-sm text-warm-gray-dark leading-relaxed">
+          <p className="text-sm text-border-dark leading-relaxed">
             {content}
           </p>
         </div>

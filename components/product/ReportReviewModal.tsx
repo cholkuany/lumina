@@ -71,7 +71,7 @@ export function ReportReviewModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-charcoal/50" />
+          <div className="fixed inset-0 bg-text-primary/50" />
         </Transition.Child>
 
         {/* Modal */}
@@ -86,17 +86,17 @@ export function ReportReviewModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md bg-ivory rounded-brand shadow-xl overflow-hidden">
+              <Dialog.Panel className="w-full max-w-md bg-background rounded-brand shadow-xl overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-warm-gray-light">
-                  <Dialog.Title className="font-serif text-xl text-charcoal flex items-center gap-2">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-border-light">
+                  <Dialog.Title className="font-serif text-xl text-text-primary flex items-center gap-2">
                     <Flag className="w-5 h-5 text-red-500" />
                     Report Review
                   </Dialog.Title>
                   <button
                     onClick={handleClose}
                     disabled={isLoading}
-                    className="p-2 -mr-2 text-warm-gray-dark hover:text-charcoal transition-colors disabled:opacity-50"
+                    className="p-2 -mr-2 text-border-dark hover:text-text-primary transition-colors disabled:opacity-50"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -106,13 +106,13 @@ export function ReportReviewModal({
                 <div className="px-6 py-6">
                   {submitted ? (
                     <div className="text-center py-4">
-                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Flag className="w-8 h-8 text-green-600" />
+                      <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Flag className="w-8 h-8 text-success-600" />
                       </div>
-                      <h3 className="font-medium text-charcoal mb-2">
+                      <h3 className="font-medium text-text-primary mb-2">
                         Report Submitted
                       </h3>
-                      <p className="text-sm text-warm-gray-dark mb-6">
+                      <p className="text-sm text-border-dark mb-6">
                         Thank you for helping us maintain quality reviews. We&apos;ll review your report shortly.
                       </p>
                       <Button onClick={handleClose}>Close</Button>
@@ -129,7 +129,7 @@ export function ReportReviewModal({
 
                       {/* Reason Selection */}
                       <div>
-                        <label className="block text-sm font-medium text-charcoal mb-3">
+                        <label className="block text-sm font-medium text-text-primary mb-3">
                           Why are you reporting this review?
                         </label>
                         <RadioGroup
@@ -145,7 +145,7 @@ export function ReportReviewModal({
 
                       {/* Additional Details */}
                       <div>
-                        <label className="block text-sm font-medium text-charcoal mb-2">
+                        <label className="block text-sm font-medium text-text-primary mb-2">
                           Additional details (optional)
                         </label>
                         <textarea
@@ -154,11 +154,11 @@ export function ReportReviewModal({
                           placeholder="Provide more context about your report..."
                           rows={3}
                           maxLength={500}
-                          className="w-full px-4 py-3 bg-white border border-warm-grayrounded-brand 
-                                     text-sm text-charcoal placeholder:text-warm-gray-dark resize-none
-                                     focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold"
+                          className="w-full px-4 py-3 bg-white border border-borderrounded-brand 
+                                     text-sm text-text-primary placeholder:text-border-dark resize-none
+                                     focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                         />
-                        <p className="text-xs text-warm-gray-dark mt-1 text-right">
+                        <p className="text-xs text-border-dark mt-1 text-right">
                           {details.length}/500
                         </p>
                       </div>

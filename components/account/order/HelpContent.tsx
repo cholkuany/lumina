@@ -47,14 +47,14 @@ export function HelpContent({
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-green-600" />
+        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-8 h-8 text-success-600" />
         </div>
-        <h3 className="font-serif text-xl text-charcoal mb-2">Message Sent</h3>
-        <p className="text-warm-gray-dark mb-6">
+        <h3 className="font-serif text-xl text-text-primary mb-2">Message Sent</h3>
+        <p className="text-border-dark mb-6">
           We&apos;ve received your message and will respond within 24 hours. Check your email for updates.
         </p>
-        <p className="text-sm text-warm-gray-dark mb-6">
+        <p className="text-sm text-border-dark mb-6">
           Ticket ID: <span className="font-mono font-medium">{ticketId}</span>
         </p>
         <Button onClick={onClose}>Close</Button>
@@ -64,7 +64,7 @@ export function HelpContent({
 
   return (
     <div>
-      <p className="text-warm-gray-dark mb-6">
+      <p className="text-border-dark mb-6">
         How can we help you with order {order.orderNumber}?
       </p>
 
@@ -72,39 +72,39 @@ export function HelpContent({
       <div className="grid grid-cols-3 gap-3 mb-6">
         <a
           href="tel:1-800-LUMINA"
-          className="flex flex-col items-center gap-2 p-4 border border-warm-gray-light rounded-lg hover:border-gold hover:bg-gold/5 transition-colors"
+          className="flex flex-col items-center gap-2 p-4 border border-border-light rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
         >
-          <Phone className="w-5 h-5 text-gold" />
-          <span className="text-xs text-center text-charcoal">Call Us</span>
+          <Phone className="w-5 h-5 text-primary" />
+          <span className="text-xs text-center text-text-primary">Call Us</span>
         </a>
         <a
           href="mailto:support@lumina.com"
-          className="flex flex-col items-center gap-2 p-4 border border-warm-gray-light rounded-lg hover:border-gold hover:bg-gold/5 transition-colors"
+          className="flex flex-col items-center gap-2 p-4 border border-border-light rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
         >
-          <Mail className="w-5 h-5 text-gold" />
-          <span className="text-xs text-center text-charcoal">Email</span>
+          <Mail className="w-5 h-5 text-primary" />
+          <span className="text-xs text-center text-text-primary">Email</span>
         </a>
         <button
-          className="flex flex-col items-center gap-2 p-4 border border-warm-gray-light rounded-lg hover:border-gold hover:bg-gold/5 transition-colors"
+          className="flex flex-col items-center gap-2 p-4 border border-border-light rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
         >
-          <MessageCircle className="w-5 h-5 text-gold" />
-          <span className="text-xs text-center text-charcoal">Live Chat</span>
+          <MessageCircle className="w-5 h-5 text-primary" />
+          <span className="text-xs text-center text-text-primary">Live Chat</span>
         </button>
       </div>
 
       <div className="relative mb-6">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-warm-gray-light" />
+          <div className="w-full border-t border-border-light" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-2 bg-white text-warm-gray-dark">or send us a message</span>
+          <span className="px-2 bg-white text-border-dark">or send us a message</span>
         </div>
       </div>
 
       {/* Help Topics */}
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-2">
+          <label className="block text-sm font-medium text-text-primary mb-2">
             Select a Topic
           </label>
           <div className="grid grid-cols-2 gap-2">
@@ -115,12 +115,12 @@ export function HelpContent({
                   key={topic.id}
                   onClick={() => setSelectedTopic(topic.id)}
                   className={`flex items-center gap-2 p-3 border rounded-lg transition-colors ${selectedTopic === topic.id
-                    ? 'border-gold bg-gold/5'
-                    : 'border-warm-gray-light hover:border-gold/50'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border-light hover:border-primary/50'
                     }`}
                 >
-                  <Icon className={`w-4 h-4 ${selectedTopic === topic.id ? 'text-gold' : 'text-warm-gray-dark'}`} />
-                  <span className={`text-sm ${selectedTopic === topic.id ? 'text-charcoal' : 'text-warm-gray-dark'}`}>
+                  <Icon className={`w-4 h-4 ${selectedTopic === topic.id ? 'text-primary' : 'text-border-dark'}`} />
+                  <span className={`text-sm ${selectedTopic === topic.id ? 'text-text-primary' : 'text-border-dark'}`}>
                     {topic.label}
                   </span>
                 </button>
@@ -130,7 +130,7 @@ export function HelpContent({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-text-primary mb-1">
             Your Message
           </label>
           <textarea
@@ -138,7 +138,7 @@ export function HelpContent({
             onChange={(e) => setMessage(e.target.value)}
             rows={4}
             placeholder="Describe your issue or question..."
-            className="w-full px-3 py-2 border border-warm-gray-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-gold/20 focus:border-gold resize-none"
+            className="w-full px-3 py-2 border border-border-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
           />
         </div>
       </div>

@@ -27,9 +27,9 @@ export function Specifications({
   remove,
 }: SpecificationsProps) {
   return (
-    <div className="bg-white rounded-brand border border-warm-gray p-6 space-y-5">
+    <div className="bg-white rounded-brand border border-border p-6 space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-medium text-charcoal">
+        <h2 className="text-lg font-medium text-text-primary">
           Specifications
         </h2>
 
@@ -46,7 +46,7 @@ export function Specifications({
       {fields.map((field, index) => (
         <div
           key={field.id}
-          className="flex items-start gap-3 p-3 bg-linen rounded-lg"
+          className="flex items-start gap-3 p-3 bg-surface rounded-lg"
         >
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <FormInput
@@ -65,7 +65,7 @@ export function Specifications({
           <button
             type="button"
             onClick={() => remove(index)}
-            className="p-2 text-warm-gray-dark hover:text-red-500"
+            className="p-2 text-border-dark hover:text-red-500"
           >
             <X className="w-5 h-5" />
           </button>

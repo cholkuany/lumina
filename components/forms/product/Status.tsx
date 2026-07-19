@@ -8,8 +8,8 @@ interface StatusProps {
 
 export function Status({ control }: StatusProps) {
   return (
-    <div className="bg-white rounded-brand border border-warm-gray p-6 space-y-5">
-      <h2 className="text-lg font-medium text-charcoal">Status</h2>
+    <div className="bg-white rounded-brand border border-border p-6 space-y-5">
+      <h2 className="text-lg font-medium text-text-primary">Status</h2>
 
       <Controller
         name="isFeatured"

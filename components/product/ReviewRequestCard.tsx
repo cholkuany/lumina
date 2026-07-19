@@ -39,11 +39,11 @@ export function ReviewRequestCard({
 
   return (
     <>
-      <div className="bg-white border border-warm-gray-light rounded-brand p-4 relative">
+      <div className="bg-white border border-border-light rounded-brand p-4 relative">
         {/* Dismiss Button */}
         <button
           onClick={onDismiss}
-          className="absolute top-3 right-3 p-1 text-warm-gray-dark hover:text-charcoal"
+          className="absolute top-3 right-3 p-1 text-border-dark hover:text-text-primary"
         >
           <X className="w-4 h-4" />
         </button>
@@ -52,7 +52,7 @@ export function ReviewRequestCard({
           {/* Product Image */}
           <Link
             href={`/products/${product.id}`}
-            className="relative w-16 h-16 bg-linen rounded-lg overflow-hidden shrink-0"
+            className="relative w-16 h-16 bg-surface rounded-lg overflow-hidden shrink-0"
           >
             <Image
               src={product.image}
@@ -64,16 +64,16 @@ export function ReviewRequestCard({
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <p className="text-xs text-warm-gray-dark mb-1">
+            <p className="text-xs text-border-dark mb-1">
               Purchased on {purchaseDate}
             </p>
             <Link href={`/products/${product.id}`}>
-              <h4 className="font-medium text-charcoal text-sm hover:text-gold transition-colors line-clamp-1 mb-2">
+              <h4 className="font-medium text-text-primary text-sm hover:text-primary transition-colors line-clamp-1 mb-2">
                 {product.name}
               </h4>
             </Link>
 
-            <p className="text-sm text-charcoal mb-2">How was your experience?</p>
+            <p className="text-sm text-text-primary mb-2">How was your experience?</p>
 
             {/* Quick Star Rating */}
             <div className="flex items-center gap-4">

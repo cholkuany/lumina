@@ -9,10 +9,10 @@ export const UserAvatar = ({ user, initials, onClick, open }: { user: LoginUser 
     onClick={onClick}
     variant="ghost"
     size="icon"
-    className={cn("relative", open && "bg-linen")}
+    className={cn("relative", open && "bg-surface")}
   >
     {user ? (
-      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center text-white text-xs font-medium" >
+      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs font-medium" >
         {
           user.image ? (
             <Image
@@ -40,12 +40,12 @@ export const UserAvatar = ({ user, initials, onClick, open }: { user: LoginUser 
 // className = {
 //   cn(
 //       "relative",
-//     userMenuOpen && "bg-linen"
+//     userMenuOpen && "bg-surface"
 //     )}
 //   >
 // {
 //   user?(
-//       <div className = "w-8 h-8 bg-gold rounded-full flex items-center justify-center text-white text-xs font-medium" >
+//       <div className = "w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs font-medium" >
 //     {
 //       user.image ? (
 //         <Image

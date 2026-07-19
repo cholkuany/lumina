@@ -26,7 +26,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <div className="relative aspect-square bg-linen rounded-brand overflow-hidden group">
+      <div className="relative aspect-square bg-surface rounded-brand overflow-hidden group">
         <Image
           src={images[activeIndex].secure_url}
           alt={`${productName} - Image ${activeIndex + 1}`}
@@ -65,7 +65,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
         </div>
 
         {/* Image Counter */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-charcoal/80 text-white text-xs rounded-full">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-text-primary/80 text-white text-xs rounded-full">
           {activeIndex + 1} / {images.length}
         </div>
       </div>
@@ -78,10 +78,10 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
               key={index}
               onClick={() => setActiveIndex(index)}
               className={cn(
-                'aspect-square bg-linen rounded-lg overflow-hidden border-2 transition-all',
+                'aspect-square bg-surface rounded-lg overflow-hidden border-2 transition-all',
                 activeIndex === index
-                  ? 'border-charcoal'
-                  : 'border-transparent hover:border-warm-gray'
+                  ? 'border-text-primary'
+                  : 'border-transparent hover:border-border'
               )}
             >
               <Image

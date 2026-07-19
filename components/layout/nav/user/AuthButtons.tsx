@@ -6,7 +6,7 @@ export const AuthButtons = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boole
     <Link
       href="/login"
       onClick={() => setUserMenuOpen(false)}
-      className="flex items-center justify-center gap-2 w-full h-11 bg-gold text-white rounded-lg font-medium hover:bg-gold-dark transition-colors"
+      className="flex items-center justify-center gap-2 w-full h-11 bg-primary text-white rounded-lg font-medium hover:bg-primary-dark transition-colors"
     >
       <LogIn className="w-4 h-4" />
       Sign In
@@ -14,7 +14,7 @@ export const AuthButtons = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boole
     <Link
       href="/register"
       onClick={() => setUserMenuOpen(false)}
-      className="flex items-center justify-center gap-2 w-full h-11 border border-charcoal text-charcoal rounded-lg font-medium hover:bg-linen transition-colors"
+      className="flex items-center justify-center gap-2 w-full h-11 border border-text-primary text-text-primary rounded-lg font-medium hover:bg-surface transition-colors"
     >
       <UserPlus className="w-4 h-4" />
       Create Account

@@ -35,7 +35,7 @@ export function WriteReviewModal({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-charcoal/50" />
+          <div className="fixed inset-0 bg-text-primary/50" />
         </TransitionChild>
 
         {/* Modal */}
@@ -50,15 +50,15 @@ export function WriteReviewModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className="w-full max-w-lg bg-ivory rounded-brand shadow-xl overflow-hidden">
+              <DialogPanel className="w-full max-w-lg bg-background rounded-brand shadow-xl overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-warm-gray-light">
-                  <DialogTitle className="font-serif text-xl text-charcoal">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-border-light">
+                  <DialogTitle className="font-serif text-xl text-text-primary">
                     Write a Review
                   </DialogTitle>
                   <button
                     onClick={onClose}
-                    className="p-2 -mr-2 text-warm-gray-dark hover:text-charcoal transition-colors"
+                    className="p-2 -mr-2 text-border-dark hover:text-text-primary transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>

@@ -39,15 +39,15 @@ export function ReviewImagesGallery({ reviews }: ReviewImagesGalleryProps) {
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="font-serif text-lg text-charcoal flex items-center gap-2">
-          <Camera className="w-5 h-5 text-gold" />
+        <h3 className="font-serif text-lg text-text-primary flex items-center gap-2">
+          <Camera className="w-5 h-5 text-primary" />
           Customer Photos ({allImages.length})
         </h3>
 
         {allImages.length > 6 && !showAll && (
           <button
             onClick={() => setShowAll(true)}
-            className="text-sm text-gold hover:underline flex items-center gap-1"
+            className="text-sm text-primary hover:underline flex items-center gap-1"
           >
             View All
             <ChevronRight className="w-4 h-4" />
@@ -60,7 +60,7 @@ export function ReviewImagesGallery({ reviews }: ReviewImagesGalleryProps) {
           <button
             key={`${item.reviewId}-${index}`}
             onClick={() => openLightbox(index)}
-            className="relative aspect-square rounded-lg overflow-hidden bg-linen 
+            className="relative aspect-square rounded-lg overflow-hidden bg-surface 
                        hover:opacity-90 transition-opacity group"
           >
             <Image
@@ -72,7 +72,7 @@ export function ReviewImagesGallery({ reviews }: ReviewImagesGalleryProps) {
 
             {/* Show remaining count on last visible item */}
             {!showAll && index === 5 && remainingCount > 0 && (
-              <div className="absolute inset-0 bg-charcoal/70 flex items-center justify-center">
+              <div className="absolute inset-0 bg-text-primary/70 flex items-center justify-center">
                 <span className="text-white font-semibold text-lg">
                   +{remainingCount}
                 </span>

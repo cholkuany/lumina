@@ -75,14 +75,14 @@ export function WriteReviewForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Product Info */}
-      <div className="pb-4 border-b border-warm-gray-light">
-        <p className="text-sm text-warm-gray-dark">Reviewing:</p>
-        <p className="font-medium text-charcoal">{productName}</p>
+      <div className="pb-4 border-b border-border-light">
+        <p className="text-sm text-border-dark">Reviewing:</p>
+        <p className="font-medium text-text-primary">{productName}</p>
       </div>
 
       {/* Star Rating */}
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-3">
+        <label className="block text-sm font-medium text-text-primary mb-3">
           Overall Rating <span className="text-red-500">*</span>
         </label>
         <StarRatingInput
@@ -108,14 +108,14 @@ export function WriteReviewForm({
           error={errors.title?.[0]}
           maxLength={100}
         />
-        <p className="text-xs text-warm-gray-dark mt-1 text-right">
+        <p className="text-xs text-border-dark mt-1 text-right">
           {formData.title.length}/100
         </p>
       </div>
 
       {/* Review Content */}
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-2">
+        <label className="block text-sm font-medium text-text-primary mb-2">
           Your Review <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -125,9 +125,9 @@ export function WriteReviewForm({
           rows={5}
           maxLength={2000}
           className={cn(
-            'w-full px-4 py-3 bg-white border rounded-brand text-charcoal placeholder:text-warm-gray-dark',
-            'focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-colors resize-none',
-            errors.content ? 'border-red-400' : 'border-warm-gray'
+            'w-full px-4 py-3 bg-white border rounded-brand text-text-primary placeholder:text-border-dark',
+            'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none',
+            errors.content ? 'border-red-400' : 'border-border'
           )}
         />
         <div className="flex justify-between mt-1">
@@ -139,7 +139,7 @@ export function WriteReviewForm({
           ) : (
             <span />
           )}
-          <p className="text-xs text-warm-gray-dark">
+          <p className="text-xs text-border-dark">
             {formData.content.length}/500
           </p>
         </div>
@@ -147,7 +147,7 @@ export function WriteReviewForm({
 
       {/* Photo Upload */}
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-2">
+        <label className="block text-sm font-medium text-text-primary mb-2">
           Add Photos (Optional)
         </label>
         <ImageUpload
@@ -159,7 +159,7 @@ export function WriteReviewForm({
 
       {/* Recommendation */}
       <div>
-        <label className="block text-sm font-medium text-charcoal mb-3">
+        <label className="block text-sm font-medium text-text-primary mb-3">
           Would you recommend this product?
         </label>
         <div className="flex gap-4">
@@ -169,8 +169,8 @@ export function WriteReviewForm({
             className={cn(
               'flex-1 py-3 px-4 border rounded-brand text-sm font-medium transition-all',
               formData.recommendProduct === true
-                ? 'border-green-500 bg-green-50 text-green-700'
-                : 'border-warm-grayhover:border-green-300 text-charcoal'
+                ? 'border-success-500 bg-success-50 text-success-700'
+                : 'border-borderhover:border-success-300 text-text-primary'
             )}
           >
             👍 Yes, I recommend it
@@ -182,7 +182,7 @@ export function WriteReviewForm({
               'flex-1 py-3 px-4 border rounded-brand text-sm font-medium transition-all',
               formData.recommendProduct === false
                 ? 'border-red-500 bg-red-50 text-red-700'
-                : 'border-warm-grayhover:border-red-300 text-charcoal'
+                : 'border-borderhover:border-red-300 text-text-primary'
             )}
           >
             👎 No, I don&apos;t
@@ -191,11 +191,11 @@ export function WriteReviewForm({
       </div>
 
       {/* Guidelines */}
-      <div className="bg-linen rounded-brand p-4">
-        <h4 className="font-medium text-charcoal text-sm mb-2">
+      <div className="bg-surface rounded-brand p-4">
+        <h4 className="font-medium text-text-primary text-sm mb-2">
           Review Guidelines
         </h4>
-        <ul className="text-xs text-warm-gray-dark space-y-1">
+        <ul className="text-xs text-border-dark space-y-1">
           <li>• Be honest and specific about your experience</li>
           <li>• Focus on the product&apos;s features and quality</li>
           <li>• Avoid inappropriate language or personal information</li>

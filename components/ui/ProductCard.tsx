@@ -5,7 +5,7 @@ import { useCart } from '@/context/CartContext'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Heart, ShoppingBag, Star } from 'lucide-react'
+import { Heart, Plus, ShoppingBag, Star } from 'lucide-react'
 import { cn, formatPrice } from '@/lib/utils'
 import { TProduct } from '@/lib/types'
 // import { WishlistButton } from '../layout/nav/WishlistButton'
@@ -94,7 +94,7 @@ export function ProductCard({
             {product.isNewArrival && (
               <span
                 className={cn(
-                  'rounded-full bg-charcoal text-white',
+                  'rounded-full bg-text-primary text-white',
                   isCompact
                     ? 'px-1.5 py-0.5 text-[10px]'
                     : 'px-2.5 py-1 text-xs'
@@ -107,7 +107,7 @@ export function ProductCard({
             {product.isSale && (
               <span
                 className={cn(
-                  'rounded-full bg-gold text-white',
+                  'rounded-full bg-primary text-white',
                   isCompact
                     ? 'px-1.5 py-0.5 text-[10px]'
                     : 'px-2.5 py-1 text-xs'
@@ -143,7 +143,7 @@ export function ProductCard({
           </button>
 
           {/* Quick Add */}
-          <div
+          {/* <div
             className={cn(
               'absolute bottom-0 left-0 right-0 translate-y-full p-2 transition-transform duration-300 group-hover:translate-y-0',
               !isCompact && 'p-3'
@@ -152,7 +152,7 @@ export function ProductCard({
             <button
               disabled={!isCurrentVariantInStock}
               className={cn(
-                'w-full bg-charcoal/95 text-white backdrop-blur-sm transition-colors hover:bg-gold disabled:cursor-not-allowed disabled:opacity-50',
+                'w-full bg-text-primary/95 text-white backdrop-blur-sm transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50',
                 isCompact
                   ? 'rounded-md py-1.5 text-xs'
                   : 'rounded-lg py-2.5 text-sm font-medium'
@@ -162,7 +162,35 @@ export function ProductCard({
                 handleAddToCart()
               }}
             >
-              Quick Add
+              <span className="sm:hidden">
+                <Plus className="h-4 w-4" />
+              </span>
+              <span className="hidden sm:inline">
+                Quick Add
+              </span>
+            </button>
+          </div> */}
+          <div
+            className={cn(
+              "absolute bottom-0 left-0 right-0 p-2 translate-y-0 sm:translate-y-full sm:transition-transform sm:duration-300 sm:group-hover:translate-y-0",
+              !isCompact && "p-3"
+            )}
+          >
+            <button
+              disabled={!isCurrentVariantInStock}
+              className={cn(
+                "flex w-16 sm:w-full items-center justify-center bg-text-primary/95 text-white backdrop-blur-sm transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50",
+                isCompact
+                  ? "rounded-md h-8 sm:h-auto sm:py-1.5 text-xs"
+                  : "rounded-lg h-10 sm:h-auto sm:py-2.5 text-sm font-medium"
+              )}
+              onClick={(e) => {
+                e.preventDefault()
+                handleAddToCart()
+              }}
+            >
+              <span className='flex sm:hidden'><Plus className="h-4 w-4" /> Add</span>
+              <span className="hidden sm:inline">Quick Add</span>
             </button>
           </div>
         </div>
@@ -177,7 +205,7 @@ export function ProductCard({
           {/* Title */}
           <h3
             className={cn(
-              'font-medium text-charcoal',
+              'font-medium text-text-primary',
               isCompact
                 ? 'line-clamp-2 text-sm'
                 : 'line-clamp-1 text-sm'
@@ -188,7 +216,7 @@ export function ProductCard({
 
           {/* Description (full only) */}
           {!isCompact && product.description && (
-            <p className="mb-2 line-clamp-1 text-xs text-warm-gray-dark">
+            <p className="mb-2 line-clamp-1 text-xs text-border-dark">
               {product.description}
             </p>
           )}
@@ -209,14 +237,14 @@ export function ProductCard({
                       ? 'h-3 w-3'
                       : 'h-3.5 w-3.5',
                     i < Math.floor(product.rating)
-                      ? 'fill-gold text-gold'
-                      : 'fill-warm-gray-light text-warm-gray-light'
+                      ? 'fill-primary text-text-primary'
+                      : 'fill-border-light text-border-light'
                   )}
                 />
               ))}
             </div>
 
-            <span className="text-xs text-warm-gray-dark">
+            <span className="text-xs text-border-dark">
               ({product.reviewCount})
             </span>
           </div>
@@ -225,7 +253,7 @@ export function ProductCard({
           <div className="flex items-center gap-2">
             <span
               className={cn(
-                'text-charcoal',
+                'text-text-primary',
                 isCompact
                   ? 'text-sm font-bold'
                   : 'font-semibold'
@@ -235,7 +263,7 @@ export function ProductCard({
             </span>
 
             {currentVariant.originalPrice && (
-              <span className="text-xs text-warm-gray-dark line-through">
+              <span className="text-xs text-border-dark line-through">
                 {formatPrice(currentVariant.originalPrice)}
               </span>
             )}
@@ -247,7 +275,7 @@ export function ProductCard({
               <div className="relative">
                 <div
                   className={cn(
-                    'flex items-center justify-center rounded-full bg-charcoal text-white shadow-lg',
+                    'flex items-center justify-center rounded-full bg-text-primary text-white shadow-lg',
                     isCompact
                       ? 'h-7 w-7'
                       : 'h-9 w-9'
@@ -264,7 +292,7 @@ export function ProductCard({
 
                 <span
                   className={cn(
-                    'absolute -right-1 -top-1 flex items-center justify-center rounded-full bg-gold font-bold text-white shadow-sm',
+                    'absolute -right-1 -top-1 flex items-center justify-center rounded-full bg-primary font-bold text-white shadow-sm',
                     isCompact
                       ? 'h-4 w-4 text-[9px]'
                       : 'h-5 w-5 text-[10px]'

@@ -12,7 +12,7 @@ interface CategoryCardProps {
 export function CategoryCard({ name, image, category, itemCount }: CategoryCardProps) {
   return (
     <Link href={`/products?category=${category}`} className="group">
-      <div className="relative overflow-hidden rounded-brand aspect-4/5 bg-linen">
+      <div className="relative overflow-hidden rounded-brand aspect-4/5 bg-surface">
         <Image
           src={image}
           alt={name}
@@ -21,7 +21,7 @@ export function CategoryCard({ name, image, category, itemCount }: CategoryCardP
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-linear-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-text-primary/70 via-text-primary/20 to-transparent" />
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5">

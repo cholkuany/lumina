@@ -35,7 +35,7 @@ export default async function AdminLayout({
         <AuthProvider>
           <QueryContextProvider>
             <SidebarProvider>
-              <div className="min-h-screen bg-linen">
+              <div className="min-h-screen bg-surface">
                 <Sidebar user={session.user} />
                 <div className="lg:pl-72">
                   <AdminHeader />

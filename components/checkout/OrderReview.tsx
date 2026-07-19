@@ -38,12 +38,12 @@ export function OrderReview({
       {/* Order Items */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-lg text-charcoal">Order Items</h3>
-          <span className="text-sm text-warm-gray-dark">
+          <h3 className="font-serif text-lg text-text-primary">Order Items</h3>
+          <span className="text-sm text-border-dark">
             {state.items.length} {state.items.length === 1 ? 'item' : 'items'}
           </span>
         </div>
-        <div className="bg-linen rounded-brand p-4 space-y-4">
+        <div className="bg-surface rounded-brand p-4 space-y-4">
           {state.items.map((item) => (
             <div key={item.id} className="flex gap-4">
               <div className='relative w-16 h-16'>
@@ -55,22 +55,22 @@ export function OrderReview({
                     className="object-cover"
                   />
                 </div>
-                <div className="absolute -top-1 -right-1 w-5 h-5 bg-charcoal text-white text-xs rounded-full flex items-center justify-center z-10">
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-text-primary text-white text-xs rounded-full flex items-center justify-center z-10">
                   {item.quantity}
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-charcoal line-clamp-1">
+                <h4 className="text-sm font-medium text-text-primary line-clamp-1">
                   {item.product.name}
                 </h4>
                 {item.product.variant.attributes && (
-                  <p className="text-xs text-warm-gray-dark">
+                  <p className="text-xs text-border-dark">
                     {Object.values(item.product.variant.attributes).join(' / ')}
                   </p>
                 )}
               </div>
               <div className="text-right">
-                <p className="font-medium text-charcoal">
+                <p className="font-medium text-text-primary">
                   {formatPrice(item.product.variant.price * item.quantity)}
                 </p>
               </div>
@@ -82,44 +82,44 @@ export function OrderReview({
       {/* Shipping Address */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-lg text-charcoal flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-gold" />
+          <h3 className="font-serif text-lg text-text-primary flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-primary" />
             Shipping Address
           </h3>
           <button
             onClick={onBack}
-            className="text-sm text-gold hover:underline flex items-center gap-1"
+            className="text-sm text-primary hover:underline flex items-center gap-1"
           >
             <Edit2 className="w-3 h-3" />
             Edit
           </button>
         </div>
-        <div className="bg-linen rounded-brand p-4">
-          <p className="text-charcoal font-medium">
+        <div className="bg-surface rounded-brand p-4">
+          <p className="text-text-primary font-medium">
             {shippingData.firstName} {shippingData.lastName}
           </p>
-          <p className="text-warm-gray-dark text-sm">
+          <p className="text-border-dark text-sm">
             {shippingData.address}
             {shippingData.apartment && `, ${shippingData.apartment}`}
           </p>
-          <p className="text-warm-gray-dark text-sm">
+          <p className="text-border-dark text-sm">
             {shippingData.city}, {shippingData.state} {shippingData.zipCode}
           </p>
-          <p className="text-warm-gray-dark text-sm">{shippingData.phone}</p>
+          <p className="text-border-dark text-sm">{shippingData.phone}</p>
         </div>
       </div>
 
       {/* Shipping Method */}
       <div>
-        <h3 className="font-serif text-lg text-charcoal flex items-center gap-2 mb-4">
-          <Truck className="w-5 h-5 text-gold" />
+        <h3 className="font-serif text-lg text-text-primary flex items-center gap-2 mb-4">
+          <Truck className="w-5 h-5 text-primary" />
           Shipping Method
         </h3>
-        <div className="bg-linen rounded-brand p-4">
-          <p className="text-charcoal font-medium capitalize">
+        <div className="bg-surface rounded-brand p-4">
+          <p className="text-text-primary font-medium capitalize">
             {shippingData.shippingMethod} Shipping
           </p>
-          <p className="text-warm-gray-dark text-sm">
+          <p className="text-border-dark text-sm">
             {shippingData.shippingMethod === 'standard' && '5-7 business days'}
             {shippingData.shippingMethod === 'express' && '2-3 business days'}
             {shippingData.shippingMethod === 'overnight' && 'Next business day'}
@@ -130,46 +130,46 @@ export function OrderReview({
       {/* Payment Method */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-lg text-charcoal flex items-center gap-2">
-            <CreditCard className="w-5 h-5 text-gold" />
+          <h3 className="font-serif text-lg text-text-primary flex items-center gap-2">
+            <CreditCard className="w-5 h-5 text-primary" />
             Payment Method
           </h3>
           <button
             onClick={onBack}
-            className="text-sm text-gold hover:underline flex items-center gap-1"
+            className="text-sm text-primary hover:underline flex items-center gap-1"
           >
             <Edit2 className="w-3 h-3" />
             Edit
           </button>
         </div>
-        <div className="bg-linen rounded-brand p-4">
-          <p className="text-charcoal font-medium">Stripe Checkout</p>
-          <p className="text-warm-gray-dark text-sm">
+        <div className="bg-surface rounded-brand p-4">
+          <p className="text-text-primary font-medium">Stripe Checkout</p>
+          <p className="text-border-dark text-sm">
             You&apos;ll be redirected to Stripe to enter payment details securely.
           </p>
         </div>
       </div>
 
       {/* Order Summary */}
-      <div className="border-t border-warm-gray-light pt-6">
+      <div className="border-t border-border-light pt-6">
         <div className="space-y-2 mb-4">
           <div className="flex justify-between text-sm">
-            <span className="text-warm-gray-dark">Subtotal</span>
-            <span className="text-charcoal">{formatPrice(subtotal)}</span>
+            <span className="text-border-dark">Subtotal</span>
+            <span className="text-text-primary">{formatPrice(subtotal)}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-warm-gray-dark">Shipping</span>
-            <span className="text-charcoal">
+            <span className="text-border-dark">Shipping</span>
+            <span className="text-text-primary">
               {shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}
             </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-warm-gray-dark">Tax</span>
-            <span className="text-charcoal">{formatPrice(tax)}</span>
+            <span className="text-border-dark">Tax</span>
+            <span className="text-text-primary">{formatPrice(tax)}</span>
           </div>
-          <div className="flex justify-between text-lg font-semibold pt-2 border-t border-warm-gray-light">
-            <span className="text-charcoal">Total</span>
-            <span className="text-charcoal">{formatPrice(total)}</span>
+          <div className="flex justify-between text-lg font-semibold pt-2 border-t border-border-light">
+            <span className="text-text-primary">Total</span>
+            <span className="text-text-primary">{formatPrice(total)}</span>
           </div>
         </div>
       </div>
@@ -196,11 +196,11 @@ export function OrderReview({
       </div>
 
       {/* Terms */}
-      <p className="text-xs text-warm-gray-dark text-center">
+      <p className="text-xs text-border-dark text-center">
         By placing your order, you agree to our{' '}
-        <a href="/terms" className="text-gold hover:underline">Terms of Service</a>
+        <a href="/terms" className="text-primary hover:underline">Terms of Service</a>
         {' '}and{' '}
-        <a href="/privacy" className="text-gold hover:underline">Privacy Policy</a>.
+        <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>.
       </p>
     </div>
   )

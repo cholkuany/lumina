@@ -59,7 +59,7 @@ export function ReviewCard({
     <div className="py-6 first:pt-0">
       <div className="flex items-start gap-4">
         {/* Avatar */}
-        <div className="w-10 h-10 bg-linen rounded-full flex items-center justify-center shrink-0">
+        <div className="w-10 h-10 bg-surface rounded-full flex items-center justify-center shrink-0">
           {review.avatar ? (
             <Image
               src={review.avatar}
@@ -69,7 +69,7 @@ export function ReviewCard({
               className="rounded-full"
             />
           ) : (
-            <span className="text-sm font-medium text-warm-gray-dark">
+            <span className="text-sm font-medium text-border-dark">
               {review.authorName.charAt(0).toUpperCase()}
             </span>
           )}
@@ -78,9 +78,9 @@ export function ReviewCard({
         <div className="flex-1 min-w-0">
           {/* Header */}
           <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="font-medium text-charcoal">{review.authorName}</span>
+            <span className="font-medium text-text-primary">{review.authorName}</span>
             {review.verified && (
-              <span className="inline-flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-xs bg-success-100 text-success-700 px-2 py-0.5 rounded-full">
                 <CheckCircle className="w-3 h-3" />
                 Verified Purchase
               </span>
@@ -96,23 +96,23 @@ export function ReviewCard({
                   className={cn(
                     'w-4 h-4',
                     i < review.rating
-                      ? 'fill-gold text-gold'
-                      : 'fill-warm-gray-light text-warm-gray-light'
+                      ? 'fill-primary text-primary'
+                      : 'fill-border-light text-border-light'
                   )}
                 />
               ))}
             </div>
-            <span className="text-sm text-warm-gray-dark">{formatDate(review.createdAt)}</span>
+            <span className="text-sm text-border-dark">{formatDate(review.createdAt)}</span>
           </div>
 
           {/* Title */}
-          <h4 className="font-medium text-charcoal mb-2">{review.title}</h4>
+          <h4 className="font-medium text-text-primary mb-2">{review.title}</h4>
 
           {/* Recommendation Badge */}
           {review.recommendProduct !== undefined && (
             <div className="mb-3">
               {review.recommendProduct ? (
-                <span className="inline-flex items-center gap-1 text-xs text-green-700">
+                <span className="inline-flex items-center gap-1 text-xs text-success-700">
                   👍 Recommends this product
                 </span>
               ) : (
@@ -124,7 +124,7 @@ export function ReviewCard({
           )}
 
           {/* Content */}
-          <p className="text-sm text-warm-gray-dark leading-relaxed mb-3 whitespace-pre-line">
+          <p className="text-sm text-border-dark leading-relaxed mb-3 whitespace-pre-line">
             {displayContent}
             {isLongReview && !showFullContent && '...'}
           </p>
@@ -132,7 +132,7 @@ export function ReviewCard({
           {isLongReview && (
             <button
               onClick={() => setShowFullContent(!showFullContent)}
-              className="text-sm text-gold hover:underline mb-3"
+              className="text-sm text-primary hover:underline mb-3"
             >
               {showFullContent ? 'Show less' : 'Read more'}
             </button>
@@ -145,9 +145,9 @@ export function ReviewCard({
                 <button
                   key={index}
                   onClick={() => openLightbox(index)}
-                  className="relative w-16 h-16 rounded-lg overflow-hidden bg-linen 
+                  className="relative w-16 h-16 rounded-lg overflow-hidden bg-surface 
                              hover:opacity-90 transition-opacity ring-2 ring-transparent 
-                             hover:ring-gold focus:ring-gold focus:outline-none"
+                             hover:ring-primary focus:ring-primary focus:outline-none"
                 >
                   <Image
                     src={image}
@@ -162,15 +162,15 @@ export function ReviewCard({
 
           {/* Actions */}
           <div className="flex items-center gap-4 pt-2">
-            <span className="text-sm text-warm-gray-dark">Was this helpful?</span>
+            <span className="text-sm text-border-dark">Was this helpful?</span>
 
             <button
               onClick={() => onHelpful('up')}
               className={cn(
                 'flex items-center gap-1.5 text-sm transition-colors',
                 helpfulStatus === 'up'
-                  ? 'text-green-600'
-                  : 'text-warm-gray-dark hover:text-charcoal'
+                  ? 'text-success-600'
+                  : 'text-border-dark hover:text-text-primary'
               )}
             >
               <ThumbsUp
@@ -185,7 +185,7 @@ export function ReviewCard({
                 'flex items-center gap-1.5 text-sm transition-colors',
                 helpfulStatus === 'down'
                   ? 'text-red-600'
-                  : 'text-warm-gray-dark hover:text-charcoal'
+                  : 'text-border-dark hover:text-text-primary'
               )}
             >
               <ThumbsDown
@@ -194,7 +194,7 @@ export function ReviewCard({
               No
             </button>
 
-            <span className="text-warm-gray-light">|</span>
+            <span className="text-border-light">|</span>
 
             <button
               onClick={() => setReportedReview(true)}
@@ -202,8 +202,8 @@ export function ReviewCard({
               className={cn(
                 'flex items-center gap-1.5 text-sm transition-colors',
                 reportedReview
-                  ? 'text-warm-gray-dark cursor-default'
-                  : 'text-warm-gray-dark hover:text-red-500'
+                  ? 'text-border-dark cursor-default'
+                  : 'text-border-dark hover:text-red-500'
               )}
             >
               <Flag className="w-4 h-4" />
@@ -213,10 +213,10 @@ export function ReviewCard({
             {/* Seller Response Button */}
             {isSellerView && !review.response && !showResponseForm && (
               <>
-                <span className="text-warm-gray-light">|</span>
+                <span className="text-border-light">|</span>
                 <button
                   onClick={() => setShowResponseForm(true)}
-                  className="flex items-center gap-1.5 text-sm text-gold hover:underline"
+                  className="flex items-center gap-1.5 text-sm text-primary hover:underline"
                 >
                   <MessageSquare className="w-4 h-4" />
                   Respond

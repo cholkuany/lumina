@@ -43,7 +43,7 @@ export function SortIcon({
     <svg
       className={cn(
         'w-4 h-4 transition-colors',
-        active ? 'text-gold' : 'text-warm-gray-dark'
+        active ? 'text-primary' : 'text-border-dark'
       )}
       fill="none"
       stroke="currentColor"
@@ -65,7 +65,7 @@ export const CheckBox = ({ checked, onChange }: { checked: boolean; onChange: Re
     type="checkbox"
     checked={checked}
     onChange={onChange}
-    className="w-4 h-4 rounded border-warm-gray text-gold focus:ring-gold/30"
+    className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30"
   />
 )
 
@@ -84,16 +84,16 @@ export function getItemValue<T>(item: T, key: keyof T): React.ReactNode {
 }
 
 export const DataTableSkeleton = () => (
-  <div className="bg-white rounded-brand border border-warm-gray overflow-hidden">
+  <div className="bg-white rounded-brand border border-border overflow-hidden">
     <div className="animate-pulse">
-      <div className="h-12 bg-linen border-b border-warm-gray" />
+      <div className="h-12 bg-surface border-b border-border" />
       {[...Array(5)].map((_, i) => (
-        <div key={i} className="h-16 border-b border-warm-gray-light last:border-b-0">
+        <div key={i} className="h-16 border-b border-border-light last:border-b-0">
           <div className="flex items-center gap-4 p-4">
-            <div className="w-10 h-10 bg-warm-gray-light rounded-lg" />
+            <div className="w-10 h-10 bg-border-light rounded-lg" />
             <div className="flex-1 space-y-2">
-              <div className="h-4 bg-warm-gray-light rounded w-1/3" />
-              <div className="h-3 bg-warm-gray-light rounded w-1/4" />
+              <div className="h-4 bg-border-light rounded w-1/3" />
+              <div className="h-3 bg-border-light rounded w-1/4" />
             </div>
           </div>
         </div>
@@ -103,12 +103,12 @@ export const DataTableSkeleton = () => (
 )
 
 export const EmptyTableResult = ({ emptyMessage }: { emptyMessage: string }) => (
-  <div className="bg-white rounded-brand border border-warm-gray p-12 text-center">
-    <div className="w-16 h-16 bg-linen rounded-full flex items-center justify-center mx-auto mb-4">
-      <Inbox className="w-8 h-8 text-warm-gray-dark" />
+  <div className="bg-white rounded-brand border border-border p-12 text-center">
+    <div className="w-16 h-16 bg-surface rounded-full flex items-center justify-center mx-auto mb-4">
+      <Inbox className="w-8 h-8 text-border-dark" />
     </div>
-    <p className="text-charcoal font-medium">{emptyMessage}</p>
-    <p className="text-sm text-warm-gray-dark mt-1">
+    <p className="text-text-primary font-medium">{emptyMessage}</p>
+    <p className="text-sm text-border-dark mt-1">
       Try adjusting your filters or search terms
     </p>
   </div>

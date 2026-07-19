@@ -38,19 +38,19 @@ export default function TermsOfServicePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-linen py-12 lg:py-16">
+      <section className="bg-surface py-12 lg:py-16">
         <div className="container-lumina">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Scale className="w-8 h-8 text-gold" />
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Scale className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-charcoal mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
               Terms of Service
             </h1>
-            <p className="text-warm-gray-dark">
+            <p className="text-border-dark">
               Please read these terms carefully before using our services.
             </p>
-            <div className="flex items-center justify-center gap-6 mt-6 text-sm text-warm-gray-dark">
+            <div className="flex items-center justify-center gap-6 mt-6 text-sm text-border-dark">
               <span>Last Updated: {lastUpdated}</span>
               <span>•</span>
               <span>Effective: {effectiveDate}</span>
@@ -63,8 +63,8 @@ export default function TermsOfServicePage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Table of Contents - Sidebar */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 bg-white border border-warm-gray-light rounded-brand p-6">
-              <h2 className="font-serif text-lg text-charcoal mb-4">
+            <div className="sticky top-24 bg-white border border-border-light rounded-brand p-6">
+              <h2 className="font-serif text-lg text-text-primary mb-4">
                 Table of Contents
               </h2>
               <nav className="space-y-2">
@@ -72,7 +72,7 @@ export default function TermsOfServicePage() {
                   <a
                     key={item.id}
                     href={`#${item.id}`}
-                    className="block text-sm text-warm-gray-dark hover:text-gold transition-colors py-1"
+                    className="block text-sm text-border-dark hover:text-primary transition-colors py-1"
                   >
                     {item.title}
                   </a>
@@ -83,15 +83,15 @@ export default function TermsOfServicePage() {
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <div className="bg-white border border-warm-gray-light rounded-brand p-8 lg:p-12">
+            <div className="bg-white border border-border-light rounded-brand p-8 lg:p-12">
               {/* Introduction */}
               <div className="prose prose-warm max-w-none mb-12">
-                <p className="text-lg text-warm-gray-dark leading-relaxed">
+                <p className="text-lg text-border-dark leading-relaxed">
                   Welcome to LUMINA. These Terms of Service (&quot;Terms&quot;) govern your access to and use of our website,
                   mobile applications, and services (collectively, the &quot;Services&quot;). By accessing or using our Services,
                   you agree to be bound by these Terms and our Privacy Policy.
                 </p>
-                <p className="text-warm-gray-dark">
+                <p className="text-border-dark">
                   LUMINA is operated by Lumina Commerce Inc. (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;), a company registered in Delaware,
                   United States. Our principal place of business is 123 Commerce Street, New York, NY 10001.
                 </p>
@@ -99,13 +99,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 1: Acceptance of Terms */}
               <section id="acceptance" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     1
                   </span>
                   Acceptance of Terms
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     By creating an account, making a purchase, or otherwise using our Services, you acknowledge that you
                     have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms,
@@ -125,13 +125,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 2: Account Registration */}
               <section id="account" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     2
                   </span>
                   Account Registration
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     To access certain features of our Services, you may need to create an account. When creating an
                     account, you agree to:
@@ -152,21 +152,21 @@ export default function TermsOfServicePage() {
 
               {/* Section 3: Products & Pricing */}
               <section id="products" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     3
                   </span>
                   Products & Pricing
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
-                  <h3 className="font-medium text-charcoal">3.1 Product Information</h3>
+                <div className="pl-11 space-y-4 text-border-dark">
+                  <h3 className="font-medium text-text-primary">3.1 Product Information</h3>
                   <p>
                     We strive to provide accurate product descriptions, images, and pricing. However, we do not warrant
                     that product descriptions, pricing, or other content is accurate, complete, reliable, current, or
                     error-free. Product images are for illustrative purposes and may vary from the actual product.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">3.2 Pricing</h3>
+                  <h3 className="font-medium text-text-primary">3.2 Pricing</h3>
                   <p>
                     All prices are displayed in US Dollars unless otherwise specified. Prices are subject to change
                     without notice. We reserve the right to correct any pricing errors, even after an order has been
@@ -174,7 +174,7 @@ export default function TermsOfServicePage() {
                     price or cancel your order.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">3.3 Availability</h3>
+                  <h3 className="font-medium text-text-primary">3.3 Availability</h3>
                   <p>
                     Product availability is subject to change. We do not guarantee that any product will be available
                     at any particular time. If a product becomes unavailable after you place an order, we will notify
@@ -185,34 +185,34 @@ export default function TermsOfServicePage() {
 
               {/* Section 4: Orders & Payment */}
               <section id="orders" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     4
                   </span>
                   Orders & Payment
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
-                  <h3 className="font-medium text-charcoal">4.1 Order Acceptance</h3>
+                <div className="pl-11 space-y-4 text-border-dark">
+                  <h3 className="font-medium text-text-primary">4.1 Order Acceptance</h3>
                   <p>
                     Your order constitutes an offer to purchase products. We reserve the right to accept or decline
                     your order for any reason. An order is not accepted until we send you an order confirmation email.
                     We may cancel orders due to product unavailability, pricing errors, suspected fraud, or other reasons.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">4.2 Payment Methods</h3>
+                  <h3 className="font-medium text-text-primary">4.2 Payment Methods</h3>
                   <p>
                     We accept various payment methods including credit cards (Visa, Mastercard, American Express, Discover),
                     debit cards, PayPal, Apple Pay, Google Pay, and other payment methods as displayed at checkout.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">4.3 Payment Processing</h3>
+                  <h3 className="font-medium text-text-primary">4.3 Payment Processing</h3>
                   <p>
                     Payment is processed at the time of order placement. By providing payment information, you represent
                     that you are authorized to use the payment method and authorize us to charge the total amount of your
                     order, including applicable taxes and shipping fees.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">4.4 Sales Tax</h3>
+                  <h3 className="font-medium text-text-primary">4.4 Sales Tax</h3>
                   <p>
                     Applicable sales tax will be calculated and added to your order based on your shipping address and
                     current tax rates. You are responsible for any applicable taxes in your jurisdiction.
@@ -222,35 +222,35 @@ export default function TermsOfServicePage() {
 
               {/* Section 5: Shipping & Delivery */}
               <section id="shipping" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     5
                   </span>
                   Shipping & Delivery
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
-                  <h3 className="font-medium text-charcoal">5.1 Shipping Options</h3>
+                <div className="pl-11 space-y-4 text-border-dark">
+                  <h3 className="font-medium text-text-primary">5.1 Shipping Options</h3>
                   <p>
                     We offer various shipping options with estimated delivery times displayed at checkout. Delivery
                     times are estimates and not guaranteed. Factors such as carrier delays, weather, holidays, and
                     customs processing may affect delivery times.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">5.2 Shipping Costs</h3>
+                  <h3 className="font-medium text-text-primary">5.2 Shipping Costs</h3>
                   <p>
                     Shipping costs are calculated based on your shipping address, selected shipping method, and order
                     weight/size. Free shipping may be offered on orders meeting certain criteria as displayed on our
                     website.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">5.3 Risk of Loss</h3>
+                  <h3 className="font-medium text-text-primary">5.3 Risk of Loss</h3>
                   <p>
                     Risk of loss and title for products pass to you upon delivery to the carrier. We are not responsible
                     for delays or damages caused by the carrier. If your package is lost or damaged during shipping,
                     please contact us and we will work with the carrier to resolve the issue.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">5.4 International Shipping</h3>
+                  <h3 className="font-medium text-text-primary">5.4 International Shipping</h3>
                   <p>
                     For international orders, you are responsible for all customs duties, taxes, and fees imposed by
                     your country. We are not responsible for delays due to customs processing.
@@ -260,39 +260,39 @@ export default function TermsOfServicePage() {
 
               {/* Section 6: Returns & Refunds */}
               <section id="returns" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     6
                   </span>
                   Returns & Refunds
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
-                  <h3 className="font-medium text-charcoal">6.1 Return Policy</h3>
+                <div className="pl-11 space-y-4 text-border-dark">
+                  <h3 className="font-medium text-text-primary">6.1 Return Policy</h3>
                   <p>
                     We accept returns within 30 days of delivery for most items in their original condition with tags
                     attached. Some items, including personalized products, intimate apparel, and final sale items, are
                     not eligible for return.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">6.2 Return Process</h3>
+                  <h3 className="font-medium text-text-primary">6.2 Return Process</h3>
                   <p>
                     To initiate a return, log into your account and request a return through your order history, or
                     contact our customer service team. You will receive a prepaid return label for eligible returns.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">6.3 Refunds</h3>
+                  <h3 className="font-medium text-text-primary">6.3 Refunds</h3>
                   <p>
                     Refunds will be processed to the original payment method within 5-10 business days after we receive
                     and inspect your return. Shipping costs are non-refundable unless the return is due to our error.
                   </p>
 
-                  <h3 className="font-medium text-charcoal">6.4 Exchanges</h3>
+                  <h3 className="font-medium text-text-primary">6.4 Exchanges</h3>
                   <p>
                     If you wish to exchange an item for a different size or color, please return the original item and
                     place a new order for the desired item.
                   </p>
 
-                  <div className="bg-linen rounded-lg p-4 mt-4">
+                  <div className="bg-surface rounded-lg p-4 mt-4">
                     <p className="text-sm">
                       <strong>Note:</strong> Items must be returned in their original, unworn condition with all tags
                       attached. Items that show signs of wear, washing, or alteration will not be accepted for return.
@@ -303,13 +303,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 7: Intellectual Property */}
               <section id="intellectual-property" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     7
                   </span>
                   Intellectual Property
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     All content on our Services, including text, graphics, logos, images, audio, video, software, and
                     other materials (collectively, &quot;Content&quot;), is owned by or licensed to LUMINA and is protected by
@@ -333,13 +333,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 8: User Content */}
               <section id="user-content" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     8
                   </span>
                   User Content
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     Our Services may allow you to submit content such as reviews, comments, photos, and other materials
                     (&quot;User Content&quot;). By submitting User Content, you grant us a non-exclusive, royalty-free, perpetual,
@@ -363,13 +363,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 9: Prohibited Activities */}
               <section id="prohibited" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     9
                   </span>
                   Prohibited Activities
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     You agree not to engage in any of the following prohibited activities:
                   </p>
@@ -390,13 +390,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 10: Disclaimer of Warranties */}
               <section id="disclaimer" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     10
                   </span>
                   Disclaimer of Warranties
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                     <p className="text-sm text-amber-800 uppercase font-medium">
                       THE SERVICES AND ALL PRODUCTS ARE PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY
@@ -413,13 +413,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 11: Limitation of Liability */}
               <section id="limitation" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     11
                   </span>
                   Limitation of Liability
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     TO THE FULLEST EXTENT PERMITTED BY LAW, LUMINA SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
                     SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA,
@@ -438,13 +438,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 12: Indemnification */}
               <section id="indemnification" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     12
                   </span>
                   Indemnification
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     You agree to indemnify, defend, and hold harmless LUMINA and its officers, directors, employees,
                     agents, and affiliates from and against any claims, liabilities, damages, losses, costs, and
@@ -461,13 +461,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 13: Termination */}
               <section id="termination" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     13
                   </span>
                   Termination
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     We may terminate or suspend your account and access to the Services immediately, without prior
                     notice or liability, for any reason, including if you breach these Terms.
@@ -485,13 +485,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 14: Governing Law */}
               <section id="governing-law" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     14
                   </span>
                   Governing Law
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     These Terms shall be governed by and construed in accordance with the laws of the State of New York,
                     United States, without regard to its conflict of law provisions.
@@ -506,13 +506,13 @@ export default function TermsOfServicePage() {
 
               {/* Section 15: Changes to Terms */}
               <section id="changes" className="mb-12 scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     15
                   </span>
                   Changes to Terms
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     We reserve the right to modify these Terms at any time. We will notify you of any changes by posting
                     the new Terms on this page and updating the &quot;Last Updated&quot; date.
@@ -529,31 +529,31 @@ export default function TermsOfServicePage() {
 
               {/* Section 16: Contact Information */}
               <section id="contact" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-charcoal mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 bg-gold/10 rounded-full flex items-center justify-center text-gold text-sm font-medium">
+                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                  <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">
                     16
                   </span>
                   Contact Information
                 </h2>
-                <div className="pl-11 space-y-4 text-warm-gray-dark">
+                <div className="pl-11 space-y-4 text-border-dark">
                   <p>
                     If you have any questions about these Terms, please contact us:
                   </p>
-                  <div className="bg-linen rounded-lg p-6">
-                    <p className="font-medium text-charcoal mb-3">Lumina Commerce Inc.</p>
+                  <div className="bg-surface rounded-lg p-6">
+                    <p className="font-medium text-text-primary mb-3">Lumina Commerce Inc.</p>
                     <div className="space-y-2 text-sm">
                       <p>123 Commerce Street</p>
                       <p>New York, NY 10001</p>
                       <p>United States</p>
                       <p className="pt-2">
                         <strong>Email:</strong>{' '}
-                        <a href="mailto:legal@lumina.com" className="text-gold hover:underline">
+                        <a href="mailto:legal@lumina.com" className="text-primary hover:underline">
                           legal@lumina.com
                         </a>
                       </p>
                       <p>
                         <strong>Phone:</strong>{' '}
-                        <a href="tel:1-800-LUMINA" className="text-gold hover:underline">
+                        <a href="tel:1-800-LUMINA" className="text-primary hover:underline">
                           1-800-LUMINA
                         </a>
                       </p>
@@ -564,26 +564,26 @@ export default function TermsOfServicePage() {
             </div>
 
             {/* Related Links */}
-            <div className="mt-8 p-6 bg-linen rounded-brand">
-              <h3 className="font-serif text-lg text-charcoal mb-4">Related Policies</h3>
+            <div className="mt-8 p-6 bg-surface rounded-brand">
+              <h3 className="font-serif text-lg text-text-primary mb-4">Related Policies</h3>
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/privacy"
-                  className="inline-flex items-center gap-2 text-gold hover:underline"
+                  className="inline-flex items-center gap-2 text-primary hover:underline"
                 >
                   <FileText className="w-4 h-4" />
                   Privacy Policy
                 </Link>
                 <Link
                   href="/shipping-policy"
-                  className="inline-flex items-center gap-2 text-gold hover:underline"
+                  className="inline-flex items-center gap-2 text-primary hover:underline"
                 >
                   <Truck className="w-4 h-4" />
                   Shipping Policy
                 </Link>
                 <Link
                   href="/return-policy"
-                  className="inline-flex items-center gap-2 text-gold hover:underline"
+                  className="inline-flex items-center gap-2 text-primary hover:underline"
                 >
                   <RotateCcw className="w-4 h-4" />
                   Return Policy
