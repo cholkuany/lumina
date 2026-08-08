@@ -10,7 +10,7 @@ export const useProducts = () =>
       const result = await fetch('/api/products/')
 
       if (!result.ok) {
-        throw new Error('Error fetching data')
+        throw new Error('Unable to load products')
       }
       return result.json() as Promise<TProduct[]>
     }
@@ -23,7 +23,7 @@ export const useProduct = (id: string) =>
       const result = await fetch(`/api/products/${id}`)
 
       if (!result.ok) {
-        throw new Error('Error fetching data')
+        throw new Error('Unable to load product')
       }
 
       return result.json() as Promise<TProduct>

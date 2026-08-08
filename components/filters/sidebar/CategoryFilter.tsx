@@ -4,14 +4,24 @@ import type { NestedCategory } from '@/hooks/useCategories'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { ToggleButton } from '@/components/filters/sidebar/ToggleButton'
 
-export const CategoryFilter = ({
-  category,
-  expandedGroups,
-  toggleGroup,
-  selectedFilters,
-  onFilterChange,
-  level = 0,
-}: { category: NestedCategory, expandedGroups: string[], toggleGroup: (groupId: string) => void, selectedFilters: Record<string, string[]>, onFilterChange: (groupId: string, value: string, checked: boolean) => void, level: number }) => {
+export const CategoryFilter = (
+  {
+    category,
+    expandedGroups,
+    toggleGroup,
+    selectedFilters,
+    onFilterChange,
+    level = 0,
+  }:
+    {
+      category: NestedCategory,
+      expandedGroups: string[],
+      toggleGroup: (groupId: string) => void,
+      selectedFilters: Record<string, string[]>,
+      onFilterChange: (groupId: string, value: string, checked: boolean) => void,
+      level: number
+    }
+) => {
   const isExpanded = expandedGroups.includes(category.id);
 
   return (

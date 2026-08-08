@@ -19,7 +19,7 @@ export function Categories() {
         <div className="mb-8 flex items-end justify-between gap-6">
           <h2 className="mt-2 text-xl font-black tracking-[-.045em] text-[#172a22] sm:text-3xl">Categories</h2>
           <Link
-            href="/categories"
+            href="/products"
             className="group hidden items-center gap-2 text-sm font-black text-[#172a22] sm:flex capitalize">
             View all
             <ArrowUpRight className="h-4 w-4 group-hover:scale-110" />

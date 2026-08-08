@@ -27,11 +27,31 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { name: 'Facebook', icon: Facebook, href: '#' },
-  { name: 'Instagram', icon: Instagram, href: '#' },
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'YouTube', icon: Youtube, href: '#' },
-]
+  {
+    name: "Facebook",
+    icon: Facebook,
+    href: "#",
+    hover: "hover:bg-[#1877F2]",
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    href: "#",
+    hover: "hover:bg-[#E4405F]",
+  },
+  {
+    name: "Twitter",
+    icon: Twitter,
+    href: "#",
+    hover: "hover:bg-[#1DA1F2]",
+  },
+  {
+    name: "YouTube",
+    icon: Youtube,
+    href: "#",
+    hover: "hover:bg-[#FF0000]",
+  },
+];
 
 export function Footer() {
   const [email, setEmail] = useState('')
@@ -149,9 +169,7 @@ export function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-text-primary text-white
-                             flex items-center justify-center
-                             hover:bg-primary transition-colors"
+                  className={`w-10 h-10 rounded-full bg-text-primary text-white flex items-center justify-center transition-colors duration-300 ${social.hover}`}
                   aria-label={social.name}
                 >
                   <social.icon className="w-4 h-4" />

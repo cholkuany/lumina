@@ -37,6 +37,8 @@ export function FilterSidebar({
     filters.map(f => f.name)
   )
 
+  console.log("expandedGroups", expandedGroups)
+
   const toggleGroup = (groupId: string) => {
     setExpandedGroups(prev =>
       prev.includes(groupId)
@@ -48,10 +50,7 @@ export function FilterSidebar({
   const hasActiveFilters = Object.values(selectedFilters).some(arr => arr.length > 0)
 
   return (
-    <div className={cn(
-      'bg-white',
-      isMobile && 'fixed inset-0 z-50 overflow-y-auto'
-    )}>
+    <div className={cn(isMobile && 'bg-white fixed inset-0 z-50 overflow-y-auto')}>
       {/* Mobile Header */}
       {isMobile && (
         <div className="sticky top-0 bg-white border-b border-border-light px-4 py-4 flex items-center justify-between">

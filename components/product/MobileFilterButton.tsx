@@ -17,7 +17,7 @@ export const MobileFilterButton = (
   return (
     <button
       onClick={() => setMobileFiltersOpen(true)}
-      className="lg:hidden flex items-center gap-2 text-sm font-medium text-text-primary"
+      className="md:hidden flex items-center gap-2 text-sm font-medium text-text-primary"
     >
       <SlidersHorizontal className="w-4 h-4" />
       Filters

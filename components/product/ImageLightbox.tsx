@@ -3,7 +3,7 @@
 
 import { Fragment, useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react'
 import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -89,7 +89,7 @@ export function ImageLightbox({
     <Transition show={isOpen} as={Fragment}>
       <Dialog onClose={onClose} className="relative z-50">
         {/* Backdrop */}
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -99,12 +99,12 @@ export function ImageLightbox({
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-text-primary/95" />
-        </Transition.Child>
+        </TransitionChild>
 
         {/* Modal */}
         <div className="fixed inset-0 overflow-hidden">
           <div className="flex min-h-full items-center justify-center">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
@@ -113,7 +113,7 @@ export function ImageLightbox({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full h-full flex flex-col">
+              <DialogPanel className="w-full h-full flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-text-primary/50">
                   <span className="text-white text-sm">
@@ -233,8 +233,8 @@ export function ImageLightbox({
                     ))}
                   </div>
                 )}
-              </Dialog.Panel>
-            </Transition.Child>
+              </DialogPanel>
+            </TransitionChild>
           </div>
         </div>
       </Dialog>

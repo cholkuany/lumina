@@ -16,6 +16,7 @@ import { ReviewDetailModal } from '@/components/admin/ReviewDetailModal'
 
 import { Check, X, Clock, Flag, Star } from "lucide-react"
 import { useReviewColumns } from '@/components/admin/columns/useReviewColumns'
+import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 
 const reviewStatuses = [
   { value: 'pending', label: 'Pending' },
@@ -85,7 +86,7 @@ export default function ReviewsPage() {
     }
   }
 
-  if (isLoading) return <div>Loading reviews...</div>
+  if (isLoading) return <AdminPageLoadingState />
   if (error) return <div>Error loading reviews: {error.message}</div>
   if (!reviews || reviews.length === 0) return <div>No reviews found.</div>
 

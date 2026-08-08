@@ -15,6 +15,7 @@ import { ResourceTableToolbar } from '@/components/tables/ResourceTableToolbar'
 import { ResourceTable } from '@/components/tables/ResourceTable'
 import { ResourceTablePagination } from '@/components/tables/ResourceTablePagination'
 import { useResourceController, useTableInstanceController } from '@/hooks/useResourceController'
+import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 
 const stockStatuses = [
   { value: 'in_stock', label: 'In Stock', amount: 100 },
@@ -62,7 +63,7 @@ export default function ProductsPage() {
 
   const categories = categoriesData?.map(c => ({ value: c.name, label: c.name }))
 
-  if (isPending) return <div>Loading...</div>
+  if (isPending) return <AdminPageLoadingState />
   if (isError) return <div>Error fetching products {error.message}</div>
 
   const selectedIds =

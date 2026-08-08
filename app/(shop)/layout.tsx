@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Navbar } from '@/components/layout/nav/Navbar'
 import { Footer } from '@/components/layout/Footer'
-import { CartDrawer } from '@/components/cart/CartDrawer'
 
 // Context Providers
 import { CartProvider } from '@/context/CartContext'
@@ -32,7 +31,6 @@ export default function RootLayout({
                 <Navbar />
                 {children}
                 <Footer />
-                <CartDrawer />
               </WishlistProvider>
             </CartProvider>
           </QueryContextProvider>

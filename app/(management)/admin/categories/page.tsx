@@ -15,6 +15,7 @@ import { Plus } from 'lucide-react';
 import { NestedCategory } from '@/hooks/useCategories'
 import { useFlatCategories } from '@/hooks/useFlatCategories'
 import { normalizedValue } from '@/lib/utils'
+import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 
 export default function CategoriesPage() {
   const [searchQuery, setSearchQuery] = useState('')
@@ -44,7 +45,7 @@ export default function CategoriesPage() {
       : data?.categories ?? []
   }, [data?.categories, searchQuery])
 
-  if (pending) return <div>Loading...</div>
+  if (pending) return <AdminPageLoadingState />
   if (hasErred) return <div>Error fetching categories.</div>
 
   const categories = data?.categories ?? []

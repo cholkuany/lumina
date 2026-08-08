@@ -1,9 +1,19 @@
-import { ChevronDown } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export const ToggleButton = (
-  { id, label, included, toggleGroup }:
-    { id: string, label: string, included: boolean, toggleGroup: (groupId: string) => void }
+  {
+    id,
+    label,
+    included,
+    toggleGroup
+  }:
+    {
+      id: string,
+      label: string,
+      included: boolean,
+      toggleGroup: (groupId: string) => void
+    }
 ) => {
   return (
     <button
@@ -11,7 +21,7 @@ export const ToggleButton = (
       className="flex items-center justify-between w-full py-2"
     >
       <span className="font-medium text-text-primary">{label}</span>
-      <ChevronDown
+      <ChevronRight
         className={cn(
           'w-5 h-5 text-border-dark transition-transform',
           included && 'rotate-180'

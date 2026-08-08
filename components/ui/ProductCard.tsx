@@ -8,7 +8,6 @@ import Link from 'next/link'
 import { Heart, Plus, ShoppingBag, Star } from 'lucide-react'
 import { cn, formatPrice } from '@/lib/utils'
 import { TProduct } from '@/lib/types'
-// import { WishlistButton } from '../layout/nav/WishlistButton'
 
 interface ProductCardProps {
   product: TProduct

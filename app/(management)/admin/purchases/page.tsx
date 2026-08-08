@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button'
 import type { AdminPurchase, PurchaseStats, PurchaseStatus } from '@/lib/purchase-types'
 import type { TProduct } from '@/lib/types'
 import { cn } from '@/lib/utils'
+import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 
 const statusConfig: Record<PurchaseStatus, { label: string; className: string }> = {
   pending: { label: 'Draft', className: 'bg-gray-100 text-gray-700' },
@@ -76,7 +77,7 @@ export default function PurchasesPage() {
 
   const stats = purchasesQuery.data?.stats
 
-  if (purchasesQuery.isLoading) return <div className="py-16 text-center text-border-dark">Loading purchase orders…</div>
+  if (purchasesQuery.isLoading) return <AdminPageLoadingState />
   if (purchasesQuery.error) return <div className="py-16 text-center text-red-600">{purchasesQuery.error.message}</div>
 
   return (
