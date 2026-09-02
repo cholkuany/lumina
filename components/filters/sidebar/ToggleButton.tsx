@@ -1,32 +1,42 @@
-import { ChevronRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 export const ToggleButton = (
   {
     id,
     label,
-    included,
-    toggleGroup
+    productCount,
+    isCurrent = false,
   }:
     {
       id: string,
       label: string,
-      included: boolean,
-      toggleGroup: (groupId: string) => void
+      productCount?: number
+      isCurrent?: boolean
     }
 ) => {
+  const content = (
+    <span className="flex w-full items-center justify-between gap-3">
+      <span>{label}</span>
+      {!isCurrent && productCount !== undefined && (
+        <span className="text-xs text-border-dark">({productCount})</span>
+      )}
+    </span>
+  )
+
+  if (isCurrent) {
+    return (
+      <div aria-current="page" className="py-1.5 font-semibold text-text-primary">
+        {content}
+      </div>
+    )
+  }
+
   return (
-    <button
-      onClick={() => toggleGroup(id)}
-      className="flex items-center justify-between w-full py-2"
+    <Link
+      href={`/products?category=${encodeURIComponent(label)}&id=${id}`}
+      className="block py-1.5 text-sm text-text-primary transition-colors hover:text-primary hover:underline"
     >
-      <span className="font-medium text-text-primary">{label}</span>
-      <ChevronRight
-        className={cn(
-          'w-5 h-5 text-border-dark transition-transform',
-          included && 'rotate-180'
-        )}
-      />
-    </button>
+      {content}
+    </Link>
   )
 }

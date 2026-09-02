@@ -1,12 +1,13 @@
-// lib/auth.ts
 import { betterAuth } from "better-auth";
 import { admin } from "better-auth/plugins";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 import { sendEmail, emailTemplates } from "./email";
+
 if (!process.env.MONGODB_URI) {
   throw new Error("MONGODB_URI is not defined in environment variables");
 }
+
 const client = new MongoClient(process.env.MONGODB_URI);
 const db = client.db();
 
@@ -53,6 +54,10 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
+    // facebook: {
+    //   clientId: process.env.FACEBOOK_CLIENT_ID as string,
+    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+    // },
   },
 
   // Session Configuration
@@ -69,7 +74,7 @@ export const auth = betterAuth({
   account: {
     accountLinking: {
       enabled: true,
-      trustedProviders: ["google"],
+      trustedProviders: ["google", "facebook"],
     },
   },
 

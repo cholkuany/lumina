@@ -4,6 +4,8 @@ import Category from '@/lib/db/models/Category'
 import { categorySchema } from '@/lib/validations/category.validation'
 import { z } from 'zod'
 import { FlatCategory } from '@/hooks/useCategories'
+import { deleteImages, uploadImages } from '@/lib/cloudinary'
+import { revalidatePath } from 'next/cache'
 
 export const categoryProjection = {
   $project: {
@@ -125,6 +127,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  let uploadedPublicId: string | null = null
+
   try {
     await dbConnect()
 
@@ -170,15 +174,31 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    let image = sanitizedData.image || ''
+    if (image.startsWith('data:image/')) {
+      const [uploadedImage] = await uploadImages([image], 'lumina/categories')
+      image = uploadedImage.secure_url
+      uploadedPublicId = uploadedImage.public_id
+    }
+
     const category = await Category.create({
       ...sanitizedData,
+      image,
       parent: sanitizedData.parent || null,
       // ancestors built in pre('save')
     })
 
+    revalidatePath('/')
+
     return NextResponse.json(category.toJSON(), { status: 201 })
   } catch (error) {
     console.error('Error creating category:', error)
+
+    if (uploadedPublicId) {
+      await deleteImages([uploadedPublicId]).catch((cleanupError) => {
+        console.error('Failed to clean up category image:', cleanupError)
+      })
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(

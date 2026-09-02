@@ -13,6 +13,7 @@ interface ImageUploadProps {
   label?: string
   error?: string
   folder?: string
+  maxFileSizeMB?: number
 }
 
 export function ImageUpload({
@@ -20,25 +21,37 @@ export function ImageUpload({
   onChange,
   maxImages = 5,
   className,
+  maxFileSizeMB,
 }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isDragging, setIsDragging] = useState(false)
+  const [fileError, setFileError] = useState<string | null>(null)
 
   const handleFileSelect = (files: FileList | null) => {
     if (!files) return
+
+    setFileError(null)
 
     const remainingSlots = maxImages - images.length
     const filesToProcess = Array.from(files).slice(0, remainingSlots)
 
     filesToProcess.forEach((file) => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          const result = e.target?.result as string
-          onChange([...images, result])
-        }
-        reader.readAsDataURL(file)
+      if (!file.type.startsWith('image/')) {
+        setFileError('Please select an image file.')
+        return
       }
+
+      if (maxFileSizeMB && file.size > maxFileSizeMB * 1024 * 1024) {
+        setFileError(`Images must be ${maxFileSizeMB}MB or smaller.`)
+        return
+      }
+
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const result = e.target?.result as string
+        onChange([...images, result])
+      }
+      reader.readAsDataURL(file)
     })
   }
 
@@ -125,6 +138,7 @@ export function ImageUpload({
       <p className="text-xs text-border-dark mt-2">
         Add up to {maxImages} {maxImages > 1 ? 'images' : 'image'}. Drag & drop or click to upload.
       </p>
+      {fileError && <p role="alert" className="mt-1 text-xs text-red-600">{fileError}</p>}
     </div>
   )
 }

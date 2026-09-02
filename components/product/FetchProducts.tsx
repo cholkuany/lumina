@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { FilterSidebar } from '@/components/filters/sidebar/FilterSidebar'
 import { useProducts } from '@/hooks/useProducts'
-import { useCategories } from '@/hooks/useCategories'
+import { NestedCategory, useCategories } from '@/hooks/useCategories'
 
 import { filteredSearch } from '@/utils/filteredSearch'
 import ProductsToolbar from '@/components/product/ProductsToolbar'
@@ -18,9 +18,11 @@ import { ProductsErrorState } from '@/components/product/ProductsErrorState'
 export default function FetchProducts({
   searchQuery,
   categoryParam,
+  id
 }: {
   searchQuery: string | null
   categoryParam: string | null
+  id: string | null
 }) {
   const [sortBy, setSortBy] = useState('featured')
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 500])
@@ -34,14 +36,19 @@ export default function FetchProducts({
     return initial
   })
 
-  const {
-    data: products = [],
-    isPending,
-    isError,
-    isFetching,
-    refetch,
-  } = useProducts()
+  const { data: products = [], isPending, isError, isFetching, refetch, } = useProducts()
   const { data: nestedCategories } = useCategories(false)
+
+  const currentCategory: NestedCategory | undefined = nestedCategories?.categoryMap.get(id ?? '') || undefined
+  const isLeafCategory = Boolean(currentCategory && currentCategory.children.length === 0)
+  const parentCategory = currentCategory?.parent
+    ? nestedCategories?.categoryMap.get(currentCategory.parent.id)
+    : undefined
+  const sidebarCategories = currentCategory
+    ? isLeafCategory
+      ? parentCategory?.children ?? [currentCategory]
+      : currentCategory.children
+    : nestedCategories?.categories ?? []
 
   const filteredProducts = useMemo(
     () =>
@@ -54,13 +61,20 @@ export default function FetchProducts({
     items.push({ label: 'home', href: '/' })
     if (categoryParam) {
       items.push({ label: 'products', href: '/products' })
-      items.push({ label: categoryParam })
+      // items.push({ label: categoryParam })
     } else {
       items.push({ label: 'All Products' })
     }
 
     return items
   }, [categoryParam])
+
+  const currentCrumbs = currentCategory ?
+    currentCategory.ancestors.map((ancestor) => ({
+      label: ancestor.name,
+      href: ancestor.name.toLocaleLowerCase()
+    })) : []
+  if (categoryParam) currentCrumbs.push({ label: categoryParam, href: '' })
 
   if (isPending) return <ProductsLoadingState />
   if (isError) {
@@ -98,7 +112,7 @@ export default function FetchProducts({
     <main className="pb-16">
 
       <div className="container-lumina py-4">
-        <Breadcrumb items={crumbs} />
+        <Breadcrumb items={[...crumbs, ...currentCrumbs]} />
       </div>
 
       <div className="container-lumina">
@@ -106,7 +120,9 @@ export default function FetchProducts({
           {/* Desktop Sidebar */}
           <aside className="hidden md:block w-64 shrink-0">
             <FilterSidebar
-              filters={nestedCategories?.categories || []}
+              filters={sidebarCategories}
+              currentCategory={currentCategory}
+              parentCategory={parentCategory}
               selectedFilters={selectedFilters}
               onFilterChange={handleFilterChange}
               onClearAll={clearAllFilters}
@@ -120,14 +136,14 @@ export default function FetchProducts({
             <ProductsToolbar
               sortBy={sortBy}
               setSortBy={setSortBy}
-              categories={nestedCategories?.categories || []}
+              categories={currentCategory ? currentCategory.children : nestedCategories?.categories || []}
               selectedFilters={selectedFilters}
               setMobileFiltersOpen={setMobileFiltersOpen}
             />
 
             <ActiveFilters
               selectedFilters={selectedFilters}
-              categories={nestedCategories?.categories || []}
+              categories={currentCategory ? currentCategory.children : nestedCategories?.categories || []}
               onRemove={removeFilter}
               onClearAll={() => setSelectedFilters({})}
             />
@@ -143,7 +159,9 @@ export default function FetchProducts({
       {/* Mobile Filters Drawer */}
       {mobileFiltersOpen && (
         <FilterSidebar
-          filters={nestedCategories?.categories || []}
+          filters={sidebarCategories}
+          currentCategory={currentCategory}
+          parentCategory={parentCategory}
           selectedFilters={selectedFilters}
           onFilterChange={handleFilterChange}
           onClearAll={clearAllFilters}

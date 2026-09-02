@@ -67,7 +67,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
     <main className="min-h-screen flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
         {/* Form Card */}
-        <div className="bg-white border border-border-light rounded-brand p-8 shadow-soft">
+        <div className="bg-white/95 backdrop-blur-sm border border-white/70 rounded-brand p-8 shadow-soft">
           <div className="text-center mb-8">
             <h1 className="font-serif text-2xl text-text-primary mb-2">
               Welcome Back
@@ -166,7 +166,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
           </div>
 
           {/* Social Login Buttons */}
-          <SocialLogins />
+          <SocialLogins redirectTo={redirectTo} />
 
           {/* Sign Up Link */}
           <p className="text-center text-sm text-border-dark mt-8">

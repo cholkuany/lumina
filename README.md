@@ -78,6 +78,7 @@ Fill in `.env.local` using [`.env.example`](./.env.example) as a guide.
 | `NEXT_PUBLIC_APP_URL` | Public application origin used by auth, email links, and checkout redirects |
 | `NEXT_PUBLIC_BASE_URL` | Legacy/fallback application origin used by some email and checkout code |
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google OAuth application credentials |
+| `FACEBOOK_CLIENT_ID` / `FACEBOOK_CLIENT_SECRET` | Meta app ID and app secret for Facebook Login |
 | `STRIPE_SECRET_KEY` | Stripe server-side API key |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
 | `NEXT_PUBLIC_CLOUDINARY_API_KEY` | Cloudinary API key |
@@ -87,6 +88,16 @@ Fill in `.env.local` using [`.env.example`](./.env.example) as a guide.
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` | SMTP credentials used by verification and password-reset email |
 
 Never expose variables without the `NEXT_PUBLIC_` prefix to client components or commit real secrets.
+
+### Facebook Login
+
+Create a Meta app with the Facebook Login product, then add this exact valid OAuth redirect URI:
+
+```text
+http://localhost:3000/api/auth/callback/facebook
+```
+
+For production, replace `http://localhost:3000` with the public application origin. Copy the Meta app ID and app secret into `FACEBOOK_CLIENT_ID` and `FACEBOOK_CLIENT_SECRET`, and add the production domain to the Meta app's allowed domains before switching the app live.
 
 ## ⌨️ Commands
 

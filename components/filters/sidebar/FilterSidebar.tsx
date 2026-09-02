@@ -1,9 +1,7 @@
-// components/filters/FilterSidebar.tsx
 'use client'
 
-import { useState } from 'react'
-import { X } from 'lucide-react'
-import { ToggleButton } from '@/components/filters/sidebar/ToggleButton'
+import Link from 'next/link'
+import { ChevronLeft, X } from 'lucide-react'
 import { CategoryFilter } from '@/components/filters/sidebar/CategoryFilter'
 
 import { Button } from '@/components/ui/Button'
@@ -11,8 +9,9 @@ import { cn } from '@/lib/utils'
 import type { NestedCategory } from '@/hooks/useCategories'
 
 interface FilterSidebarProps {
-  // filters: FilterGroup[]
   filters: NestedCategory[]
+  currentCategory?: NestedCategory
+  parentCategory?: NestedCategory
   selectedFilters: Record<string, string[]>
   onFilterChange: (groupId: string, value: string, checked: boolean) => void
   onClearAll: () => void
@@ -24,30 +23,19 @@ interface FilterSidebarProps {
 
 export function FilterSidebar({
   filters,
+  currentCategory,
+  parentCategory,
   selectedFilters,
-  onFilterChange,
   onClearAll,
-  priceRange,
-  onPriceChange,
   isMobile,
   onClose,
 }: FilterSidebarProps) {
 
-  const [expandedGroups, setExpandedGroups] = useState<string[]>(
-    filters.map(f => f.name)
-  )
-
-  console.log("expandedGroups", expandedGroups)
-
-  const toggleGroup = (groupId: string) => {
-    setExpandedGroups(prev =>
-      prev.includes(groupId)
-        ? prev.filter(id => id !== groupId)
-        : [...prev, groupId]
-    )
-  }
-
   const hasActiveFilters = Object.values(selectedFilters).some(arr => arr.length > 0)
+  const isLeafCategory = Boolean(currentCategory && currentCategory.children.length === 0)
+  const backHref = parentCategory
+    ? `/products?category=${encodeURIComponent(parentCategory.name)}&id=${parentCategory.id}`
+    : '/products'
 
   return (
     <div className={cn(isMobile && 'bg-white fixed inset-0 z-50 overflow-y-auto')}>
@@ -62,6 +50,32 @@ export function FilterSidebar({
       )}
 
       <div className={cn('space-y-6', isMobile ? 'p-4' : 'pr-8')}>
+        <section aria-labelledby="category-filter-heading">
+          <h2 id="category-filter-heading" className="mb-4 text-base font-semibold text-text-primary">
+            Categories
+          </h2>
+
+          {isLeafCategory && (
+            <Link
+              href={backHref}
+              className="mb-3 flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+              All Categories
+            </Link>
+          )}
+
+          <div className="space-y-2">
+            {filters.map((category) => (
+              <CategoryFilter
+                key={category.id}
+                category={category}
+                isCurrent={category.id === currentCategory?.id}
+              />
+            ))}
+          </div>
+        </section>
+
         {/* Clear All */}
         {hasActiveFilters && (
           <button
@@ -71,62 +85,6 @@ export function FilterSidebar({
             Clear all filters
           </button>
         )}
-
-        {/* Price Range */}
-        <div>
-          <ToggleButton
-            id='price'
-            included={expandedGroups.includes('price')}
-            toggleGroup={toggleGroup}
-            label='Price'
-          />
-
-          {expandedGroups.includes('price') && (
-            <div className="pt-4 pb-2">
-              <div className="flex items-center gap-4">
-                <div className="flex-1">
-                  <label className="text-xs text-border-dark">Min</label>
-                  <input
-                    type="number"
-                    value={priceRange[0]}
-                    onChange={(e) => onPriceChange([Number(e.target.value), priceRange[1]])}
-                    className="w-full h-10 px-3 border border-borderrounded-lg text-sm focus:outline-none focus:border-primary"
-                    min={0}
-                  />
-                </div>
-                <span className="text-border-dark mt-4">—</span>
-                <div className="flex-1">
-                  <label className="text-xs text-border-dark">Max</label>
-                  <input
-                    type="number"
-                    value={priceRange[1]}
-                    onChange={(e) => onPriceChange([priceRange[0], Number(e.target.value)])}
-                    className="w-full h-10 px-3 border border-borderrounded-lg text-sm focus:outline-none focus:border-primary"
-                    min={0}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Filter Groups */}
-        {filters.map((category) => (
-          <div
-            key={category.id}
-            className="border-t border-border-light pt-4"
-          >
-            <CategoryFilter
-              key={category.id}
-              category={category}
-              expandedGroups={expandedGroups}
-              toggleGroup={toggleGroup}
-              selectedFilters={selectedFilters}
-              onFilterChange={onFilterChange}
-              level={0}
-            />
-          </div>
-        ))}
 
       </div>
 
@@ -141,4 +99,3 @@ export function FilterSidebar({
     </div>
   )
 }
-

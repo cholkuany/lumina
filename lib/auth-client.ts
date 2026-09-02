@@ -1,4 +1,3 @@
-// lib/auth-client.ts
 import { createAuthClient } from "better-auth/react";
 import { adminClient, inferAdditionalFields } from "better-auth/client/plugins";
 import { auth } from "./auth";

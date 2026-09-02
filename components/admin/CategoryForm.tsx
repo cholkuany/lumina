@@ -59,7 +59,7 @@ export function CategoryForm({
 
   // Update image field when imageUrl changes
   useEffect(() => {
-    setValue('image', imageUrl[0] || '')
+    setValue('image', imageUrl[0] || '', { shouldDirty: true, shouldValidate: true })
   }, [imageUrl, setValue])
 
   // Build parent options with indentation
@@ -106,6 +106,7 @@ export function CategoryForm({
               images={imageUrl}
               onChange={setImageUrl}
               maxImages={1}
+              maxFileSizeMB={2}
               folder="lumina/categories"
             />
           )}

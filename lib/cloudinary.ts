@@ -71,3 +71,18 @@ export const deleteImages = async (publicIds: string[]) => {
     throw error;
   }
 };
+
+export const getCloudinaryPublicId = (url: string) => {
+  try {
+    const pathname = new URL(url).pathname;
+    const uploadPath = pathname.split('/upload/')[1];
+
+    if (!uploadPath) return null;
+
+    return uploadPath
+      .replace(/^v\d+\//, '')
+      .replace(/\.[^/.]+$/, '');
+  } catch {
+    return null;
+  }
+};

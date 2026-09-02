@@ -4,6 +4,8 @@ import Category, { type ICategory } from '@/lib/db/models/Category'
 import { categorySchema } from '@/lib/validations/category.validation'
 import { z } from 'zod'
 import mongoose from 'mongoose'
+import { deleteImages, getCloudinaryPublicId, uploadImages } from '@/lib/cloudinary'
+import { revalidatePath } from 'next/cache'
 
 type CategoryModel = ICategory & { _id: mongoose.Types.ObjectId }
 
@@ -47,6 +49,8 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  let uploadedPublicId: string | null = null
+
   try {
     await dbConnect()
     const { id } = await params
@@ -107,8 +111,18 @@ export async function PUT(
       validatedData.parent !== undefined &&
       validatedData.parent?.toString() !== category.parent?.toString()
 
+    const previousImage = category.image || ''
+    let image = validatedData.image || ''
+
+    if (image.startsWith('data:image/')) {
+      const [uploadedImage] = await uploadImages([image], 'lumina/categories')
+      image = uploadedImage.secure_url
+      uploadedPublicId = uploadedImage.public_id
+    }
+
     category.set({
       ...validatedData,
+      image,
       parent: validatedData.parent ?? null,
     })
 
@@ -119,9 +133,26 @@ export async function PUT(
       await updateDescendantAncestors(category)
     }
 
+    if (previousImage && previousImage !== image) {
+      const previousPublicId = getCloudinaryPublicId(previousImage)
+      if (previousPublicId) {
+        await deleteImages([previousPublicId]).catch((cleanupError) => {
+          console.error('Failed to remove previous category image:', cleanupError)
+        })
+      }
+    }
+
+    revalidatePath('/')
+
     return NextResponse.json(category.toJSON())
   } catch (error) {
     console.error('Error updating category:', error)
+
+    if (uploadedPublicId) {
+      await deleteImages([uploadedPublicId]).catch((cleanupError) => {
+        console.error('Failed to clean up replacement category image:', cleanupError)
+      })
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -182,6 +213,17 @@ export async function DELETE(
         }
       )
     }
+
+    const imagePublicId = deletedCategory.image
+      ? getCloudinaryPublicId(deletedCategory.image)
+      : null
+    if (imagePublicId) {
+      await deleteImages([imagePublicId]).catch((cleanupError) => {
+        console.error('Failed to remove deleted category image:', cleanupError)
+      })
+    }
+
+    revalidatePath('/')
 
     return NextResponse.json({ message: 'Category deleted successfully', status: 200 })
   } catch (error) {
