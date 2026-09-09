@@ -3,8 +3,8 @@ import { Navbar } from '@/components/layout/nav/Navbar'
 import { Footer } from '@/components/layout/Footer'
 
 // Context Providers
-import { CartProvider } from '@/context/CartContext'
-import { WishlistProvider } from '@/context/WishlistContext'
+// import { CartProvider } from '@/context/CartContext'
+// import { WishlistProvider } from '@/context/WishlistContext'
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { QueryContextProvider } from '@/context/QueryProviderContext'
 
@@ -26,13 +26,9 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <QueryContextProvider>
-            <CartProvider>
-              <WishlistProvider>
-                <Navbar />
-                {children}
-                <Footer />
-              </WishlistProvider>
-            </CartProvider>
+            <Navbar />
+            {children}
+            <Footer />
           </QueryContextProvider>
         </AuthProvider>
       </body>

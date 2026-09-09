@@ -1,14 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useCart } from '@/context/CartContext'
+import { useClearCart } from '@/stores/cart/cart.selectors'
 
 type CheckoutSuccessClientProps = {
   sessionId?: string
 }
 
 export function CheckoutSuccessClient({ sessionId }: CheckoutSuccessClientProps) {
-  const { clearCart } = useCart()
+  const clearCart = useClearCart()
   const [orderError, setOrderError] = useState('')
 
   useEffect(() => {

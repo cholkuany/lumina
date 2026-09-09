@@ -4,8 +4,9 @@ import { useMemo } from 'react'
 import { Heart, Star, Minus, Plus, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { VariantSelector } from './VariantSelector'
-import { useCart } from '@/context/CartContext'
-import { useWishlist } from '@/context/WishlistContext'
+import { useCartItems, useAddToCart } from '@/stores/cart/cart.selectors'
+import { useAddToWishlist, useRemoveFromWishlist, useIsInWishlist } from '@/stores/wishlist/wishlist.selectors'
+
 import { TProduct } from '@/lib/types'
 import { formatPrice, cn } from '@/lib/utils'
 import { ImageGallery } from '@/components/product/ImageGallery'
@@ -20,8 +21,12 @@ export function ProductInfo({ product }: { product: TProduct }) {
     currentVariant,
   } = useVariantSelector(product.variants)
 
-  const { addItem, state } = useCart()
-  const { addItem: addToWishlist, removeItem: removeFromWishlist, isInWishlist } = useWishlist()
+  const addItemToCart = useAddToCart()
+  const items = useCartItems()
+
+  const addToWishlist = useAddToWishlist()
+  const removeFromWishlist = useRemoveFromWishlist()
+  const isInWishlist = useIsInWishlist(product.id)
 
   // Get images for the current color
   const currentImages = useMemo(() => {
@@ -31,15 +36,13 @@ export function ProductInfo({ product }: { product: TProduct }) {
     [currentVariant]
   )
 
-  const inWishlist = isInWishlist(product.id)
-
   const handleAddToCart = (q: number) => {
     if (!currentVariant || currentVariant.stock === 0) return
-    addItem(product, q, selectedVariants, currentVariant.images[0]?.secure_url)
+    addItemToCart(product, q, selectedVariants, currentVariant.images[0]?.secure_url)
   }
 
   const handleWishlistToggle = () => {
-    if (inWishlist) {
+    if (isInWishlist) {
       removeFromWishlist(product.id)
     } else {
       addToWishlist(product)
@@ -55,7 +58,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
 
   const isInStock = currentVariant ? currentVariant.stock > 0 : false
   const stockCount = currentVariant?.stock ?? 0
-  const cartQuantity = state.items.find(
+  const cartQuantity = items.find(
     item => item.product.id === product.id
       && JSON.stringify(item.product.variant.attributes) === JSON.stringify(selectedVariants)
   )?.quantity || 0
@@ -83,14 +86,14 @@ export function ProductInfo({ product }: { product: TProduct }) {
               onClick={handleWishlistToggle}
               className={cn(
                 'p-2 rounded-full border transition-all duration-200 shrink-0',
-                inWishlist
+                isInWishlist
                   ? 'border-red-200 bg-red-50'
                   : 'border-border-light hover:border-border'
               )}
             >
               <Heart className={cn(
                 'w-5 h-5 transition-colors',
-                inWishlist ? 'fill-red-500 text-red-500' : 'text-border-dark'
+                isInWishlist ? 'fill-red-500 text-red-500' : 'text-border-dark'
               )} />
             </button>
           </div>

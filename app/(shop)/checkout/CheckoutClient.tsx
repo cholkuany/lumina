@@ -10,12 +10,14 @@ import { PaymentForm } from '@/components/checkout/PaymentForm'
 import { TPaymentFormData } from '@/lib/types'
 import { OrderReview } from '@/components/checkout/OrderReview'
 import { CartItem } from '@/components/cart/CartItem'
-import { useCart } from '@/context/CartContext'
+import { useCartSubtotal, useCartItems } from '@/stores/cart/cart.selectors'
 import { formatPrice } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 
 export default function CheckoutClient() {
-  const { state, subtotal } = useCart()
+  const items = useCartItems()
+  const subtotal = useCartSubtotal()
+
   const [currentStep, setCurrentStep] = useState(1)
   const [shippingData, setShippingData] = useState<TShippingFormData | null>(null)
   const [paymentData, setPaymentData] = useState<TPaymentFormData | null>(null)
@@ -59,7 +61,7 @@ export default function CheckoutClient() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          items: state.items,
+          items: items,
           shippingData,
           paymentData,
         }),
@@ -83,7 +85,7 @@ export default function CheckoutClient() {
   }
 
   // Empty cart redirect
-  if (state.items.length === 0) {
+  if (items.length === 0) {
     return (
       <main className="container-lumina py-16 text-center">
         <h1 className="font-serif text-2xl text-text-primary mb-4">Your cart is empty</h1>
@@ -161,7 +163,7 @@ export default function CheckoutClient() {
 
               {/* Items */}
               <div className="max-h-64 overflow-y-auto mb-4">
-                {state.items.map((item) => (
+                {items.map((item) => (
                   <CartItem key={item.id} item={item} showControls={false} />
                 ))}
               </div>

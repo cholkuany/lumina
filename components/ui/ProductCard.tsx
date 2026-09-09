@@ -1,7 +1,7 @@
 'use client'
 
-import { useWishlist } from '@/context/WishlistContext'
-import { useCart } from '@/context/CartContext'
+import { useAddToWishlist, useWishlistItems, useRemoveFromWishlist } from '@/stores/wishlist/wishlist.selectors'
+import { useCartItems, useAddToCart } from '@/stores/cart/cart.selectors'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,12 +18,12 @@ export function ProductCard({
   product,
   variant = 'full',
 }: ProductCardProps) {
-  const { addItem, state, removeItem } = useWishlist()
+  const addItemToWishlist = useAddToWishlist()
+  const removeItem = useRemoveFromWishlist()
+  const wishlistItems = useWishlistItems()
 
-  const {
-    addItem: addItemToCart,
-    state: { items },
-  } = useCart()
+  const addItemToCart = useAddToCart()
+  const items = useCartItems()
 
   const isCompact = variant === 'compact'
 
@@ -40,7 +40,7 @@ export function ProductCard({
     )
   }
 
-  const isInWishlist = state.items.some((item) => item.product.id === product.id)
+  const isInWishlist = wishlistItems.some((item) => item.product.id === product.id)
 
   const cartItem = items?.find(
     (item) => item.product.id === product.id
@@ -128,7 +128,7 @@ export function ProductCard({
               if (isInWishlist) {
                 removeItem(product.id)
               } else {
-                addItem(product)
+                addItemToWishlist(product)
               }
             }}
           >

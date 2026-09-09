@@ -5,25 +5,24 @@ import { ArrowLeft, ShoppingBag } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { CartItem } from '@/components/cart/CartItem'
 import { CartSummary } from '@/components/cart/CartSummary'
-import { Breadcrumb } from '@/components/ui/Breadcrumb'
-import { useCart } from '@/context/CartContext'
+import { useCartItems, useCartItemCount, useClearCart } from '@/stores/cart/cart.selectors'
 
 export default function CartPage() {
-  const { state, clearCart, itemCount } = useCart()
+  const items = useCartItems()
+  const itemCount = useCartItemCount()
+  const clearCart = useClearCart()
+
+  console.log('CartPage items:', items)
 
   return (
     <main className="pb-16">
-      {/* Breadcrumb */}
-      <div className="container-lumina py-4">
-        <Breadcrumb items={[{ label: 'Shopping Cart' }]} />
-      </div>
 
       <div className="container-lumina">
-        <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-8">
+        <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-8 py-4">
           Shopping Cart
         </h1>
 
-        {state.items.length > 0 ? (
+        {items.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Cart Items */}
             <div className="lg:col-span-2">
@@ -42,7 +41,7 @@ export default function CartPage() {
 
               {/* Items */}
               <div className="divide-y divide-border-light">
-                {state.items.map((item) => (
+                {items.map((item) => (
                   <CartItem key={item.id} item={item} />
                 ))}
               </div>

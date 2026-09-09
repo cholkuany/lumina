@@ -4,7 +4,7 @@
 import Image from 'next/image'
 import { MapPin, CreditCard, Truck, Edit2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { useCart } from '@/context/CartContext'
+import { useCartItems, useCartSubtotal } from '@/stores/cart/cart.selectors'
 import { formatPrice } from '@/lib/utils'
 
 import { TShippingFormData } from '@/lib/types'
@@ -22,7 +22,8 @@ export function OrderReview({
   onSubmit,
   isProcessing,
 }: OrderReviewProps) {
-  const { state, subtotal } = useCart()
+  const items = useCartItems()
+  const subtotal = useCartSubtotal()
 
   const shippingCost = shippingData.shippingMethod === 'standard'
     ? (subtotal >= 50 ? 0 : 5.99)
@@ -40,11 +41,11 @@ export function OrderReview({
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-serif text-lg text-text-primary">Order Items</h3>
           <span className="text-sm text-border-dark">
-            {state.items.length} {state.items.length === 1 ? 'item' : 'items'}
+            {items.length} {items.length === 1 ? 'item' : 'items'}
           </span>
         </div>
         <div className="bg-surface rounded-brand p-4 space-y-4">
-          {state.items.map((item) => (
+          {items.map((item) => (
             <div key={item.id} className="flex gap-4">
               <div className='relative w-16 h-16'>
                 <div className="w-full h-full bg-white rounded-lg overflow-hidden shrink-0">

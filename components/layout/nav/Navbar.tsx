@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useLoggedInUser } from '@/hooks/useLoggedInUser'
-import { useCart } from '@/context/CartContext'
+import { useCartItemCount } from '@/stores/cart/cart.selectors'
 import { NestedCategory, useCategories } from '@/hooks/useCategories'
 import { DesktopNavigationWrapper } from './DesktopNavigation'
 import { MobileMenu } from './mobile/MobileMenu'
@@ -19,7 +19,8 @@ export type NavItem = {
 
 export function Navbar() {
   const [toggleMobileMenu, setToggleMobileMenu] = useState(false)
-  const { itemCount } = useCart()
+
+  const itemCount = useCartItemCount()
   const { user, firstName, lastName } = useLoggedInUser()
   const { data } = useCategories(false)
 
@@ -39,7 +40,7 @@ export function Navbar() {
       {/* <HeaderBanner /> */}
 
       <nav className="container-lumina">
-        <div className="flex h-16 items-center justify-between lg:h-[76px]">
+        <div className="flex h-16 items-center justify-between lg:h-19">
           <MobileMenuToggle open={toggleMobileMenu} setOpen={setToggleMobileMenu} />
           <Logo />
           <DesktopNavigationWrapper navigation={navigationItems} />

@@ -1,11 +1,10 @@
-// components/cart/CartSummary.tsx
 'use client'
 
 import { useState } from 'react'
 import Link from 'next/link'
 import { Tag, Truck, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { useCart } from '@/context/CartContext'
+import { useCartSubtotal } from '@/stores/cart/cart.selectors'
 import { formatPrice } from '@/lib/utils'
 
 interface CartSummaryProps {
@@ -13,7 +12,7 @@ interface CartSummaryProps {
 }
 
 export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
-  const { subtotal } = useCart()
+  const subtotal = useCartSubtotal()
 
   const [promoCode, setPromoCode] = useState('')
   const [promoApplied, setPromoApplied] = useState(false)

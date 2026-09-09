@@ -4,23 +4,27 @@ import Link from 'next/link'
 import { Heart, ShoppingBag, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
-import { useWishlist } from '@/context/WishlistContext'
-import { useCart } from '@/context/CartContext'
+import { useWishlistItems, useRemoveFromWishlist, useClearWishlist, useWishlistItemCount } from '@/stores/wishlist/wishlist.selectors'
+import { useAddToCart } from '@/stores/cart/cart.selectors'
 import { formatPrice } from '@/lib/utils'
 import { TProduct } from '@/lib/types'
 
 export default function WishlistPage() {
-  const { state, removeItem, clearWishlist, itemCount } = useWishlist()
-  const { addItem } = useCart()
+  const items = useWishlistItems()
+  const removeItem = useRemoveFromWishlist()
+  const clearWishlist = useClearWishlist()
+  const itemCount = useWishlistItemCount()
+
+  const addItem = useAddToCart()
 
   const handleAddToCart = (product: TProduct) => {
-    addItem(product, 1)
+    addItem(product, 1, product.variants[0].attributes, product.variants[0].images[0]?.secure_url)
     removeItem(product.id)
   }
-
+  // (product, quantity, variants, image)
   const handleAddAllToCart = () => {
-    state.items.forEach(item => {
-      addItem(item.product, 1)
+    items.forEach(item => {
+      addItem(item.product, 1, item.product.variants[0].attributes, item.product.variants[0].images[0]?.secure_url)
     })
     clearWishlist()
   }
@@ -39,7 +43,7 @@ export default function WishlistPage() {
             </p>
           </div>
 
-          {state.items.length > 0 && (
+          {items.length > 0 && (
             <div className="flex gap-3">
               <Button variant="secondary" onClick={clearWishlist}>
                 Clear All
@@ -52,9 +56,9 @@ export default function WishlistPage() {
           )}
         </div>
 
-        {state.items.length > 0 ? (
+        {items.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {state.items.map((item) => (
+            {items.map((item) => (
               <div
                 key={item.id}
                 className="bg-white border border-border-light rounded-brand overflow-hidden group"

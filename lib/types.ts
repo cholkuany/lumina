@@ -40,7 +40,6 @@ export type Attribute = {
   color: string
   size: string
   material?: string
-  // [key: string]: string | undefined
 } & Record<string, string>
 
 export interface TProductVariant {
@@ -53,12 +52,8 @@ export interface TProductVariant {
   images: IImage[]
 }
 
-
-// export type CartProductVariant = Omit<TProductVariant, 'stock'>
-
 export type TCartProduct = Pick<TProduct, 'id' | 'name'>
   & {
-    // variant: CartProductVariant
     variant: TProductVariant
   }
 

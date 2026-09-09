@@ -5,9 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Trash2 } from 'lucide-react'
 import { QuantitySelector } from '@/components/ui/QuantitySelector'
-import { useCart } from '@/context/CartContext'
 import { TCartItem as CartItemType } from '@/lib/types'
 import { formatPrice } from '@/lib/utils'
+import { useUpdateCartQuantity, useRemoveFromCart } from '@/stores/cart/cart.selectors'
 
 interface CartItemProps {
   item: CartItemType
@@ -15,7 +15,8 @@ interface CartItemProps {
 }
 
 export function CartItem({ item, showControls = true }: CartItemProps) {
-  const { updateQuantity, removeItem } = useCart()
+  const updateQuantity = useUpdateCartQuantity()
+  const removeItem = useRemoveFromCart()
 
   return (
     <div className="flex gap-4 py-4 border-b border-border-light last:border-0">

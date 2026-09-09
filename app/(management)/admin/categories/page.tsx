@@ -23,7 +23,6 @@ export default function CategoriesPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const queryClient = useQueryClient()
-  // const { data: categories = [] } = useCategories(showInactive)
 
   // Modal states
   const [modal, setModal] = useState<{

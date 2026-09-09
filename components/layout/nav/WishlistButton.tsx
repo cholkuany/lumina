@@ -4,10 +4,10 @@ import { Heart } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { CountBadge } from '@/components/layout/nav/CountBadge'
-import { useWishlist } from '@/context/WishlistContext'
+import { useWishlistItemCount } from '@/stores/wishlist/wishlist.selectors'
 
 export const WishlistButton = () => {
-  const { itemCount } = useWishlist()
+  const itemsCount = useWishlistItemCount()
   const router = useRouter()
   return (
     <Button
@@ -17,8 +17,8 @@ export const WishlistButton = () => {
       onClick={() => router.push('/wishlist')}
     >
       <Heart className="w-5 h-5" />
-      {itemCount > 0 && (
-        <CountBadge count={itemCount} />
+      {itemsCount > 0 && (
+        <CountBadge count={itemsCount} />
       )}
     </Button>
   )
