@@ -28,7 +28,7 @@ export function SellerResponse({
         <div className="flex-1 min-w-0">
           {/* Header */}
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="font-medium text-text-primary text-sm">{sellerName}</span>
+            <span className="font-medium text-foreground text-sm">{sellerName}</span>
             {isOfficial && (
               <span className="inline-flex items-center gap-1 text-xs bg-primary/20 text-primary-dark px-2 py-0.5 rounded-full">
                 <MessageSquare className="w-3 h-3" />

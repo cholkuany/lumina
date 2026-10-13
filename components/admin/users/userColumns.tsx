@@ -29,7 +29,7 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
               </span>
             </div>
             <div className="min-w-0">
-              <p className="font-medium text-text-primary truncate">{row.original.name}</p>
+              <p className="font-medium text-foreground truncate">{row.original.name}</p>
               <p className="text-xs text-border-dark truncate">{row.original.email}</p>
             </div>
           </div>
@@ -51,7 +51,7 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
               "transition-all hover:ring-2 hover:ring-offset-1 cursor-pointer",
               row.original.role === "admin"
                 ? "bg-purple-100 text-purple-700 hover:ring-purple-300"
-                : "bg-surface text-text-primary hover:ring-border"
+                : "bg-surface text-foreground hover:ring-border"
             )}
           >
             {row.original.role}
@@ -73,7 +73,7 @@ export const useUserColumns = (setModal: (state: ModalState) => void): ColumnDef
             className={cn(
               "text-xs",
               (row.original).subscribeNewsletter
-                ? "text-success-600 font-medium"
+                ? "text-success font-medium"
                 : "text-border-dark"
             )}
           >

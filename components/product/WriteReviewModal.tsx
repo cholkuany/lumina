@@ -53,12 +53,12 @@ export function WriteReviewModal({
               <DialogPanel className="w-full max-w-lg bg-background rounded-brand shadow-xl overflow-hidden">
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-border-light">
-                  <DialogTitle className="font-serif text-xl text-text-primary">
+                  <DialogTitle className="font-serif text-xl text-foreground">
                     Write a Review
                   </DialogTitle>
                   <button
                     onClick={onClose}
-                    className="p-2 -mr-2 text-border-dark hover:text-text-primary transition-colors"
+                    className="p-2 -mr-2 text-border-dark hover:text-foreground transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>

@@ -35,11 +35,11 @@ export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
 
   return (
     <div className="bg-surface rounded-brand p-6 lg:p-8 sticky top-24">
-      <h3 className="font-serif text-xl text-text-primary mb-6">Order Summary</h3>
+      <h3 className="font-serif text-xl text-foreground mb-6">Order Summary</h3>
 
       {/* Promo Code */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-text-primary mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           Promo Code
         </label>
         <div className="flex gap-2">
@@ -62,7 +62,7 @@ export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
           <p className="text-red-500 text-xs mt-1">{promoError}</p>
         )}
         {promoApplied && (
-          <p className="text-success-600 text-xs mt-1">Promo code applied! 10% off</p>
+          <p className="text-success text-xs mt-1">Promo code applied! 10% off</p>
         )}
       </div>
 
@@ -70,11 +70,11 @@ export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
       <div className="space-y-3 mb-6">
         <div className="flex justify-between text-sm">
           <span className="text-border-dark">Subtotal</span>
-          <span className="text-text-primary">{formatPrice(subtotal)}</span>
+          <span className="text-foreground">{formatPrice(subtotal)}</span>
         </div>
 
         {promoApplied && (
-          <div className="flex justify-between text-sm text-success-600">
+          <div className="flex justify-between text-sm text-success">
             <span>Discount (10%)</span>
             <span>-{formatPrice(discount)}</span>
           </div>
@@ -82,9 +82,9 @@ export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
 
         <div className="flex justify-between text-sm">
           <span className="text-border-dark">Shipping</span>
-          <span className="text-text-primary">
+          <span className="text-foreground">
             {shipping === 0 ? (
-              <span className="text-success-600">Free</span>
+              <span className="text-success">Free</span>
             ) : (
               formatPrice(shipping)
             )}
@@ -93,13 +93,13 @@ export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
 
         <div className="flex justify-between text-sm">
           <span className="text-border-dark">Estimated Tax</span>
-          <span className="text-text-primary">{formatPrice(tax)}</span>
+          <span className="text-foreground">{formatPrice(tax)}</span>
         </div>
 
         <div className="border-t border-borderpt-3">
           <div className="flex justify-between">
-            <span className="font-semibold text-text-primary">Total</span>
-            <span className="font-semibold text-text-primary text-lg">
+            <span className="font-semibold text-foreground">Total</span>
+            <span className="font-semibold text-foreground text-lg">
               {formatPrice(total)}
             </span>
           </div>

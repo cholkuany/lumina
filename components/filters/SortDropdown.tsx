@@ -28,7 +28,7 @@ export function SortDropdown({ options, value, onChange }: SortDropdownProps) {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 text-sm text-text-primary hover:text-primary transition-colors"
+        className="flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors"
       >
         <span className="text-border-dark">Sort by:</span>
         <span className="font-medium">{selectedOption?.label}</span>
@@ -48,7 +48,7 @@ export function SortDropdown({ options, value, onChange }: SortDropdownProps) {
                 'flex items-center justify-between w-full px-4 py-2.5 text-sm transition-colors',
                 option.value === value
                   ? 'text-primary bg-surface'
-                  : 'text-text-primary hover:bg-surface'
+                  : 'text-foreground hover:bg-surface'
               )}
             >
               {option.label}

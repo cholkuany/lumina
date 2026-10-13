@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { SignOutButton } from '@/components/sign-out-button'
 import { type LoginUser } from '@/lib/types'
 import { AuthenticatedLinks } from './AuthenticatedLinks'
@@ -6,13 +7,11 @@ import { AuthButtons } from './AuthButtons'
 import { GuestInfoHeader } from './GuestInfoHeader'
 import { QuickLinks } from './QuickLinks'
 
-import { cn } from '@/lib/utils'
-
 type UserDropdownMenuProps = {
-  userSession: LoginUser | null,
-  userMenuOpen: boolean,
-  firstName: string,
-  lastName: string,
+  userSession: LoginUser | null
+  userMenuOpen: boolean
+  firstName: string
+  lastName: string
   setUserMenuOpen: (open: boolean) => void
 }
 
@@ -21,31 +20,30 @@ export const UserDropdownMenu = ({
   userMenuOpen,
   firstName,
   lastName,
-  setUserMenuOpen
+  setUserMenuOpen,
 }: UserDropdownMenuProps) => {
+  useEffect(() => {
+    if (!userMenuOpen) return
+    const onKeyDown = (e: KeyboardEvent) => e.key === 'Escape' && setUserMenuOpen(false)
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [userMenuOpen, setUserMenuOpen])
+
   if (!userMenuOpen) return null
 
   return (
-    <div
-      className={cn(
-        "absolute top-full right-0 mt-2 w-72 bg-white rounded-brand shadow-hover border border-border-light overflow-hidden transition-all duration-200",
-        userMenuOpen
-          ? "opacity-100 visible translate-y-0"
-          : "opacity-0 invisible -translate-y-2"
-      )}
-    >
+    <div className="fixed inset-x-2 top-16 z-50 overflow-hidden rounded-brand border border-border-light bg-white shadow-hover sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-72">
       {userSession ? (
         <>
           <UserInfoHeader
             firstName={firstName}
             lastName={lastName}
             email={userSession.email}
+            image={userSession.image}
           />
-          <AuthenticatedLinks
-            setUserMenuOpen={setUserMenuOpen}
-          />
+          <AuthenticatedLinks setUserMenuOpen={setUserMenuOpen} />
           <QuickLinks setUserMenuOpen={setUserMenuOpen} />
-          <SignOutButton />
+          <SignOutButton closeMenu={() => setUserMenuOpen(false)} />
         </>
       ) : (
         <>

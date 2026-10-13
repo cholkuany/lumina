@@ -83,7 +83,7 @@ function Modal({
         />
         <div className="relative bg-white rounded-brand shadow-hover max-w-lg w-full max-h-[90vh] overflow-y-auto">
           <div className="flex items-center justify-between p-6 border-b border-border-light">
-            <h2 className="font-serif text-xl text-text-primary">{title}</h2>
+            <h2 className="font-serif text-xl text-foreground">{title}</h2>
             <button
               onClick={onClose}
               className="p-2 hover:bg-surface rounded-full transition-colors"
@@ -227,11 +227,11 @@ function AddPaymentMethodForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Security Notice */}
-      <div className="flex items-start gap-3 p-4 bg-success-50 border border-success-200 rounded-lg">
-        <Shield className="w-5 h-5 text-success-600 shrink-0 mt-0.5" />
+      <div className="flex items-start gap-3 p-4 bg-success-light border border-success/25 rounded-lg">
+        <Shield className="w-5 h-5 text-success shrink-0 mt-0.5" />
         <div>
-          <p className="text-sm font-medium text-success-800">Secure Payment</p>
-          <p className="text-xs text-success-700 mt-0.5">
+          <p className="text-sm font-medium text-success-dark">Secure Payment</p>
+          <p className="text-xs text-success-dark mt-0.5">
             Your card information is encrypted and secure.
           </p>
         </div>
@@ -239,7 +239,7 @@ function AddPaymentMethodForm({
 
       {/* Card Number */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Card Number *
         </label>
         <div className="relative">
@@ -262,7 +262,7 @@ function AddPaymentMethodForm({
 
       {/* Cardholder Name */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Cardholder Name *
         </label>
         <input
@@ -282,7 +282,7 @@ function AddPaymentMethodForm({
       {/* Expiry & CVV */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Expiry Date *
           </label>
           <input
@@ -300,7 +300,7 @@ function AddPaymentMethodForm({
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             CVV *
           </label>
           <input
@@ -328,7 +328,7 @@ function AddPaymentMethodForm({
           onChange={handleChange}
           className="w-5 h-5 rounded border-border accent-primary"
         />
-        <span className="text-sm text-text-primary">Set as default payment method</span>
+        <span className="text-sm text-foreground">Set as default payment method</span>
       </label>
 
       {/* Actions */}
@@ -390,7 +390,7 @@ function DeleteConfirmation({
           </span>
         </div>
         <div>
-          <p className="font-medium text-text-primary">
+          <p className="font-medium text-foreground">
             {brand.name} •••• {method.last4}
           </p>
           <p className="text-sm text-border-dark">
@@ -462,7 +462,7 @@ function PaymentMethodCard({
           {/* Card Details */}
           <div>
             <div className="flex items-center gap-2">
-              <p className="font-medium text-text-primary">
+              <p className="font-medium text-foreground">
                 {brand.name} •••• {method.last4}
               </p>
               {method.isDefault && (
@@ -578,7 +578,7 @@ export default function PaymentMethodsPage() {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
-                <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
+                <h1 className="font-serif text-2xl lg:text-3xl text-foreground">
                   Payment Methods
                 </h1>
                 <p className="text-border-dark mt-1">
@@ -609,7 +609,7 @@ export default function PaymentMethodsPage() {
             ) : (
               <div className="text-center py-16 bg-surface rounded-brand">
                 <CreditCard className="w-16 h-16 text-border-dark mx-auto mb-4" />
-                <h2 className="font-serif text-xl text-text-primary mb-2">
+                <h2 className="font-serif text-xl text-foreground mb-2">
                   No Payment Methods
                 </h2>
                 <p className="text-border-dark mb-6">
@@ -627,7 +627,7 @@ export default function PaymentMethodsPage() {
               <div className="flex items-start gap-4">
                 <Shield className="w-8 h-8 text-primary shrink-0" />
                 <div>
-                  <h3 className="font-medium text-text-primary mb-1">Your payment information is secure</h3>
+                  <h3 className="font-medium text-foreground mb-1">Your payment information is secure</h3>
                   <p className="text-sm text-border-dark">
                     We use industry-standard encryption to protect your payment details. Your full card number is never stored on our servers.
                   </p>

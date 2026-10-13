@@ -54,7 +54,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
           {product.name}
         </Link>
         <ChevronRight className="w-4 h-4 text-border-dark" />
-        <span className="text-text-primary font-medium">Edit</span>
+        <span className="text-foreground font-medium">Edit</span>
       </nav>
 
       {/* Edit Form */}

@@ -1,22 +1,13 @@
-import Link from 'next/link'
 import { Package, Heart } from 'lucide-react'
+import { MenuLink } from './MenuLink'
 
-export const QuickLinks = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boolean) => void }) => (
-  <div className="p-2 border-t border-border-light">
-    <Link
-      href="/account/orders"
-      onClick={() => setUserMenuOpen(false)}
-      className="flex items-center gap-3 px-3 py-2.5 text-sm text-text-primary hover:bg-surface hover:text-primary rounded-lg transition-colors"
-    >
-      <Package className="w-4 h-4" />
-      Track Order
-    </Link>
-    <Link
-      href="/wishlist"
-      onClick={() => setUserMenuOpen(false)}
-      className="flex items-center gap-3 px-3 py-2.5 text-sm text-text-primary hover:bg-surface hover:text-primary rounded-lg transition-colors"
-    >
-      <Heart className="w-4 h-4" />
-      Wishlist
-    </Link>
-  </div>)
+export const QuickLinks = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boolean) => void }) => {
+  const close = () => setUserMenuOpen(false)
+
+  return (
+    <div className="border-t border-border-light p-2">
+      <MenuLink href="/account/orders" icon={Package} onClick={close}>Track Order</MenuLink>
+      <MenuLink href="/wishlist" icon={Heart} onClick={close}>Wishlist</MenuLink>
+    </div>
+  )
+}

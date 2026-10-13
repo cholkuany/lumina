@@ -2,6 +2,7 @@ import type {
   TCartItem,
   TProduct,
   Attribute,
+  TProductVariant,
 } from '@/lib/types'
 
 export interface CartState {
@@ -11,9 +12,9 @@ export interface CartState {
 }
 
 export interface Actions {
-  addItem: (product: TProduct, quantity: number, variants?: Partial<Attribute>, image?: string) => void
-  removeItem: (id: string) => void
-  updateQuantity: (id: string, quantity: number) => void
+  addItem: (product: TProduct, quantity: number, variants: Attribute) => void
+  removeItem: (variant: TProductVariant) => void
+  updateQuantity: (variant: TProductVariant, quantity: number) => void
   clearCart: () => void
   toggleCart: () => void
   openCart: () => void

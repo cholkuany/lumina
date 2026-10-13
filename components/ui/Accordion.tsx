@@ -38,7 +38,7 @@ export function Accordion({ items, allowMultiple = true, className }: AccordionP
             onClick={() => toggleItem(item.id)}
             className="flex items-center justify-between w-full py-4 text-left"
           >
-            <span className="font-medium text-text-primary">{item.title}</span>
+            <span className="font-medium text-foreground">{item.title}</span>
             <ChevronDown
               className={cn(
                 'w-5 h-5 text-border-dark transition-transform duration-300',

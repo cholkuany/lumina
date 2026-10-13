@@ -2,8 +2,8 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { Accordion } from '@/components/ui/Accordion'
 import { ProductInfo } from '@/components/product/ProductInfo'
 import { getProduct } from '@/lib/queries/get.product'
-import { Header } from '@/components/product/ReviewSection'
-import { ProductReviews } from '@/components/product/productReviews'
+import { Header } from '@/components/product/reviews/ReviewSection'
+import { ProductReviews } from '@/components/product/reviews/productReviews'
 import { RelatedProducts } from '@/components/product/RelatedProducts'
 import { Suspense } from 'react'
 import { RelatedProductsSkeleton } from '@/components/product/RelatedProductsSkeleton'
@@ -59,7 +59,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   {product.specifications && product.specifications.map((spec) => (
                     <div key={spec.key} className="flex justify-between py-3 border-b border-border-light">
                       <span className="text-border-dark">{spec.key}</span>
-                      <span className="font-medium text-text-primary">{spec.value}</span>
+                      <span className="font-medium text-foreground">{spec.value}</span>
                     </div>
                   ))}
                 </div>

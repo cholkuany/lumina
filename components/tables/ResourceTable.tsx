@@ -67,7 +67,7 @@ export function ResourceTable<T>({
                     <th
                       key={header.id}
                       className={cn(
-                        'px-4 py-3 text-left text-xs font-semibold text-text-primary uppercase tracking-wider',
+                        'px-4 py-3 text-left text-xs font-semibold text-foreground uppercase tracking-wider',
                         header.column.getCanSort() &&
                         'cursor-pointer hover:bg-border-light/50',
                         meta?.className
@@ -137,7 +137,7 @@ export function ResourceTable<T>({
                       <td
                         key={cell.id}
                         className={cn(
-                          'px-4 py-4 text-sm text-text-primary',
+                          'px-4 py-4 text-sm text-foreground',
                           meta?.className
                         )}
                       >

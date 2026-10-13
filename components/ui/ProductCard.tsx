@@ -1,307 +1,90 @@
 'use client'
 
-import { useAddToWishlist, useWishlistItems, useRemoveFromWishlist } from '@/stores/wishlist/wishlist.selectors'
-import { useCartItems, useAddToCart } from '@/stores/cart/cart.selectors'
+import { ProductThumb } from '@/components/ui/ProductThumb'
+import { WishlistButton } from '../layout/nav/WishlistButton'
 
-import Image from 'next/image'
 import Link from 'next/link'
-import { Heart, Plus, ShoppingBag, Star } from 'lucide-react'
-import { cn, formatPrice } from '@/lib/utils'
-import { TProduct } from '@/lib/types'
+import { cn } from '@/lib/utils'
+import type { TProduct } from '@/lib/types'
+import { ProductBadges } from './Productbadges'
+import { QuickAddButton } from './Quickaddbutton'
+import { RatingSummary } from './RatingSummary'
+import { PriceDisplay } from './Pricedisplay'
+import { CartQuantityBadge } from './Cartquantitybadge'
 
 interface ProductCardProps {
   product: TProduct
   variant?: 'full' | 'compact'
 }
 
-export function ProductCard({
-  product,
-  variant = 'full',
-}: ProductCardProps) {
-  const addItemToWishlist = useAddToWishlist()
-  const removeItem = useRemoveFromWishlist()
-  const wishlistItems = useWishlistItems()
+import { useProductCardState } from '@/hooks/useProductcardstate'
 
-  const addItemToCart = useAddToCart()
-  const items = useCartItems()
+interface ProductCardProps {
+  product: TProduct
+  variant?: 'full' | 'compact'
+}
 
+export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
   const isCompact = variant === 'compact'
 
-  const currentVariant =
-    product.variants.find((variant) => variant.stock > 0) ||
-    product.variants[0]
-
-  const handleAddToCart = () => {
-    addItemToCart(
-      product,
-      1,
-      currentVariant.attributes,
-      currentVariant.images[0]?.secure_url
-    )
-  }
-
-  const isInWishlist = wishlistItems.some((item) => item.product.id === product.id)
-
-  const cartItem = items?.find(
-    (item) => item.product.id === product.id
-  )
-
-  const quantity = cartItem?.quantity || 0
-  const isInCart = quantity > 0
-
-  const isCurrentVariantInCart = cartItem?.product.variant.attributes
-    ? JSON.stringify(cartItem.product.variant.attributes) ===
-    JSON.stringify(currentVariant.attributes)
-    : false
-
-  const isCurrentVariantInStock = isCurrentVariantInCart
-    ? (cartItem?.quantity ?? 0) < currentVariant.stock
-    : currentVariant.stock > 0
-
-  const image =
-    currentVariant?.images?.[0]?.secure_url ||
-    '/placeholder-product.jpg'
+  const { currentVariant, quantity, isInCart, canAdd, addToCart, image } =
+    useProductCardState(product)
 
   return (
-    <Link
-      href={`/products/${product.id}`}
-      className="group block"
-    >
+    <Link href={`/products/${product.id}`} className="group block">
       <div
         className={cn(
-          'card-hover overflow-hidden rounded-brand border border-gray-100 bg-white',
+          'overflow-hidden rounded-brand border card p-2.5',
           isCompact && 'rounded-lg'
         )}
       >
         {/* Image */}
-        <div className="relative aspect-square overflow-hidden bg-gray-100">
-          <Image
-            src={image}
-            alt={product.name}
-            fill
-            sizes={isCompact
-              ? '(max-width: 768px) 50vw, 180px'
-              : '(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw'}
-            className={cn(
-              'transition-transform duration-500 group-hover:scale-105',
-              isCompact ? 'object-contain p-2' : 'object-cover'
-            )}
+        <div className="relative aspect-square overflow-hidden bg-gray-100 rounded-brand mb-1.5">
+          <ProductThumb image={image} name={product.name} isCompact={isCompact} />
+          <ProductBadges
+            isSale={product.isSale}
+            isNewArrival={product.isNewArrival}
+            isCompact={isCompact}
           />
-
-          {/* Badges */}
-          <div className="absolute left-2 top-2 flex flex-col gap-1">
-            {product.isNewArrival && (
-              <span
-                className={cn(
-                  'rounded-full bg-text-primary text-white',
-                  isCompact
-                    ? 'px-1.5 py-0.5 text-[10px]'
-                    : 'px-2.5 py-1 text-xs'
-                )}
-              >
-                NEW
-              </span>
-            )}
-
-            {product.isSale && (
-              <span
-                className={cn(
-                  'rounded-full bg-primary text-white',
-                  isCompact
-                    ? 'px-1.5 py-0.5 text-[10px]'
-                    : 'px-2.5 py-1 text-xs'
-                )}
-              >
-                SALE
-              </span>
-            )}
-          </div>
-
-          {/* Add to Wishlist */}
-          <button
-            className={cn(
-              'absolute right-2 top-2 rounded-full bg-white/90 backdrop-blur-sm transition-all',
-              isCompact ? 'p-1.5' : 'p-2',
-            )}
-            onClick={(e) => {
-              e.preventDefault()
-              if (isInWishlist) {
-                removeItem(product.id)
-              } else {
-                addItemToWishlist(product)
-              }
-            }}
-          >
-            <Heart
-              className={cn(
-                isCompact ? 'h-4 w-4' : 'h-5 w-5',
-              )}
-              fill={isInWishlist ? '#B8956C' : 'none'}
-              stroke={isInWishlist ? '#B8956C' : 'currentColor'}
-            />
-          </button>
-
-          {/* Quick Add */}
-          {/* <div
-            className={cn(
-              'absolute bottom-0 left-0 right-0 translate-y-full p-2 transition-transform duration-300 group-hover:translate-y-0',
-              !isCompact && 'p-3'
-            )}
-          >
-            <button
-              disabled={!isCurrentVariantInStock}
-              className={cn(
-                'w-full bg-text-primary/95 text-white backdrop-blur-sm transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50',
-                isCompact
-                  ? 'rounded-md py-1.5 text-xs'
-                  : 'rounded-lg py-2.5 text-sm font-medium'
-              )}
-              onClick={(e) => {
-                e.preventDefault()
-                handleAddToCart()
-              }}
-            >
-              <span className="sm:hidden">
-                <Plus className="h-4 w-4" />
-              </span>
-              <span className="hidden sm:inline">
-                Quick Add
-              </span>
-            </button>
-          </div> */}
-          <div
-            className={cn(
-              "absolute bottom-0 left-0 right-0 p-2 translate-y-0 sm:translate-y-full sm:transition-transform sm:duration-300 sm:group-hover:translate-y-0",
-              !isCompact && "p-3"
-            )}
-          >
-            <button
-              disabled={!isCurrentVariantInStock}
-              className={cn(
-                "flex w-16 sm:w-full items-center justify-center bg-text-primary/95 text-white backdrop-blur-sm transition-colors hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50",
-                isCompact
-                  ? "rounded-md h-8 sm:h-auto sm:py-1.5 text-xs"
-                  : "rounded-lg h-10 sm:h-auto sm:py-2.5 text-sm font-medium"
-              )}
-              onClick={(e) => {
-                e.preventDefault()
-                handleAddToCart()
-              }}
-            >
-              <span className='flex sm:hidden'><Plus className="h-4 w-4" /> Add</span>
-              <span className="hidden sm:inline">Quick Add</span>
-            </button>
-          </div>
+          <WishlistButton product={product} isCompact={isCompact} />
+          <QuickAddButton
+            onClick={addToCart}
+            disabled={!canAdd}
+            isCompact={isCompact}
+          />
         </div>
 
         {/* Content */}
-        <div
-          className={cn(
-            'relative',
-            isCompact ? 'p-3' : 'p-4'
-          )}
-        >
-          {/* Title */}
+        <div className={cn('relative')}>
           <h3
             className={cn(
-              'font-medium text-text-primary',
-              isCompact
-                ? 'line-clamp-2 text-sm'
-                : 'line-clamp-1 text-sm'
+              'mb-1 h-8 overflow-hidden text-[12.5px] font-medium leading-tight text-ink',
+              isCompact ? 'line-clamp-2' : 'line-clamp-1'
             )}
           >
             {product.name}
           </h3>
 
-          {/* Description (full only) */}
           {!isCompact && product.description && (
-            <p className="mb-2 line-clamp-1 text-xs text-border-dark">
+            <p className="mb-2 line-clamp-1 text-xs text-ink">
               {product.description}
             </p>
           )}
 
-          {/* Rating */}
-          <div
-            className={cn(
-              'flex items-center gap-1',
-              isCompact ? 'mb-1 mt-1' : 'mb-2'
-            )}
-          >
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={cn(
-                    isCompact
-                      ? 'h-3 w-3'
-                      : 'h-3.5 w-3.5',
-                    i < Math.floor(product.rating)
-                      ? 'fill-primary text-text-primary'
-                      : 'fill-border-light text-border-light'
-                  )}
-                />
-              ))}
-            </div>
+          <RatingSummary
+            rating={product.rating}
+            reviewCount={product.reviewCount}
+            isCompact={isCompact}
+            className={isCompact ? 'my-1' : 'mb-2'}
+          />
 
-            <span className="text-xs text-border-dark">
-              ({product.reviewCount})
-            </span>
-          </div>
+          <PriceDisplay
+            price={currentVariant.price}
+            originalPrice={currentVariant.originalPrice}
+            isCompact={isCompact}
+          />
 
-          {/* Price */}
-          <div className="flex items-center gap-2">
-            <span
-              className={cn(
-                'text-text-primary',
-                isCompact
-                  ? 'text-sm font-bold'
-                  : 'font-semibold'
-              )}
-            >
-              {formatPrice(currentVariant.price)}
-            </span>
-
-            {currentVariant.originalPrice && (
-              <span className="text-xs text-border-dark line-through">
-                {formatPrice(currentVariant.originalPrice)}
-              </span>
-            )}
-          </div>
-
-          {/* Cart Indicator */}
-          {isInCart && (
-            <div className="absolute right-2 top-2 z-10">
-              <div className="relative">
-                <div
-                  className={cn(
-                    'flex items-center justify-center rounded-full bg-text-primary text-white shadow-lg',
-                    isCompact
-                      ? 'h-7 w-7'
-                      : 'h-9 w-9'
-                  )}
-                >
-                  <ShoppingBag
-                    className={cn(
-                      isCompact
-                        ? 'h-3 w-3'
-                        : 'h-4 w-4'
-                    )}
-                  />
-                </div>
-
-                <span
-                  className={cn(
-                    'absolute -right-1 -top-1 flex items-center justify-center rounded-full bg-primary font-bold text-white shadow-sm',
-                    isCompact
-                      ? 'h-4 w-4 text-[9px]'
-                      : 'h-5 w-5 text-[10px]'
-                  )}
-                >
-                  {quantity}
-                </span>
-              </div>
-            </div>
-          )}
+          {isInCart && <CartQuantityBadge quantity={quantity} isCompact={isCompact} />}
         </div>
       </div>
     </Link>

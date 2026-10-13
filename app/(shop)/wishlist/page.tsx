@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Heart, ShoppingBag, Trash2 } from 'lucide-react'
+import { Heart, ShoppingCart, Trash2 } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { useWishlistItems, useRemoveFromWishlist, useClearWishlist, useWishlistItemCount } from '@/stores/wishlist/wishlist.selectors'
@@ -18,13 +18,13 @@ export default function WishlistPage() {
   const addItem = useAddToCart()
 
   const handleAddToCart = (product: TProduct) => {
-    addItem(product, 1, product.variants[0].attributes, product.variants[0].images[0]?.secure_url)
+    addItem(product, 1, product.variants[0].attributes)
     removeItem(product.id)
   }
-  // (product, quantity, variants, image)
+
   const handleAddAllToCart = () => {
     items.forEach(item => {
-      addItem(item.product, 1, item.product.variants[0].attributes, item.product.variants[0].images[0]?.secure_url)
+      addItem(item.product, 1, item.product.variants[0].attributes)
     })
     clearWishlist()
   }
@@ -35,7 +35,7 @@ export default function WishlistPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary pt-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-foreground pt-4">
               My Wishlist
             </h1>
             <p className="text-border-dark mt-1">
@@ -49,7 +49,7 @@ export default function WishlistPage() {
                 Clear All
               </Button>
               <Button onClick={handleAddAllToCart}>
-                <ShoppingBag className="w-4 h-4 mr-2" />
+                <ShoppingCart className="w-4 h-4 mr-2" />
                 Add All to Cart
               </Button>
             </div>
@@ -98,13 +98,13 @@ export default function WishlistPage() {
                 {/* Content */}
                 <div className="p-4">
                   <Link href={`/products/${item.product.id}`}>
-                    <h3 className="font-medium text-text-primary text-sm mb-1 line-clamp-2 hover:text-primary transition-colors">
+                    <h3 className="font-medium text-foreground text-sm mb-1 line-clamp-2 hover:text-primary transition-colors">
                       {item.product.name}
                     </h3>
                   </Link>
 
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="font-semibold text-text-primary">
+                    <span className="font-semibold text-foreground">
                       {formatPrice(item.product.variants?.[0].price)}
                     </span>
                     {item.product.variants?.[0].originalPrice && (
@@ -116,7 +116,7 @@ export default function WishlistPage() {
 
                   {/* Stock Status */}
                   {item.product.variants?.[0].stock ? (
-                    <p className="text-xs text-success-600 mb-3">In Stock</p>
+                    <p className="text-xs text-success mb-3">In Stock</p>
                   ) : (
                     <p className="text-xs text-red-500 mb-3">Out of Stock</p>
                   )}
@@ -128,7 +128,7 @@ export default function WishlistPage() {
                     onClick={() => handleAddToCart(item.product)}
                     disabled={!item.product.variants?.[0].stock}
                   >
-                    <ShoppingBag className="w-4 h-4 mr-2" />
+                    <ShoppingCart className="w-4 h-4 mr-2" strokeWidth={1.8} />
                     Add to Cart
                   </Button>
                 </div>
@@ -141,7 +141,7 @@ export default function WishlistPage() {
             <div className="w-24 h-24 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
               <Heart className="w-12 h-12 text-border-dark" />
             </div>
-            <h2 className="font-serif text-2xl text-text-primary mb-3">
+            <h2 className="font-serif text-2xl text-foreground mb-3">
               Your wishlist is empty
             </h2>
             <p className="text-border-dark mb-8 max-w-md mx-auto">

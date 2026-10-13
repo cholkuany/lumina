@@ -173,7 +173,7 @@ export function ConfirmModal({
             <Icon className={cn('w-6 h-6', config.iconColor)} />
           </div>
           <div className="flex-1">
-            <h3 id='confirm-title' className="text-lg font-semibold text-text-primary">{finalTitle}</h3>
+            <h3 id='confirm-title' className="text-lg font-semibold text-foreground">{finalTitle}</h3>
             <p className="mt-2 text-sm text-border-dark">{finalMessage}</p>
           </div>
         </div>

@@ -81,7 +81,7 @@ export function CategoryForm({
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
       {/* Category Image */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           Category Image
         </label>
         <div className="flex items-start gap-4">

@@ -107,10 +107,10 @@ export default function ReviewsPage() {
           bgColor="bg-amber-100"
         />
         <StatWrapper
-          icon={<Check className="w-5 h-5 text-success-600" />}
+          icon={<Check className="w-5 h-5 text-success" />}
           label="Approved"
           value={stats?.approved ?? '-'}
-          bgColor="bg-success-100"
+          bgColor="bg-success-light"
         />
         <StatWrapper
           icon={<Flag className="w-5 h-5 text-orange-600" />}
@@ -144,7 +144,7 @@ export default function ReviewsPage() {
                 variant="secondary"
                 size="sm"
                 onClick={() => handleBulkAction('approve')}
-                className="text-success-600 border-success-200 hover:bg-success-50"
+                className="text-success border-success-light hover:bg-success/10"
               >
                 <Check className="w-4 h-4 mr-1" />
                 Approve ({selectedIds.length})
@@ -213,7 +213,7 @@ const StatWrapper = (
         {icon}
       </div>
       <div>
-        <p className="text-2xl font-semibold text-text-primary">{value}</p>
+        <p className="text-2xl font-semibold text-foreground">{value}</p>
         <p className="text-xs text-border-dark">{label}</p>
       </div>
     </div>

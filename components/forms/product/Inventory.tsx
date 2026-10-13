@@ -17,12 +17,12 @@ export function Inventory({
 }: InventoryProps) {
   return (
     <div className="bg-white rounded-radius-brand border border-border p-6 space-y-5">
-      <h2 className="text-lg font-medium text-text-primary">Inventory</h2>
+      <h2 className="text-lg font-medium text-foreground">Inventory</h2>
 
       <div className="flex gap-1 items-center">
         <label
           htmlFor="stockCount"
-          className="block text-sm font-medium text-text-primary capitalize"
+          className="block text-sm font-medium text-foreground capitalize"
         >
           {label}:
         </label>

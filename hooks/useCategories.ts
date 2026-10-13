@@ -1,46 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
 
-// export interface Category {
-//   id: string
-//   name: string
-//   slug: string
-//   description?: string
-//   image?: string
-//   parent?: { id: string; name: string; slug: string } | null
-//   isActive: boolean
-//   sortOrder: number
-//   productCount: number
-//   children: Category[]
-//   ancestors: { id: string; name: string; slug: string }[]
-// }
-
-// export interface FlatCategory {
-//   id: string
-//   name: string
-//   level: number
-// }
-// type FlatCategory = 
-// {
-//   ancestors: {
-//     name: string
-//     slug: string
-//     id: string
-//   }[]
-//   description: string
-//   image: string
-//   isActive: boolean
-//   name: string
-//   parent: {
-//     name: string
-//     slug: string
-//     id: string
-//   }
-//   productCount: number
-//   slug: string
-//   sortOrder: number
-//   id: string
-// }
-
 export interface NestedCategory {
   id: string
   name: string

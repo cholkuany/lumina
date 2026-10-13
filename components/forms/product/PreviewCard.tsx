@@ -21,7 +21,7 @@ export function PreviewCard({
 
   return (
     <div className="bg-white rounded-brand border border-border p-6 space-y-4">
-      <h2 className="text-lg font-medium text-text-primary">Preview</h2>
+      <h2 className="text-lg font-medium text-foreground">Preview</h2>
 
       <div className="grid grid-cols-2 gap-1">
         {images.map((img, idx) => (
@@ -52,7 +52,7 @@ export function PreviewCard({
       </div>
 
       <div>
-        <p className="font-medium text-text-primary truncate">
+        <p className="font-medium text-foreground truncate">
           {name || 'Product Name'}
         </p>
 

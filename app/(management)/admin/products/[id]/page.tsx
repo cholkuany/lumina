@@ -47,7 +47,7 @@ export default async function ProductDetailPage({
             Products
           </Link>
           <ChevronRight className="w-4 h-4 text-border-dark" />
-          <span className="text-text-primary font-medium truncate max-w-60">
+          <span className="text-foreground font-medium truncate max-w-60">
             {product.name}
           </span>
         </nav>
@@ -149,7 +149,7 @@ export default async function ProductDetailPage({
                       {product.brand}
                     </p>
                   )}
-                  <h1 className="text-2xl font-semibold text-text-primary">
+                  <h1 className="text-2xl font-semibold text-foreground">
                     {product.name}
                   </h1>
                   <p className="text-sm text-border-dark">
@@ -200,7 +200,7 @@ export default async function ProductDetailPage({
                         <ChevronRight className="w-3 h-3 text-border" />
                       </span>
                     ))}
-                    <span className="font-medium text-text-primary">
+                    <span className="font-medium text-foreground">
                       {product.category.name}
                     </span>
                   </div>
@@ -211,7 +211,7 @@ export default async function ProductDetailPage({
                   <p className="text-xs text-border-dark uppercase tracking-wider font-medium">
                     Description
                   </p>
-                  <p className="text-sm text-text-primary leading-relaxed">
+                  <p className="text-sm text-foreground leading-relaxed">
                     {product.description}
                   </p>
                 </div>
@@ -224,7 +224,7 @@ export default async function ProductDetailPage({
                 <p className="text-xs text-border-dark uppercase tracking-wider font-medium">
                   Full Description
                 </p>
-                <p className="text-sm text-text-primary leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">
                   {product.longDescription}
                 </p>
               </div>
@@ -235,7 +235,7 @@ export default async function ProductDetailPage({
           <div className="bg-white rounded-xl border border-border p-6 space-y-4">
             <div className="flex items-center gap-2">
               <Layers className="w-5 h-5 text-primary" />
-              <h2 className="text-lg font-medium text-text-primary">
+              <h2 className="text-lg font-medium text-foreground">
                 Variants
                 <span className="ml-2 text-sm font-normal text-border-dark">
                   ({product.variants.length})
@@ -269,13 +269,13 @@ export default async function ProductDetailPage({
                   <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-3">
                     <div>
                       <p className="text-xs text-border-dark">SKU</p>
-                      <p className="text-sm font-medium text-text-primary truncate">
+                      <p className="text-sm font-medium text-foreground truncate">
                         {variant.sku}
                       </p>
                     </div>
                     <div>
                       <p className="text-xs text-border-dark">Attributes</p>
-                      <p className="text-sm font-medium text-text-primary">
+                      <p className="text-sm font-medium text-foreground">
                         {variant.attributes.color} / {variant.attributes.size}
                         {variant.attributes.material &&
                           ` / ${variant.attributes.material}`}
@@ -318,7 +318,7 @@ export default async function ProductDetailPage({
             <div className="bg-white rounded-xl border border-border p-6 space-y-4">
               <div className="flex items-center gap-2">
                 <Tag className="w-5 h-5 text-primary" />
-                <h2 className="text-lg font-medium text-text-primary">
+                <h2 className="text-lg font-medium text-foreground">
                   Specifications
                 </h2>
               </div>
@@ -328,7 +328,7 @@ export default async function ProductDetailPage({
                     <p className="text-sm text-border-dark w-40 shrink-0 capitalize">
                       {spec.key}
                     </p>
-                    <p className="text-sm text-text-primary font-medium capitalize">
+                    <p className="text-sm text-foreground font-medium capitalize">
                       {spec.value}
                     </p>
                   </div>
@@ -343,7 +343,7 @@ export default async function ProductDetailPage({
 
           {/* Stats */}
           <div className="bg-white rounded-xl border border-border p-6 space-y-4">
-            <h2 className="text-lg font-medium text-text-primary">Stats</h2>
+            <h2 className="text-lg font-medium text-foreground">Stats</h2>
             <div className="space-y-3 divide-y divide-border">
 
               <div className="flex items-center justify-between py-3">
@@ -351,7 +351,7 @@ export default async function ProductDetailPage({
                   <Package className="w-4 h-4" />
                   Total Stock
                 </div>
-                <span className={`text-sm font-semibold ${totalStock === 0 ? 'text-red-500' : 'text-text-primary'
+                <span className={`text-sm font-semibold ${totalStock === 0 ? 'text-red-500' : 'text-foreground'
                   }`}>
                   {totalStock} units
                 </span>
@@ -362,7 +362,7 @@ export default async function ProductDetailPage({
                   <TrendingUp className="w-4 h-4" />
                   Units Sold
                 </div>
-                <span className="text-sm font-semibold text-text-primary">
+                <span className="text-sm font-semibold text-foreground">
                   {product.unitsSold ?? 0}
                 </span>
               </div>
@@ -372,7 +372,7 @@ export default async function ProductDetailPage({
                   <Star className="w-4 h-4" />
                   Rating
                 </div>
-                <span className="text-sm font-semibold text-text-primary">
+                <span className="text-sm font-semibold text-foreground">
                   {product.rating.toFixed(1)} / 5
                 </span>
               </div>
@@ -382,7 +382,7 @@ export default async function ProductDetailPage({
                   <BarChart2 className="w-4 h-4" />
                   Reviews
                 </div>
-                <span className="text-sm font-semibold text-text-primary">
+                <span className="text-sm font-semibold text-foreground">
                   {product.reviewCount}
                 </span>
               </div>
@@ -392,7 +392,7 @@ export default async function ProductDetailPage({
           {/* Rating Breakdown */}
           {product.reviewCount > 0 && (
             <div className="bg-white rounded-xl border border-border p-6 space-y-4">
-              <h2 className="text-lg font-medium text-text-primary">
+              <h2 className="text-lg font-medium text-foreground">
                 Rating Breakdown
               </h2>
               <div className="space-y-2">
@@ -425,7 +425,7 @@ export default async function ProductDetailPage({
 
           {/* Variant Stock Summary */}
           <div className="bg-white rounded-xl border border-border p-6 space-y-4">
-            <h2 className="text-lg font-medium text-text-primary">Stock Summary</h2>
+            <h2 className="text-lg font-medium text-foreground">Stock Summary</h2>
             <div className="space-y-2">
               {product.variants.map((variant, idx) => {
                 const stockPercent = Math.min(

@@ -4,7 +4,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Trash2 } from 'lucide-react'
-import { QuantitySelector } from '@/components/ui/QuantitySelector'
+// import { QuantitySelector } from '@/components/ui/QuantitySelector'
+import { QuantityStepper } from '../ui/QuantityStepper'
 import { TCartItem as CartItemType } from '@/lib/types'
 import { formatPrice } from '@/lib/utils'
 import { useUpdateCartQuantity, useRemoveFromCart } from '@/stores/cart/cart.selectors'
@@ -36,7 +37,7 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
       {/* Details */}
       <div className="flex-1 min-w-0">
         <Link href={`/products/${item.product.id}`}>
-          <h4 className="font-medium text-text-primary text-sm leading-tight mb-1 hover:text-primary transition-colors line-clamp-2">
+          <h4 className="font-medium text-foreground text-sm leading-tight mb-1 hover:text-primary transition-colors line-clamp-2">
             {item.product.name}
           </h4>
         </Link>
@@ -52,18 +53,26 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
 
         <div className="flex items-center justify-between gap-2">
           {showControls ? (
-            <QuantitySelector
+            // <QuantitySelector
+            //   value={item.quantity}
+            //   onChange={(qty) => updateQuantity(item.product.variant, qty)}
+            //   size="sm"
+            //   stock={item.product.variant.stock}
+            // />
+            <QuantityStepper
               value={item.quantity}
-              onChange={(qty) => updateQuantity(item.id, qty)}
+              onChange={(qty) => updateQuantity(item.product.variant, qty)}
+              min={1}
+              max={item.product.variant.stock}
               size="sm"
-              stock={item.product.variant.stock}
+              showMaxMessage
             />
           ) : (
             <span className="text-sm text-border-dark">Qty: {item.quantity}</span>
           )}
 
           <div className="text-right">
-            <p className="font-semibold text-text-primary">
+            <p className="font-semibold text-foreground">
               {formatPrice(item.product.variant.price * item.quantity)}
             </p>
             {item.quantity > 1 && (
@@ -78,7 +87,7 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
       {/* Remove Button */}
       {showControls && (
         <button
-          onClick={() => removeItem(item.id)}
+          onClick={() => removeItem(item.product.variant)}
           className="p-1 text-border-dark hover:text-red-500 transition-colors self-start"
         >
           <Trash2 className="w-4 h-4" />

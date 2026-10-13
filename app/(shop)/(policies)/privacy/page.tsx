@@ -50,7 +50,7 @@ export default function PrivacyPolicyPage() {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <Shield className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-4">
               Privacy Policy
             </h1>
             <p className="text-border-dark">
@@ -69,10 +69,10 @@ export default function PrivacyPolicyPage() {
       <section className="container-lumina py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white border border-border-light rounded-brand p-6 text-center">
-            <div className="w-12 h-12 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Lock className="w-6 h-6 text-success-600" />
+            <div className="w-12 h-12 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+              <Lock className="w-6 h-6 text-success" />
             </div>
-            <h3 className="font-medium text-text-primary mb-2">Secure Data</h3>
+            <h3 className="font-medium text-foreground mb-2">Secure Data</h3>
             <p className="text-sm text-border-dark">
               Your data is encrypted and protected with industry-standard security measures.
             </p>
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
             <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <UserCheck className="w-6 h-6 text-primary-600" />
             </div>
-            <h3 className="font-medium text-text-primary mb-2">Your Control</h3>
+            <h3 className="font-medium text-foreground mb-2">Your Control</h3>
             <p className="text-sm text-border-dark">
               You have full control over your data with easy access, update, and deletion options.
             </p>
@@ -90,7 +90,7 @@ export default function PrivacyPolicyPage() {
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Eye className="w-6 h-6 text-purple-600" />
             </div>
-            <h3 className="font-medium text-text-primary mb-2">Transparency</h3>
+            <h3 className="font-medium text-foreground mb-2">Transparency</h3>
             <p className="text-sm text-border-dark">
               We&apos;re clear about what data we collect and how we use it.
             </p>
@@ -103,7 +103,7 @@ export default function PrivacyPolicyPage() {
           {/* Table of Contents - Sidebar */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 bg-white border border-border-light rounded-brand p-6">
-              <h2 className="font-serif text-lg text-text-primary mb-4">Table of Contents</h2>
+              <h2 className="font-serif text-lg text-foreground mb-4">Table of Contents</h2>
               <nav className="space-y-2">
                 {tableOfContents.map((item) => (
                   <a
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 1 */}
               <section id="introduction" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">1</span>
                   Introduction
                 </h2>
@@ -149,13 +149,13 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 2 */}
               <section id="information-collected" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">2</span>
                   Information We Collect
                 </h2>
                 <div className="pl-11 space-y-6 text-border-dark">
                   <div>
-                    <h3 className="font-medium text-text-primary mb-3">2.1 Information You Provide</h3>
+                    <h3 className="font-medium text-foreground mb-3">2.1 Information You Provide</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li><strong>Account information:</strong> Name, email, password, phone number</li>
                       <li><strong>Purchase information:</strong> Billing/shipping addresses, payment details</li>
@@ -164,7 +164,7 @@ export default function PrivacyPolicyPage() {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-medium text-text-primary mb-3">2.2 Automatically Collected Information</h3>
+                    <h3 className="font-medium text-foreground mb-3">2.2 Automatically Collected Information</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li><strong>Device data:</strong> Device type, OS, browser, unique identifiers</li>
                       <li><strong>Usage data:</strong> Pages visited, clicks, time spent, search queries</li>
@@ -172,7 +172,7 @@ export default function PrivacyPolicyPage() {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-medium text-text-primary mb-3">2.3 Third-Party Information</h3>
+                    <h3 className="font-medium text-foreground mb-3">2.3 Third-Party Information</h3>
                     <ul className="list-disc pl-6 space-y-2">
                       <li>Social media data (when you connect accounts)</li>
                       <li>Payment processor confirmations</li>
@@ -184,14 +184,14 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 3 */}
               <section id="how-we-use" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">3</span>
                   How We Use Your Information
                 </h2>
                 <div className="pl-11 space-y-4 text-border-dark">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-surface rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Order Fulfillment</h4>
+                      <h4 className="font-medium text-foreground mb-2">Order Fulfillment</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Process and ship orders</li>
                         <li>• Send order confirmations</li>
@@ -200,7 +200,7 @@ export default function PrivacyPolicyPage() {
                       </ul>
                     </div>
                     <div className="bg-surface rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Account Management</h4>
+                      <h4 className="font-medium text-foreground mb-2">Account Management</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Create/manage accounts</li>
                         <li>• Authenticate users</li>
@@ -209,7 +209,7 @@ export default function PrivacyPolicyPage() {
                       </ul>
                     </div>
                     <div className="bg-surface rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Marketing</h4>
+                      <h4 className="font-medium text-foreground mb-2">Marketing</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Send promotional emails</li>
                         <li>• Personalize recommendations</li>
@@ -218,7 +218,7 @@ export default function PrivacyPolicyPage() {
                       </ul>
                     </div>
                     <div className="bg-surface rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Security</h4>
+                      <h4 className="font-medium text-foreground mb-2">Security</h4>
                       <ul className="text-sm space-y-1">
                         <li>• Detect fraud</li>
                         <li>• Prevent abuse</li>
@@ -232,13 +232,13 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 4 */}
               <section id="information-sharing" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">4</span>
                   Information Sharing
                 </h2>
                 <div className="pl-11 space-y-4 text-border-dark">
-                  <div className="bg-success-50 border border-success-200 rounded-lg p-4 mb-4">
-                    <p className="text-sm text-success-800 font-medium">We do not sell your personal information.</p>
+                  <div className="bg-success-light border border-success/25 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-success-dark font-medium">We do not sell your personal information.</p>
                   </div>
                   <p>We may share your information with:</p>
                   <ul className="list-disc pl-6 space-y-2">
@@ -252,7 +252,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 5 */}
               <section id="cookies" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">5</span>
                   Cookies & Tracking
                 </h2>
@@ -262,21 +262,21 @@ export default function PrivacyPolicyPage() {
                     <div className="flex items-start gap-3 p-3 border border-border-light rounded-lg">
                       <Cookie className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-text-primary">Essential Cookies</p>
+                        <p className="font-medium text-foreground">Essential Cookies</p>
                         <p className="text-sm">Required for core functionality (cart, login, checkout)</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3 p-3 border border-border-light rounded-lg">
                       <Eye className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-text-primary">Analytics Cookies</p>
+                        <p className="font-medium text-foreground">Analytics Cookies</p>
                         <p className="text-sm">Help us understand how visitors use our site</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3 p-3 border border-border-light rounded-lg">
                       <Share2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-medium text-text-primary">Marketing Cookies</p>
+                        <p className="font-medium text-foreground">Marketing Cookies</p>
                         <p className="text-sm">Used for targeted advertising across websites</p>
                       </div>
                     </div>
@@ -289,7 +289,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 6 */}
               <section id="data-security" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">6</span>
                   Data Security
                 </h2>
@@ -315,7 +315,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 7 */}
               <section id="data-retention" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">7</span>
                   Data Retention
                 </h2>
@@ -324,8 +324,8 @@ export default function PrivacyPolicyPage() {
                     <table className="w-full border-collapse">
                       <thead>
                         <tr className="bg-surface">
-                          <th className="border border-border-light px-4 py-3 text-left text-sm font-medium text-text-primary">Data Type</th>
-                          <th className="border border-border-light px-4 py-3 text-left text-sm font-medium text-text-primary">Retention Period</th>
+                          <th className="border border-border-light px-4 py-3 text-left text-sm font-medium text-foreground">Data Type</th>
+                          <th className="border border-border-light px-4 py-3 text-left text-sm font-medium text-foreground">Retention Period</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -361,7 +361,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 8 */}
               <section id="your-rights" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">8</span>
                   Your Rights & Choices
                 </h2>
@@ -369,27 +369,27 @@ export default function PrivacyPolicyPage() {
                   <p>Depending on your location, you may have the following rights:</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="border border-border-light rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Access</h4>
+                      <h4 className="font-medium text-foreground mb-2">Access</h4>
                       <p className="text-sm">Request a copy of your personal data</p>
                     </div>
                     <div className="border border-border-light rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Correction</h4>
+                      <h4 className="font-medium text-foreground mb-2">Correction</h4>
                       <p className="text-sm">Request correction of inaccurate data</p>
                     </div>
                     <div className="border border-border-light rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Deletion</h4>
+                      <h4 className="font-medium text-foreground mb-2">Deletion</h4>
                       <p className="text-sm">Request deletion of your data</p>
                     </div>
                     <div className="border border-border-light rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Portability</h4>
+                      <h4 className="font-medium text-foreground mb-2">Portability</h4>
                       <p className="text-sm">Receive your data in a portable format</p>
                     </div>
                     <div className="border border-border-light rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Restriction</h4>
+                      <h4 className="font-medium text-foreground mb-2">Restriction</h4>
                       <p className="text-sm">Limit how we process your data</p>
                     </div>
                     <div className="border border-border-light rounded-lg p-4">
-                      <h4 className="font-medium text-text-primary mb-2">Objection</h4>
+                      <h4 className="font-medium text-foreground mb-2">Objection</h4>
                       <p className="text-sm">Object to certain processing activities</p>
                     </div>
                   </div>
@@ -398,7 +398,7 @@ export default function PrivacyPolicyPage() {
                     <a href="mailto:privacy@lumina.com" className="text-primary hover:underline">privacy@lumina.com</a>
                     {' '}or through your account settings.
                   </p>
-                  <h3 className="font-medium text-text-primary mt-6">Marketing Communications</h3>
+                  <h3 className="font-medium text-foreground mt-6">Marketing Communications</h3>
                   <p>You can opt out of marketing emails by:</p>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>Clicking &quot;unsubscribe&quot; in any marketing email</li>
@@ -410,7 +410,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 9 */}
               <section id="childrens-privacy" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">9</span>
                   Children&apos;s Privacy
                 </h2>
@@ -425,7 +425,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 10 */}
               <section id="international" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">10</span>
                   International Transfers
                 </h2>
@@ -444,7 +444,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 11 */}
               <section id="third-party" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">11</span>
                   Third-Party Links
                 </h2>
@@ -459,7 +459,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 12 */}
               <section id="california" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">12</span>
                   California Privacy Rights (CCPA)
                 </h2>
@@ -481,7 +481,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 13 */}
               <section id="european" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">13</span>
                   European Privacy Rights (GDPR)
                 </h2>
@@ -502,7 +502,7 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 14 */}
               <section id="changes" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">14</span>
                   Changes to This Policy
                 </h2>
@@ -521,14 +521,14 @@ export default function PrivacyPolicyPage() {
 
               {/* Section 15 */}
               <section id="contact" className="scroll-mt-24">
-                <h2 className="font-serif text-2xl text-text-primary mb-4 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground mb-4 flex items-center gap-3">
                   <span className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary text-sm font-medium">15</span>
                   Contact Us
                 </h2>
                 <div className="pl-11 space-y-4 text-border-dark">
                   <p>If you have questions about this Privacy Policy or our data practices, contact us:</p>
                   <div className="bg-surface rounded-lg p-6">
-                    <p className="font-medium text-text-primary mb-3">Lumina Commerce Inc.</p>
+                    <p className="font-medium text-foreground mb-3">Lumina Commerce Inc.</p>
                     <div className="space-y-2 text-sm">
                       <p>Privacy Team</p>
                       <p>123 Commerce Street</p>
@@ -546,7 +546,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Related Links */}
             <div className="mt-8 p-6 bg-surface rounded-brand">
-              <h3 className="font-serif text-lg text-text-primary mb-4">Related Policies</h3>
+              <h3 className="font-serif text-lg text-foreground mb-4">Related Policies</h3>
               <div className="flex flex-wrap gap-4">
                 <Link href="/terms" className="inline-flex items-center gap-2 text-primary hover:underline">
                   <FileText className="w-4 h-4" />

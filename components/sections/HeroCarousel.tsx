@@ -3,153 +3,324 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { TProduct } from '@/lib/types'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import {
-  formatPrice,
-  getProductDiscount,
-  getProductOriginalPrice,
-  getProductPrice,
-} from '@/lib/utils'
+  ChevronLeft,
+  ChevronRight,
+  ShoppingCart,
+  Sparkles,
+  Tag,
+  TrendingUp,
+  type LucideIcon,
+} from 'lucide-react'
 
-export function HeroCarousel({ products }: { products: TProduct[] }) {
-  const items = products.slice(0, 5)
-  const [activeIndex, setActiveIndex] = useState(0)
+import type { HeroCollection, HeroKind, HeroProduct } from './hero-collections'
 
-  if (!items.length) return null
+/**
+ * Each kind of collection owns a colour and an icon, so "Deals" is always the
+ * same colour wherever it sits in the layout. This is the one place to tune the
+ * palette. Keep every class a full literal string so Tailwind can see it.
+ */
+const KINDS: Record<HeroKind, { tone: string; Icon: LucideIcon }> = {
+  deals: { tone: 'from-danger via-danger to-foreground', Icon: Tag },
+  trending: { tone: 'from-accent via-accent to-foreground', Icon: TrendingUp },
+  essentials: {
+    tone: 'from-primary-light via-primary to-primary-dark',
+    Icon: ShoppingCart,
+  },
+  new: { tone: 'from-primary via-primary-dark to-foreground', Icon: Sparkles },
+}
 
-  const activeProduct = items[activeIndex]
-  const discount = getProductDiscount(activeProduct)
+/**
+ * Where each product disc sits inside the (square) featured cluster, by how
+ * many products the collection has. First entry is the lead product.
+ */
+const CLUSTER = {
+  1: ['z-30 w-[72%] left-[14%] top-[10%]'],
+  2: ['z-30 w-[64%] left-[30%] top-[8%]', 'z-20 w-[40%] left-[2%] top-[50%]'],
+  3: [
+    'z-30 w-[60%] left-[34%] top-[6%]',
+    'z-20 w-[40%] left-[2%] top-[40%]',
+    'z-10 w-[34%] left-[64%] top-[62%]',
+  ],
+} as const
 
-  const price = getProductPrice(activeProduct)
-  const originalPrice = getProductOriginalPrice(activeProduct)
-  const image =
-    activeProduct?.variants?.[0]?.images?.[0]?.secure_url ||
-    '/grocery.svg'
+/**
+ * Fades a tile's content in when the featured collection changes (wrappers are
+ * keyed by collection id). `starting:` is progressive enhancement: browsers
+ * without @starting-style support simply swap instantly.
+ */
+const ENTER =
+  'transition-opacity duration-500 starting:opacity-0 motion-reduce:transition-none'
 
-  const goPrev = () => {
-    setActiveIndex((prev) => (prev - 1 + items.length) % items.length)
-  }
+/* -------------------------------------------------------------------------- */
+/* Shared pieces                                                              */
+/* -------------------------------------------------------------------------- */
 
-  const goNext = () => {
-    setActiveIndex((prev) => (prev + 1) % items.length)
-  }
+function KindPill({
+  collection,
+  compact = false,
+}: {
+  collection: HeroCollection
+  compact?: boolean
+}) {
+  const { Icon } = KINDS[collection.kind]
 
   return (
-    <div className="relative overflow-hidden rounded-brand">
-      {/* HERO GRID */}
-      <div className="relative mx-auto grid min-h-54 max-w-5xl items-center md:min-h-64 md:grid-cols-[minmax(0,0.95fr)_minmax(260px,0.95fr)]">
+    <span
+      className={`inline-flex items-center gap-1.5 rounded bg-white/90 font-bold uppercase text-foreground ${compact ? 'px-2 py-0.5 text-[10px]' : 'px-2.5 py-0.5 text-[11px]'
+        }`}
+    >
+      <Icon size={compact ? 11 : 12} aria-hidden="true" />
+      {collection.label}
+    </span>
+  )
+}
 
-        {/* CONTENT */}
-        <div className="order-2 z-10 flex flex-col justify-center px-5 py-4 md:order-1 md:px-8 md:py-5 lg:px-10">
+/** A real product on a white disc, with its price pinned underneath. */
+function ProductDisc({
+  product,
+  className,
+  priority,
+}: {
+  product: HeroProduct
+  className: string
+  priority: boolean
+}) {
+  return (
+    <Link
+      href={`/products/${product.id}`}
+      aria-label={`${product.name}, ${product.price}${product.discount ? `, ${product.discount}% off` : ''
+        }`}
+      className={`group absolute aspect-square rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${className}`}
+    >
+      {/* white disc: works for transparent cut-outs and white-background shots alike */}
+      <span className="absolute inset-0 overflow-hidden rounded-full bg-white shadow-[0_18px_36px_rgba(0,0,0,0.28)] ring-4 ring-white/25 transition-transform duration-500 group-hover:scale-105">
+        <Image
+          src={product.image}
+          alt=""
+          fill
+          priority={priority}
+          sizes="(max-width: 768px) 120px, 220px"
+          className="object-contain p-[10%]"
+        />
+      </span>
 
-          {/* CATEGORY + DEAL BADGES */}
-          <div className="mb-2 flex items-center gap-2">
-            <span className="rounded bg-slate-900 px-2.5 py-0.5 text-[11px] font-bold uppercase text-white">
-              {activeProduct.category?.name || ''}
-            </span>
+      <span className="absolute -bottom-2 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-white px-2 py-0.5 text-[10px] font-bold text-foreground shadow-soft md:text-xs">
+        {product.price}
+        {product.discount ? <span className="text-danger">-{product.discount}%</span> : null}
+      </span>
+    </Link>
+  )
+}
 
-            <span className="rounded bg-red-600 px-2.5 py-0.5 text-[11px] font-bold uppercase text-white">
-              Limited Time Deal
-            </span>
-          </div>
+/* -------------------------------------------------------------------------- */
+/* Featured (large) tile                                                      */
+/* -------------------------------------------------------------------------- */
 
-          <h2 className="text-2xl font-extrabold leading-tight text-slate-900 md:text-3xl lg:text-4xl">
-            {discount ? `Save ${discount}% Today` : 'Featured Deal'}
-          </h2>
+function FeaturedTile({
+  collection,
+  canNavigate,
+  onPrev,
+  onNext,
+}: {
+  collection: HeroCollection
+  canNavigate: boolean
+  onPrev: () => void
+  onNext: () => void
+}) {
+  const { tone } = KINDS[collection.kind]
+  const shown = collection.products.slice(0, 3)
+  const layout = CLUSTER[shown.length as 1 | 2 | 3]
 
-          <p className="mt-2 max-w-md text-sm text-slate-600 md:text-base">
-            {activeProduct.name}
-          </p>
+  return (
+    <div
+      className={`relative isolate flex min-h-112 flex-col justify-end overflow-hidden rounded-brand bg-linear-to-br ${tone} p-5 text-white shadow-soft md:min-h-80 md:justify-center md:p-8 lg:min-h-0`}
+    >
+      {/* legibility scrim: bottom-up on mobile, left-to-right where the text sits on desktop */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/40 via-black/0 to-black/0 md:bg-linear-to-r md:from-black/30 md:via-black/5"
+      />
 
-          <div className="mt-3 flex items-end gap-3">
-            <span className="text-xl font-extrabold text-slate-900 md:text-2xl">
-              {formatPrice(price)}
-            </span>
+      {/* mobile: the pill sits top-left, clear of the products */}
+      <div
+        key={`pill-${collection.id}`}
+        className={`absolute left-5 top-5 z-10 md:hidden ${ENTER}`}
+      >
+        <KindPill collection={collection} />
+      </div>
 
-            {originalPrice && (
-              <span className="pb-0.5 text-sm text-slate-500 line-through md:text-base">
-                {formatPrice(originalPrice)}
-              </span>
-            )}
-          </div>
+      {/* product cluster, bleeding toward the right edge like BentoHero's art */}
+      <div
+        key={`cluster-${collection.id}`}
+        className={`absolute right-3 top-3 z-10 size-48 md:right-6 md:top-1/2 md:size-72 md:-translate-y-1/2 lg:size-88 ${ENTER}`}
+      >
+        <span aria-hidden className="pointer-events-none absolute inset-[6%] rounded-full bg-white/10" />
+        <span aria-hidden className="pointer-events-none absolute -inset-[8%] rounded-full border border-white/15" />
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link
-              href={`/products/${activeProduct.id}`}
-              className="rounded-md bg-[#FFD814] px-4 py-2 text-sm font-bold text-black transition hover:bg-[#F7CA00]"
-            >
-              Shop Deal
-            </Link>
+        {shown.map((product, i) => (
+          <ProductDisc
+            key={product.id}
+            product={product}
+            className={layout[i]}
+            priority={i === 0}
+          />
+        ))}
+      </div>
 
-            <Link
-              href="/sale"
-              className="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-bold text-slate-900 transition hover:bg-slate-100"
-            >
-              Browse Deals
-            </Link>
-          </div>
+      <div key={`content-${collection.id}`} className={`relative z-10 md:max-w-[52%] ${ENTER}`}>
+        <div className="mb-3 hidden md:block">
+          <KindPill collection={collection} />
         </div>
 
-        {/* IMAGE */}
-        <div className="order-1 relative min-h-36 overflow-hidden md:order-2 md:min-h-64">
-          {/* DISCOUNT BADGE */}
-          {discount && (
-            <div
-              className="absolute left-4 top-4 z-10 flex h-13 w-13 items-center justify-center rounded-full bg-red-600 text-[10px] font-extrabold text-white shadow-lg md:h-14 md:w-14"
-            >
-              {discount}% OFF
+        <h2 className="font-serif text-3xl font-semibold leading-tight md:text-4xl">
+          {collection.headline}
+        </h2>
+
+        <p className="mt-2 line-clamp-2 max-w-md text-sm text-white/85 md:text-base">
+          {collection.blurb}
+        </p>
+
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <Link
+            href={collection.href}
+            className="rounded-brand bg-white px-5 py-2.5 text-sm font-bold text-foreground shadow-soft transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/30"
+          >
+            {collection.cta}
+          </Link>
+
+          {/* prev / next. Below lg the small tiles are the navigation. */}
+          {canNavigate && (
+            <div className="hidden items-center gap-2 lg:flex">
+              <button
+                type="button"
+                onClick={onPrev}
+                aria-label="Previous collection"
+                className="flex size-9 items-center justify-center rounded-full bg-black/25 text-white backdrop-blur-sm transition hover:bg-black/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <ChevronLeft size={20} aria-hidden="true" />
+              </button>
+
+              <button
+                type="button"
+                onClick={onNext}
+                aria-label="Next collection"
+                className="flex size-9 items-center justify-center rounded-full bg-black/25 text-white backdrop-blur-sm transition hover:bg-black/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <ChevronRight size={20} aria-hidden="true" />
+              </button>
             </div>
           )}
-          <Image
-            src={image}
-            alt={activeProduct.name}
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-contain object-center p-3 drop-shadow-[0_18px_32px_rgba(0,0,0,0.14)] transition-transform duration-500 md:p-5"
-          />
         </div>
       </div>
+    </div>
+  )
+}
 
-      {/* INDICATORS */}
-      <div className="flex items-center justify-center gap-2 pb-2">
-        {items.map((product, index) => {
-          const isActive = index === activeIndex
+/* -------------------------------------------------------------------------- */
+/* Small "up next" tile                                                       */
+/* -------------------------------------------------------------------------- */
 
-          return (
-            <button
-              key={product.id}
-              onClick={() => setActiveIndex(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`
-                h-2 w-2 rounded-full transition-all duration-300
-                ${isActive ? 'h-4 w-4 bg-[#FFD814] ring-[#FFD814] ring-offset-2 ring-2' : 'bg-slate-300 hover:bg-[#FFD814]'}
-              `}
+function SideTile({
+  collection,
+  wide,
+  onSelect,
+}: {
+  collection: HeroCollection
+  /** Spans both columns on lg, used when an odd number of tiles would leave a gap. */
+  wide: boolean
+  onSelect: () => void
+}) {
+  const { tone } = KINDS[collection.kind]
+  const [lead, second] = collection.products
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-label={`Show ${collection.label}: ${collection.headline}`}
+      className={`group relative isolate flex h-40 w-[68%] shrink-0 snap-start flex-col justify-end overflow-hidden rounded-brand bg-linear-to-br ${tone} p-3.5 text-left text-white shadow-soft transition-shadow duration-300 hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 md:h-44 md:w-auto md:flex-1 lg:h-auto lg:min-h-0 ${wide ? 'lg:col-span-2' : ''
+        }`}
+    >
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/45 via-black/0 to-black/0"
+      />
+
+      {/* a second product tucked behind the lead hints that this is a collection, not one item */}
+      {second ? (
+        <span className="absolute right-18 top-10 size-14 overflow-hidden rounded-full bg-white shadow-[0_10px_20px_rgba(0,0,0,0.22)] ring-4 ring-white/20 transition-transform duration-500 group-hover:scale-105 lg:right-20 lg:size-16">
+          <Image src={second.image} alt="" fill sizes="64px" className="object-contain p-2" />
+        </span>
+      ) : null}
+
+      <span className="absolute -right-5 -top-5 size-24 overflow-hidden rounded-full bg-white shadow-[0_14px_28px_rgba(0,0,0,0.25)] ring-4 ring-white/20 transition-transform duration-500 group-hover:scale-105 lg:size-28">
+        <Image src={lead.image} alt="" fill sizes="112px" className="object-contain p-2.5" />
+      </span>
+
+      <span className="absolute left-3.5 top-3.5">
+        <KindPill collection={collection} compact />
+      </span>
+
+      <span className="relative z-10 block">
+        <span className="line-clamp-2 block text-[13px] font-semibold leading-snug md:text-sm">
+          {collection.headline}
+        </span>
+        {collection.teaser ? (
+          <span className="mt-1 block text-xs font-medium text-white/85">{collection.teaser}</span>
+        ) : null}
+      </span>
+    </button>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+/* Carousel                                                                   */
+/* -------------------------------------------------------------------------- */
+
+export function HeroCarousel({ collections }: { collections: HeroCollection[] }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  if (!collections.length) return null
+
+  const current = activeIndex < collections.length ? activeIndex : 0
+
+  // Everything except the active collection, in the order it will come up next,
+  // so the first small tile is always what "Next" will show.
+  const upNext = collections
+    .map((_, offset) => (current + 1 + offset) % collections.length)
+    .slice(0, collections.length - 1)
+
+  const goPrev = () => setActiveIndex((current - 1 + collections.length) % collections.length)
+  const goNext = () => setActiveIndex((current + 1) % collections.length)
+
+  return (
+    <div
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Featured collections"
+      className={`grid gap-3 lg:h-96 ${upNext.length ? 'lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]' : ''
+        }`}
+    >
+      <FeaturedTile
+        collection={collections[current]}
+        canNavigate={collections.length > 1}
+        onPrev={goPrev}
+        onNext={goNext}
+      />
+
+      {upNext.length > 0 && (
+        // mobile: swipeable strip, tablet: one row, desktop: 2-column bento beside the featured tile
+        <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 md:snap-none md:overflow-visible md:pb-0 lg:grid lg:auto-rows-fr lg:grid-cols-2 scrollHiddened">
+          {upNext.map((collectionIndex, position) => (
+            <SideTile
+              key={collections[collectionIndex].id}
+              collection={collections[collectionIndex]}
+              wide={upNext.length % 2 === 1 && position === upNext.length - 1}
+              onSelect={() => setActiveIndex(collectionIndex)}
             />
-          )
-        })}
-      </div>
-
-      {/* NAVIGATION */}
-      {items.length > 1 && (
-        <>
-          <button
-            onClick={goPrev}
-            aria-label="Previous product"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 hidden h-14 w-14 items-center justify-center text-4xl text-slate-700 transition hover:bg-black/5 md:flex rounded-full bg-primary"
-          >
-            <ChevronLeft size={40} className='text-white' />
-          </button>
-
-          <button
-            onClick={goNext}
-            aria-label="Next product"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 hidden h-14 w-14 items-center justify-center text-4xl text-slate-700 transition hover:bg-black/5 md:flex rounded-full bg-primary"
-          >
-            <ChevronRight size={40} className='text-white' />
-          </button>
-        </>
+          ))}
+        </div>
       )}
     </div>
   )

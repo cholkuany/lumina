@@ -69,7 +69,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
         {/* Form Card */}
         <div className="bg-white/95 backdrop-blur-sm border border-white/70 rounded-brand p-8 shadow-soft">
           <div className="text-center mb-8">
-            <h1 className="font-serif text-2xl text-text-primary mb-2">
+            <h1 className="font-serif text-2xl text-foreground mb-2">
               Welcome Back
             </h1>
             <p className="text-border-dark">
@@ -103,7 +103,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-foreground transition-colors"
                 >
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />

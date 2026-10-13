@@ -13,7 +13,7 @@ export const Input = ({ className, label, error, icon, ref, children, ...props }
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium text-text-primary mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           {label}
         </label>
       )}
@@ -26,7 +26,7 @@ export const Input = ({ className, label, error, icon, ref, children, ...props }
         <input
           ref={ref}
           className={cn(
-            `w-full h-12 px-4 bg-white border border-borderrounded-brand text-text-primary 
+            `w-full h-12 px-4 bg-white border border-borderrounded-brand text-foreground 
             placeholder:text-border-dark focus:outline-none focus:border-primary focus:ring-1 
             focus:ring-primary transition-colors duration-200`,
             icon && 'pl-12',

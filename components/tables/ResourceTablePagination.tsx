@@ -57,7 +57,7 @@ export function ResourceTablePagination<T>({
         {/* )} */}
 
         {/* Page info */}
-        <span className="text-sm text-text-primary">
+        <span className="text-sm text-foreground">
           Page {pageIndex + 1} of {totalPages}
         </span>
 

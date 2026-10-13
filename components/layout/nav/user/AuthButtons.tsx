@@ -1,23 +1,30 @@
 import { UserPlus, LogIn } from 'lucide-react'
 import Link from 'next/link'
 
-export const AuthButtons = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boolean) => void }) => (
-  <div className="p-4 space-y-3">
-    <Link
-      href="/login"
-      onClick={() => setUserMenuOpen(false)}
-      className="flex items-center justify-center gap-2 w-full h-11 bg-primary text-white rounded-lg font-medium hover:bg-primary-dark transition-colors"
-    >
-      <LogIn className="w-4 h-4" />
-      Sign In
-    </Link>
-    <Link
-      href="/register"
-      onClick={() => setUserMenuOpen(false)}
-      className="flex items-center justify-center gap-2 w-full h-11 border border-text-primary text-text-primary rounded-lg font-medium hover:bg-surface transition-colors"
-    >
-      <UserPlus className="w-4 h-4" />
-      Create Account
-    </Link>
-  </div>
-)
+const base =
+  'flex h-11 w-full items-center justify-center gap-2 rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2'
+
+export const AuthButtons = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boolean) => void }) => {
+  const close = () => setUserMenuOpen(false)
+
+  return (
+    <div className="space-y-3 p-4">
+      <Link
+        href="/login"
+        onClick={close}
+        className={`${base} bg-primary text-white hover:bg-primary-dark`}
+      >
+        <LogIn className="h-4 w-4 shrink-0" aria-hidden="true" />
+        Sign In
+      </Link>
+      <Link
+        href="/register"
+        onClick={close}
+        className={`${base} border border-foreground/30 text-foreground hover:bg-surface`}
+      >
+        <UserPlus className="h-4 w-4 shrink-0" aria-hidden="true" />
+        Create Account
+      </Link>
+    </div>
+  )
+}

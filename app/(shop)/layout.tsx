@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import { Navbar } from '@/components/layout/nav/Navbar'
-import { Footer } from '@/components/layout/Footer'
 
-// Context Providers
-// import { CartProvider } from '@/context/CartContext'
-// import { WishlistProvider } from '@/context/WishlistContext'
+import { Footer } from '@/components/layout/Footer'
+import Header from '@/components/layout/nav/experimentals/header';
+import CategoryNav from '@/components/layout/nav/experimentals/categoryNav/CategoryNav';
+
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { QueryContextProvider } from '@/context/QueryProviderContext'
 
@@ -26,7 +25,8 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <QueryContextProvider>
-            <Navbar />
+            <Header />
+            <CategoryNav />
             {children}
             <Footer />
           </QueryContextProvider>

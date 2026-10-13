@@ -42,7 +42,7 @@ export function Filters({
                 className={cn(
                   'px-3 py-1.5 text-sm',
                   'bg-surface border border-transparent rounded-lg',
-                  'text-text-primary',
+                  'text-foreground',
                   'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30',
                   'cursor-pointer'
                 )}

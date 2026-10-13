@@ -25,7 +25,7 @@ export const ToggleButton = (
 
   if (isCurrent) {
     return (
-      <div aria-current="page" className="py-1.5 font-semibold text-text-primary">
+      <div aria-current="page" className="py-1.5 font-semibold text-foreground">
         {content}
       </div>
     )
@@ -34,7 +34,7 @@ export const ToggleButton = (
   return (
     <Link
       href={`/products?category=${encodeURIComponent(label)}&id=${id}`}
-      className="block py-1.5 text-sm text-text-primary transition-colors hover:text-primary hover:underline"
+      className="block py-1.5 text-sm text-foreground transition-colors hover:text-primary hover:underline"
     >
       {content}
     </Link>

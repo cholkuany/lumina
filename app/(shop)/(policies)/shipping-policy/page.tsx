@@ -71,7 +71,7 @@ export default function ShippingPolicyPage() {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <Truck className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-4">
               Shipping Policy
             </h1>
             <p className="text-border-dark">
@@ -87,22 +87,22 @@ export default function ShippingPolicyPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <DollarSign className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Free Shipping</h3>
+            <h3 className="font-medium text-foreground mb-1">Free Shipping</h3>
             <p className="text-sm text-border-dark">On orders $75+</p>
           </div>
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Fast Processing</h3>
+            <h3 className="font-medium text-foreground mb-1">Fast Processing</h3>
             <p className="text-sm text-border-dark">Ships within 1-2 days</p>
           </div>
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <Globe className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Global Delivery</h3>
+            <h3 className="font-medium text-foreground mb-1">Global Delivery</h3>
             <p className="text-sm text-border-dark">Ships to 100+ countries</p>
           </div>
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <MapPin className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Order Tracking</h3>
+            <h3 className="font-medium text-foreground mb-1">Order Tracking</h3>
             <p className="text-sm text-border-dark">Real-time updates</p>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function ShippingPolicyPage() {
 
           {/* Domestic Shipping */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Package className="w-6 h-6 text-primary" />
               Domestic Shipping (United States)
             </h2>
@@ -123,21 +123,21 @@ export default function ShippingPolicyPage() {
                 <table className="w-full">
                   <thead className="bg-surface">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Shipping Method</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Delivery Time</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Cost</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-foreground">Shipping Method</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-foreground">Delivery Time</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-foreground">Cost</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border-light">
                     {shippingMethods.map((method, index) => (
                       <tr key={index} className="hover:bg-surface/50 transition-colors">
                         <td className="px-6 py-4">
-                          <p className="font-medium text-text-primary">{method.name}</p>
+                          <p className="font-medium text-foreground">{method.name}</p>
                           <p className="text-sm text-border-dark">{method.description}</p>
                         </td>
                         <td className="px-6 py-4 text-border-dark">{method.time}</td>
                         <td className="px-6 py-4">
-                          <span className="font-medium text-text-primary">{method.cost}</span>
+                          <span className="font-medium text-foreground">{method.cost}</span>
                           {method.cost.includes('Free') && (
                             <p className="text-sm text-border-dark">{method.costBelow} under $75</p>
                           )}
@@ -150,12 +150,12 @@ export default function ShippingPolicyPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-success-50 border border-success-200 rounded-lg p-4">
+              <div className="bg-success-light border border-success/25 rounded-lg p-4">
                 <div className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-success-600 shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-success shrink-0" />
                   <div>
-                    <p className="font-medium text-success-800">Free Shipping Threshold</p>
-                    <p className="text-sm text-success-700 mt-1">
+                    <p className="font-medium text-success-dark">Free Shipping Threshold</p>
+                    <p className="text-sm text-success-dark mt-1">
                       Spend $75 or more to qualify for free standard shipping on your order.
                     </p>
                   </div>
@@ -177,7 +177,7 @@ export default function ShippingPolicyPage() {
 
           {/* International Shipping */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Globe className="w-6 h-6 text-primary" />
               International Shipping
             </h2>
@@ -191,15 +191,15 @@ export default function ShippingPolicyPage() {
                 <table className="w-full">
                   <thead className="bg-surface">
                     <tr>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Destination</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Delivery Time</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-text-primary">Shipping Cost</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-foreground">Destination</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-foreground">Delivery Time</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-foreground">Shipping Cost</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border-light">
                     {internationalZones.map((zone, index) => (
                       <tr key={index} className="hover:bg-surface/50 transition-colors">
-                        <td className="px-6 py-4 font-medium text-text-primary">{zone.zone}</td>
+                        <td className="px-6 py-4 font-medium text-foreground">{zone.zone}</td>
                         <td className="px-6 py-4 text-border-dark">{zone.time}</td>
                         <td className="px-6 py-4 text-border-dark">{zone.cost}</td>
                       </tr>
@@ -225,14 +225,14 @@ export default function ShippingPolicyPage() {
 
           {/* Order Processing */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Clock className="w-6 h-6 text-primary" />
               Order Processing
             </h2>
 
             <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Processing Times</h3>
+                <h3 className="font-medium text-foreground mb-2">Processing Times</h3>
                 <ul className="list-disc pl-6 text-border-dark space-y-2">
                   <li>Orders are processed Monday through Friday, excluding holidays</li>
                   <li>Orders placed before 2:00 PM EST ship the same business day</li>
@@ -242,7 +242,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Order Confirmation</h3>
+                <h3 className="font-medium text-foreground mb-2">Order Confirmation</h3>
                 <p className="text-border-dark">
                   You will receive an email confirmation when your order is placed and another when it ships with
                   tracking information. You can also track your order in your account dashboard.
@@ -250,7 +250,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Multiple Items</h3>
+                <h3 className="font-medium text-foreground mb-2">Multiple Items</h3>
                 <p className="text-border-dark">
                   If your order contains multiple items, they may ship separately from different warehouses.
                   You will receive tracking information for each shipment.
@@ -261,14 +261,14 @@ export default function ShippingPolicyPage() {
 
           {/* Shipping Restrictions */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <AlertTriangle className="w-6 h-6 text-primary" />
               Shipping Restrictions
             </h2>
 
             <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
               <div>
-                <h3 className="font-medium text-text-primary mb-2">PO Boxes & APO/FPO Addresses</h3>
+                <h3 className="font-medium text-foreground mb-2">PO Boxes & APO/FPO Addresses</h3>
                 <p className="text-border-dark">
                   We can ship to PO Boxes and APO/FPO addresses via USPS. Express and Next Day shipping options
                   are not available for these addresses.
@@ -276,7 +276,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Restricted Destinations</h3>
+                <h3 className="font-medium text-foreground mb-2">Restricted Destinations</h3>
                 <p className="text-border-dark">
                   Due to shipping carrier restrictions, we cannot ship to certain countries. If your country is not
                   available at checkout, we are unable to deliver to that location at this time.
@@ -284,7 +284,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Hazardous Materials</h3>
+                <h3 className="font-medium text-foreground mb-2">Hazardous Materials</h3>
                 <p className="text-border-dark">
                   Some products containing batteries, liquids, or aerosols may have shipping restrictions and
                   may not be available for all shipping methods or international destinations.
@@ -292,7 +292,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Large or Heavy Items</h3>
+                <h3 className="font-medium text-foreground mb-2">Large or Heavy Items</h3>
                 <p className="text-border-dark">
                   Oversized or heavy items may incur additional shipping charges. These charges will be displayed
                   at checkout before you complete your order.
@@ -303,7 +303,7 @@ export default function ShippingPolicyPage() {
 
           {/* Tracking Your Order */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <MapPin className="w-6 h-6 text-primary" />
               Tracking Your Order
             </h2>
@@ -326,14 +326,14 @@ export default function ShippingPolicyPage() {
 
           {/* Delivery Issues */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Package className="w-6 h-6 text-primary" />
               Delivery Issues
             </h2>
 
             <div className="bg-white border border-border-light rounded-brand p-6 space-y-6">
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Lost or Stolen Packages</h3>
+                <h3 className="font-medium text-foreground mb-2">Lost or Stolen Packages</h3>
                 <p className="text-border-dark">
                   If your package is marked as delivered but you haven&apos;t received it, please check with neighbors
                   and any secure locations at your address. If you still can&apos;t locate your package, contact us
@@ -342,7 +342,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Damaged Packages</h3>
+                <h3 className="font-medium text-foreground mb-2">Damaged Packages</h3>
                 <p className="text-border-dark">
                   If your order arrives damaged, please take photos of the packaging and products, then contact
                   our customer service team within 48 hours. We will arrange for a replacement or refund.
@@ -350,7 +350,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Incorrect Address</h3>
+                <h3 className="font-medium text-foreground mb-2">Incorrect Address</h3>
                 <p className="text-border-dark">
                   Please ensure your shipping address is correct before placing your order. If you need to change
                   the address after placing an order, contact us immediately. Once the order has shipped, we cannot
@@ -359,7 +359,7 @@ export default function ShippingPolicyPage() {
               </div>
 
               <div>
-                <h3 className="font-medium text-text-primary mb-2">Delayed Shipments</h3>
+                <h3 className="font-medium text-foreground mb-2">Delayed Shipments</h3>
                 <p className="text-border-dark">
                   Occasionally, shipments may be delayed due to weather, carrier issues, or customs processing.
                   If your order is significantly delayed, please contact our customer service team for assistance.
@@ -370,7 +370,7 @@ export default function ShippingPolicyPage() {
 
           {/* Holiday Shipping */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Calendar className="w-6 h-6 text-primary" />
               Holiday Shipping Deadlines
             </h2>
@@ -383,27 +383,27 @@ export default function ShippingPolicyPage() {
                 <table className="w-full">
                   <thead className="bg-surface">
                     <tr>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Holiday</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Standard</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Express</th>
-                      <th className="px-4 py-3 text-left text-sm font-medium text-text-primary">Next Day</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-foreground">Holiday</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-foreground">Standard</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-foreground">Express</th>
+                      <th className="px-4 py-3 text-left text-sm font-medium text-foreground">Next Day</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border-light">
                     <tr>
-                      <td className="px-4 py-3 font-medium text-text-primary">Christmas</td>
+                      <td className="px-4 py-3 font-medium text-foreground">Christmas</td>
                       <td className="px-4 py-3 text-border-dark">Dec 14</td>
                       <td className="px-4 py-3 text-border-dark">Dec 20</td>
                       <td className="px-4 py-3 text-border-dark">Dec 23</td>
                     </tr>
                     <tr className="bg-surface/50">
-                      <td className="px-4 py-3 font-medium text-text-primary">Valentine&apos;s Day</td>
+                      <td className="px-4 py-3 font-medium text-foreground">Valentine&apos;s Day</td>
                       <td className="px-4 py-3 text-border-dark">Feb 7</td>
                       <td className="px-4 py-3 text-border-dark">Feb 11</td>
                       <td className="px-4 py-3 text-border-dark">Feb 13</td>
                     </tr>
                     <tr>
-                      <td className="px-4 py-3 font-medium text-text-primary">Mother&apos;s Day</td>
+                      <td className="px-4 py-3 font-medium text-foreground">Mother&apos;s Day</td>
                       <td className="px-4 py-3 text-border-dark">May 3</td>
                       <td className="px-4 py-3 text-border-dark">May 8</td>
                       <td className="px-4 py-3 text-border-dark">May 10</td>
@@ -419,7 +419,7 @@ export default function ShippingPolicyPage() {
 
           {/* Contact */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6">Questions?</h2>
+            <h2 className="font-serif text-2xl text-foreground mb-6">Questions?</h2>
             <div className="bg-surface rounded-brand p-6">
               <p className="text-border-dark mb-4">
                 If you have any questions about shipping or need help with an order, our customer service team is here to help.
@@ -440,7 +440,7 @@ export default function ShippingPolicyPage() {
 
           {/* Related Links */}
           <div className="p-6 bg-white border border-border-light rounded-brand">
-            <h3 className="font-serif text-lg text-text-primary mb-4">Related Policies</h3>
+            <h3 className="font-serif text-lg text-foreground mb-4">Related Policies</h3>
             <div className="flex flex-wrap gap-4">
               <Link href="/return-policy" className="inline-flex items-center gap-2 text-primary hover:underline">
                 Return Policy

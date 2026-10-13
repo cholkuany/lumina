@@ -17,12 +17,12 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           {item.href ? (
             <Link
               href={item.href}
-              className="text-border-dark hover:text-primary transition-colors group-last:text-text-primary underline underline-offset-[3px] capitalize"
+              className="text-border-dark hover:text-primary transition-colors group-last:text-foreground underline underline-offset-[3px] capitalize"
             >
               {item.label}
             </Link>
           ) : (
-            <span className="text-text-primary font-medium">{item.label}</span>
+            <span className="text-foreground font-medium">{item.label}</span>
           )}
         </div>
       ))}

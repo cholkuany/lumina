@@ -24,7 +24,7 @@ const pageTitles: Record<string, string> = {
 const notificationIcon = {
   ORDER: { icon: ClipboardList, className: 'bg-primary-100 text-primary-600' },
   REVIEW: { icon: Star, className: 'bg-amber-100 text-amber-600' },
-  USER: { icon: User, className: 'bg-success-100 text-success-600' },
+  USER: { icon: User, className: 'bg-success text-success' },
   SYSTEM: { icon: AlertCircle, className: 'bg-red-100 text-red-600' },
 }
 
@@ -64,7 +64,7 @@ export function AdminHeader() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggle}
-            className="lg:hidden p-2 -ml-1 rounded-lg text-border-dark hover:text-text-primary hover:bg-surface transition-colors"
+            className="lg:hidden p-2 -ml-1 rounded-lg text-border-dark hover:text-foreground hover:bg-surface transition-colors"
             aria-label="Open navigation"
           >
             <Menu className="w-5 h-5" />
@@ -72,7 +72,7 @@ export function AdminHeader() {
 
           {/* Desktop title + breadcrumbs */}
           <div className="hidden sm:block">
-            <h1 className="text-xl font-semibold text-text-primary">{title}</h1>
+            <h1 className="text-xl font-semibold text-foreground">{title}</h1>
             <nav className="flex items-center gap-1.5 text-xs text-border-dark">
               {breadcrumbs.map((crumb, index) => (
                 <span key={crumb.href} className="flex items-center gap-1.5">
@@ -86,7 +86,7 @@ export function AdminHeader() {
           </div>
 
           {/* Mobile title */}
-          <h1 className="sm:hidden text-base font-semibold text-text-primary">
+          <h1 className="sm:hidden text-base font-semibold text-foreground">
             {title}
           </h1>
         </div>
@@ -98,7 +98,7 @@ export function AdminHeader() {
           <div className="relative">
             <button
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative p-2 text-border-dark hover:text-text-primary hover:bg-surface rounded-lg transition-colors"
+              className="relative p-2 text-border-dark hover:text-foreground hover:bg-surface rounded-lg transition-colors"
               aria-label="Notifications"
             >
               <Bell className="w-5 h-5" />
@@ -123,7 +123,7 @@ export function AdminHeader() {
                   {/* Header */}
                   <div className="flex items-center justify-between px-4 py-3 border-b border-border shrink-0">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-text-primary">Notifications</h3>
+                      <h3 className="font-semibold text-foreground">Notifications</h3>
                       {unreadCount > 0 && (
                         <span className="px-2 py-0.5 text-xs font-semibold bg-primary/10 text-primary rounded-full">
                           {unreadCount} new
@@ -136,7 +136,7 @@ export function AdminHeader() {
                         <button
                           onClick={markAllAsRead}
                           title="Mark all as read"
-                          className="p-1.5 text-border-dark hover:text-text-primary hover:bg-surface rounded-lg transition-colors"
+                          className="p-1.5 text-border-dark hover:text-foreground hover:bg-surface rounded-lg transition-colors"
                         >
                           <CheckCheck className="w-4 h-4" />
                         </button>
@@ -152,7 +152,7 @@ export function AdminHeader() {
                       {/* Close */}
                       <button
                         onClick={() => setShowNotifications(false)}
-                        className="p-1.5 text-border-dark hover:text-text-primary hover:bg-surface rounded-lg transition-colors"
+                        className="p-1.5 text-border-dark hover:text-foreground hover:bg-surface rounded-lg transition-colors"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -207,7 +207,7 @@ export function AdminHeader() {
                             <div className="flex-1 min-w-0">
                               <p className={cn(
                                 'text-sm',
-                                n.read ? 'text-text-primary/70' : 'text-text-primary font-medium'
+                                n.read ? 'text-foreground/70' : 'text-foreground font-medium'
                               )}>
                                 {n.message}
                               </p>

@@ -29,7 +29,7 @@ const FormSelect = (
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-sm font-medium text-text-primary"
+            className="block text-sm font-medium text-foreground"
           >
             {label}
             {props.required && <span className="text-primary ml-1">*</span>}
@@ -41,7 +41,7 @@ const FormSelect = (
             className={cn(
               'w-full px-4 py-3 rounded-brand',
               'bg-white border border-border',
-              'text-text-primary',
+              'text-foreground',
               'transition-all duration-200',
               'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
               'hover:border-border-dark',

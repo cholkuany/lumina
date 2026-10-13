@@ -142,7 +142,7 @@ export default function CategoriesPage() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-text-primary">Categories</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Categories</h1>
           <p className="text-border-dark mt-1">
             Products categories
           </p>
@@ -159,15 +159,15 @@ export default function CategoriesPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-white rounded-brand border border-border p-4">
-          <p className="text-2xl font-semibold text-text-primary">{categoryMap.size}</p>
+          <p className="text-2xl font-semibold text-foreground">{categoryMap.size}</p>
           <p className="text-sm text-border-dark">Total Categories</p>
         </div>
         <div className="bg-white rounded-brand border border-border p-4">
-          <p className="text-2xl font-semibold text-text-primary">{stats.root}</p>
+          <p className="text-2xl font-semibold text-foreground">{stats.root}</p>
           <p className="text-sm text-border-dark">Root Categories</p>
         </div>
         <div className="bg-white rounded-brand border border-border p-4">
-          <p className="text-2xl font-semibold text-text-primary">
+          <p className="text-2xl font-semibold text-foreground">
             {categoryMap.size - stats.root}
           </p>
           <p className="text-sm text-border-dark">Subcategories</p>
@@ -190,7 +190,7 @@ export default function CategoriesPage() {
             onChange={(e) => setShowInactive(e.target.checked)}
             className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30"
           />
-          <span className="text-sm text-text-primary">Show inactive</span>
+          <span className="text-sm text-foreground">Show inactive</span>
         </label>
       </div>
 

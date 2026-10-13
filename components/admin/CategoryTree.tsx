@@ -33,7 +33,7 @@ export function CategoryTree({
       {categories.length === 0 ? (
         <div className="text-center py-12 bg-surface rounded-brand">
           <Folder className="w-12 h-12 text-border-dark mx-auto mb-3" />
-          <p className="text-text-primary font-medium">No categories yet</p>
+          <p className="text-foreground font-medium">No categories yet</p>
           <p className="text-sm text-border-dark mt-1">
             Create your first category to get started
           </p>
@@ -84,7 +84,7 @@ function CategoryNode({
           className={cn(
             'w-6 h-6 flex items-center justify-center rounded transition-colors',
             hasChildren
-              ? 'hover:bg-border-light text-text-primary'
+              ? 'hover:bg-border-light text-foreground'
               : 'text-transparent cursor-default'
           )}
           disabled={!hasChildren}
@@ -116,7 +116,7 @@ function CategoryNode({
         {/* Category Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-text-primary truncate">
+            <span className="font-medium text-foreground truncate">
               {category.name}
             </span>
             {!category.isActive && (

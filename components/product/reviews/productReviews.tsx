@@ -1,6 +1,6 @@
 'use client'
 
-import { ReviewSection } from '@/components/product/ReviewSection'
+import { ReviewSection } from '@/components/product/reviews/ReviewSection'
 import { useProductReviews } from '@/hooks/useProductReviews'
 
 type ProductReviewsProps = {

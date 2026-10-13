@@ -21,7 +21,7 @@ const FormInput = ({ label, error, hint, className, id, optional = true, ...prop
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-text-primary capitalize"
+          className="block text-sm font-medium text-foreground capitalize"
         >
           {label}
           {!optional && <span className="text-primary ml-1">*</span>}
@@ -32,7 +32,7 @@ const FormInput = ({ label, error, hint, className, id, optional = true, ...prop
         className={cn(
           'w-full px-4 py-3 rounded-brand',
           'bg-white border border-border',
-          'text-text-primary placeholder:text-border-dark',
+          'text-foreground placeholder:text-border-dark',
           'transition-all duration-200',
           'focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary',
           'hover:border-border-dark',

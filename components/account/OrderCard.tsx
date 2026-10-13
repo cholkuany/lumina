@@ -45,15 +45,15 @@ export function OrderCard({ order }: OrderCardProps) {
         <div className="flex flex-wrap items-center gap-4 sm:gap-8">
           <div>
             <p className="text-xs text-border-dark">Order Number</p>
-            <p className="font-medium text-text-primary">{order.orderNumber}</p>
+            <p className="font-medium text-foreground">{order.orderNumber}</p>
           </div>
           <div>
             <p className="text-xs text-border-dark">Date Placed</p>
-            <p className="font-medium text-text-primary">{order.date}</p>
+            <p className="font-medium text-foreground">{order.date}</p>
           </div>
           <div>
             <p className="text-xs text-border-dark">Total</p>
-            <p className="font-medium text-text-primary">{formatPrice(order.total)}</p>
+            <p className="font-medium text-foreground">{formatPrice(order.total)}</p>
           </div>
         </div>
 
@@ -81,12 +81,12 @@ export function OrderCard({ order }: OrderCardProps) {
               </Link>
               <div className="flex-1 min-w-0">
                 <Link href={`/products/${item.product.id}`}>
-                  <h4 className="font-medium text-text-primary text-sm hover:text-primary transition-colors line-clamp-1">
+                  <h4 className="font-medium text-foreground text-sm hover:text-primary transition-colors line-clamp-1">
                     {item.product.name}
                   </h4>
                 </Link>
                 <p className="text-sm text-border-dark">Qty: {item.quantity}</p>
-                <p className="text-sm font-medium text-text-primary">
+                <p className="text-sm font-medium text-foreground">
                   {formatPrice(item.product.variant.price * item.quantity)}
                 </p>
               </div>

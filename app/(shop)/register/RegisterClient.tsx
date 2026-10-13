@@ -50,7 +50,7 @@ export default function RegisterClient({ redirectTo }: { redirectTo: string }) {
         {/* Form Card */}
         <div className="bg-white/95 backdrop-blur-sm border border-white/70 rounded-brand p-8 shadow-soft">
           <div className="text-center mb-8">
-            <h1 className="font-serif text-2xl text-text-primary mb-2">
+            <h1 className="font-serif text-2xl text-foreground mb-2">
               Create Account
             </h1>
             <p className="text-border-dark">
@@ -187,7 +187,7 @@ const RegistrationForm = ({ redirectTo }: { redirectTo: string }) => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-1/2 text-border-dark hover:text-text-primary transition-colors"
+              className="absolute right-4 top-1/2 -translate-1/2 text-border-dark hover:text-foreground transition-colors"
             >
               {showPassword ? (
                 <EyeOff className="w-5 h-5" />
@@ -208,13 +208,13 @@ const RegistrationForm = ({ redirectTo }: { redirectTo: string }) => {
                   key={req.id}
                   className={cn(
                     'flex items-center gap-2 text-xs transition-colors',
-                    isValid ? 'text-success-600' : 'text-border-dark'
+                    isValid ? 'text-success' : 'text-border-dark'
                   )}
                 >
                   <div
                     className={cn(
                       'w-4 h-4 rounded-full flex items-center justify-center',
-                      isValid ? 'bg-success-100' : 'bg-border-light'
+                      isValid ? 'bg-success-light' : 'bg-border-light'
                     )}
                   >
                     {isValid && <Check className="w-3 h-3" />}

@@ -42,7 +42,7 @@ export function Checkbox({ id, label, checked, onChange, disabled, className }: 
           {checked && <Check className="w-4 h-4 text-white absolute inset-0.5 top-0.5 left-0.5" strokeWidth={3} />}
         </div>
       </div>
-      <span className="text-sm text-text-primary">{label}</span>
+      <span className="text-sm text-foreground">{label}</span>
     </label>
   )
 }

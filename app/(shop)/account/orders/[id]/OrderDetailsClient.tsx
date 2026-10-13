@@ -49,8 +49,8 @@ const statusConfig: Record<OrderStatus, {
   },
   delivered: {
     label: 'Delivered',
-    color: 'text-success-700',
-    bgColor: 'bg-success-50',
+    color: 'text-success-dark',
+    bgColor: 'bg-success-light',
     icon: CheckCircle,
   },
   cancelled: {
@@ -97,7 +97,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
         <div className="container-lumina">
           <div className="text-center py-16 bg-surface rounded-brand">
             <Package className="w-16 h-16 text-border-dark mx-auto mb-4" />
-            <h2 className="font-serif text-xl text-text-primary mb-2">
+            <h2 className="font-serif text-xl text-foreground mb-2">
               Order Not Found
             </h2>
             <p className="text-border-dark mb-6">
@@ -163,7 +163,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div>
-                <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
+                <h1 className="font-serif text-2xl lg:text-3xl text-foreground">
                   Order {order.orderNumber}
                 </h1>
                 <p className="text-border-dark mt-1">
@@ -184,7 +184,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
               <div className="bg-surface rounded-brand p-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <h2 className="font-medium text-text-primary mb-1">
+                    <h2 className="font-medium text-foreground mb-1">
                       Tracking Information
                     </h2>
                     <div className="flex items-center gap-2 text-border-dark">
@@ -199,7 +199,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                         <Copy className="w-4 h-4" />
                       </button>
                       {copiedTracking && (
-                        <span className="text-xs text-success-600">Copied!</span>
+                        <span className="text-xs text-success">Copied!</span>
                       )}
                     </div>
                     {order.estimatedDelivery && order.status === 'shipped' && (
@@ -208,7 +208,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                       </p>
                     )}
                     {order.deliveredDate && order.status === 'delivered' && (
-                      <p className="text-sm text-success-700 mt-1">
+                      <p className="text-sm text-success-dark mt-1">
                         Delivered on {order.deliveredDate}
                       </p>
                     )}
@@ -228,7 +228,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
 
             {/* Order Timeline */}
             <div className="bg-white border border-border-light rounded-brand p-6">
-              <h2 className="font-serif text-lg text-text-primary mb-6">
+              <h2 className="font-serif text-lg text-foreground mb-6">
                 Order Timeline
               </h2>
               <div className="relative">
@@ -260,7 +260,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                       {/* Content */}
                       <div className="pb-8">
                         <p
-                          className={`font-medium ${event.completed ? 'text-text-primary' : 'text-border-dark'
+                          className={`font-medium ${event.completed ? 'text-foreground' : 'text-border-dark'
                             }`}
                         >
                           {config.label}
@@ -278,7 +278,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
             {/* Order Items */}
             <div className="bg-white border border-border-light rounded-brand overflow-hidden">
               <div className="p-6 border-b border-border-light">
-                <h2 className="font-serif text-lg text-text-primary">
+                <h2 className="font-serif text-lg text-foreground">
                   Items ({order.items.length})
                 </h2>
               </div>
@@ -300,7 +300,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                     <div className="flex-1 min-w-0">
                       <Link
                         href={`/products/${item.product.id}`}
-                        className="font-medium text-text-primary hover:text-primary transition-colors line-clamp-2"
+                        className="font-medium text-foreground hover:text-primary transition-colors line-clamp-2"
                       >
                         {item.product.name}
                       </Link>
@@ -317,7 +317,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
 
                     {/* Price */}
                     <div className="text-right">
-                      <p className="font-medium text-text-primary">
+                      <p className="font-medium text-foreground">
                         {formatPrice(item.product.price * item.quantity)}
                       </p>
                       {item.quantity > 1 && (
@@ -342,7 +342,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                     <span>{order.shipping === 0 ? 'Free' : formatPrice(order.shipping)}</span>
                   </div>
                   {order.discount > 0 && (
-                    <div className="flex justify-between text-success-700">
+                    <div className="flex justify-between text-success-dark">
                       <span>Discount</span>
                       <span>-{formatPrice(order.discount)}</span>
                     </div>
@@ -351,7 +351,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
                     <span>Tax</span>
                     <span>{formatPrice(order.tax)}</span>
                   </div>
-                  <div className="flex justify-between text-text-primary font-medium text-lg pt-2 border-t border-border">
+                  <div className="flex justify-between text-foreground font-medium text-lg pt-2 border-t border-border">
                     <span>Total</span>
                     <span>{formatPrice(order.total)}</span>
                   </div>
@@ -365,12 +365,12 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
               <div className="bg-white border border-border-light rounded-brand p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <MapPin className="w-5 h-5 text-primary" />
-                  <h2 className="font-serif text-lg text-text-primary">
+                  <h2 className="font-serif text-lg text-foreground">
                     Shipping Address
                   </h2>
                 </div>
                 <address className="not-italic text-border-dark leading-relaxed">
-                  <p className="font-medium text-text-primary">
+                  <p className="font-medium text-foreground">
                     {order.shippingAddress.firstName} {order.shippingAddress.lastName}
                   </p>
                   <p>{order.shippingAddress.street}</p>
@@ -391,12 +391,12 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
               <div className="bg-white border border-border-light rounded-brand p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <CreditCard className="w-5 h-5 text-primary" />
-                  <h2 className="font-serif text-lg text-text-primary">
+                  <h2 className="font-serif text-lg text-foreground">
                     Payment Method
                   </h2>
                 </div>
                 <div className="text-border-dark">
-                  <p className="font-medium text-text-primary">
+                  <p className="font-medium text-foreground">
                     {order.paymentMethod.brand} •••• {order.paymentMethod.last4}
                   </p>
                   <p className="text-sm">
@@ -406,7 +406,7 @@ export function OrderDetailsClient({ order }: { order: TOrderProps | null }) {
 
                 {/* Billing Address */}
                 <div className="mt-4 pt-4 border-t border-border-light">
-                  <p className="text-sm font-medium text-text-primary mb-2">Billing Address</p>
+                  <p className="text-sm font-medium text-foreground mb-2">Billing Address</p>
                   <address className="not-italic text-sm text-border-dark leading-relaxed">
                     <p>
                       {order.billingAddress.firstName} {order.billingAddress.lastName}

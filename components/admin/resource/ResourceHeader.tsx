@@ -6,7 +6,7 @@ export const ResourceHeader = ({ title, description, addResourceText, addResourc
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold text-text-primary">{title}</h1>
+        <h1 className="text-2xl font-semibold text-foreground">{title}</h1>
         <p className="text-border-dark mt-1">
           {description}
         </p>

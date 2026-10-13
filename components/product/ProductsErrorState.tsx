@@ -21,7 +21,7 @@ export function ProductsErrorState({
         <p className="mb-2 text-sm font-bold uppercase tracking-[0.18em] text-danger-dark">
           Something went wrong
         </p>
-        <h1 className="font-serif text-3xl font-semibold text-text-primary">
+        <h1 className="font-serif text-3xl font-semibold text-foreground">
           We couldn&apos;t load the products
         </h1>
         <p className="mx-auto mt-3 max-w-md leading-7 text-border-dark">

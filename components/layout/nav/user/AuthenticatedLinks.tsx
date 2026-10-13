@@ -1,21 +1,12 @@
-import Link from 'next/link'
 import { userMenuItems } from '@/lib/constants/navigation'
+import { MenuLink } from './MenuLink'
 
-type AuthenticatedLinksProps = {
-  setUserMenuOpen: (open: boolean) => void;
-}
-export const AuthenticatedLinks = ({ setUserMenuOpen }: AuthenticatedLinksProps) => (
+export const AuthenticatedLinks = ({ setUserMenuOpen }: { setUserMenuOpen: (open: boolean) => void }) => (
   <div className="p-2">
     {userMenuItems.map((item) => (
-      <Link
-        key={item.name}
-        href={item.href}
-        onClick={() => setUserMenuOpen(false)}
-        className="flex items-center gap-3 px-3 py-2.5 text-sm text-text-primary hover:bg-surface hover:text-primary rounded-lg transition-colors"
-      >
-        <item.icon className="w-4 h-4" />
+      <MenuLink key={item.name} href={item.href} icon={item.icon} onClick={() => setUserMenuOpen(false)}>
         {item.name}
-      </Link>
+      </MenuLink>
     ))}
   </div>
 )

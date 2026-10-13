@@ -66,7 +66,7 @@ export default async function AccountPage() {
                   }
                 </div>
                 <div>
-                  <h1 className="font-serif text-2xl text-text-primary">
+                  <h1 className="font-serif text-2xl text-foreground">
                     Welcome back, {firstName}!
                   </h1>
                   <p className="text-border-dark">
@@ -78,7 +78,7 @@ export default async function AccountPage() {
 
             {/* Quick Actions */}
             <div>
-              <h2 className="font-serif text-xl text-text-primary mb-4">Quick Actions</h2>
+              <h2 className="font-serif text-xl text-foreground mb-4">Quick Actions</h2>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {accountQuickActions.map((action) => (
                   <Link
@@ -90,7 +90,7 @@ export default async function AccountPage() {
                     <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center mx-auto mb-3">
                       <action.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <p className="font-medium text-text-primary text-sm">{action.label}</p>
+                    <p className="font-medium text-foreground text-sm">{action.label}</p>
                     <p className="text-xs text-border-dark">{action.count} items</p>
                   </Link>
                 ))}
@@ -100,7 +100,7 @@ export default async function AccountPage() {
             {/* Recent Orders */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-serif text-xl text-text-primary">Recent Orders</h2>
+                <h2 className="font-serif text-xl text-foreground">Recent Orders</h2>
                 <Link
                   href="/account/orders"
                   className="text-sm text-primary hover:underline flex items-center gap-1 group"
@@ -129,7 +129,7 @@ export default async function AccountPage() {
 
             {/* Mobile Navigation */}
             <div className="lg:hidden">
-              <h2 className="font-serif text-xl text-text-primary mb-4">Account Menu</h2>
+              <h2 className="font-serif text-xl text-foreground mb-4">Account Menu</h2>
               <AccountSidebar />
             </div>
           </div>

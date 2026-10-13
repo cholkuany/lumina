@@ -34,7 +34,7 @@ export function Variant({
   return (
     <div className="bg-white rounded-brand border border-border p-6 space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-medium text-text-primary">
+        <h2 className="text-lg font-medium text-foreground">
           Product Variants
         </h2>
 
@@ -64,14 +64,14 @@ export function Variant({
       {fields.length === 0 ? (
         <div className="text-center py-12 bg-surface rounded-lg">
           <Layers className="w-6 h-6 text-border-dark mx-auto mb-4" />
-          <p className="text-text-primary font-medium">No variants added</p>
+          <p className="text-foreground font-medium">No variants added</p>
         </div>
       ) : (
         <div className="space-y-4">
           {fields.map((field, index) => (
             <div key={field.id} className="p-4 bg-surface rounded-lg space-y-4">
               <div className="flex items-start justify-between">
-                <span className="text-sm font-medium text-text-primary">
+                <span className="text-sm font-medium text-foreground">
                   Variant {index + 1}
                 </span>
 

@@ -5,7 +5,7 @@ export const ProductInfo = ({ id, name, category }: { id: string, name: string, 
     <div>
       <Link
         href={`/admin/products/edit/${id}`}
-        className="font-medium text-text-primary hover:text-primary transition-colors"
+        className="font-medium text-foreground hover:text-primary transition-colors"
       >
         {name}
       </Link>

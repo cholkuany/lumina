@@ -23,7 +23,7 @@ export function AddressCard({ address, onEdit, onDelete }: AddressCardProps) {
           <MapPin className="w-5 h-5 text-primary" />
         </div>
         <div>
-          <h4 className="font-medium text-text-primary">
+          <h4 className="font-medium text-foreground">
             {address.firstName} {address.lastName}
           </h4>
           <p className="text-sm text-border-dark">{address.phone}</p>
@@ -42,14 +42,14 @@ export function AddressCard({ address, onEdit, onDelete }: AddressCardProps) {
       <div className="flex items-center gap-4 pt-3 border-t border-border-light">
         <button
           onClick={onEdit}
-          className="flex items-center gap-1.5 text-sm text-text-primary hover:text-primary transition-colors"
+          className="flex items-center gap-1.5 text-sm text-foreground hover:text-primary transition-colors"
         >
           <Edit2 className="w-4 h-4" />
           Edit
         </button>
         <button
           onClick={onDelete}
-          className="flex items-center gap-1.5 text-sm text-text-primary hover:text-red-500 transition-colors"
+          className="flex items-center gap-1.5 text-sm text-foreground hover:text-red-500 transition-colors"
         >
           <Trash2 className="w-4 h-4" />
           Delete

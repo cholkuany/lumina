@@ -3,19 +3,19 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import {
-  Star,
   ThumbsUp,
   ThumbsDown,
   Flag,
   CheckCircle,
   MessageSquare,
 } from 'lucide-react'
-import { SellerResponse } from './SellerResponse'
-import { SellerResponseForm } from './SellerResponseForm'
-import { ImageLightbox } from './ImageLightbox'
+import { SellerResponse } from '../SellerResponse'
+import { SellerResponseForm } from '../SellerResponseForm'
+import { ImageLightbox } from '../ImageLightbox'
 import { DBReviewInput } from '@/lib/queries/get.reviews'
 import { cn } from '@/lib/utils'
 import { formatDate } from '@/lib/utils'
+import { RatingSummary } from '../../ui/RatingSummary'
 
 interface ReviewCardProps {
   review: DBReviewInput
@@ -78,9 +78,9 @@ export function ReviewCard({
         <div className="flex-1 min-w-0">
           {/* Header */}
           <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="font-medium text-text-primary">{review.authorName}</span>
+            <span className="font-medium text-foreground">{review.authorName}</span>
             {review.verified && (
-              <span className="inline-flex items-center gap-1 text-xs bg-success-100 text-success-700 px-2 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-xs bg-success-light text-success-dark px-2 py-0.5 rounded-full">
                 <CheckCircle className="w-3 h-3" />
                 Verified Purchase
               </span>
@@ -90,29 +90,19 @@ export function ReviewCard({
           {/* Rating & Date */}
           <div className="flex items-center gap-3 mb-3">
             <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={cn(
-                    'w-4 h-4',
-                    i < review.rating
-                      ? 'fill-primary text-primary'
-                      : 'fill-border-light text-border-light'
-                  )}
-                />
-              ))}
+              <RatingSummary rating={review.rating} />
             </div>
             <span className="text-sm text-border-dark">{formatDate(review.createdAt)}</span>
           </div>
 
           {/* Title */}
-          <h4 className="font-medium text-text-primary mb-2">{review.title}</h4>
+          <h4 className="font-medium text-foreground mb-2">{review.title}</h4>
 
           {/* Recommendation Badge */}
           {review.recommendProduct !== undefined && (
             <div className="mb-3">
               {review.recommendProduct ? (
-                <span className="inline-flex items-center gap-1 text-xs text-success-700">
+                <span className="inline-flex items-center gap-1 text-xs text-success-dark">
                   👍 Recommends this product
                 </span>
               ) : (
@@ -145,9 +135,7 @@ export function ReviewCard({
                 <button
                   key={index}
                   onClick={() => openLightbox(index)}
-                  className="relative w-16 h-16 rounded-lg overflow-hidden bg-surface 
-                             hover:opacity-90 transition-opacity ring-2 ring-transparent 
-                             hover:ring-primary focus:ring-primary focus:outline-none"
+                  className="relative w-16 h-16 rounded-lg overflow-hidden bg-surface hover:opacity-90 transition-opacity ring-2 ring-transparent hover:ring-primary focus:ring-primary focus:outline-none"
                 >
                   <Image
                     src={image}
@@ -169,8 +157,8 @@ export function ReviewCard({
               className={cn(
                 'flex items-center gap-1.5 text-sm transition-colors',
                 helpfulStatus === 'up'
-                  ? 'text-success-600'
-                  : 'text-border-dark hover:text-text-primary'
+                  ? 'text-success'
+                  : 'text-border-dark hover:text-foreground'
               )}
             >
               <ThumbsUp
@@ -185,7 +173,7 @@ export function ReviewCard({
                 'flex items-center gap-1.5 text-sm transition-colors',
                 helpfulStatus === 'down'
                   ? 'text-red-600'
-                  : 'text-border-dark hover:text-text-primary'
+                  : 'text-border-dark hover:text-foreground'
               )}
             >
               <ThumbsDown

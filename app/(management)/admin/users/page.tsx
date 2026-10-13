@@ -297,8 +297,8 @@ type StatProps = {
 
 const Stats = ({ total = 0, isLoading, active = 0, users, banned }: StatProps) => (
   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-    <StatCard label="Total Users" value={total ?? "—"} valueClass="text-text-primary" isLoading={isLoading} />
-    <StatCard label="Active Users" value={active} valueClass="text-success-600" isLoading={isLoading} />
+    <StatCard label="Total Users" value={total ?? "—"} valueClass="text-foreground" isLoading={isLoading} />
+    <StatCard label="Active Users" value={active} valueClass="text-success" isLoading={isLoading} />
     <StatCard label="Banned" value={banned} valueClass="text-red-600" isLoading={isLoading} />
     <StatCard
       label="Admins"

@@ -24,7 +24,7 @@ export const ToggleFilterOptions = ({ activeFilterCount, showFilters, setShowFil
           'flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-brand border transition-colors',
           showFilters || activeFilterCount > 0
             ? 'bg-primary/10 border-primary text-primary'
-            : 'bg-white border-border text-text-primary hover:bg-surface'
+            : 'bg-white border-border text-foreground hover:bg-surface'
         )}
       >
         <Funnel className="w-5 h-5" />

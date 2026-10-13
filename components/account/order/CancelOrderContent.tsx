@@ -51,10 +51,10 @@ export function CancelOrderContent({
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-success-600" />
+        <div className="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-8 h-8 text-success" />
         </div>
-        <h3 className="font-serif text-xl text-text-primary mb-2">Order Cancelled</h3>
+        <h3 className="font-serif text-xl text-foreground mb-2">Order Cancelled</h3>
         <p className="text-border-dark mb-6">
           Your order has been successfully cancelled. A refund of {formatPrice(order.total)} will be processed within 5-7 business days.
         </p>
@@ -79,7 +79,7 @@ export function CancelOrderContent({
 
       <div className="space-y-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Reason for Cancellation *
           </label>
           <select
@@ -95,7 +95,7 @@ export function CancelOrderContent({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Additional Comments (Optional)
           </label>
           <textarea
@@ -110,7 +110,7 @@ export function CancelOrderContent({
 
       <div className="bg-surface rounded-lg p-4 mb-6">
         <p className="text-sm text-border-dark">
-          <strong className="text-text-primary">Refund Amount:</strong> {formatPrice(order.total)}
+          <strong className="text-foreground">Refund Amount:</strong> {formatPrice(order.total)}
         </p>
         <p className="text-sm text-border-dark mt-1">
           Refunds are typically processed within 5-7 business days.

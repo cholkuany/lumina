@@ -107,7 +107,7 @@ export const EmptyTableResult = ({ emptyMessage }: { emptyMessage: string }) => 
     <div className="w-16 h-16 bg-surface rounded-full flex items-center justify-center mx-auto mb-4">
       <Inbox className="w-8 h-8 text-border-dark" />
     </div>
-    <p className="text-text-primary font-medium">{emptyMessage}</p>
+    <p className="text-foreground font-medium">{emptyMessage}</p>
     <p className="text-sm text-border-dark mt-1">
       Try adjusting your filters or search terms
     </p>

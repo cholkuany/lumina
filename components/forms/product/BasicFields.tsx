@@ -14,7 +14,7 @@ export function BasicFields({
 }: BasicFieldsProps) {
   return (
     <div className="bg-white rounded-brand border border-border p-6 space-y-5">
-      <h2 className="text-lg font-medium text-text-primary">Product Details</h2>
+      <h2 className="text-lg font-medium text-foreground">Product Details</h2>
 
       <FormInput
         label="Product Name"

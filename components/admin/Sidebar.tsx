@@ -61,7 +61,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
                 <span className="text-white font-bold text-sm">L</span>
               </div>
               <div>
-                <span className="text-lg font-semibold text-text-primary tracking-wide">
+                <span className="text-lg font-semibold text-foreground tracking-wide">
                   LUMINA
                 </span>
                 <span className="block text-xs text-border-dark -mt-0.5">
@@ -73,7 +73,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
             {/* Close button — mobile only */}
             <button
               onClick={close}
-              className="lg:hidden p-1.5 rounded-lg text-border-dark hover:text-text-primary hover:bg-surface transition-colors"
+              className="lg:hidden p-1.5 rounded-lg text-border-dark hover:text-foreground hover:bg-surface transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -96,7 +96,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
                     'flex items-center gap-3 px-3 py-2.5 rounded-brand text-sm font-medium transition-all duration-200',
                     active
                       ? 'bg-primary/10 text-primary'
-                      : 'text-text-primary/70 hover:bg-surface hover:text-text-primary'
+                      : 'text-foreground/70 hover:bg-surface hover:text-foreground'
                   )}
                 >
                   <item.icon
@@ -125,7 +125,7 @@ export function Sidebar({ user }: { user: LoginUser }) {
                       'flex items-center gap-3 px-3 py-2.5 rounded-brand text-sm font-medium transition-all duration-200',
                       active
                         ? 'bg-primary/10 text-primary'
-                        : 'text-text-primary/70 hover:bg-surface hover:text-text-primary'
+                        : 'text-foreground/70 hover:bg-surface hover:text-foreground'
                     )}
                   >
                     <item.icon
@@ -150,14 +150,14 @@ export function Sidebar({ user }: { user: LoginUser }) {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-text-primary truncate">{user.name}</p>
+                <p className="text-sm font-medium text-foreground truncate">{user.name}</p>
                 <p className="text-xs text-border-dark truncate">Administrator</p>
               </div>
               <button onClick={() => signOut({
                 fetchOptions: {
                   onSuccess: () => redirect('/login')
                 }
-              })} className="p-1.5 text-border-dark hover:text-text-primary transition-colors">
+              })} className="p-1.5 text-border-dark hover:text-foreground transition-colors">
                 <LogOut className="w-5 h-5" />
               </button>
             </div>

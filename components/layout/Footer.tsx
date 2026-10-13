@@ -92,7 +92,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-surface border-t border-border-light">
+    <footer className="bg-ink border-t border-border-light">
       {/* Newsletter Section */}
       <div className="bg-text-primary text-white py-12">
         <div className="container-lumina">
@@ -130,7 +130,7 @@ export function Footer() {
                 <Button
                   type="submit"
                   variant="primary"
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap bg-primary/50"
                   isLoading={status === 'loading'}
                 >
                   {status === 'loading' ? 'Joining' : 'Subscribe'}
@@ -156,7 +156,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-4 lg:mb-0">
             <Link href="/" className="inline-block mb-4">
-              <span className="font-serif text-2xl font-semibold text-text-primary">
+              <span className="font-serif text-2xl font-semibold text-surface">
                 LUMINA
               </span>
             </Link>
@@ -169,7 +169,7 @@ export function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  className={`w-10 h-10 rounded-full bg-text-primary text-white flex items-center justify-center transition-colors duration-300 ${social.hover}`}
+                  className={`w-10 h-10 rounded-full bg-text-primary text-foreground-muted flex items-center justify-center transition-colors duration-300 ${social.hover}`}
                   aria-label={social.name}
                 >
                   <social.icon className="w-4 h-4" />
@@ -180,7 +180,7 @@ export function Footer() {
 
           {/* Shop Links */}
           <div>
-            <h4 className="font-serif font-semibold text-text-primary mb-4">Shop</h4>
+            <h4 className="font-serif font-semibold text-surface mb-4">Shop</h4>
             <ul className="space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
@@ -197,7 +197,7 @@ export function Footer() {
 
           {/* Help Links */}
           <div>
-            <h4 className="font-serif font-semibold text-text-primary mb-4">Help</h4>
+            <h4 className="font-serif font-semibold text-surface mb-4">Help</h4>
             <ul className="space-y-3">
               {footerLinks.help.map((link) => (
                 <li key={link.name}>
@@ -214,7 +214,7 @@ export function Footer() {
 
           {/* Company Links */}
           <div>
-            <h4 className="font-serif font-semibold text-text-primary mb-4">Company</h4>
+            <h4 className="font-serif font-semibold text-surface mb-4">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>

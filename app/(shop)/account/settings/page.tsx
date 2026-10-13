@@ -79,7 +79,7 @@ function Modal({
         />
         <div className="relative bg-white rounded-brand shadow-hover max-w-lg w-full max-h-[90vh] overflow-y-auto">
           <div className="flex items-center justify-between p-6 border-b border-border-light">
-            <h2 className="font-serif text-xl text-text-primary">{title}</h2>
+            <h2 className="font-serif text-xl text-foreground">{title}</h2>
             <button
               onClick={onClose}
               className="p-2 hover:bg-surface rounded-full transition-colors"
@@ -135,7 +135,7 @@ function SettingsSection({
   return (
     <div className="bg-white border border-border-light rounded-brand overflow-hidden">
       <div className="p-6 border-b border-border-light">
-        <h2 className="font-serif text-lg text-text-primary">{title}</h2>
+        <h2 className="font-serif text-lg text-foreground">{title}</h2>
         {description && (
           <p className="text-sm text-border-dark mt-1">{description}</p>
         )}
@@ -201,7 +201,7 @@ function ProfileSettings({
     <div className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             First Name
           </label>
           {isEditing ? (
@@ -223,7 +223,7 @@ function ProfileSettings({
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Last Name
           </label>
           {isEditing ? (
@@ -247,7 +247,7 @@ function ProfileSettings({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Email Address
         </label>
         {isEditing ? (
@@ -270,7 +270,7 @@ function ProfileSettings({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Phone Number
         </label>
         {isEditing ? (
@@ -375,10 +375,10 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
   if (success) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Check className="w-8 h-8 text-success-600" />
+        <div className="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+          <Check className="w-8 h-8 text-success" />
         </div>
-        <h3 className="font-serif text-xl text-text-primary mb-2">Password Changed</h3>
+        <h3 className="font-serif text-xl text-foreground mb-2">Password Changed</h3>
         <p className="text-border-dark mb-6">
           Your password has been successfully updated.
         </p>
@@ -390,7 +390,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Current Password
         </label>
         <div className="relative">
@@ -405,7 +405,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => toggleShowPassword('current')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-foreground"
           >
             {showPasswords.current ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -416,7 +416,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           New Password
         </label>
         <div className="relative">
@@ -431,7 +431,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => toggleShowPassword('new')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-foreground"
           >
             {showPasswords.new ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -445,7 +445,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Confirm New Password
         </label>
         <div className="relative">
@@ -460,7 +460,7 @@ function ChangePasswordForm({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => toggleShowPassword('confirm')}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-text-primary"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-border-dark hover:text-foreground"
           >
             {showPasswords.confirm ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
           </button>
@@ -530,7 +530,7 @@ function DeleteAccountForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Type DELETE to confirm
         </label>
         <input
@@ -546,7 +546,7 @@ function DeleteAccountForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-1">
+        <label className="block text-sm font-medium text-foreground mb-1">
           Enter your password
         </label>
         <input
@@ -636,7 +636,7 @@ export default function SettingsPage() {
           <div className="lg:col-span-3 space-y-6">
             {/* Header */}
             <div>
-              <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
+              <h1 className="font-serif text-2xl lg:text-3xl text-foreground">
                 Account Settings
               </h1>
               <p className="text-border-dark mt-1">
@@ -665,7 +665,7 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-3">
                     <Lock className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="font-medium text-text-primary">Password</p>
+                      <p className="font-medium text-foreground">Password</p>
                       <p className="text-sm text-border-dark">Last changed 3 months ago</p>
                     </div>
                   </div>
@@ -682,7 +682,7 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-3">
                     <Smartphone className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="font-medium text-text-primary">Two-Factor Authentication</p>
+                      <p className="font-medium text-foreground">Two-Factor Authentication</p>
                       <p className="text-sm text-border-dark">Add an extra layer of security</p>
                     </div>
                   </div>
@@ -695,7 +695,7 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-3">
                     <Shield className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="font-medium text-text-primary">Active Sessions</p>
+                      <p className="font-medium text-foreground">Active Sessions</p>
                       <p className="text-sm text-border-dark">Manage devices logged into your account</p>
                     </div>
                   </div>
@@ -714,7 +714,7 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Order Updates</p>
+                    <p className="font-medium text-foreground">Order Updates</p>
                     <p className="text-sm text-border-dark">Get notified about your order status</p>
                   </div>
                   <Toggle
@@ -725,7 +725,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Promotions & Offers</p>
+                    <p className="font-medium text-foreground">Promotions & Offers</p>
                     <p className="text-sm text-border-dark">Receive exclusive deals and discounts</p>
                   </div>
                   <Toggle
@@ -736,7 +736,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">New Arrivals</p>
+                    <p className="font-medium text-foreground">New Arrivals</p>
                     <p className="text-sm text-border-dark">Be the first to know about new products</p>
                   </div>
                   <Toggle
@@ -747,7 +747,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Price Drops</p>
+                    <p className="font-medium text-foreground">Price Drops</p>
                     <p className="text-sm text-border-dark">Get alerts when wishlist items go on sale</p>
                   </div>
                   <Toggle
@@ -758,7 +758,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Newsletter</p>
+                    <p className="font-medium text-foreground">Newsletter</p>
                     <p className="text-sm text-border-dark">Weekly updates and curated content</p>
                   </div>
                   <Toggle
@@ -769,7 +769,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3">
                   <div>
-                    <p className="font-medium text-text-primary">SMS Notifications</p>
+                    <p className="font-medium text-foreground">SMS Notifications</p>
                     <p className="text-sm text-border-dark">Receive text messages for important updates</p>
                   </div>
                   <Toggle
@@ -795,7 +795,7 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Profile Visibility</p>
+                    <p className="font-medium text-foreground">Profile Visibility</p>
                     <p className="text-sm text-border-dark">Control who can see your profile</p>
                   </div>
                   <select
@@ -810,7 +810,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Show Wishlist</p>
+                    <p className="font-medium text-foreground">Show Wishlist</p>
                     <p className="text-sm text-border-dark">Allow others to see your wishlist</p>
                   </div>
                   <Toggle
@@ -821,7 +821,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3 border-b border-border-light">
                   <div>
-                    <p className="font-medium text-text-primary">Analytics</p>
+                    <p className="font-medium text-foreground">Analytics</p>
                     <p className="text-sm text-border-dark">Help us improve by sharing usage data</p>
                   </div>
                   <Toggle
@@ -832,7 +832,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center justify-between py-3">
                   <div>
-                    <p className="font-medium text-text-primary">Personalized Ads</p>
+                    <p className="font-medium text-foreground">Personalized Ads</p>
                     <p className="text-sm text-border-dark">See ads based on your interests</p>
                   </div>
                   <Toggle
@@ -860,7 +860,7 @@ export default function SettingsPage() {
                   <div className="flex items-center gap-3">
                     <LogOut className="w-5 h-5 text-border-dark" />
                     <div>
-                      <p className="font-medium text-text-primary">Sign Out Everywhere</p>
+                      <p className="font-medium text-foreground">Sign Out Everywhere</p>
                       <p className="text-sm text-border-dark">Log out of all devices</p>
                     </div>
                   </div>

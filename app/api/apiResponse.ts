@@ -13,17 +13,3 @@ export function apiResponse(
     { status }
   );
 }
-
-// export function formatZodErrors(error: z.ZodError) {
-//   const flattened = z.flattenError(error);
-
-//   console.error('Validation errors:', flattened);
-
-//   // return Object.fromEntries(
-//   //   Object.entries(flattened.fieldErrors).map(([key, value]) => [
-//   //     key,
-//   //     value
-//   //   ])
-//   // );
-//   return flattened
-// }

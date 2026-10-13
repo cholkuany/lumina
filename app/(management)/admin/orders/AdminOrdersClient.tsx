@@ -159,7 +159,7 @@ export function AdminOrdersClient({
               <Clock className="w-5 h-5 text-primary-600" />
             </div>
             <div>
-              <p className="text-2xl font-semibold text-text-primary">{stats.processing}</p>
+              <p className="text-2xl font-semibold text-foreground">{stats.processing}</p>
               <p className="text-xs text-border-dark">Processing</p>
             </div>
           </div>
@@ -170,18 +170,18 @@ export function AdminOrdersClient({
               <Truck className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-2xl font-semibold text-text-primary">{stats.shipped}</p>
+              <p className="text-2xl font-semibold text-foreground">{stats.shipped}</p>
               <p className="text-xs text-border-dark">Shipped</p>
             </div>
           </div>
         </div>
         <div className="bg-white rounded-brand border border-border p-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center">
-              <Check className="w-5 h-5 text-success-600" />
+            <div className="w-10 h-10 bg-success-light rounded-lg flex items-center justify-center">
+              <Check className="w-5 h-5 text-success-dark" />
             </div>
             <div>
-              <p className="text-2xl font-semibold text-text-primary">{stats.delivered}</p>
+              <p className="text-2xl font-semibold text-foreground">{stats.delivered}</p>
               <p className="text-xs text-border-dark">Delivered</p>
             </div>
           </div>
@@ -192,7 +192,7 @@ export function AdminOrdersClient({
               <X className="w-5 h-5 text-red-600" />
             </div>
             <div>
-              <p className="text-2xl font-semibold text-text-primary">{stats.cancelled}</p>
+              <p className="text-2xl font-semibold text-foreground">{stats.cancelled}</p>
               <p className="text-xs text-border-dark">Cancelled</p>
             </div>
           </div>
@@ -345,7 +345,7 @@ function OrderDetailDrawer({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div>
-            <h2 className="text-lg font-semibold text-text-primary">
+            <h2 className="text-lg font-semibold text-foreground">
               Order {order.orderNumber}
             </h2>
             <p className="text-sm text-border-dark">
@@ -359,7 +359,7 @@ function OrderDetailDrawer({
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-border-dark hover:text-text-primary hover:bg-surface rounded-lg transition-colors"
+            className="p-2 text-border-dark hover:text-foreground hover:bg-surface rounded-lg transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -381,7 +381,7 @@ function OrderDetailDrawer({
                 <span
                   className={cn(
                     'inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full capitalize',
-                    order.paymentStatus === 'paid' && 'bg-success-100 text-success-700',
+                    order.paymentStatus === 'paid' && 'bg-success-light text-success-dark',
                     order.paymentStatus === 'refunded' && 'bg-gray-100 text-gray-700'
                   )}
                 >
@@ -393,7 +393,7 @@ function OrderDetailDrawer({
 
           {/* Customer Info */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-3">Customer</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Customer</h3>
             <div className="flex items-center gap-3 p-3 bg-white border border-border rounded-brand">
               <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
                 <span className="text-primary font-semibold text-sm">
@@ -401,7 +401,7 @@ function OrderDetailDrawer({
                 </span>
               </div>
               <div className="flex-1">
-                <p className="font-medium text-text-primary">{order.customer.name}</p>
+                <p className="font-medium text-foreground">{order.customer.name}</p>
                 <p className="text-sm text-border-dark">{order.customer.email}</p>
               </div>
               <button className="p-2 text-border-dark hover:text-primary hover:bg-surface rounded-lg transition-colors">
@@ -412,9 +412,9 @@ function OrderDetailDrawer({
 
           {/* Shipping Address */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-3">Shipping Address</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Shipping Address</h3>
             <div className="p-3 bg-white border border-border rounded-brand">
-              <p className="text-sm text-text-primary">
+              <p className="text-sm text-foreground">
                 {order.shippingAddress.firstName} {order.shippingAddress.lastName}
               </p>
               <p className="text-sm text-border-dark mt-1">
@@ -429,7 +429,7 @@ function OrderDetailDrawer({
 
           {/* Order Items */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-3">
+            <h3 className="text-sm font-semibold text-foreground mb-3">
               Order Items ({order.items})
             </h3>
             <div className="space-y-3">
@@ -444,12 +444,12 @@ function OrderDetailDrawer({
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-text-primary truncate">{item.name}</p>
+                    <p className="font-medium text-foreground truncate">{item.name}</p>
                     <p className="text-xs text-border-dark">
                       {item.variant ? `${item.variant} • ` : ''}Qty: {item.quantity}
                     </p>
                   </div>
-                  <p className="font-medium text-text-primary">
+                  <p className="font-medium text-foreground">
                     ${(item.price * item.quantity).toFixed(2)}
                   </p>
                 </div>
@@ -459,26 +459,26 @@ function OrderDetailDrawer({
 
           {/* Order Summary */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-3">Order Summary</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Order Summary</h3>
             <div className="p-4 bg-white border border-border rounded-brand space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-border-dark">Subtotal</span>
-                <span className="text-text-primary">${order.subtotal.toFixed(2)}</span>
+                <span className="text-foreground">${order.subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-border-dark">Shipping</span>
-                <span className="text-text-primary">
+                <span className="text-foreground">
                   {order.shipping === 0 ? 'Free' : `$${order.shipping.toFixed(2)}`}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-border-dark">Tax</span>
-                <span className="text-text-primary">${order.tax.toFixed(2)}</span>
+                <span className="text-foreground">${order.tax.toFixed(2)}</span>
               </div>
               <div className="border-t border-border-light pt-2 mt-2">
                 <div className="flex justify-between">
-                  <span className="font-semibold text-text-primary">Total</span>
-                  <span className="font-semibold text-text-primary">
+                  <span className="font-semibold text-foreground">Total</span>
+                  <span className="font-semibold text-foreground">
                     ${order.total.toFixed(2)}
                   </span>
                 </div>
@@ -489,7 +489,7 @@ function OrderDetailDrawer({
           {/* Return Requests */}
           {order.returnRequests.length > 0 && (
             <div>
-              <h3 className="text-sm font-semibold text-text-primary mb-3">
+              <h3 className="text-sm font-semibold text-foreground mb-3">
                 Return Requests ({order.returnRequests.length})
               </h3>
               <div className="space-y-3">
@@ -500,7 +500,7 @@ function OrderDetailDrawer({
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="font-medium text-text-primary">{request.returnNumber}</p>
+                        <p className="font-medium text-foreground">{request.returnNumber}</p>
                         <p className="text-xs text-border-dark">
                           {new Date(request.createdAt).toLocaleDateString('en-US', {
                             month: 'short',
@@ -514,7 +514,7 @@ function OrderDetailDrawer({
                         request.status === 'pending' && 'bg-amber-100 text-amber-700',
                         request.status === 'approved' && 'bg-primary-100 text-primary-700',
                         request.status === 'rejected' && 'bg-red-100 text-red-700',
-                        request.status === 'received' && 'bg-success-100 text-success-700'
+                        request.status === 'received' && 'bg-success-light text-success-dark'
                       )}>
                         {request.status}
                       </span>
@@ -524,8 +524,8 @@ function OrderDetailDrawer({
                       {request.items.map((item) => (
                         <div key={item.orderItemId} className="rounded-lg bg-surface p-3 text-sm">
                           <div className="flex justify-between gap-3">
-                            <span className="font-medium text-text-primary">{item.productName}</span>
-                            <span className="text-text-primary">Qty: {item.quantity}</span>
+                            <span className="font-medium text-foreground">{item.productName}</span>
+                            <span className="text-foreground">Qty: {item.quantity}</span>
                           </div>
                           <p className="mt-1 text-xs text-border-dark">{item.reason}</p>
                         </div>
@@ -587,7 +587,7 @@ function OrderDetailDrawer({
 
           {/* Timeline */}
           <div>
-            <h3 className="text-sm font-semibold text-text-primary mb-3">Order Timeline</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Order Timeline</h3>
             <div className="space-y-4">
               {[
                 { status: 'Order placed', date: order.date },
@@ -601,14 +601,14 @@ function OrderDetailDrawer({
                     <div
                       className={cn(
                         'w-3 h-3 rounded-full',
-                        'bg-success-500'
+                        'bg-success'
                       )}
                     />
                     {index < timeline.length - 1 && (
                       <div
                         className={cn(
                           'w-0.5 h-8 mt-1',
-                          'bg-success-500'
+                          'bg-success'
                         )}
                       />
                     )}
@@ -617,7 +617,7 @@ function OrderDetailDrawer({
                     <p
                       className={cn(
                         'text-sm font-medium',
-                        'text-text-primary'
+                        'text-foreground'
                       )}
                     >
                       {step.status}

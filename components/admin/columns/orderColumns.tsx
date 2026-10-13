@@ -23,7 +23,7 @@ export function useOrderColumns({
               e.stopPropagation()
               setOrderDetail(row.original)
             }}
-            className="font-medium text-text-primary hover:text-primary transition-colors"
+            className="font-medium text-foreground hover:text-primary transition-colors"
           >
             {row.original.orderNumber}
           </button>
@@ -45,7 +45,7 @@ export function useOrderColumns({
       header: 'Customer',
       cell: ({ row }) => (
         <div>
-          <p className="text-sm font-medium text-text-primary">{row.original.customer.name}</p>
+          <p className="text-sm font-medium text-foreground">{row.original.customer.name}</p>
           <p className="text-xs text-border-dark">{row.original.customer.email}</p>
         </div>
       ),
@@ -55,14 +55,14 @@ export function useOrderColumns({
       accessorKey: 'items',
       header: 'Items',
       cell: ({ row }) => (
-        <span className="text-text-primary">{row.original.items}</span>
+        <span className="text-foreground">{row.original.items}</span>
       ),
     },
     {
       accessorKey: 'total',
       header: 'Total',
       cell: ({ row }) => (
-        <span className="font-medium text-text-primary">${row.original.total.toFixed(2)}</span>
+        <span className="font-medium text-foreground">${row.original.total.toFixed(2)}</span>
       ),
       enableSorting: true,
     },
@@ -73,7 +73,7 @@ export function useOrderColumns({
         <span
           className={cn(
             'px-2 py-1 text-xs font-medium rounded-full capitalize',
-            row.original.paymentStatus === 'paid' && 'bg-success-100 text-success-700',
+            row.original.paymentStatus === 'paid' && 'bg-success-light text-success-dark',
             row.original.paymentStatus === 'pending' && 'bg-amber-100 text-amber-700',
             row.original.paymentStatus === 'failed' && 'bg-red-100 text-red-700',
             row.original.paymentStatus === 'refunded' && 'bg-gray-100 text-gray-700'

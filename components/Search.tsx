@@ -25,7 +25,7 @@ export function SearchComponent({
         className={cn(
           'w-full px-10 py-2.5 text-sm',
           'bg-white border border-border rounded-brand',
-          'placeholder:text-border-dark text-text-primary',
+          'placeholder:text-border-dark text-foreground',
           'focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20',
           'transition-all duration-200'
         )}

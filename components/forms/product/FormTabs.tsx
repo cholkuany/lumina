@@ -29,7 +29,7 @@ export function FormTabs({
               'flex items-center gap-2 pb-4 text-sm font-medium transition-colors relative',
               activeTab === tab.id
                 ? 'text-primary'
-                : 'text-border-dark hover:text-text-primary'
+                : 'text-border-dark hover:text-foreground'
             )}
           >
             <tab.icon className="w-4 h-4" />

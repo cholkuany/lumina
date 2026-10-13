@@ -159,7 +159,7 @@ export default function AddressesPage() {
           <div className="lg:col-span-3">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h1 className="font-serif text-2xl lg:text-3xl text-text-primary">
+              <h1 className="font-serif text-2xl lg:text-3xl text-foreground">
                 My Addresses
               </h1>
               <Button onClick={() => handleOpenForm()}>
@@ -171,7 +171,7 @@ export default function AddressesPage() {
             {/* Address Form Modal/Section */}
             {isFormOpen && (
               <div className="bg-surface rounded-brand p-6 mb-8">
-                <h2 className="font-serif text-xl text-text-primary mb-6">
+                <h2 className="font-serif text-xl text-foreground mb-6">
                   {editingAddress ? 'Edit Address' : 'Add New Address'}
                 </h2>
                 <form onSubmit={handleSubmit}>
@@ -273,7 +273,7 @@ export default function AddressesPage() {
             ) : (
               <div className="text-center py-16 bg-surface rounded-brand">
                 <MapPin className="w-16 h-16 text-border-dark mx-auto mb-4" />
-                <h2 className="font-serif text-xl text-text-primary mb-2">
+                <h2 className="font-serif text-xl text-foreground mb-2">
                   No addresses saved
                 </h2>
                 <p className="text-border-dark mb-6">

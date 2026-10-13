@@ -132,7 +132,7 @@ export function useVariantSelector(variants: TProductVariant[]) {
 
   return {
 
-    selectedVariants: selected,
+    selectedAttributes: selected,
     setAttribute,
     currentVariant,
     getOptions,

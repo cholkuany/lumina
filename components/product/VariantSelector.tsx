@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils'
 import { TProductVariant, Attribute } from '@/lib/types'
 import { Check } from 'lucide-react'
 
+const LOW_STOCK_THRESHOLD = 5
+
 interface VariantSelectorProps {
   variants: TProductVariant[]
   selected: Partial<Attribute>
@@ -59,6 +61,8 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
     variantIndex[selected.color]?.[selected.size]
 
   const currentStock = currentVariant ? currentVariant.stock : 0
+  const isInStock = currentStock > 0
+  const isLowStock = isInStock && currentStock <= LOW_STOCK_THRESHOLD
 
   const handleColorChange = (color: string) => {
     const sizes = variantIndex[color]
@@ -83,7 +87,7 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
       {showColorSelector && colorOptions.length > 1 && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-text-primary">
+            <span className="text-sm font-medium text-foreground">
               Color: <span className="font-normal text-border-dark">{selected.color ? selected.color : 'Select'}</span>
             </span>
             {selected.color && (
@@ -133,7 +137,7 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
                     {isSelected && (
                       <div className="absolute inset-0 bg-text-primary/10 flex items-center justify-center">
                         <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                          <Check className="w-3 h-3 text-text-primary" />
+                          <Check className="w-3 h-3 text-foreground" />
                         </div>
                       </div>
                     )}
@@ -156,10 +160,10 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
       {showSizeSelector && selected.color && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-text-primary">
+            <span className="text-sm font-medium text-foreground">
               Size: <span className="font-normal text-border-dark">{selected.size || 'Select'}</span>
             </span>
-            {/* <button className="text-xs text-text-primary underline underline-offset-2 hover:no-underline">
+            {/* <button className="text-xs text-foreground underline underline-offset-2 hover:no-underline">
               Size Guide
             </button> */}
           </div>
@@ -181,7 +185,7 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
                       ? 'border-text-primary bg-text-primary text-white'
                       : isOutOfStock
                         ? 'border-border-light text-border line-through cursor-not-allowed bg-gray-50'
-                        : 'border-border-light text-text-primary hover:border-text-primary'
+                        : 'border-border-light text-foreground hover:border-text-primary'
                   )}
                 >
                   {size}
@@ -205,23 +209,20 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
 
       {/* Stock Status */}
       {selected.color && selected.size && (
-        <div className={cn(
-          'text-sm py-2',
-          currentStock === 0
-            ? 'text-red-600'
-            : currentStock <= 3
-              ? 'text-amber-600'
-              : 'text-success-600'
+        <p className={cn(
+          'flex items-center gap-2 text-sm font-medium',
+          !currentStock ? 'text-red-600' : isLowStock ? 'text-amber-600' : 'text-success'
         )}>
-          {currentStock === 0 ? (
-            'Out of stock'
-          ) : currentStock <= 3 ? (
-            `Only ${currentStock} left in stock`
-          ) : (
-            'In stock'
-          )}
-        </div>
-      )}
-    </div>
+          <span
+            className={cn(
+              'h-2 w-2 rounded-full',
+              !currentStock ? 'bg-red-500' : isLowStock ? 'bg-amber-500' : 'bg-success'
+            )}
+          />
+          {!currentStock ? 'Out of stock' : isLowStock ? `Only ${currentStock} left` : 'In stock'}
+        </p>
+      )
+      }
+    </div >
   )
 }

@@ -18,7 +18,7 @@ export default function ProductsGrid({
         <div className="w-20 h-20 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
           <SlidersHorizontal className="w-8 h-8 text-border-dark" />
         </div>
-        <h2 className="font-serif text-xl text-text-primary mb-2">No products found</h2>
+        <h2 className="font-serif text-xl text-foreground mb-2">No products found</h2>
         <p className="text-border-dark mb-6">
           Try adjusting your filters or search terms.
         </p>
@@ -33,6 +33,7 @@ export default function ProductsGrid({
     <>
       <div
         className='gap-3 lg:gap-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'
+      // className='flex gap-3 flex-wrap pb-1'
       >
         {products.map(product => (
           <ProductCard

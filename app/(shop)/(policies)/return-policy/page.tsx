@@ -64,7 +64,7 @@ export default function ReturnPolicyPage() {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <RotateCcw className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-4">
+            <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-4">
               Return & Refund Policy
             </h1>
             <p className="text-border-dark">
@@ -80,22 +80,22 @@ export default function ReturnPolicyPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">30-Day Returns</h3>
+            <h3 className="font-medium text-foreground mb-1">30-Day Returns</h3>
             <p className="text-sm text-border-dark">From delivery date</p>
           </div>
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <Truck className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Free Return Shipping</h3>
+            <h3 className="font-medium text-foreground mb-1">Free Return Shipping</h3>
             <p className="text-sm text-border-dark">Prepaid labels included</p>
           </div>
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <CreditCard className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Full Refunds</h3>
+            <h3 className="font-medium text-foreground mb-1">Full Refunds</h3>
             <p className="text-sm text-border-dark">To original payment</p>
           </div>
           <div className="bg-white border border-border-light rounded-brand p-5 text-center">
             <Gift className="w-8 h-8 text-primary mx-auto mb-3" />
-            <h3 className="font-medium text-text-primary mb-1">Easy Exchanges</h3>
+            <h3 className="font-medium text-foreground mb-1">Easy Exchanges</h3>
             <p className="text-sm text-border-dark">Swap for different size/color</p>
           </div>
         </div>
@@ -106,14 +106,14 @@ export default function ReturnPolicyPage() {
 
           {/* Return Policy Overview */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <RotateCcw className="w-6 h-6 text-primary" />
               Return Policy Overview
             </h2>
 
             <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
               <p className="text-border-dark">
-                We offer a <strong className="text-text-primary">30-day return policy</strong> from the date of delivery.
+                We offer a <strong className="text-foreground">30-day return policy</strong> from the date of delivery.
                 If you&pos;re not completely satisfied with your purchase, you can return it for a full refund or exchange
                 within this period.
               </p>
@@ -121,12 +121,12 @@ export default function ReturnPolicyPage() {
                 Items must be returned in their original condition, unworn/unused, with all tags attached and in the
                 original packaging. Items that show signs of wear, washing, or alterations will not be accepted.
               </p>
-              <div className="bg-success-50 border border-success-200 rounded-lg p-4 mt-4">
+              <div className="bg-success-light border border-success/25 rounded-lg p-4 mt-4">
                 <div className="flex gap-3">
-                  <CheckCircle className="w-5 h-5 text-success-600 shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-success shrink-0" />
                   <div>
-                    <p className="font-medium text-success-800">Extended Holiday Returns</p>
-                    <p className="text-sm text-success-700 mt-1">
+                    <p className="font-medium text-success-dark">Extended Holiday Returns</p>
+                    <p className="text-sm text-success-dark mt-1">
                       Orders placed between November 1 and December 31 can be returned until January 31 of the following year.
                     </p>
                   </div>
@@ -137,22 +137,22 @@ export default function ReturnPolicyPage() {
 
           {/* Returnable vs Non-Returnable */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Package className="w-6 h-6 text-primary" />
               What Can Be Returned?
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Returnable Items */}
-              <div className="bg-white border border-success-200 rounded-brand p-6">
+              <div className="bg-white border border-success-light rounded-brand p-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <CheckCircle className="w-6 h-6 text-success-600" />
-                  <h3 className="font-medium text-text-primary text-lg">Returnable Items</h3>
+                  <CheckCircle className="w-6 h-6 text-success" />
+                  <h3 className="font-medium text-foreground text-lg">Returnable Items</h3>
                 </div>
                 <ul className="space-y-3">
                   {returnableItems.map((item, index) => (
                     <li key={index} className="flex items-start gap-2 text-border-dark">
-                      <CheckCircle className="w-4 h-4 text-success-500 shrink-0 mt-1" />
+                      <CheckCircle className="w-4 h-4 text-success shrink-0 mt-1" />
                       <span className="text-sm">{item}</span>
                     </li>
                   ))}
@@ -163,7 +163,7 @@ export default function ReturnPolicyPage() {
               <div className="bg-white border border-red-200 rounded-brand p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <XCircle className="w-6 h-6 text-red-600" />
-                  <h3 className="font-medium text-text-primary text-lg">Non-Returnable Items</h3>
+                  <h3 className="font-medium text-foreground text-lg">Non-Returnable Items</h3>
                 </div>
                 <ul className="space-y-3">
                   {nonReturnableItems.map((item, index) => (
@@ -179,7 +179,7 @@ export default function ReturnPolicyPage() {
 
           {/* How to Return */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <FileText className="w-6 h-6 text-primary" />
               How to Start a Return
             </h2>
@@ -192,7 +192,7 @@ export default function ReturnPolicyPage() {
                     1
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-text-primary mb-2">Initiate Your Return</h3>
+                    <h3 className="font-medium text-foreground mb-2">Initiate Your Return</h3>
                     <p className="text-border-dark text-sm mb-3">
                       Log into your account and go to your order history. Find the order you want to return and click
                       &quot;Return Items.&quot; Select the items you wish to return and provide a reason.
@@ -213,7 +213,7 @@ export default function ReturnPolicyPage() {
                     2
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-text-primary mb-2">Print Your Return Label</h3>
+                    <h3 className="font-medium text-foreground mb-2">Print Your Return Label</h3>
                     <p className="text-border-dark text-sm">
                       Once your return is approved, you&pos;ll receive a prepaid return shipping label via email.
                       Print the label and attach it to your package. If you don&pos;t have a printer, you can use
@@ -228,7 +228,7 @@ export default function ReturnPolicyPage() {
                     3
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-text-primary mb-2">Pack Your Items</h3>
+                    <h3 className="font-medium text-foreground mb-2">Pack Your Items</h3>
                     <p className="text-border-dark text-sm">
                       Place items in their original packaging with all tags attached. If you no longer have the
                       original packaging, use a sturdy box or mailer to protect your items during shipping.
@@ -242,7 +242,7 @@ export default function ReturnPolicyPage() {
                     4
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-text-primary mb-2">Drop Off Your Package</h3>
+                    <h3 className="font-medium text-foreground mb-2">Drop Off Your Package</h3>
                     <p className="text-border-dark text-sm">
                       Drop off your package at any UPS, FedEx, or USPS location (depending on your return label).
                       Keep your receipt as proof of shipment until your return is processed.
@@ -256,7 +256,7 @@ export default function ReturnPolicyPage() {
                     5
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-text-primary mb-2">Receive Your Refund</h3>
+                    <h3 className="font-medium text-foreground mb-2">Receive Your Refund</h3>
                     <p className="text-border-dark text-sm">
                       Once we receive and inspect your return, we&pos;ll process your refund within 2-3 business days.
                       You&pos;ll receive an email confirmation when your refund is issued.
@@ -282,7 +282,7 @@ export default function ReturnPolicyPage() {
 
           {/* Refund Timeline */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Clock className="w-6 h-6 text-primary" />
               Refund Timeline
             </h2>
@@ -292,14 +292,14 @@ export default function ReturnPolicyPage() {
                 {refundTimeline.map((item, index) => (
                   <div key={index} className="flex items-start gap-4">
                     <div className="flex flex-col items-center">
-                      <div className={`w-4 h-4 rounded-full ${index === refundTimeline.length - 1 ? 'bg-success-500' : 'bg-primary'}`} />
+                      <div className={`w-4 h-4 rounded-full ${index === refundTimeline.length - 1 ? 'bg-success' : 'bg-primary'}`} />
                       {index < refundTimeline.length - 1 && (
                         <div className="w-0.5 h-12 bg-border-light" />
                       )}
                     </div>
                     <div className="flex-1 pb-4">
                       <div className="flex items-center justify-between">
-                        <h4 className="font-medium text-text-primary">{item.step}</h4>
+                        <h4 className="font-medium text-foreground">{item.step}</h4>
                         <span className="text-sm text-primary font-medium">{item.time}</span>
                       </div>
                       <p className="text-sm text-border-dark mt-1">{item.description}</p>
@@ -309,33 +309,33 @@ export default function ReturnPolicyPage() {
               </div>
 
               <div className="mt-6 pt-6 border-t border-border-light">
-                <h4 className="font-medium text-text-primary mb-3">Refund Methods</h4>
+                <h4 className="font-medium text-foreground mb-3">Refund Methods</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-border-dark">
                   <div className="flex items-start gap-2">
                     <CreditCard className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-text-primary">Credit/Debit Card</p>
+                      <p className="font-medium text-foreground">Credit/Debit Card</p>
                       <p>5-10 business days after processing</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
                     <CreditCard className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-text-primary">PayPal</p>
+                      <p className="font-medium text-foreground">PayPal</p>
                       <p>3-5 business days after processing</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
                     <Gift className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-text-primary">Store Credit</p>
+                      <p className="font-medium text-foreground">Store Credit</p>
                       <p>Instant - available immediately</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-2">
                     <CreditCard className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-medium text-text-primary">Gift Card Payment</p>
+                      <p className="font-medium text-foreground">Gift Card Payment</p>
                       <p>Refunded as store credit</p>
                     </div>
                   </div>
@@ -346,7 +346,7 @@ export default function ReturnPolicyPage() {
 
           {/* Exchanges */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Gift className="w-6 h-6 text-primary" />
               Exchanges
             </h2>
@@ -358,7 +358,7 @@ export default function ReturnPolicyPage() {
 
               <div className="space-y-4">
                 <div className="bg-surface rounded-lg p-4">
-                  <h4 className="font-medium text-text-primary mb-2">Option 1: Return & Reorder (Recommended)</h4>
+                  <h4 className="font-medium text-foreground mb-2">Option 1: Return & Reorder (Recommended)</h4>
                   <p className="text-sm text-border-dark">
                     For the fastest exchange, we recommend returning your item for a refund and placing a new order
                     for the desired item. This ensures you get your new item as quickly as possible, especially if
@@ -367,7 +367,7 @@ export default function ReturnPolicyPage() {
                 </div>
 
                 <div className="bg-surface rounded-lg p-4">
-                  <h4 className="font-medium text-text-primary mb-2">Option 2: Direct Exchange</h4>
+                  <h4 className="font-medium text-foreground mb-2">Option 2: Direct Exchange</h4>
                   <p className="text-sm text-border-dark">
                     You can also request a direct exchange when initiating your return. Select &quot;Exchange&quot; instead of
                     &quot;Refund&quot; and choose your new size/color. Your new item will ship once we receive your return.
@@ -392,7 +392,7 @@ export default function ReturnPolicyPage() {
 
           {/* Damaged or Defective Items */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <AlertTriangle className="w-6 h-6 text-primary" />
               Damaged or Defective Items
             </h2>
@@ -400,14 +400,14 @@ export default function ReturnPolicyPage() {
             <div className="bg-white border border-border-light rounded-brand p-6 space-y-4">
               <p className="text-border-dark">
                 If you receive a damaged or defective item, we sincerely apologize. Please contact us within
-                <strong className="text-text-primary"> 48 hours of delivery</strong> and we&pos;ll make it right.
+                <strong className="text-foreground"> 48 hours of delivery</strong> and we&pos;ll make it right.
               </p>
 
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Camera className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-medium text-text-primary">Document the Damage</h4>
+                    <h4 className="font-medium text-foreground">Document the Damage</h4>
                     <p className="text-sm text-border-dark">
                       Take clear photos of the damaged item and packaging. This helps us process your claim quickly
                       and improve our packaging.
@@ -418,7 +418,7 @@ export default function ReturnPolicyPage() {
                 <div className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-medium text-text-primary">Contact Customer Service</h4>
+                    <h4 className="font-medium text-foreground">Contact Customer Service</h4>
                     <p className="text-sm text-border-dark">
                       Email us at <a href="mailto:returns@lumina.com" className="text-primary hover:underline">returns@lumina.com</a> or
                       call 1-800-LUMINA with your order number and photos.
@@ -429,7 +429,7 @@ export default function ReturnPolicyPage() {
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-medium text-text-primary">Resolution Options</h4>
+                    <h4 className="font-medium text-foreground">Resolution Options</h4>
                     <p className="text-sm text-border-dark">
                       We&pos;ll offer a full refund or replacement at no additional cost. In most cases, you won&pos;t need
                       to return the damaged item.
@@ -442,7 +442,7 @@ export default function ReturnPolicyPage() {
 
           {/* International Returns */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Truck className="w-6 h-6 text-primary" />
               International Returns
             </h2>
@@ -477,7 +477,7 @@ export default function ReturnPolicyPage() {
 
           {/* Gift Returns */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <Gift className="w-6 h-6 text-primary" />
               Gift Returns
             </h2>
@@ -489,7 +489,7 @@ export default function ReturnPolicyPage() {
 
               <div className="space-y-4">
                 <div className="bg-surface rounded-lg p-4">
-                  <h4 className="font-medium text-text-primary mb-2">With Gift Receipt</h4>
+                  <h4 className="font-medium text-foreground mb-2">With Gift Receipt</h4>
                   <p className="text-sm text-border-dark">
                     If you have a gift receipt, you can return the item for store credit equal to the purchase price.
                     You can also exchange for a different size or color.
@@ -497,7 +497,7 @@ export default function ReturnPolicyPage() {
                 </div>
 
                 <div className="bg-surface rounded-lg p-4">
-                  <h4 className="font-medium text-text-primary mb-2">Without Gift Receipt</h4>
+                  <h4 className="font-medium text-foreground mb-2">Without Gift Receipt</h4>
                   <p className="text-sm text-border-dark">
                     No gift receipt? No problem. Contact us with the gift giver&pos;s name or email address, and we&pos;ll
                     help locate the order. Refunds will be issued as store credit at the current selling price.
@@ -514,7 +514,7 @@ export default function ReturnPolicyPage() {
 
           {/* Refund Exceptions */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <AlertTriangle className="w-6 h-6 text-primary" />
               Refund Exceptions & Deductions
             </h2>
@@ -528,7 +528,7 @@ export default function ReturnPolicyPage() {
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-text-primary">Original Shipping Costs</p>
+                    <p className="font-medium text-foreground">Original Shipping Costs</p>
                     <p className="text-sm text-border-dark">
                       Original shipping costs are non-refundable unless the return is due to our error (wrong item,
                       defective product, etc.)
@@ -538,7 +538,7 @@ export default function ReturnPolicyPage() {
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-text-primary">Items Not in Original Condition</p>
+                    <p className="font-medium text-foreground">Items Not in Original Condition</p>
                     <p className="text-sm text-border-dark">
                       Items returned with signs of wear, missing tags, or not in original packaging may be subject
                       to a restocking fee of up to 20% or may be rejected.
@@ -548,7 +548,7 @@ export default function ReturnPolicyPage() {
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-text-primary">Late Returns</p>
+                    <p className="font-medium text-foreground">Late Returns</p>
                     <p className="text-sm text-border-dark">
                       Returns received after the 30-day window may be accepted at our discretion and refunded as
                       store credit only.
@@ -558,7 +558,7 @@ export default function ReturnPolicyPage() {
                 <li className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-medium text-text-primary">Promotional Items</p>
+                    <p className="font-medium text-foreground">Promotional Items</p>
                     <p className="text-sm text-border-dark">
                       Free gifts or promotional items must be returned with the qualifying purchase, or their value
                       will be deducted from your refund.
@@ -571,49 +571,49 @@ export default function ReturnPolicyPage() {
 
           {/* FAQ Section */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6 flex items-center gap-3">
+            <h2 className="font-serif text-2xl text-foreground mb-6 flex items-center gap-3">
               <HelpCircle className="w-6 h-6 text-primary" />
               Frequently Asked Questions
             </h2>
 
             <div className="bg-white border border-border-light rounded-brand divide-y divide-border-light">
               <div className="p-6">
-                <h4 className="font-medium text-text-primary mb-2">How long do I have to return an item?</h4>
+                <h4 className="font-medium text-foreground mb-2">How long do I have to return an item?</h4>
                 <p className="text-sm text-border-dark">
                   You have 30 days from the delivery date to return your items. For holiday purchases made between
                   November 1 and December 31, you have until January 31 to return.
                 </p>
               </div>
               <div className="p-6">
-                <h4 className="font-medium text-text-primary mb-2">Do I have to pay for return shipping?</h4>
+                <h4 className="font-medium text-foreground mb-2">Do I have to pay for return shipping?</h4>
                 <p className="text-sm text-border-dark">
                   Return shipping is free for all domestic orders. We provide a prepaid return label. International
                   customers are responsible for return shipping costs.
                 </p>
               </div>
               <div className="p-6">
-                <h4 className="font-medium text-text-primary mb-2">Can I return sale items?</h4>
+                <h4 className="font-medium text-foreground mb-2">Can I return sale items?</h4>
                 <p className="text-sm text-border-dark">
                   Yes, sale items can be returned within the standard 30-day window unless marked as &quot;Final Sale.&quot;
                   Final Sale items cannot be returned or exchanged.
                 </p>
               </div>
               <div className="p-6">
-                <h4 className="font-medium text-text-primary mb-2">What if I lost my receipt?</h4>
+                <h4 className="font-medium text-foreground mb-2">What if I lost my receipt?</h4>
                 <p className="text-sm text-border-dark">
                   No problem! We can look up your order using your email address or the credit card used for purchase.
                   Contact customer service for assistance.
                 </p>
               </div>
               <div className="p-6">
-                <h4 className="font-medium text-text-primary mb-2">Can I return an item to a store?</h4>
+                <h4 className="font-medium text-foreground mb-2">Can I return an item to a store?</h4>
                 <p className="text-sm text-border-dark">
                   Currently, we are an online-only retailer and do not have physical stores. All returns must be
                   shipped back to our warehouse using the provided return label.
                 </p>
               </div>
               <div className="p-6">
-                <h4 className="font-medium text-text-primary mb-2">Why was my return rejected?</h4>
+                <h4 className="font-medium text-foreground mb-2">Why was my return rejected?</h4>
                 <p className="text-sm text-border-dark">
                   Returns may be rejected if items are worn, washed, damaged, missing tags, or returned outside the
                   return window. If your return was rejected, we&pos;ll contact you to discuss options.
@@ -624,7 +624,7 @@ export default function ReturnPolicyPage() {
 
           {/* Contact Section */}
           <section>
-            <h2 className="font-serif text-2xl text-text-primary mb-6">Need Help?</h2>
+            <h2 className="font-serif text-2xl text-foreground mb-6">Need Help?</h2>
             <div className="bg-surface rounded-brand p-6">
               <p className="text-border-dark mb-4">
                 Our customer service team is here to help with any questions about returns, refunds, or exchanges.
@@ -632,21 +632,21 @@ export default function ReturnPolicyPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white rounded-lg p-4 text-center">
                   <Mail className="w-6 h-6 text-primary mx-auto mb-2" />
-                  <p className="font-medium text-text-primary text-sm">Email</p>
+                  <p className="font-medium text-foreground text-sm">Email</p>
                   <a href="mailto:returns@lumina.com" className="text-primary hover:underline text-sm">
                     returns@lumina.com
                   </a>
                 </div>
                 <div className="bg-white rounded-lg p-4 text-center">
                   <HelpCircle className="w-6 h-6 text-primary mx-auto mb-2" />
-                  <p className="font-medium text-text-primary text-sm">Phone</p>
+                  <p className="font-medium text-foreground text-sm">Phone</p>
                   <a href="tel:1-800-LUMINA" className="text-primary hover:underline text-sm">
                     1-800-LUMINA
                   </a>
                 </div>
                 <div className="bg-white rounded-lg p-4 text-center">
                   <Clock className="w-6 h-6 text-primary mx-auto mb-2" />
-                  <p className="font-medium text-text-primary text-sm">Hours</p>
+                  <p className="font-medium text-foreground text-sm">Hours</p>
                   <p className="text-border-dark text-sm">Mon-Fri 9AM-6PM EST</p>
                 </div>
               </div>
@@ -655,7 +655,7 @@ export default function ReturnPolicyPage() {
 
           {/* Related Links */}
           <div className="p-6 bg-white border border-border-light rounded-brand">
-            <h3 className="font-serif text-lg text-text-primary mb-4">Related Policies</h3>
+            <h3 className="font-serif text-lg text-foreground mb-4">Related Policies</h3>
             <div className="flex flex-wrap gap-4">
               <Link href="/shipping-policy" className="inline-flex items-center gap-2 text-primary hover:underline">
                 <Truck className="w-4 h-4" />

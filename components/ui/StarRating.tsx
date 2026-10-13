@@ -62,7 +62,7 @@ export function StarRating({
         ))}
       </div>
       {showLabel && displayValue > 0 && (
-        <span className="text-sm text-text-primary font-medium">
+        <span className="text-sm text-foreground font-medium">
           {labels[displayValue]}
         </span>
       )}

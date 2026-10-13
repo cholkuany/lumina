@@ -1,10 +1,8 @@
 import Link from 'next/link'
 
 export const Logo = () => (
-  <Link href="/" className="flex items-center gap-2">
-    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#e5484d] text-lg font-black text-white">L</span>
-    <span className="text-2xl font-black tracking-[-.06em] text-[#172a22] lg:text-3xl">
-      LUMINA<span className="text-[#e64d25]">.</span>
-    </span>
+  <Link href="/" className="flex items-baseline gap-0.5 whitespace-nowrap font-serif text-xl font-bold text-white md:text-2xl">
+    Lumina
+    <span className="text-2xl leading-none text-gold md:text-[28px]">.</span>
   </Link>
 )

@@ -39,7 +39,7 @@ export function OrderReview({
       {/* Order Items */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-lg text-text-primary">Order Items</h3>
+          <h3 className="font-serif text-lg text-foreground">Order Items</h3>
           <span className="text-sm text-border-dark">
             {items.length} {items.length === 1 ? 'item' : 'items'}
           </span>
@@ -61,7 +61,7 @@ export function OrderReview({
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-text-primary line-clamp-1">
+                <h4 className="text-sm font-medium text-foreground line-clamp-1">
                   {item.product.name}
                 </h4>
                 {item.product.variant.attributes && (
@@ -71,7 +71,7 @@ export function OrderReview({
                 )}
               </div>
               <div className="text-right">
-                <p className="font-medium text-text-primary">
+                <p className="font-medium text-foreground">
                   {formatPrice(item.product.variant.price * item.quantity)}
                 </p>
               </div>
@@ -83,7 +83,7 @@ export function OrderReview({
       {/* Shipping Address */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-lg text-text-primary flex items-center gap-2">
+          <h3 className="font-serif text-lg text-foreground flex items-center gap-2">
             <MapPin className="w-5 h-5 text-primary" />
             Shipping Address
           </h3>
@@ -96,7 +96,7 @@ export function OrderReview({
           </button>
         </div>
         <div className="bg-surface rounded-brand p-4">
-          <p className="text-text-primary font-medium">
+          <p className="text-foreground font-medium">
             {shippingData.firstName} {shippingData.lastName}
           </p>
           <p className="text-border-dark text-sm">
@@ -112,12 +112,12 @@ export function OrderReview({
 
       {/* Shipping Method */}
       <div>
-        <h3 className="font-serif text-lg text-text-primary flex items-center gap-2 mb-4">
+        <h3 className="font-serif text-lg text-foreground flex items-center gap-2 mb-4">
           <Truck className="w-5 h-5 text-primary" />
           Shipping Method
         </h3>
         <div className="bg-surface rounded-brand p-4">
-          <p className="text-text-primary font-medium capitalize">
+          <p className="text-foreground font-medium capitalize">
             {shippingData.shippingMethod} Shipping
           </p>
           <p className="text-border-dark text-sm">
@@ -131,7 +131,7 @@ export function OrderReview({
       {/* Payment Method */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-lg text-text-primary flex items-center gap-2">
+          <h3 className="font-serif text-lg text-foreground flex items-center gap-2">
             <CreditCard className="w-5 h-5 text-primary" />
             Payment Method
           </h3>
@@ -144,7 +144,7 @@ export function OrderReview({
           </button>
         </div>
         <div className="bg-surface rounded-brand p-4">
-          <p className="text-text-primary font-medium">Stripe Checkout</p>
+          <p className="text-foreground font-medium">Stripe Checkout</p>
           <p className="text-border-dark text-sm">
             You&apos;ll be redirected to Stripe to enter payment details securely.
           </p>
@@ -156,21 +156,21 @@ export function OrderReview({
         <div className="space-y-2 mb-4">
           <div className="flex justify-between text-sm">
             <span className="text-border-dark">Subtotal</span>
-            <span className="text-text-primary">{formatPrice(subtotal)}</span>
+            <span className="text-foreground">{formatPrice(subtotal)}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-border-dark">Shipping</span>
-            <span className="text-text-primary">
+            <span className="text-foreground">
               {shippingCost === 0 ? 'Free' : formatPrice(shippingCost)}
             </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-border-dark">Tax</span>
-            <span className="text-text-primary">{formatPrice(tax)}</span>
+            <span className="text-foreground">{formatPrice(tax)}</span>
           </div>
           <div className="flex justify-between text-lg font-semibold pt-2 border-t border-border-light">
-            <span className="text-text-primary">Total</span>
-            <span className="text-text-primary">{formatPrice(total)}</span>
+            <span className="text-foreground">Total</span>
+            <span className="text-foreground">{formatPrice(total)}</span>
           </div>
         </div>
       </div>

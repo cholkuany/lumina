@@ -42,7 +42,7 @@ export function FilterSidebar({
       {/* Mobile Header */}
       {isMobile && (
         <div className="sticky top-0 bg-white border-b border-border-light px-4 py-4 flex items-center justify-between">
-          <h2 className="font-serif text-xl text-text-primary">Filters</h2>
+          <h2 className="font-serif text-xl text-foreground">Filters</h2>
           <button onClick={onClose} className="p-2 -mr-2">
             <X className="w-5 h-5" />
           </button>
@@ -51,7 +51,7 @@ export function FilterSidebar({
 
       <div className={cn('space-y-6', isMobile ? 'p-4' : 'pr-8')}>
         <section aria-labelledby="category-filter-heading">
-          <h2 id="category-filter-heading" className="mb-4 text-base font-semibold text-text-primary">
+          <h2 id="category-filter-heading" className="mb-4 text-base font-semibold text-foreground">
             Categories
           </h2>
 

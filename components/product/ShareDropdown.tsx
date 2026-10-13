@@ -148,12 +148,12 @@ export function ShareDropdown({
     {
       label: copied ? 'Copied!' : 'Copy Link',
       icon: copied ? (
-        <Check className="w-4 h-4 text-success-500" />
+        <Check className="w-4 h-4 text-success" />
       ) : (
         <Link2 className="w-4 h-4" />
       ),
       action: handleCopyLink,
-      className: copied ? 'text-success-600' : '',
+      className: copied ? 'text-success' : '',
     },
     {
       label: 'Twitter / X',
@@ -171,7 +171,7 @@ export function ShareDropdown({
       label: 'WhatsApp',
       icon: <WhatsAppIcon className='w-4 h-4 text-[#25D366]' />,
       action: handleWhatsAppShare,
-      className: 'hover:text-success-500',
+      className: 'hover:text-success',
     },
     {
       label: 'Pinterest',
@@ -190,7 +190,7 @@ export function ShareDropdown({
         aria-haspopup="true"
         aria-expanded={isOpen}
         aria-label="Share this product"
-        className="flex items-center gap-2 text-sm text-border-dark hover:text-text-primary transition-colors"
+        className="flex items-center gap-2 text-sm text-border-dark hover:text-foreground transition-colors"
       >
         <Share2 className="w-4 h-4" />
         Share this product
@@ -219,13 +219,13 @@ export function ShareDropdown({
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-2 border-b border-border-light mb-1">
-            <span className="text-xs font-semibold text-text-primary uppercase tracking-wide">
+            <span className="text-xs font-semibold text-foreground uppercase tracking-wide">
               Share via
             </span>
             <button
               onClick={() => setIsOpen(false)}
               aria-label="Close share menu"
-              className="text-border-dark hover:text-text-primary transition-colors"
+              className="text-border-dark hover:text-foreground transition-colors"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -240,7 +240,7 @@ export function ShareDropdown({
               className={cn(
                 'w-full flex items-center gap-3 px-4 py-2.5',
                 'text-sm text-border-dark transition-colors',
-                'hover:bg-surface/60 hover:text-text-primary',
+                'hover:bg-surface/60 hover:text-foreground',
                 option.className
               )}
             >

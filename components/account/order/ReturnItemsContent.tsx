@@ -97,10 +97,10 @@ export function ReturnItemsContent({
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-success-600" />
+        <div className="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-8 h-8 text-success" />
         </div>
-        <h3 className="font-serif text-xl text-text-primary mb-2">Return Request Submitted</h3>
+        <h3 className="font-serif text-xl text-foreground mb-2">Return Request Submitted</h3>
         <p className="text-border-dark mb-6">
           We&apos;ve received your return request. You&apos;ll receive an email with return instructions shortly.
         </p>
@@ -138,7 +138,7 @@ export function ReturnItemsContent({
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-medium text-text-primary text-sm line-clamp-2">
+                  <p className="font-medium text-foreground text-sm line-clamp-2">
                     {item.product.name}
                   </p>
                   <input
@@ -158,7 +158,7 @@ export function ReturnItemsContent({
               <div className="mt-4 pt-4 border-t border-border-light space-y-3">
                 {item.quantity > 1 && (
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-1">
+                    <label className="block text-sm font-medium text-foreground mb-1">
                       Quantity to Return
                     </label>
                     <select
@@ -173,7 +173,7 @@ export function ReturnItemsContent({
                   </div>
                 )}
                 <div>
-                  <label className="block text-sm font-medium text-text-primary mb-1">
+                  <label className="block text-sm font-medium text-foreground mb-1">
                     Reason for Return *
                   </label>
                   <select

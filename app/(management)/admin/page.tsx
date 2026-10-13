@@ -6,7 +6,7 @@ import { getServerSession } from '@/lib/auth-server'
 import { AccessDenied } from '@/components/Access-Denied'
 import { getAdminDashboardData } from '@/lib/queries/get.admin.dashboard'
 
-import { UserRound, Handbag, Box, CircleDollarSignIcon, Clock, Star, Bell, Plus, ArrowRight, PackageX } from 'lucide-react';
+import { Handbag, Box, CircleDollarSignIcon, Clock, Star, Bell, Plus, ArrowRight, PackageX, Users } from 'lucide-react';
 
 function formatRelativeTime(date: string) {
   const seconds = Math.max(0, Math.floor((Date.now() - new Date(date).getTime()) / 1000))
@@ -36,7 +36,7 @@ export default async function AdminDashboard() {
       {/* Welcome Section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-text-primary">
+          <h1 className="text-2xl font-semibold text-foreground">
             Welcome back, {session.user.name.split(' ')[0]}! 👋
           </h1>
           <p className="text-border-dark mt-1">
@@ -45,7 +45,7 @@ export default async function AdminDashboard() {
         </div>
         <div className="flex items-center gap-3">
           <span className="hidden md:inline-flex items-center gap-2 text-xs text-border-dark">
-            <span className="w-2 h-2 rounded-full bg-success-500" />
+            <span className="w-2 h-2 rounded-full bg-success" />
             Live store data
           </span>
           <Link href="/admin/products/new">
@@ -58,30 +58,30 @@ export default async function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-4 gap-4 lg:gap-6">
         <StatsCard
-          title="Total Revenue"
+          title="Revenue"
           value={`$${stats.totalRevenue.toLocaleString()}`}
           description={`$${stats.monthRevenue.toLocaleString()} this month`}
           icon={<CircleDollarSignIcon className="w-6 h-6 text-primary" />}
           iconBg="bg-primary/10"
         />
         <StatsCard
-          title="Total Orders"
+          title="Orders"
           value={stats.totalOrders.toLocaleString()}
           description={`${stats.ordersToday} placed today`}
-          icon={<Handbag className="w-6 h-6 text-primary-600" />}
-          iconBg="bg-primary-100"
+          icon={<Handbag className="w-6 h-6 text-white" />}
+          iconBg="bg-primary"
         />
         <StatsCard
-          title="Total Users"
+          title="Users"
           value={stats.totalUsers.toLocaleString()}
           description={`${stats.newUsersToday} joined today`}
-          icon={<UserRound className="w-6 h-6 text-success-600" />}
-          iconBg="bg-success-100"
+          icon={<Users className="w-6 h-6 text-white" />}
+          iconBg="bg-green-100"
         />
         <StatsCard
-          title="Total Products"
+          title="Products"
           value={stats.totalProducts}
           description={`${stats.outOfStockItems} currently out of stock`}
           icon={<Box className="w-6 h-6 text-purple-600" />}
@@ -93,10 +93,10 @@ export default async function AdminDashboard() {
       <section className="space-y-3" aria-labelledby="attention-heading">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <h2 id="attention-heading" className="text-lg font-semibold text-text-primary">Needs attention</h2>
+            <h2 id="attention-heading" className="text-lg font-semibold text-foreground">Needs attention</h2>
             <p className="text-sm text-border-dark">Tasks that may need an admin decision.</p>
           </div>
-          <span className="text-sm font-medium text-text-primary">{attentionCount} open</span>
+          <span className="text-sm font-medium text-foreground">{attentionCount} open</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
           <Link
@@ -107,7 +107,7 @@ export default async function AdminDashboard() {
               <Clock className="w-5 h-5 text-amber-600" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xl font-semibold text-text-primary">{stats.pendingOrders}</p>
+              <p className="text-xl font-semibold text-foreground">{stats.pendingOrders}</p>
               <p className="text-xs text-border-dark">Orders to process</p>
             </div>
             <ArrowRight className="w-4 h-4 text-border-dark group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -121,7 +121,7 @@ export default async function AdminDashboard() {
               <Star className="w-5 h-5 text-orange-600" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xl font-semibold text-text-primary">{stats.pendingReviews}</p>
+              <p className="text-xl font-semibold text-foreground">{stats.pendingReviews}</p>
               <p className="text-xs text-border-dark">Reviews to moderate</p>
             </div>
             <ArrowRight className="w-4 h-4 text-border-dark group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -135,7 +135,7 @@ export default async function AdminDashboard() {
               <Bell className="w-5 h-5 text-red-600" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xl font-semibold text-text-primary">{stats.lowStockItems}</p>
+              <p className="text-xl font-semibold text-foreground">{stats.lowStockItems}</p>
               <p className="text-xs text-border-dark">Products running low</p>
             </div>
             <ArrowRight className="w-4 h-4 text-border-dark group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -149,7 +149,7 @@ export default async function AdminDashboard() {
               <PackageX className="w-5 h-5 text-red-600" />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xl font-semibold text-text-primary">{stats.outOfStockItems}</p>
+              <p className="text-xl font-semibold text-foreground">{stats.outOfStockItems}</p>
               <p className="text-xs text-border-dark">Products out of stock</p>
             </div>
             <ArrowRight className="w-4 h-4 text-border-dark group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -162,7 +162,7 @@ export default async function AdminDashboard() {
         {/* Recent Orders */}
         <div className="lg:col-span-2 bg-white rounded-brand border border-border">
           <div className="flex items-center justify-between p-4 border-b border-border">
-            <h2 className="font-semibold text-text-primary">Recent Orders</h2>
+            <h2 className="font-semibold text-foreground">Recent Orders</h2>
             <Link
               href="/admin/orders"
               className="text-sm text-primary hover:text-primary-dark font-medium"
@@ -173,17 +173,17 @@ export default async function AdminDashboard() {
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-border-light">
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
+                <tr className="border-b border-border-light bg-surface">
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
                     Order
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
                     Customer
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
                     Total
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
+                  <th className="px-4 py-2 text-left text-xs font-semibold text-border-dark uppercase tracking-wider">
                     Status
                   </th>
                 </tr>
@@ -191,10 +191,10 @@ export default async function AdminDashboard() {
               <tbody className="divide-y divide-border-light">
                 {recentOrders.map((order) => (
                   <tr key={order.id} className="hover:bg-surface/50 transition-colors">
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-1">
                       <Link
                         href="/admin/orders"
-                        className="text-sm font-medium text-text-primary hover:text-primary"
+                        className="text-sm font-medium text-foreground hover:text-primary"
                       >
                         {order.orderNumber}
                       </Link>
@@ -202,16 +202,16 @@ export default async function AdminDashboard() {
                         {new Date(order.date).toLocaleDateString()}
                       </p>
                     </td>
-                    <td className="px-4 py-3">
-                      <p className="text-sm text-text-primary">{order.customer}</p>
+                    <td className="px-4 py-1">
+                      <p className="text-sm text-foreground">{order.customer}</p>
                       <p className="text-xs text-border-dark">{order.email}</p>
                     </td>
-                    <td className="px-4 py-3">
-                      <span className="text-sm font-medium text-text-primary">
+                    <td className="px-4 py-1">
+                      <span className="text-sm font-medium text-foreground">
                         ${order.total.toFixed(2)}
                       </span>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-1">
                       <OrderStatusBadge status={order.status} />
                     </td>
                   </tr>
@@ -228,15 +228,15 @@ export default async function AdminDashboard() {
           {/* Fulfillment snapshot */}
           <div className="bg-white rounded-brand border border-border">
             <div className="p-4 border-b border-border">
-              <h2 className="font-semibold text-text-primary">Order fulfillment</h2>
+              <h2 className="font-semibold text-foreground">Order fulfillment</h2>
               <p className="text-xs text-border-dark mt-0.5">All-time order status</p>
             </div>
             <div className="p-4 space-y-3">
               {Object.entries(orderStatuses).map(([status, count]) => (
                 <div key={status}>
                   <div className="mb-1.5 flex items-center justify-between text-xs">
-                    <span className="capitalize text-text-primary">{status}</span>
-                    <span className="font-semibold text-text-primary">{count}</span>
+                    <span className="capitalize text-foreground">{status}</span>
+                    <span className="font-semibold text-foreground">{count}</span>
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-surface">
                     <div
@@ -244,7 +244,7 @@ export default async function AdminDashboard() {
                         'h-full rounded-full',
                         status === 'processing' && 'bg-primary-500',
                         status === 'shipped' && 'bg-amber-500',
-                        status === 'delivered' && 'bg-success-500',
+                        status === 'delivered' && 'bg-success',
                         status === 'cancelled' && 'bg-red-400'
                       )}
                       style={{ width: `${(count / maxOrderStatus) * 100}%` }}
@@ -258,7 +258,7 @@ export default async function AdminDashboard() {
           {/* Activity Feed */}
           <div className="bg-white rounded-brand border border-border">
             <div className="flex items-center justify-between p-4 border-b border-border">
-              <h2 className="font-semibold text-text-primary">Recent Activity</h2>
+              <h2 className="font-semibold text-foreground">Recent Activity</h2>
               <span className="text-xs text-border-dark">Latest 5</span>
             </div>
             <div className="p-4 space-y-4">
@@ -269,7 +269,7 @@ export default async function AdminDashboard() {
                       'w-8 h-8 rounded-full flex items-center justify-center shrink-0',
                       activity.type === 'order' && 'bg-primary-100',
                       activity.type === 'review' && 'bg-amber-100',
-                      activity.type === 'user' && 'bg-success-100',
+                      activity.type === 'user' && 'bg-success-light',
                       activity.type === 'product' && 'bg-red-100'
                     )}
                   >
@@ -280,14 +280,14 @@ export default async function AdminDashboard() {
                       <Star className="w-4 h-4 text-amber-600" />
                     )}
                     {activity.type === 'user' && (
-                      <UserRound className="w-4 h-4 text-success-600" />
+                      <Users className="w-4 h-4 text-success" />
                     )}
                     {activity.type === 'product' && (
                       <Bell className="w-4 h-4 text-red-600" />
                     )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-text-primary">{activity.message}</p>
+                    <p className="text-sm text-foreground">{activity.message}</p>
                     <p className="text-xs text-border-dark mt-0.5">
                       {formatRelativeTime(activity.date)}
                     </p>
@@ -305,7 +305,7 @@ export default async function AdminDashboard() {
       {/* Top Products */}
       <div className="bg-white rounded-brand border border-border">
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <h2 className="font-semibold text-text-primary">Top Selling Products</h2>
+          <h2 className="font-semibold text-foreground">Top Selling Products</h2>
           <Link
             href="/admin/products"
             className="text-sm text-primary hover:text-primary-dark font-medium"
@@ -347,16 +347,16 @@ export default async function AdminDashboard() {
                           <div className="w-full h-full bg-border-light" />
                         )}
                       </div>
-                      <span className="text-sm font-medium text-text-primary">
+                      <span className="text-sm font-medium text-foreground">
                         {product.name}
                       </span>
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="text-sm text-text-primary">{product.sales} units</span>
+                    <span className="text-sm text-foreground">{product.sales} units</span>
                   </td>
                   <td className="px-4 py-3">
-                    <span className="text-sm font-medium text-text-primary">
+                    <span className="text-sm font-medium text-foreground">
                       ${product.revenue.toLocaleString()}
                     </span>
                   </td>
@@ -386,7 +386,7 @@ function OrderStatusBadge({ status }: { status: string }) {
   const config: Record<string, { label: string; className: string }> = {
     processing: { label: 'Processing', className: 'bg-primary-100 text-primary-700' },
     shipped: { label: 'Shipped', className: 'bg-amber-100 text-amber-700' },
-    delivered: { label: 'Delivered', className: 'bg-success-100 text-success-700' },
+    delivered: { label: 'Delivered', className: 'bg-success-light text-success-dark' },
     cancelled: { label: 'Cancelled', className: 'bg-red-100 text-red-700' },
   }
 

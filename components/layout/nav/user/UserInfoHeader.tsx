@@ -1,22 +1,25 @@
+import { AvatarBadge } from './AvatarBadge'
+
 type UserInfoHeaderProps = {
-  firstName: string;
-  lastName: string;
+  firstName: string
+  lastName: string
   email: string
+  image?: string | null
 }
 
-export const UserInfoHeader = ({ firstName, lastName, email }: UserInfoHeaderProps) => (
-  <div className="p-4 bg-surface border-b border-border-light">
+export const UserInfoHeader = ({ firstName, lastName, email, image }: UserInfoHeaderProps) => (
+  <div className="border-b border-border-light bg-surface p-4">
     <div className="flex items-center gap-3">
-      <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-serif font-semibold">
-        {firstName.charAt(0)}{lastName.charAt(0)}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="font-medium text-text-primary truncate">
-          {firstName} {lastName}
+      <AvatarBadge
+        image={image}
+        initials={`${firstName.charAt(0)}${lastName.charAt(0)}`}
+        className="h-12 w-12 text-base ring-2 ring-gold/40"
+      />
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-semibold text-foreground">
+          Hello, {firstName} {lastName}
         </p>
-        <p className="text-sm text-border-dark truncate">
-          {email}
-        </p>
+        <p className="truncate text-sm text-foreground/60">{email}</p>
       </div>
     </div>
   </div>

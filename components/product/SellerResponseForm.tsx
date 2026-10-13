@@ -51,7 +51,7 @@ export function SellerResponseForm({
         </div>
 
         <div className="flex-1">
-          <label className="block text-sm font-medium text-text-primary mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             {existingResponse ? 'Edit Response' : 'Write a Response'}
           </label>
 
@@ -65,7 +65,7 @@ export function SellerResponseForm({
             rows={4}
             maxLength={1000}
             className={cn(
-              'w-full px-4 py-3 bg-white border rounded-brand text-sm text-text-primary',
+              'w-full px-4 py-3 bg-white border rounded-brand text-sm text-foreground',
               'placeholder:text-border-dark resize-none',
               'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary',
               error ? 'border-red-400' : 'border-border'

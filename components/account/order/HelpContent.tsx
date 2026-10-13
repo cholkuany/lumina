@@ -47,10 +47,10 @@ export function HelpContent({
   if (submitted) {
     return (
       <div className="text-center py-8">
-        <div className="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-success-600" />
+        <div className="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+          <CheckCircle className="w-8 h-8 text-success" />
         </div>
-        <h3 className="font-serif text-xl text-text-primary mb-2">Message Sent</h3>
+        <h3 className="font-serif text-xl text-foreground mb-2">Message Sent</h3>
         <p className="text-border-dark mb-6">
           We&apos;ve received your message and will respond within 24 hours. Check your email for updates.
         </p>
@@ -75,20 +75,20 @@ export function HelpContent({
           className="flex flex-col items-center gap-2 p-4 border border-border-light rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
         >
           <Phone className="w-5 h-5 text-primary" />
-          <span className="text-xs text-center text-text-primary">Call Us</span>
+          <span className="text-xs text-center text-foreground">Call Us</span>
         </a>
         <a
           href="mailto:support@lumina.com"
           className="flex flex-col items-center gap-2 p-4 border border-border-light rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
         >
           <Mail className="w-5 h-5 text-primary" />
-          <span className="text-xs text-center text-text-primary">Email</span>
+          <span className="text-xs text-center text-foreground">Email</span>
         </a>
         <button
           className="flex flex-col items-center gap-2 p-4 border border-border-light rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
         >
           <MessageCircle className="w-5 h-5 text-primary" />
-          <span className="text-xs text-center text-text-primary">Live Chat</span>
+          <span className="text-xs text-center text-foreground">Live Chat</span>
         </button>
       </div>
 
@@ -104,7 +104,7 @@ export function HelpContent({
       {/* Help Topics */}
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-2">
+          <label className="block text-sm font-medium text-foreground mb-2">
             Select a Topic
           </label>
           <div className="grid grid-cols-2 gap-2">
@@ -120,7 +120,7 @@ export function HelpContent({
                     }`}
                 >
                   <Icon className={`w-4 h-4 ${selectedTopic === topic.id ? 'text-primary' : 'text-border-dark'}`} />
-                  <span className={`text-sm ${selectedTopic === topic.id ? 'text-text-primary' : 'text-border-dark'}`}>
+                  <span className={`text-sm ${selectedTopic === topic.id ? 'text-foreground' : 'text-border-dark'}`}>
                     {topic.label}
                   </span>
                 </button>
@@ -130,7 +130,7 @@ export function HelpContent({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text-primary mb-1">
+          <label className="block text-sm font-medium text-foreground mb-1">
             Your Message
           </label>
           <textarea

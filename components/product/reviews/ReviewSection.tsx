@@ -1,14 +1,15 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { Star, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Select } from '@/components/ui/Select'
-import { WriteReviewModal } from './WriteReviewModal'
+import { WriteReviewModal } from '../WriteReviewModal'
 // import { ReviewData } from './WriteReviewForm'
 import { ReviewCard } from './ReviewCard'
 import { DBReviewInput } from '@/lib/queries/get.reviews'
 import { cn } from '@/lib/utils'
+import { RatingSummary } from '../../ui/RatingSummary'
 
 interface ReviewSectionProps {
   productId: string
@@ -65,30 +66,6 @@ export function ReviewSection({
       }
     })
 
-  // const handleWriteReview = async (reviewData: ReviewData) => {
-  //   console.log('Submitted review:', reviewData)
-  //   try {
-  //     const response = await fetch('/api/reviews', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         ...reviewData,
-  //         product: productId,
-  //       }),
-  //     })
-  //     if (!response.ok) {
-  //       const errorData = await response.json()
-  //       console.error('Failed to create review:', errorData)
-  //     }
-
-  //     const data = await response.json()
-  //     console.log('Review created successfully:', data)
-
-  //   } catch (error: unknown) {
-  //     console.error('Error submitting review:', (error as Error).message)
-  //   }
-  // }
-
   const handleHelpful = (reviewId: string, type: 'up' | 'down') => {
     void type
     setHelpfulReviews((prev) => {
@@ -110,23 +87,11 @@ export function ReviewSection({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Average Rating */}
         <div className="lg:col-span-3 text-center lg:text-left">
-          <div className="text-5xl font-serif font-semibold text-text-primary mb-2">
+          <div className="text-5xl font-serif font-semibold text-foreground mb-2">
             {averageRating.toFixed(1)}
           </div>
           <div className="flex items-center justify-center lg:justify-start gap-1 mb-2">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className={cn(
-                  'w-5 h-5',
-                  i < Math.floor(averageRating)
-                    ? 'fill-primary text-primary'
-                    : i < averageRating
-                      ? 'fill-primary/50 text-primary'
-                      : 'fill-border-light text-border-light'
-                )}
-              />
-            ))}
+            <RatingSummary rating={averageRating} reviewCount={totalReviews} />
           </div>
           <p className="text-sm text-border-dark">
             Based on {totalReviews} reviews
@@ -172,7 +137,7 @@ export function ReviewSection({
         {/* Write Review CTA */}
         <div className="lg:col-span-4">
           <div className="bg-surface rounded-brand p-6 text-center">
-            <h4 className="font-medium text-text-primary mb-2">Share your thoughts</h4>
+            <h4 className="font-medium text-foreground mb-2">Share your thoughts</h4>
             <p className="text-sm text-border-dark mb-4">
               If you&apos;ve used this product, help others by sharing your experience.
             </p>
@@ -185,7 +150,7 @@ export function ReviewSection({
 
       {/* Filters & Sort */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-border-light">
-        <h3 className="font-serif text-xl text-text-primary">
+        <h3 className="font-serif text-xl text-foreground">
           Customer Reviews
           {filterRating && (
             <span className="text-primary text-base font-normal ml-2">
@@ -270,7 +235,7 @@ interface HeadingProps {
 export const Header = ({ title, as: Tag }: HeadingProps) => {
   return (
     <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-border-light'>
-      <Tag className="font-serif text-xl text-text-primary">
+      <Tag className="font-serif text-xl text-foreground">
         {title}
       </Tag>
     </div>

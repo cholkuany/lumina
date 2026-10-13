@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, ShoppingBag } from 'lucide-react'
+import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { CartItem } from '@/components/cart/CartItem'
 import { CartSummary } from '@/components/cart/CartSummary'
@@ -18,7 +18,7 @@ export default function CartPage() {
     <main className="pb-16">
 
       <div className="container-lumina">
-        <h1 className="font-serif text-3xl lg:text-4xl text-text-primary mb-8 py-4">
+        <h1 className="font-serif text-3xl lg:text-4xl text-foreground mb-8 py-4">
           Shopping Cart
         </h1>
 
@@ -49,7 +49,7 @@ export default function CartPage() {
               {/* Continue Shopping */}
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 mt-6 text-sm text-border-dark hover:text-text-primary transition-colors"
+                className="inline-flex items-center gap-2 mt-6 text-sm text-border-dark hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Continue Shopping
@@ -65,9 +65,9 @@ export default function CartPage() {
           /* Empty Cart */
           <div className="text-center py-16">
             <div className="w-24 h-24 bg-surface rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="w-12 h-12 text-border-dark" />
+              <ShoppingCart className="w-12 h-12 text-border-dark" />
             </div>
-            <h2 className="font-serif text-2xl text-text-primary mb-3">
+            <h2 className="font-serif text-2xl text-foreground mb-3">
               Your cart is empty
             </h2>
             <p className="text-border-dark mb-8 max-w-md mx-auto">

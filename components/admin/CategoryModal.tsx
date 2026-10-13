@@ -89,7 +89,7 @@ export function CategoryModal({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div>
-            <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
+            <h2 className="text-lg font-semibold text-foreground">{title}</h2>
             {parentCategory && (
               <p className="text-sm text-border-dark">
                 Parent: {parentCategory.name}
@@ -99,7 +99,7 @@ export function CategoryModal({
           <button
             onClick={onClose}
             disabled={isSubmitting}
-            className="p-2 text-border-dark hover:text-text-primary hover:bg-surface rounded-lg transition-colors disabled:opacity-50"
+            className="p-2 text-border-dark hover:text-foreground hover:bg-surface rounded-lg transition-colors disabled:opacity-50"
           >
             <X className="w-5 h-5" />
           </button>

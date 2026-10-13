@@ -77,12 +77,12 @@ export function WriteReviewForm({
       {/* Product Info */}
       <div className="pb-4 border-b border-border-light">
         <p className="text-sm text-border-dark">Reviewing:</p>
-        <p className="font-medium text-text-primary">{productName}</p>
+        <p className="font-medium text-foreground">{productName}</p>
       </div>
 
       {/* Star Rating */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-3">
+        <label className="block text-sm font-medium text-foreground mb-3">
           Overall Rating <span className="text-red-500">*</span>
         </label>
         <StarRatingInput
@@ -115,7 +115,7 @@ export function WriteReviewForm({
 
       {/* Review Content */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           Your Review <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -125,7 +125,7 @@ export function WriteReviewForm({
           rows={5}
           maxLength={2000}
           className={cn(
-            'w-full px-4 py-3 bg-white border rounded-brand text-text-primary placeholder:text-border-dark',
+            'w-full px-4 py-3 bg-white border rounded-brand text-foreground placeholder:text-border-dark',
             'focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none',
             errors.content ? 'border-red-400' : 'border-border'
           )}
@@ -147,7 +147,7 @@ export function WriteReviewForm({
 
       {/* Photo Upload */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           Add Photos (Optional)
         </label>
         <ImageUpload
@@ -159,7 +159,7 @@ export function WriteReviewForm({
 
       {/* Recommendation */}
       <div>
-        <label className="block text-sm font-medium text-text-primary mb-3">
+        <label className="block text-sm font-medium text-foreground mb-3">
           Would you recommend this product?
         </label>
         <div className="flex gap-4">
@@ -169,8 +169,8 @@ export function WriteReviewForm({
             className={cn(
               'flex-1 py-3 px-4 border rounded-brand text-sm font-medium transition-all',
               formData.recommendProduct === true
-                ? 'border-success-500 bg-success-50 text-success-700'
-                : 'border-borderhover:border-success-300 text-text-primary'
+                ? 'border-success bg-success-light text-success-dark'
+                : 'border-borderhover:border-success/25 text-foreground'
             )}
           >
             👍 Yes, I recommend it
@@ -182,7 +182,7 @@ export function WriteReviewForm({
               'flex-1 py-3 px-4 border rounded-brand text-sm font-medium transition-all',
               formData.recommendProduct === false
                 ? 'border-red-500 bg-red-50 text-red-700'
-                : 'border-borderhover:border-red-300 text-text-primary'
+                : 'border-borderhover:border-red-300 text-foreground'
             )}
           >
             👎 No, I don&apos;t
@@ -192,7 +192,7 @@ export function WriteReviewForm({
 
       {/* Guidelines */}
       <div className="bg-surface rounded-brand p-4">
-        <h4 className="font-medium text-text-primary text-sm mb-2">
+        <h4 className="font-medium text-foreground text-sm mb-2">
           Review Guidelines
         </h4>
         <ul className="text-xs text-border-dark space-y-1">

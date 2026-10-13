@@ -10,7 +10,7 @@ export default function CheckoutCancelPage() {
           <XCircle className="w-10 h-10 text-red-600" />
         </div>
 
-        <h1 className="font-serif text-3xl text-text-primary mb-4">
+        <h1 className="font-serif text-3xl text-foreground mb-4">
           Payment Cancelled
         </h1>
         <p className="text-border-dark mb-8">

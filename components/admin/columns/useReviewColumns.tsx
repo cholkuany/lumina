@@ -43,7 +43,7 @@ export function useReviewColumns(
 
           </div>
           <div className="min-w-0">
-            <p className="font-medium text-text-primary truncate">{row.original.productInfo.name}</p>
+            <p className="font-medium text-foreground truncate">{row.original.productInfo.name}</p>
             <div className="flex items-center gap-2 mt-0.5">
               <StarRating value={row.original.rating} readonly size="sm" />
               <span className="text-xs text-border-dark">
@@ -59,7 +59,7 @@ export function useReviewColumns(
       header: 'Content',
       cell: ({ row }) => (
         <div className="max-w-xs">
-          <p className="font-medium text-text-primary text-sm truncate">{row.original.title}</p>
+          <p className="font-medium text-foreground text-sm truncate">{row.original.title}</p>
           <p className="text-xs text-border-dark line-clamp-2 mt-0.5">
             {row.original.content}
           </p>
@@ -85,7 +85,7 @@ export function useReviewColumns(
       header: 'Verified',
       cell: ({ row }) => (
         row.original.verified ? (
-          <span className="text-success-600">
+          <span className="text-success">
             <BadgeCheck className="w-5 h-5" />
           </span>
         ) : (
@@ -128,7 +128,7 @@ export function useReviewColumns(
                   // setActionModal({ open: true, type: 'approve', reviewId: review.id })
                   confirm.open('approve', row.original.id)
                 }}
-                className="p-2 text-border-dark hover:text-success-500 hover:bg-success-50 rounded-lg transition-colors"
+                className="p-2 text-border-dark hover:text-success hover:bg-success-light rounded-lg transition-colors"
                 title="Approve"
               >
                 <Check className="w-4 h-4" />

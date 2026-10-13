@@ -51,7 +51,7 @@ export function RadioGroup({ name, options, value, onChange, className }: RadioG
             </div>
           </div>
           <div className="flex-1">
-            <span className="text-sm font-medium text-text-primary">{option.label}</span>
+            <span className="text-sm font-medium text-foreground">{option.label}</span>
             {option.description && (
               <p className="text-xs text-border-dark mt-0.5">{option.description}</p>
             )}

@@ -124,7 +124,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 text-border-dark
-                         hover:text-text-primary hover:bg-surface rounded-lg transition-colors"
+                         hover:text-foreground hover:bg-surface rounded-lg transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -135,7 +135,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="text-xl font-semibold text-text-primary">{user.name}</h2>
+                  <h2 className="text-xl font-semibold text-foreground">{user.name}</h2>
                   <span className={cn(
                     "px-2 py-0.5 text-xs font-medium rounded-full capitalize border",
                     user.role === "admin"
@@ -161,7 +161,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                     "px-4 py-2 text-sm font-medium border-b-2 transition-colors",
                     activeTab === tab.key
                       ? "border-primary text-primary"
-                      : "border-transparent text-border-dark hover:text-text-primary"
+                      : "border-transparent text-border-dark hover:text-foreground"
                   )}
                 >
                   {tab.label}
@@ -218,10 +218,10 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                     {/* Form header */}
                     <div className="flex items-center justify-between px-4 py-3 bg-surface/60 border-b border-border">
                       <div>
-                        <p className="text-sm font-medium text-text-primary">New Message</p>
+                        <p className="text-sm font-medium text-foreground">New Message</p>
                         <p className="text-xs text-border-dark mt-0.5">
                           To:{" "}
-                          <span className="text-text-primary">{user.email}</span>
+                          <span className="text-foreground">{user.email}</span>
                         </p>
                       </div>
                       {/* Envelope decoration */}
@@ -250,7 +250,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                                 "text-xs px-2.5 py-1 rounded-full border transition-colors",
                                 emailForm.subject === t.subject
                                   ? "bg-primary/15 border-primary/50 text-primary-dark font-medium"
-                                  : "border-border text-border-dark hover:border-primary/40 hover:text-text-primary bg-background"
+                                  : "border-border text-border-dark hover:border-primary/40 hover:text-foreground bg-background"
                               )}
                             >
                               {t.label}
@@ -272,7 +272,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                           }
                           placeholder="Email subject…"
                           className="w-full text-sm border border-border rounded-lg
-                           bg-background px-3 py-2 text-text-primary
+                           bg-background px-3 py-2 text-foreground
                            placeholder:text-border-dark
                            focus:outline-none focus:border-primary
                            transition-colors"
@@ -297,7 +297,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                           }
                           placeholder={`Hi ${user.name.split(" ")[0]}, …`}
                           className="w-full text-sm border border-border rounded-lg
-                           bg-background px-3 py-2.5 resize-none text-text-primary
+                           bg-background px-3 py-2.5 resize-none text-foreground
                            leading-relaxed placeholder:text-border-dark
                            focus:outline-none focus:border-primary
                            transition-colors"
@@ -331,7 +331,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                           "w-full flex items-center justify-center gap-2",
                           "text-sm font-medium py-2.5 rounded-lg transition-all duration-200",
                           emailStatus === "sent"
-                            ? "bg-text-primary/10 text-text-primary cursor-default"
+                            ? "bg-text-primary/10 text-foreground cursor-default"
                             : canSendEmail
                               ? "bg-primary text-background hover:bg-primary-dark shadow-sm hover:shadow"
                               : "bg-border-light text-border-dark cursor-not-allowed"
@@ -364,7 +364,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                   {/* Revoke Sessions */}
                   <div className="p-4 flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-sm font-medium text-text-primary">Active Sessions</p>
+                      <p className="text-sm font-medium text-foreground">Active Sessions</p>
                       <p className="text-xs text-border-dark mt-0.5">
                         Force the user to log out from all devices immediately.
                       </p>
@@ -384,7 +384,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                   <div className="p-4">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-sm font-medium text-text-primary">
+                        <p className="text-sm font-medium text-foreground">
                           {isBanned ? "Unban Account" : "Ban Account"}
                         </p>
                         <p className="text-xs text-border-dark mt-0.5">
@@ -397,7 +397,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                         <button
                           onClick={handleUnban}
                           disabled={unban.isPending}
-                          className="shrink-0 text-sm font-medium text-text-primary hover:text-text-primary/80 disabled:opacity-50 transition-colors border border-border hover:border-text-primary/30 hover:bg-surface px-3 py-1.5 rounded-lg"
+                          className="shrink-0 text-sm font-medium text-foreground hover:text-foreground/80 disabled:opacity-50 transition-colors border border-border hover:border-text-primary/30 hover:bg-surface px-3 py-1.5 rounded-lg"
                         >
                           {unban.isPending ? "Unbanning…" : "Unban User"}
                         </button>
@@ -426,7 +426,7 @@ export function UserDetailModal({ user, onClose, onChangeRole }: UserDetailModal
                         <div className="flex gap-2 pt-1">
                           <button
                             onClick={() => setShowBanConfirm(false)}
-                            className="flex-1 text-sm py-1.5 border border-border rounded-lg hover:bg-surface transition-colors text-text-primary"
+                            className="flex-1 text-sm py-1.5 border border-border rounded-lg hover:bg-surface transition-colors text-foreground"
                           >
                             Cancel
                           </button>
@@ -493,7 +493,7 @@ function DetailRow({ label, value, mono = false, highlight = false }: {
       <span className="text-sm text-border-dark shrink-0">{label}</span>
       <span className={cn(
         "text-sm text-right break-all",
-        mono ? "font-mono text-xs text-border-dark" : "text-text-primary",
+        mono ? "font-mono text-xs text-border-dark" : "text-foreground",
         highlight && "text-primary font-medium"
       )}>
         {value}

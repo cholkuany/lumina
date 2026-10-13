@@ -29,7 +29,7 @@ export function Specifications({
   return (
     <div className="bg-white rounded-brand border border-border p-6 space-y-5">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-medium text-text-primary">
+        <h2 className="text-lg font-medium text-foreground">
           Specifications
         </h2>
 

@@ -30,7 +30,7 @@ export function Modal({
         <div className="relative bg-white rounded-brand shadow-hover max-w-lg w-full max-h-[90vh] overflow-y-auto">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border-light">
-            <h2 className="font-serif text-xl text-text-primary">{title}</h2>
+            <h2 className="font-serif text-xl text-foreground">{title}</h2>
             <button
               onClick={onClose}
               className="p-2 hover:bg-surface rounded-full transition-colors"

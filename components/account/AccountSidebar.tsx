@@ -31,7 +31,7 @@ export function AccountSidebar() {
               'flex items-center gap-3 px-4 py-3 rounded-brand text-sm font-medium transition-colors',
               isActive
                 ? 'bg-text-primary text-white'
-                : 'text-text-primary hover:bg-surface'
+                : 'text-foreground hover:bg-surface'
             )}
           >
             <item.icon className="w-5 h-5" />

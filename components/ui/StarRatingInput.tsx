@@ -70,7 +70,7 @@ export function StarRatingInput({
         <span
           className={cn(
             'text-sm font-medium transition-colors',
-            hoverValue ? 'text-primary' : 'text-text-primary'
+            hoverValue ? 'text-primary' : 'text-foreground'
           )}
         >
           {ratingLabels[displayValue]}

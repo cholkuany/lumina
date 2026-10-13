@@ -30,12 +30,12 @@ export function PaymentForm({ onSubmit, onBack, isProcessing = false }: TPayment
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div>
-        <h3 className="font-serif text-lg text-text-primary mb-4">Payment Method</h3>
+        <h3 className="font-serif text-lg text-foreground mb-4">Payment Method</h3>
         <div className="bg-surface rounded-brand p-6">
           <div className="flex items-start gap-3">
-            <Lock className="w-5 h-5 text-success-600 mt-0.5" />
+            <Lock className="w-5 h-5 text-success mt-0.5" />
             <div>
-              <p className="text-text-primary font-medium">Secure card payment</p>
+              <p className="text-foreground font-medium">Secure card payment</p>
               <p className="text-sm text-border-dark mt-1">
                 You&apos;ll review your order here, then continue to Stripe&apos;s hosted checkout.
               </p>
@@ -46,7 +46,7 @@ export function PaymentForm({ onSubmit, onBack, isProcessing = false }: TPayment
 
       {/* Billing Address */}
       <div>
-        <h3 className="font-serif text-lg text-text-primary mb-4">Billing Address</h3>
+        <h3 className="font-serif text-lg text-foreground mb-4">Billing Address</h3>
         <Checkbox
           id="sameAsShipping"
           label="Same as shipping address"

@@ -52,17 +52,17 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-1.5 rounded-lg text-border-dark 
-                     hover:text-text-primary hover:bg-surface transition-colors"
+                     hover:text-foreground hover:bg-surface transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
 
         {/* Header */}
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-text-primary">Change Role</h2>
+          <h2 className="text-lg font-semibold text-foreground">Change Role</h2>
           <p className="text-sm text-border-dark mt-0.5">
             Updating role for{" "}
-            <span className="font-medium text-text-primary">{user.name}</span>
+            <span className="font-medium text-foreground">{user.name}</span>
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
 
                 <div className="flex items-center justify-between pr-16">
                   <div>
-                    <p className="font-medium text-sm text-text-primary/50">
+                    <p className="font-medium text-sm text-foreground/50">
                       {role.label}
                     </p>
                     <p className="text-xs text-border-dark/70 mt-0.5">
@@ -142,8 +142,8 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
                         isSelected
                           ? role.value === "admin"
                             ? "text-purple-700"
-                            : "text-text-primary"
-                          : "text-text-primary"
+                            : "text-foreground"
+                          : "text-foreground"
                       )}
                     >
                       {role.label}
@@ -180,11 +180,11 @@ export function UserRoleModal({ user, onClose }: UserRoleModalProps) {
           {canSave ? (
             <>
               Changing role from{" "}
-              <span className="font-medium text-text-primary capitalize">
+              <span className="font-medium text-foreground capitalize">
                 {currentRole === "user" ? "Customer" : currentRole}
               </span>{" "}
               →{" "}
-              <span className="font-medium text-text-primary capitalize">
+              <span className="font-medium text-foreground capitalize">
                 {selectedRole === "user" ? "Customer" : selectedRole}
               </span>
             </>

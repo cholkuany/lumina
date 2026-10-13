@@ -36,11 +36,11 @@ export default async function CheckoutSuccessPage({
       />
 
       <div className="max-w-lg mx-auto text-center">
-        <div className="w-20 h-20 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle className="w-10 h-10 text-success-600" />
+        <div className="w-20 h-20 bg-success-light rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="w-10 h-10 text-success" />
         </div>
 
-        <h1 className="font-serif text-3xl text-text-primary mb-4">
+        <h1 className="font-serif text-3xl text-foreground mb-4">
           Thank You for Your Order!
         </h1>
         <p className="text-border-dark mb-2">
@@ -50,11 +50,11 @@ export default async function CheckoutSuccessPage({
         {stripeSession && (
           <div className="bg-surface rounded-brand p-4 my-8 text-left">
             <p className="text-sm text-border-dark">Confirmation</p>
-            <p className="text-text-primary font-medium break-all">{stripeSession.id}</p>
+            <p className="text-foreground font-medium break-all">{stripeSession.id}</p>
             {amountTotal !== null && amountTotal !== undefined && (
               <>
                 <p className="text-sm text-border-dark mt-4">Total paid</p>
-                <p className="text-text-primary font-semibold">
+                <p className="text-foreground font-semibold">
                   {formatPrice(amountTotal / 100)}
                 </p>
               </>

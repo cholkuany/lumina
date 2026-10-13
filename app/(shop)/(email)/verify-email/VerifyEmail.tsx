@@ -62,9 +62,9 @@ export function VerifyEmail({ token, error }: { token: string | undefined, error
 
         {status === "success" && (
           <>
-            <div className="mx-auto w-16 h-16 bg-success-100 rounded-full flex items-center justify-center">
+            <div className="mx-auto w-16 h-16 bg-success-light rounded-full flex items-center justify-center">
               <svg
-                className="w-8 h-8 text-success-600"
+                className="w-8 h-8 text-success"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -107,12 +107,12 @@ export function VerifyEmail({ token, error }: { token: string | undefined, error
               </svg>
             </div>
             <h2 className="text-3xl font-extrabold text-gray-900">Verification Failed</h2>
-            <p className="text-text-primary">{message}</p>
+            <p className="text-foreground">{message}</p>
             <div className="space-y-4">
               <Button
                 onClick={handleResendEmail}
                 disabled={isResending}
-                className="text-border-dark hover:text-text-primary transition-colors"
+                className="text-border-dark hover:text-foreground transition-colors"
               >
                 {isResending ? "Sending..." : "Resend verification email"}
               </Button>
@@ -162,7 +162,7 @@ export function VerifyEmail({ token, error }: { token: string | undefined, error
               <div>
                 <Link
                   href="/login"
-                  className="text-sm text-border-dark hover:text-text-primary transition-colors"
+                  className="text-sm text-border-dark hover:text-foreground transition-colors"
                 >
                   ← Back to login
                 </Link>

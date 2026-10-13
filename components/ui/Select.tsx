@@ -26,7 +26,7 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
   return (
     <div className={className}>
       {label && (
-        <label className="block text-sm font-medium text-text-primary mb-2">
+        <label className="block text-sm font-medium text-foreground mb-2">
           {label}
         </label>
       )}
@@ -62,7 +62,7 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
                   className={({ active }) =>
                     cn(
                       'relative cursor-pointer select-none py-3 pl-10 pr-4 transition-colors',
-                      active ? 'bg-surface text-text-primary' : 'text-text-primary'
+                      active ? 'bg-surface text-foreground' : 'text-foreground'
                     )
                   }
                 >

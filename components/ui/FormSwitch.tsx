@@ -23,7 +23,7 @@ const FormSwitch = forwardRef<HTMLInputElement, FormSwitchProps>(
         )}
       >
         <div className="flex-1">
-          <span className="block text-sm font-medium text-text-primary group-hover:text-primary transition-colors">
+          <span className="block text-sm font-medium text-foreground group-hover:text-primary transition-colors">
             {label}
           </span>
           {description && (
