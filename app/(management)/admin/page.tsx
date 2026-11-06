@@ -1,12 +1,17 @@
 import Link from 'next/link'
-import { StatsCard } from '@/components/admin/StatsCard'
+
+import { StatsCard } from '../components/StatsCard'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import { getServerSession } from '@/lib/auth-server'
 import { AccessDenied } from '@/components/Access-Denied'
 import { getAdminDashboardData } from '@/lib/queries/get.admin.dashboard'
+import { DonutChart, type Slice } from '../components/DonutChart'
 
-import { Handbag, Box, CircleDollarSignIcon, Clock, Star, Bell, Plus, ArrowRight, PackageX, Users } from 'lucide-react';
+import {
+  Handbag, Box, CircleDollarSignIcon, Clock, Star, Bell,
+  Plus, ArrowRight, PackageX, Users
+} from 'lucide-react';
 
 function formatRelativeTime(date: string) {
   const seconds = Math.max(0, Math.floor((Date.now() - new Date(date).getTime()) / 1000))
@@ -21,15 +26,35 @@ function formatRelativeTime(date: string) {
 
 export default async function AdminDashboard() {
   const session = await getServerSession()
-  if (!session?.user) {
+  if (!session?.user && session?.user.role !== 'admin') {
     return (
       <AccessDenied />
     )
   }
 
   const { stats, orderStatuses, recentOrders, recentActivity, topProducts } = await getAdminDashboardData()
-  const maxOrderStatus = Math.max(...Object.values(orderStatuses), 1)
+  // const maxOrderStatus = Math.max(...Object.values(orderStatuses), 1)
   const attentionCount = stats.pendingOrders + stats.pendingReviews + stats.lowStockItems + stats.outOfStockItems
+
+  // NEW <------------
+  const earlierRevenue = Math.max(stats.totalRevenue - stats.monthRevenue, 0)
+  const revenueSplit: Slice[] = [
+    { name: 'This month', value: stats.monthRevenue, color: '#6366f1' },
+    { name: 'Earlier', value: earlierRevenue, color: '#cbd5e1' },
+  ]
+
+  const statusColors = { processing: '#6366f1', shipped: '#f59e0b', delivered: '#22c55e', cancelled: '#f87171' }
+  const statusSplit: Slice[] = Object.entries(orderStatuses).map(([name, value]) => ({
+    name, value, color: statusColors[name as keyof typeof statusColors],
+  }))
+
+  const palette = ['#6366f1', '#22c55e', '#f59e0b', '#ec4899', '#06b6d4']
+  const topSum = topProducts.reduce((s, p) => s + p.revenue, 0)
+  const productSplit: Slice[] = [
+    ...topProducts.map((p, i) => ({ name: p.name, value: p.revenue, color: palette[i % palette.length] })),
+    { name: 'Other products', value: Math.max(stats.totalRevenue - topSum, 0), color: '#cbd5e1' },
+  ]
+  // NEW <------------
 
   return (
     <div className="space-y-8">
@@ -77,8 +102,8 @@ export default async function AdminDashboard() {
           title="Users"
           value={stats.totalUsers.toLocaleString()}
           description={`${stats.newUsersToday} joined today`}
-          icon={<Users className="w-6 h-6 text-white" />}
-          iconBg="bg-green-100"
+          icon={<Users className="w-6 h-6 text-success-dark" />}
+          iconBg="bg-success-light"
         />
         <StatsCard
           title="Products"
@@ -157,6 +182,29 @@ export default async function AdminDashboard() {
         </div>
       </section>
 
+      {/* Charts <--------- */}
+      {/* Insights */}
+      <section aria-labelledby="insights-heading" className="space-y-3">
+        <h2 id="insights-heading" className="text-lg font-semibold text-foreground">Insights</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+          <div className="bg-white rounded-brand border border-border p-4">
+            <h3 className="font-semibold text-foreground">Revenue</h3>
+            <p className="mb-3 text-xs text-border-dark">This month vs earlier</p>
+            <DonutChart data={revenueSplit} valuePrefix="$" centerLabel="Total" />
+          </div>
+          <div className="bg-white rounded-brand border border-border p-4">
+            <h3 className="font-semibold text-foreground">Order status</h3>
+            <p className="mb-3 text-xs text-border-dark">All-time orders</p>
+            <DonutChart data={statusSplit} centerLabel="Orders" />
+          </div>
+          <div className="bg-white rounded-brand border border-border p-4">
+            <h3 className="font-semibold text-foreground">Revenue by product</h3>
+            <p className="mb-3 text-xs text-border-dark">Top 5 vs the rest</p>
+            <DonutChart data={productSplit} valuePrefix="$" centerLabel="Total" />
+          </div>
+        </div>
+      </section>
+
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Orders */}
@@ -226,7 +274,7 @@ export default async function AdminDashboard() {
 
         <div className="space-y-6">
           {/* Fulfillment snapshot */}
-          <div className="bg-white rounded-brand border border-border">
+          {/* <div className="bg-white rounded-brand border border-border">
             <div className="p-4 border-b border-border">
               <h2 className="font-semibold text-foreground">Order fulfillment</h2>
               <p className="text-xs text-border-dark mt-0.5">All-time order status</p>
@@ -253,7 +301,7 @@ export default async function AdminDashboard() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Activity Feed */}
           <div className="bg-white rounded-brand border border-border">

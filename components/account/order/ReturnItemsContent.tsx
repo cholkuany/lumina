@@ -1,220 +1,202 @@
-// app/account/orders/[slug]/page.tsx
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
-import {
-  CheckCircle,
-  Loader2
-} from 'lucide-react'
+import { useState, useTransition, type FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
+import { CheckCircle, Loader2 } from 'lucide-react'
+import { submitReturnRequest } from './Actions'
 import { Button } from '@/components/ui/Button'
-import { TOrderProps } from '@/lib/types'
+import {
+  MAX_RETURN_REASON_LENGTH,
+  RETURN_WINDOW_DAYS,
+  getReturnedQuantities,
+  type CustomerReturn,
+} from '@/lib/returnTypes'
+import type { TOrderProps } from '@/lib/types'
+import { ProductThumbFrame } from '@/components/ui/ProductThumb'
 
-// Return Items Modal Content
-export function ReturnItemsContent({
-  order,
-  onClose,
-}: {
+interface Line {
+  checked: boolean
+  quantity: number
+  reason: string
+}
+
+type Props = {
   order: TOrderProps
+  returns: CustomerReturn[]
   onClose: () => void
-}) {
-  const [selectedItems, setSelectedItems] = useState<Record<string, { selected: boolean; quantity: number; reason: string }>>({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const [returnNumber, setReturnNumber] = useState('')
-  const [submitError, setSubmitError] = useState('')
+}
 
-  const returnReasons = [
-    'Item not as described',
-    'Wrong item received',
-    'Item damaged or defective',
-    'Changed my mind',
-    'Item arrived too late',
-    'Better price found elsewhere',
-    'Other',
-  ]
+export function ReturnItemsContent({ order, returns, onClose }: Props) {
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
-  const handleToggleItem = (itemId: string) => {
-    setSelectedItems(prev => ({
-      ...prev,
-      [itemId]: prev[itemId]?.selected
-        ? { ...prev[itemId], selected: false }
-        : { selected: true, quantity: 1, reason: '' }
-    }))
+  // Only items that still have quantity not covered by an open or completed return.
+  const returned = getReturnedQuantities(returns)
+  const items = order.items
+    .map((item) => ({ item, remaining: item.quantity - (returned[item.id] ?? 0) }))
+    .filter((row) => row.remaining > 0)
+
+  const [lines, setLines] = useState<Record<string, Line>>(() =>
+    Object.fromEntries(items.map(({ item }) => [item.id, { checked: false, quantity: 1, reason: '' }]))
+  )
+  const [error, setError] = useState<string | null>(null)
+  const [returnNumber, setReturnNumber] = useState<string | null>(null)
+
+  const update = (id: string, patch: Partial<Line>) => {
+    setError(null)
+    setLines((prev) => ({ ...prev, [id]: { ...prev[id], ...patch } }))
   }
 
-  const handleQuantityChange = (itemId: string, quantity: number) => {
-    setSelectedItems(prev => ({
-      ...prev,
-      [itemId]: { ...prev[itemId], quantity }
-    }))
-  }
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
 
-  const handleReasonChange = (itemId: string, reason: string) => {
-    setSelectedItems(prev => ({
-      ...prev,
-      [itemId]: { ...prev[itemId], reason }
-    }))
-  }
+    const selected = items.filter(({ item }) => lines[item.id]?.checked)
+    if (selected.length === 0) return setError('Select at least one item to return.')
 
-  const hasSelectedItems = Object.values(selectedItems).some(item => item.selected)
-  const allSelectedHaveReasons = Object.entries(selectedItems)
-    .filter(([, item]) => item.selected)
-    .every(([, item]) => item.reason)
+    const missing = selected.find(({ item }) => !lines[item.id].reason.trim())
+    if (missing) return setError(`Tell us why you're returning ${missing.item.product.name}.`)
 
-  const handleSubmit = async () => {
-    setIsSubmitting(true)
-    setSubmitError('')
-
-    try {
-      const items = Object.entries(selectedItems)
-        .filter(([, item]) => item.selected)
-        .map(([orderItemId, item]) => ({
-          orderItemId,
-          quantity: item.quantity,
-          reason: item.reason,
-        }))
-      const response = await fetch(`/api/orders/${order.id}/returns`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items }),
+    setError(null)
+    startTransition(async () => {
+      const result = await submitReturnRequest({
+        orderNumber: order.orderNumber,
+        items: selected.map(({ item }) => ({
+          orderItemId: item.id,
+          quantity: lines[item.id].quantity,
+          reason: lines[item.id].reason.trim(),
+        })),
       })
-      const result = await response.json()
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Could not submit the return request')
+      if (result.ok) {
+        setReturnNumber(result.returnNumber)
+        router.refresh() // re-fetch the order page so the new return shows up
+      } else {
+        setError(result.error)
       }
-
-      setReturnNumber(result.returnNumber)
-      setSubmitted(true)
-    } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : 'Could not submit the return request')
-    } finally {
-      setIsSubmitting(false)
-    }
+    })
   }
 
-  if (submitted) {
+  if (returnNumber) {
     return (
-      <div className="text-center py-8">
-        <div className="w-16 h-16 bg-success-light rounded-full flex items-center justify-center mx-auto mb-4">
-          <CheckCircle className="w-8 h-8 text-success" />
+      <div className="text-center space-y-4 py-2">
+        <CheckCircle className="w-12 h-12 text-success mx-auto" />
+        <div>
+          <p className="font-medium text-foreground">Return request submitted</p>
+          <p className="text-sm text-border-dark mt-1">
+            Your request number is <span className="font-mono">{returnNumber}</span>. We&apos;ll review it
+            and you can follow its status on this page.
+          </p>
         </div>
-        <h3 className="font-serif text-xl text-foreground mb-2">Return Request Submitted</h3>
-        <p className="text-border-dark mb-6">
-          We&apos;ve received your return request. You&apos;ll receive an email with return instructions shortly.
-        </p>
-        <p className="text-sm text-border-dark mb-6">
-          Return ID: <span className="font-mono font-medium">{returnNumber}</span>
-        </p>
-        <Button onClick={onClose}>Close</Button>
+        <Button variant="secondary" onClick={onClose}>
+          Done
+        </Button>
+      </div>
+    )
+  }
+
+  if (items.length === 0) {
+    return (
+      <div className="space-y-4">
+        <p className="text-border-dark">Every item in this order already has a return request.</p>
+        <Button variant="secondary" onClick={onClose}>
+          Close
+        </Button>
       </div>
     )
   }
 
   return (
-    <div>
-      <p className="text-border-dark mb-6">
-        Select the items you&apos;d like to return and provide a reason for each.
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <p className="text-sm text-border-dark">
+        Choose the items you&apos;d like to send back and tell us why.
+        {RETURN_WINDOW_DAYS !== null && ` Returns can be requested within ${RETURN_WINDOW_DAYS} days of delivery.`}
       </p>
 
-      <div className="space-y-4 mb-6">
-        {order.items.map((item) => (
-          <div
-            key={item.id}
-            className={`border rounded-lg p-4 transition-colors ${selectedItems[item.id]?.selected
-              ? 'border-primary bg-primary/5'
-              : 'border-border-light'
-              }`}
-          >
-            <div className="flex gap-4">
-              <div className="relative w-16 h-16 bg-surface rounded-lg overflow-hidden shrink-0">
-                <Image
-                  src={item.product.images[0].secure_url}
-                  alt={item.product.name}
-                  fill
-                  className="object-cover"
+      <ul className="space-y-3">
+        {items.map(({ item, remaining }) => {
+          const line = lines[item.id]
+          return (
+            <li
+              key={item.id}
+              className={`rounded-brand border p-4 transition-colors ${line.checked ? 'border-primary bg-primary-light/30' : 'border-border-light'
+                }`}
+            >
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={line.checked}
+                  onChange={(e) => update(item.id, { checked: e.target.checked })}
+                  className="mt-1 size-4 accent-primary"
                 />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2">
-                  <p className="font-medium text-foreground text-sm line-clamp-2">
-                    {item.product.name}
-                  </p>
-                  <input
-                    type="checkbox"
-                    checked={selectedItems[item.id]?.selected || false}
-                    onChange={() => handleToggleItem(item.id)}
-                    className="w-5 h-5 rounded border-border accent-primary"
-                  />
-                </div>
-                <p className="text-sm text-border-dark">
-                  Qty: {item.quantity} × ${item.product.price.toFixed(2)}
-                </p>
-              </div>
-            </div>
+                <ProductThumbFrame
+                  image={item.product.images?.[0]?.secure_url}
+                  name={item.product.name}
+                  className="w-14 h-14"
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="block font-medium text-foreground line-clamp-2">{item.product.name}</span>
+                  <span className="block text-sm text-border-dark">
+                    {[item.product.color, item.product.size].filter(Boolean).join(' · ')}
+                    {(item.product.color || item.product.size) && ' · '}
+                    Qty {remaining}
+                  </span>
+                </span>
+              </label>
 
-            {selectedItems[item.id]?.selected && (
-              <div className="mt-4 pt-4 border-t border-border-light space-y-3">
-                {item.quantity > 1 && (
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
-                      Quantity to Return
+              {line.checked && (
+                <div className="mt-4 space-y-3 pl-7">
+                  {remaining > 1 && (
+                    <label className="flex items-center gap-3 text-sm text-foreground">
+                      Quantity to return
+                      <select
+                        value={line.quantity}
+                        onChange={(e) => update(item.id, { quantity: Number(e.target.value) })}
+                        className="form-control h-9 w-20"
+                      >
+                        {Array.from({ length: remaining }, (_, i) => i + 1).map((n) => (
+                          <option key={n} value={n}>
+                            {n}
+                          </option>
+                        ))}
+                      </select>
                     </label>
-                    <select
-                      value={selectedItems[item.id]?.quantity || 1}
-                      onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                      className="w-full px-3 py-2 border border-border-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                    >
-                      {Array.from({ length: item.quantity }, (_, i) => i + 1).map(num => (
-                        <option key={num} value={num}>{num}</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">
-                    Reason for Return *
+                  )}
+                  <label className="block text-sm text-foreground">
+                    Reason for return
+                    <textarea
+                      value={line.reason}
+                      onChange={(e) => update(item.id, { reason: e.target.value })}
+                      maxLength={MAX_RETURN_REASON_LENGTH}
+                      rows={2}
+                      placeholder="e.g. Wrong size, arrived damaged"
+                      className="form-control mt-1 h-auto py-2 resize-y"
+                    />
+                    <span className="block text-right text-xs text-border-dark">
+                      {line.reason.length}/{MAX_RETURN_REASON_LENGTH}
+                    </span>
                   </label>
-                  <select
-                    value={selectedItems[item.id]?.reason || ''}
-                    onChange={(e) => handleReasonChange(item.id, e.target.value)}
-                    className="w-full px-3 py-2 border border-border-light rounded-lg focus:secondary-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                  >
-                    <option value="">Select a reason</option>
-                    {returnReasons.map(reason => (
-                      <option key={reason} value={reason}>{reason}</option>
-                    ))}
-                  </select>
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              )}
+            </li>
+          )
+        })}
+      </ul>
 
-      <div className="flex gap-3">
-        <Button variant="secondary" onClick={onClose} className="flex-1">
+      {error && (
+        <p role="alert" className="rounded-brand bg-danger-light px-3 py-2 text-sm font-medium text-danger-dark">
+          {error}
+        </p>
+      )}
+
+      <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+        <Button type="button" variant="secondary" onClick={onClose} disabled={isPending} className='flex-1'>
           Cancel
         </Button>
-        <Button
-          onClick={handleSubmit}
-          disabled={!hasSelectedItems || !allSelectedHaveReasons || isSubmitting}
-          className="flex-1"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Submitting...
-            </>
-          ) : (
-            'Submit Return Request'
-          )}
+        <Button type="submit" disabled={isPending} className="flex flex-1 items-center justify-center gap-2">
+          {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+          {isPending ? 'Submitting...' : 'Submit return request'}
         </Button>
       </div>
-      {submitError && (
-        <p className="mt-3 text-sm text-red-600">{submitError}</p>
-      )}
-    </div>
+    </form>
   )
 }

@@ -26,8 +26,8 @@ export function QuantityStepper({
   const atMax = value >= max
 
   const btn = cn(
-    'flex items-center justify-center text-foreground transition-colors',
-    'hover:bg-border-light/50 active:bg-border-light',
+    'flex items-center justify-center text-background transition-colors',
+    'bg-primary hover:bg-primary/50 active:bg-primary-dark',
     'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset',
     size === 'md' ? 'h-12 w-12' : 'h-9 w-9'
@@ -38,13 +38,17 @@ export function QuantityStepper({
       <div
         role="group"
         aria-label="Quantity"
-        className="inline-flex items-center overflow-hidden rounded-lg border border-border-light"
+        className="bg-primary inline-flex items-center overflow-hidden rounded-lg border border-border-light"
       >
         <button
           type="button"
           aria-label="Decrease quantity"
           className={btn}
-          onClick={() => onChange(Math.max(min, value - 1))}
+          onClick={(e) => {
+            e.preventDefault()
+            onChange(Math.max(min, value - 1))
+          }
+          }
           disabled={atMin}
         >
           <Minus className="h-4 w-4" />
@@ -53,7 +57,7 @@ export function QuantityStepper({
         <span
           aria-live="polite"
           className={cn(
-            'text-center font-medium tabular-nums text-foreground',
+            'text-center font-medium tabular-nums text-background',
             size === 'md' ? 'w-12' : 'w-9'
           )}
         >
@@ -64,7 +68,11 @@ export function QuantityStepper({
           type="button"
           aria-label="Increase quantity"
           className={btn}
-          onClick={() => onChange(Math.min(max, value + 1))}
+          onClick={(e) => {
+            e.preventDefault()
+            onChange(Math.min(max, value + 1))
+          }
+          }
           disabled={atMax}
         >
           <Plus className="h-4 w-4" />

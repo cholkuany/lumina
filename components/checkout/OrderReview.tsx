@@ -100,7 +100,7 @@ export function OrderReview({
             {shippingData.firstName} {shippingData.lastName}
           </p>
           <p className="text-border-dark text-sm">
-            {shippingData.address}
+            {shippingData.street}
             {shippingData.apartment && `, ${shippingData.apartment}`}
           </p>
           <p className="text-border-dark text-sm">

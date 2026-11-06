@@ -54,7 +54,7 @@ const SearchForm = ({ initialTerm, initialCategory }: SearchFormProps) => {
     <form
       onSubmit={handleSubmit}
       role="search"
-      className="flex h-10.5 w-full overflow-hidden rounded border-2 border-gold bg-[#FAFAF8] focus-within:ring-2 focus-within:ring-gold/40"
+      className="flex h-10.5 w-full overflow-hidden rounded border-2 border-warning bg-[#FAFAF8] focus-within:ring-2 focus-within:ring-warning/40"
     >
       <select
         aria-label="Search category"
@@ -93,7 +93,7 @@ const SearchForm = ({ initialTerm, initialCategory }: SearchFormProps) => {
       <button
         type="submit"
         aria-label="Submit search"
-        className="flex shrink-0 items-center gap-1.5 bg-gold px-3 text-[13px] font-bold text-ink transition-colors hover:bg-gold-deep sm:px-4"
+        className="flex shrink-0 items-center gap-1.5 bg-warning px-3 text-[13px] font-bold text-foreground transition-colors hover:bg-warning-dark sm:px-4"
       >
         <Search className="h-4 w-4 sm:hidden" aria-hidden="true" />
         <span className="hidden sm:inline">Search</span>
@@ -128,10 +128,10 @@ export const SearchBar = () => (
 const SearchBarFallback = () => (
   <div
     aria-hidden="true"
-    className="flex h-10.5 w-full overflow-hidden rounded border-2 border-gold bg-[#FAFAF8]"
+    className="flex h-10.5 w-full overflow-hidden rounded border-2 border-warning bg-[#FAFAF8]"
   >
     <div className="w-24 shrink-0 bg-[#EDE9DC] sm:w-28" />
     <div className="flex-1" />
-    <div className="w-11 shrink-0 bg-gold sm:w-24" />
+    <div className="w-11 shrink-0 bg-warning sm:w-24" />
   </div>
 )

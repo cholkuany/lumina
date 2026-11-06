@@ -1,13 +1,14 @@
 import mongoose from 'mongoose'
 import dbConnect from '@/lib/db/connection'
 import Order, { type IOrder, type IOrderItem } from '@/lib/db/models/Order'
-import type { TOrder, TOrderProps, TShippingAddress } from '@/lib/types'
+import type { TOrder, TOrderProps, TAddress } from '@/lib/types'
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'America/Toronto',
   }).format(date)
 }
 
@@ -21,7 +22,7 @@ function formatDateTime(date: Date) {
   }).format(date)
 }
 
-function mapShippingAddress(address: IOrder['shippingAddress']): TShippingAddress {
+function mapShippingAddress(address: IOrder['shippingAddress']): TAddress {
   return {
     id: '',
     firstName: address.firstName,

@@ -35,11 +35,11 @@ export function Checkbox({ id, label, checked, onChange, disabled, className }: 
           className={cn(
             'w-5 h-5 border-2 rounded transition-all duration-200',
             checked
-              ? 'bg-text-primary border-text-primary'
-              : 'bg-white border-border group-hover:border-primary'
+              ? 'bg-primary border-primary'
+              : 'bg-background border-border group-hover:border-primary'
           )}
         >
-          {checked && <Check className="w-4 h-4 text-white absolute inset-0.5 top-0.5 left-0.5" strokeWidth={3} />}
+          {checked && <Check className="w-4 h-4 text-background absolute inset-0.5 top-0.5 left-0.5" strokeWidth={3} />}
         </div>
       </div>
       <span className="text-sm text-foreground">{label}</span>

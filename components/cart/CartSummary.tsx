@@ -50,8 +50,7 @@ export function CartSummary({ showCheckoutButton = true }: CartSummaryProps) {
               value={promoCode}
               onChange={(e) => setPromoCode(e.target.value)}
               placeholder="Enter code"
-              className="w-full h-11 pl-10 pr-4 bg-white border border-borderrounded-brand
-                         text-sm focus:outline-none focus:border-primary transition-colors"
+              className="w-full h-11 pl-10 pr-4 bg-white border border-borderrounded-brand text-sm focus:outline-none focus:border-primary transition-colors"
             />
           </div>
           <Button variant="secondary" onClick={handleApplyPromo}>

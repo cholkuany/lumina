@@ -53,12 +53,6 @@ export function CartItem({ item, showControls = true }: CartItemProps) {
 
         <div className="flex items-center justify-between gap-2">
           {showControls ? (
-            // <QuantitySelector
-            //   value={item.quantity}
-            //   onChange={(qty) => updateQuantity(item.product.variant, qty)}
-            //   size="sm"
-            //   stock={item.product.variant.stock}
-            // />
             <QuantityStepper
               value={item.quantity}
               onChange={(qty) => updateQuantity(item.product.variant, qty)}

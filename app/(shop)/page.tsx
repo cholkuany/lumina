@@ -1,5 +1,5 @@
 import { Hero } from '@/components/sections/Hero'
-import { Categories } from '@/components/sections/Categories'
+// import { Categories } from '@/components/sections/Categories'
 import { TrendingProducts } from '@/components/sections/TrendingProducts'
 
 import { getProducts } from '@/lib/queries/get.products'

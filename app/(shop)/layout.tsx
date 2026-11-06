@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 import { Footer } from '@/components/layout/Footer'
-import Header from '@/components/layout/nav/experimentals/header';
-import CategoryNav from '@/components/layout/nav/experimentals/categoryNav/CategoryNav';
+import Header from '@/components/layout/nav/header';
+import CategoryNav from '@/components/layout/nav/categoryNav/CategoryNav';
 
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { QueryContextProvider } from '@/context/QueryProviderContext'

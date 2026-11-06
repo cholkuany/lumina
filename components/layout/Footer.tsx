@@ -92,7 +92,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-ink border-t border-border-light">
+    <footer className="bg-foreground border-t border-border-light">
       {/* Newsletter Section */}
       <div className="bg-text-primary text-white py-12">
         <div className="container-lumina">

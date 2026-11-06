@@ -9,8 +9,10 @@ export async function PATCH(_req: Request, { params }: { params: Promise<{ id: s
   try {
     const { id } = await params
     const session = await getServerSession()
-    if (!session?.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    if (!session?.user && session?.user.role !== 'admin') {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 })
     }
 
     const notification = await markNotificationAsRead(id)
@@ -38,7 +40,7 @@ export async function DELETE(
   const { id } = await params
   try {
     const session = await getServerSession()
-    if (!session?.user) {
+    if (!session?.user && session?.user.role !== 'admin') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

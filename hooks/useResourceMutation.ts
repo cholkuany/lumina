@@ -1,15 +1,12 @@
 'use client'
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-// import { DBReview } from '@/lib/queries/get.reviews'
+
 import {
   ActionType,
-  // Resource,
-  // ENDPOINT_MAP,
   RESOURCE_CONFIG,
   ResourceMap,
   ListResponse,
-  // BaseEntity,
   ACTION_STATUS_MAP
 } from '@/lib/types'
 

@@ -11,7 +11,7 @@ const menuItems = [
   { href: '/account', label: 'Dashboard', icon: User },
   { href: '/account/orders', label: 'My Orders', icon: Package },
   { href: '/account/addresses', label: 'Addresses', icon: MapPin },
-  { href: '/account/wishlist', label: 'Wishlist', icon: Heart },
+  { href: '/wishlist', label: 'Wishlist', icon: Heart },
   { href: '/account/payment-methods', label: 'Payment Methods', icon: CreditCard },
   { href: '/account/settings', label: 'Settings', icon: Settings },
 ]
@@ -30,7 +30,7 @@ export function AccountSidebar() {
             className={cn(
               'flex items-center gap-3 px-4 py-3 rounded-brand text-sm font-medium transition-colors',
               isActive
-                ? 'bg-text-primary text-white'
+                ? 'bg-primary/10 text-primary'
                 : 'text-foreground hover:bg-surface'
             )}
           >

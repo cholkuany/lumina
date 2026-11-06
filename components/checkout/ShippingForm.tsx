@@ -42,7 +42,7 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
     email: '',
     firstName: '',
     lastName: '',
-    address: '',
+    street: '',
     apartment: '',
     city: '',
     state: '',
@@ -105,8 +105,8 @@ export function ShippingForm({ onSubmit }: ShippingFormProps) {
           <div className="sm:col-span-2">
             <Input
               label="Street Address"
-              value={formData.address}
-              onChange={(e) => handleChange('address', e.target.value)}
+              value={formData.street}
+              onChange={(e) => handleChange('street', e.target.value)}
               placeholder="123 Main Street"
               required
             />

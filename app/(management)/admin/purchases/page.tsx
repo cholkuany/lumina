@@ -7,8 +7,7 @@ import { Box, Check, CircleDollarSign, Clipboard, PackagePlus, Plus, Truck, X } 
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/Button'
-import type { AdminPurchase, PurchaseStats, PurchaseStatus } from '@/lib/purchase-types'
-import type { TProduct } from '@/lib/types'
+import type { TProduct, AdminPurchase, PurchaseStatus, PurchaseStats } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 

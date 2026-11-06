@@ -4,9 +4,9 @@ import { Eye, ShieldCheck, Ban, Trash2 } from 'lucide-react';
 
 import { useState, useCallback, useMemo } from "react"
 
-import { ResourceTable } from '@/components/tables/ResourceTable';
-import { ResourceTableToolbar } from '@/components/tables/ResourceTableToolbar';
-import { ResourceTablePagination } from '@/components/tables/ResourceTablePagination';
+import { ResourceTable } from '@/app/(management)/components/tables/ResourceTable';
+import { ResourceTableToolbar } from '@/app/(management)/components/tables/ResourceTableToolbar';
+import { ResourceTablePagination } from '@/app/(management)/components/tables/ResourceTablePagination';
 import { useTableInstanceController } from '@/hooks/useResourceController';
 import { useResourceController } from '@/hooks/useResourceController';
 
@@ -14,13 +14,13 @@ import { cn } from "@/lib/utils"
 import { useUsers } from "@/hooks/useUsers"
 import { useUserActions } from "@/hooks/useUserActions"
 import { User } from "@/lib/auth"
-import { UserDetailModal } from "@/components/admin/users/UserDetailModal"
-import { UserRoleModal } from "@/components/admin/users/UserRoleModal"
-import { BulkActionsBar } from "@/components/admin/users/BulkActionsBar"
-import { ConfirmModal } from "@/components/admin/ConfirmModal"
-import { useUserColumns } from '@/components/admin/users/userColumns';
-import { BulkActions } from '@/components/admin/resource/ResourceBulkActions';
-import { ResourceHeader } from '@/components/admin/resource/ResourceHeader';
+import { UserDetailModal } from '../../components/users/UserDetailModal';
+import { UserRoleModal } from '../../components/users/UserRoleModal';
+import { BulkActionsBar } from '../../components/users/BulkActionsBar';
+import { ConfirmModal } from '../../components/ConfirmModal';
+import { useUserColumns } from '../../components/users/userColumns';
+import { BulkActions } from '../../components/resource/ResourceBulkActions';
+import { ResourceHeader } from '../../components/resource/ResourceHeader';
 
 const ITEMS_PER_PAGE = 10
 

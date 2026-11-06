@@ -12,7 +12,7 @@ export const CartIcon = ({ count, variant = 'full' }: { count: number, variant?:
     <Button
       variant="ghost"
       size="xxxl"
-      className="relative flex items-center gap-1.5 text-background px-1 py-0.5 hover:text-ink"
+      className="relative flex items-center gap-1.5 text-background px-1 py-0.5 hover:text-foreground"
       onClick={() => router.push('/cart')}
       aria-label={count > 0 ? `View cart, ${count} items` : 'View cart'}
     >

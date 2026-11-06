@@ -22,9 +22,8 @@ const quickActions = [
 export default async function AccountPage() {
   const session = await getServerSession();
 
-  if (!session) {
-    redirect("/login");
-  }
+  if (!session) redirect("/login");
+
   const userSession: LoginUser = session.user as LoginUser;
   const [firstName, lastName] = userSession.name ? userSession.name.split(" ") : ["User", ""];
   const orders = await getOrdersForUser(userSession.id)
@@ -84,8 +83,7 @@ export default async function AccountPage() {
                   <Link
                     key={action.href}
                     href={action.href}
-                    className="bg-white border border-border-light rounded-brand p-4 
-                               hover:border-primary hover:shadow-soft transition-all text-center"
+                    className="bg-white border border-border-light rounded-brand p-4 hover:border-primary hover:shadow-soft transition-all text-center"
                   >
                     <div className="w-12 h-12 bg-surface rounded-full flex items-center justify-center mx-auto mb-3">
                       <action.icon className="w-6 h-6 text-primary" />

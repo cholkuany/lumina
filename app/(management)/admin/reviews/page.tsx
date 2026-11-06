@@ -2,20 +2,20 @@
 
 import { useState, useMemo } from 'react'
 
-import { ResourceTable } from '@/components/tables/ResourceTable'
-import { useResourceController, useTableInstanceController } from '@/hooks/useResourceController'
-import { ResourceTableToolbar } from '@/components/tables/ResourceTableToolbar'
-import { ResourceTablePagination } from '@/components/tables/ResourceTablePagination'
-import { ResourceHeader } from '@/components/admin/resource/ResourceHeader'
-
-import { ConfirmModal } from '@/components/admin/ConfirmModal'
-import { Button } from '@/components/ui/Button'
-import { useAllReviews } from '@/hooks/useProductReviews'
-import { DBReview } from '@/lib/queries/get.reviews'
-import { ReviewDetailModal } from '@/components/admin/ReviewDetailModal'
-
 import { Check, X, Clock, Flag, Star } from "lucide-react"
-import { useReviewColumns } from '@/components/admin/columns/useReviewColumns'
+
+import { useReviewColumns } from '../../components/columns/useReviewColumns'
+import { useAllReviews } from '@/hooks/useProductReviews'
+import { useResourceController, useTableInstanceController } from '@/hooks/useResourceController'
+
+import { ResourceTable } from '@/app/(management)/components/tables/ResourceTable'
+import { ResourceTableToolbar } from '@/app/(management)/components/tables/ResourceTableToolbar'
+import { ResourceTablePagination } from '@/app/(management)/components/tables/ResourceTablePagination'
+import { ResourceHeader } from '../../components/resource/ResourceHeader'
+import { ConfirmModal } from '../../components/ConfirmModal'
+import { Button } from '@/components/ui/Button'
+import { DBReview } from '@/lib/queries/get.reviews'
+import { ReviewDetailModal } from '../../components/ReviewDetailModal'
 import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 
 const reviewStatuses = [

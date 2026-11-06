@@ -13,7 +13,7 @@ export const UserInfoHeader = ({ firstName, lastName, email, image }: UserInfoHe
       <AvatarBadge
         image={image}
         initials={`${firstName.charAt(0)}${lastName.charAt(0)}`}
-        className="h-12 w-12 text-base ring-2 ring-gold/40"
+        className="h-12 w-12 text-base ring-2 ring-warning/40"
       />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold text-foreground">

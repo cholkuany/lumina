@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from '@/lib/auth-server'
 import dbConnect from '@/lib/db/connection'
 import { Order } from '@/lib/db/models'
-import type { AdminOrderStatus } from '@/lib/types'
+import type { OrderStatus } from '@/lib/types'
 
-const ORDER_STATUSES: AdminOrderStatus[] = [
+const ORDER_STATUSES: OrderStatus[] = [
   'processing',
   'shipped',
   'delivered',
@@ -32,7 +32,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
     return NextResponse.json({ error: 'Invalid order ID' }, { status: 400 })
   }
 
-  let body: { status?: AdminOrderStatus }
+  let body: { status?: OrderStatus }
   try {
     body = await request.json()
   } catch {

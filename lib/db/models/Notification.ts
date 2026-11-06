@@ -1,6 +1,7 @@
 import mongoose, { Schema, Model } from 'mongoose'
 
-export type NotificationType = 'ORDER' | 'REVIEW' | 'USER' | 'SYSTEM'
+export type NotificationType = 'ORDER' | 'REVIEW' | 'USER' | 'SYSTEM' | 'RETURN'
+export const NotificationEnum = ['ORDER', 'REVIEW', 'USER', 'SYSTEM', 'RETURN']
 
 export interface INotification {
   type: NotificationType
@@ -14,7 +15,7 @@ const NotificationSchema = new Schema<INotification>(
   {
     type: {
       type: String,
-      enum: ['ORDER', 'REVIEW', 'USER', 'SYSTEM'],
+      enum: NotificationEnum,
       required: true,
     },
     message: {

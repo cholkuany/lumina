@@ -106,9 +106,9 @@ ReturnRequestSchema.post('save', async function () {
   if (!this.wasNew) return
 
   await createNotification({
-    type: 'ORDER',
+    type: 'RETURN',
     message: `New return request ${this.returnNumber}`,
-    link: `/admin/orders?order=${this.order.toString()}`,
+    link: `/admin/returns?return=${this._id}`,
   }).catch(console.error)
 })
 

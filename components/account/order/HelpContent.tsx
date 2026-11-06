@@ -1,4 +1,3 @@
-// app/account/orders/[slug]/page.tsx
 'use client'
 
 import { useState } from 'react'

@@ -2,7 +2,7 @@
 'use client'
 
 import { Fragment } from 'react'
-import { Listbox, Transition } from '@headlessui/react'
+import { Listbox, ListboxOption, ListboxOptions, ListboxButton, Transition } from '@headlessui/react'
 import { ChevronDown, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -32,10 +32,8 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
       )}
       <Listbox value={value} onChange={onChange}>
         <div className="relative">
-          <Listbox.Button
-            className="relative w-full h-12 pl-4 pr-10 text-left bg-white border border-border
-                       rounded-brand cursor-pointer focus:outline-none focus:border-primary focus:ring-1 
-                       focus:ring-primary transition-colors"
+          <ListboxButton
+            className="relative w-full h-12 pl-4 pr-10 text-left bg-white border border-border rounded-brand cursor-pointer focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
           >
             <span className={cn('block truncate', !selectedOption && 'text-border-dark')}>
               {selectedOption?.label || placeholder}
@@ -43,7 +41,7 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
               <ChevronDown className="w-5 h-5 text-border-dark" />
             </span>
-          </Listbox.Button>
+          </ListboxButton>
 
           <Transition
             as={Fragment}
@@ -51,12 +49,11 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options
-              className="absolute z-10 w-full mt-1 overflow-auto bg-white border border-border-light 
-                         rounded-brand shadow-hover max-h-60 focus:outline-none"
+            <ListboxOptions
+              className="absolute z-10 w-full mt-1 overflow-auto bg-white border border-border-light rounded-brand shadow-hover max-h-60 focus:outline-none"
             >
               {options.map((option) => (
-                <Listbox.Option
+                <ListboxOption
                   key={option.value}
                   value={option.value}
                   className={({ active }) =>
@@ -78,9 +75,9 @@ export function Select({ label, options, value, onChange, placeholder = 'Select.
                       )}
                     </>
                   )}
-                </Listbox.Option>
+                </ListboxOption>
               ))}
-            </Listbox.Options>
+            </ListboxOptions>
           </Transition>
         </div>
       </Listbox>

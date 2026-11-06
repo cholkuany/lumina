@@ -12,7 +12,7 @@ export const AvatarBadge = ({
 }) => (
   <span
     className={cn(
-      'flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-gold font-extrabold tracking-tight text-ink',
+      'flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-warning font-extrabold tracking-tight text-foreground',
       className
     )}
   >

@@ -1,0 +1,95 @@
+import type { ColumnDef } from '@tanstack/react-table'
+
+import type { TProduct } from '@/lib/types'
+import { StatusBadge } from '../StatusBadge'
+import { ProductCell } from '../products/ProductCell'
+import { ProductActions } from '../products/ProductAction'
+import { ActionType } from '@/lib/types'
+import { getProductPrice, getProductStock } from '@/lib/utils'
+
+export function createProductColumns({
+  onDelete,
+}: {
+  onDelete: (
+    type: ActionType,
+    ids: string | string[]
+  ) => void
+}): ColumnDef<TProduct>[] {
+  return [
+    {
+      accessorKey: 'name',
+      header: 'Product',
+      cell: ({ row }) => (
+        <ProductCell
+          product={row.original}
+        />
+      ),
+      enableSorting: true,
+    },
+
+    {
+      accessorKey: 'price',
+      header: 'Price',
+      cell: ({ row }) => (
+        <span className="font-medium text-foreground">
+          ${getProductPrice(row.original).toFixed(2)}
+        </span>
+      ),
+      enableSorting: true,
+    },
+
+    {
+      accessorKey: 'stockCount',
+      header: 'Stock',
+      cell: ({ row }) => {
+        const product = row.original
+        const stock = getProductStock(product)
+        return (
+          <div className="flex items-center gap-2">
+            <span className="text-foreground">
+              {stock}
+            </span>
+
+            <StatusBadge
+              status={
+                (stock ?? 0) > 100
+                  ? 'in_stock'
+                  : (stock ?? 0) > 0
+                    ? 'low_stock'
+                    : 'out_of_stock'
+              }
+              size="sm"
+            />
+          </div>
+        )
+      },
+      enableSorting: true,
+    },
+
+    {
+      accessorKey: 'unitsSold',
+      header: 'Sales',
+      cell: ({ row }) => (
+        <span className="text-foreground">
+          {row.original.unitsSold} units
+        </span>
+      ),
+      enableSorting: true,
+    },
+
+    {
+      id: 'actions',
+      header: '',
+      cell: ({ row }) => (
+        <ProductActions
+          id={row.original.id}
+          actionText="delete"
+          onDelete={onDelete}
+        />
+      ),
+      meta: {
+        className: 'w-24',
+      },
+    },
+  ]
+}

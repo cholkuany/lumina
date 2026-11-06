@@ -122,7 +122,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
 
         {/* Image Counter */}
         {hasMultiple && (
-          <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-ink/80 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+          <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-foreground/80 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
             {activeIndex + 1} / {images.length}
           </div>
         )}

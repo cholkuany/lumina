@@ -31,6 +31,7 @@ export async function getAdminOrders(): Promise<{
     shipped: 0,
     delivered: 0,
     cancelled: 0,
+    pending: 0,
   }
 
   const orders = documents.map<TAdminOrder>((order) => {

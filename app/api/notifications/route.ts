@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from '@/lib/auth-server'
-import { getUnreadNotifications, deleteAllReadNotifications, markAllNotificationsAsRead } from '@/lib/queries/notification.queries'
+import { getUnreadNotifications, deleteAllReadNotifications, markAllNotificationsAsRead, getAllNotifications } from '@/lib/queries/notification.queries'
 
 // Fetch unread notifications
 export async function GET() {
@@ -10,16 +10,18 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const notifications = await getUnreadNotifications()
+    // const notifications = await getUnreadNotifications()
+    const notifications = await getAllNotifications()
+    const unreadCount = notifications.filter((n) => !n.read).length
 
     return NextResponse.json({
       notifications,
-      count: notifications.length,
+      unreadCount,
     })
   } catch (error) {
     console.error('[GET /api/notifications]', error)
     return NextResponse.json(
-      { error: 'Failed to fetch notifications' },
+      { error: 'Failed to fetch unread notifications' },
       { status: 500 }
     )
   }
@@ -53,7 +55,7 @@ export async function PATCH() {
     }
 
     await markAllNotificationsAsRead()
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true }, { status: 200 })
   } catch (error) {
     console.error('[PATCH /api/notifications/read-all]', error)
     return NextResponse.json(

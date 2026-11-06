@@ -3,6 +3,17 @@ import { DBReview } from "./queries/get.reviews"
 import { ProductFormData } from "./validations/product.validation/product.schema"
 import { ZUser } from "./validations/user.validation"
 import { PurchaseFormValues } from "./validations/purchase.validation"
+import { NotificationType } from "./db/models/Notification"
+
+export type WithId<T> = T & { id: string }
+
+export interface Timestamped {
+  createdAt: string
+}
+
+// -----------------------------------------------------------------------------
+// Products
+// -----------------------------------------------------------------------------
 
 export interface TProduct {
   id: string
@@ -70,6 +81,12 @@ export interface TWishlistItem {
   addedAt: Date
 }
 
+// -----------------------------------------------------------------------------
+// Reviews
+// -----------------------------------------------------------------------------
+
+export type TReviewStatus = 'pending' | 'approved' | 'rejected' | 'flagged'
+
 export interface TReview {
   id: string
   author: string
@@ -89,16 +106,13 @@ export interface TReview {
   }
 }
 
-export interface TReviewSubmission {
+export interface TReviewSubmission extends Pick<TReview, 'rating' | 'title' | 'content'> {
   productId: string
-  rating: number
-  title: string
-  content: string
   images: IImage[]
   recommendProduct: boolean | null
 }
 
-export interface TReviewForModeration extends TReview {
+export interface TReviewForModeration extends TReview, Timestamped {
   product: {
     id: string
     name: string
@@ -113,35 +127,32 @@ export interface TReviewForModeration extends TReview {
   }
   reports: TReviewReport[]
   moderationHistory: TModerationAction[]
-  status: 'pending' | 'approved' | 'rejected' | 'flagged'
-  createdAt: string
+  status: TReviewStatus
 }
 
-export interface TReviewReport {
+export interface TReviewReport extends Timestamped {
   id: string
   reason: string
   details?: string
   reportedBy: string
-  createdAt: string
 }
 
-export interface TModerationAction {
+export interface TModerationAction extends Timestamped {
   id: string
   action: 'approved' | 'rejected' | 'flagged' | 'edited'
   reason?: string
   moderatorId: string
   moderatorName: string
-  createdAt: string
 }
 
-export interface TModerationStats {
-  pending: number
-  approved: number
-  rejected: number
-  flagged: number
+export interface TModerationStats extends Record<TReviewStatus, number> {
   totalToday: number
   averageResponseTime: string
 }
+
+// -----------------------------------------------------------------------------
+// Addresses
+// -----------------------------------------------------------------------------
 
 export interface TAddress {
   id: string
@@ -157,32 +168,45 @@ export interface TAddress {
   isDefault: boolean
 }
 
-export type TShippingAddress = TAddress
 export type TBillingAddress = Omit<TAddress, 'isDefault' | 'phone'>
+export type TOrderAddress = Omit<TAddress, 'id' | 'isDefault'>
 
-export interface TOrder {
+// -----------------------------------------------------------------------------
+// Orders
+// -----------------------------------------------------------------------------
+
+
+export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+export type TPaymentStatus = 'pending' | 'paid' | 'failed' | 'refunded';
+export type TInventoryStatus = 'pending' | 'adjusted' | 'failed';
+export type ReturnStatus = 'pending' | 'approved' | 'rejected' | 'received'
+
+export interface OrderBase {
   id: string
   orderNumber: string
   date: string
   status: OrderStatus
-  items: TCartItem[]
+}
+
+export interface OrderTotals {
   subtotal: number
   shipping: number
   tax: number
   total: number
-  shippingAddress: TShippingAddress
+}
+
+export interface OrderTotalsWithDiscount extends OrderTotals {
+  discount: number
+}
+
+export interface TOrder extends OrderBase, OrderTotals {
+  items: TCartItem[]
+  shippingAddress: TAddress
   trackingNumber?: string
 }
 
-export type OrderStatus = 'processing' | 'shipped' | 'delivered' | 'cancelled'
-
-export interface TOrderProps {
-  id: string
-  orderNumber: string
-  date: string
+export interface TOrderProps extends OrderBase, OrderTotalsWithDiscount {
   dateRaw: string
-  status: OrderStatus
-  total: number
   trackingNumber?: string
   carrier?: string
   estimatedDelivery?: string
@@ -200,7 +224,7 @@ export interface TOrderProps {
     }
     quantity: number
   }>
-  shippingAddress: TShippingAddress
+  shippingAddress: TAddress
   billingAddress: TBillingAddress
   paymentMethod: {
     type: string
@@ -209,10 +233,6 @@ export interface TOrderProps {
     expiryMonth: number
     expiryYear: number
   }
-  subtotal: number
-  shipping: number
-  tax: number
-  discount: number
   timeline?: Array<{
     status: string
     date: string
@@ -229,13 +249,7 @@ export type LoginUser = {
   createdAt: Date;
 }
 
-export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'refunded'
-export type AdminOrderStatus = OrderStatus
-export type ReturnStatus = 'pending' | 'approved' | 'rejected' | 'received'
-
-export interface TAdminOrder {
-  id: string
-  orderNumber: string
+export interface TAdminOrder extends OrderBase, OrderTotalsWithDiscount {
   customer: { name: string; email: string }
   items: number
   orderItems: Array<{
@@ -247,27 +261,10 @@ export interface TAdminOrder {
     price: number
     image: string
   }>
-  subtotal: number
-  shipping: number
-  tax: number
-  discount: number
-  total: number
-  status: AdminOrderStatus
-  paymentStatus: PaymentStatus
-  date: string
-  shippingAddress: {
-    firstName: string
-    lastName: string
-    street: string
-    apartment?: string
-    city: string
-    state: string
-    zipCode: string
-    country: string
-    phone: string
-  }
+  paymentStatus: TPaymentStatus
+  shippingAddress: TOrderAddress
   statusHistory: Array<{
-    status: AdminOrderStatus
+    status: OrderStatus
     date: string
     note?: string
   }>
@@ -287,8 +284,12 @@ export interface TAdminOrder {
   }>
 }
 
-export type AdminOrderStats = Record<AdminOrderStatus, number>
-export type ReviewStatus = 'pending' | 'approved' | 'rejected' | 'flagged'
+export type AdminOrderStats = Record<OrderStatus, number>
+
+// -----------------------------------------------------------------------------
+// Admin
+// -----------------------------------------------------------------------------
+
 export type UserStatus = 'active' | 'inactive' | 'suspended'
 export type StockStatus = 'in_stock' | 'low_stock' | 'out_of_stock'
 export type PurchaseStatus = 'pending' | 'ordered' | 'in_transit' | 'received' | 'cancelled'
@@ -329,50 +330,19 @@ export interface FilterOption {
   label: string
 }
 
-export interface AdminNotification {
+export interface AdminNotification extends Timestamped {
   id: string
-  type: 'order' | 'review' | 'user' | 'system'
+  type: NotificationType
   title: string
   message: string
   read: boolean
-  createdAt: string
 }
 
 export type ActionType = 'approve' | 'reject' | 'delete' | 'activate' | 'deactivate' | 'publish' | 'unpublish' | 'edit' | 'cancel'
 
-
-
-export const ENDPOINT_MAP: Record<Resource, string> = {
-  review: '/api/reviews',
-  product: '/api/products',
-  user: '/api/users',
-  order: '/api/orders',
-  purchase: 'api/purchases',
-}
-
-export type ConfirmState<R extends Resource> = {
-  open: boolean
-  type: ActionType
-  ids: string[]
-  resource: R
-}
-
-export interface BaseEntity {
-  id: string
-  status?: string
-}
-
-export type DBProduct = ProductFormData & {
-  id: string,
-}
-
-export type DBPurchase = PurchaseFormValues & {
-  id: string,
-}
-
-export type DBUser = ZUser & {
-  id: string
-}
+// -----------------------------------------------------------------------------
+// Resources / API config
+// -----------------------------------------------------------------------------
 
 export interface ResourceMap {
   review: DBReview
@@ -383,20 +353,6 @@ export interface ResourceMap {
 }
 
 export type Resource = keyof ResourceMap
-
-export interface ListResponse<T> {
-  items: T[]
-  total?: number
-}
-
-export const ACTION_STATUS_MAP: Partial<Record<ActionType, string>> = {
-  approve: 'approved',
-  reject: 'rejected',
-  activate: 'active',
-  deactivate: 'disabled',
-  publish: 'published',
-  unpublish: 'draft',
-}
 
 export const RESOURCE_CONFIG = {
   review: {
@@ -412,14 +368,43 @@ export const RESOURCE_CONFIG = {
     queryKey: ['users-dashboard'],
   },
   order: {
-    endpoint: '/api/order',
+    endpoint: '/api/orders',
     queryKey: ['orders-dashboard'],
   },
   purchase: {
     endpoint: '/api/purchases',
     queryKey: ['purchases-dashboard'],
   }
-} as const
+} as const satisfies Record<Resource, { endpoint: string; queryKey: readonly string[] }>
+
+export const ENDPOINT_MAP: Record<Resource, string> = Object.fromEntries(
+  Object.entries(RESOURCE_CONFIG).map(([resource, config]) => [resource, config.endpoint])
+) as Record<Resource, string>
+
+export type ConfirmState<R extends Resource> = {
+  open: boolean
+  type: ActionType
+  ids: string[]
+  resource: R
+}
+
+export type DBProduct = WithId<ProductFormData>
+export type DBPurchase = WithId<PurchaseFormValues>
+export type DBUser = WithId<ZUser>
+
+export interface ListResponse<T> {
+  items: T[]
+  total?: number
+}
+
+export const ACTION_STATUS_MAP: Partial<Record<ActionType, string>> = {
+  approve: 'approved',
+  reject: 'rejected',
+  activate: 'active',
+  deactivate: 'disabled',
+  publish: 'published',
+  unpublish: 'draft',
+}
 
 export interface ApiError {
   message: string;
@@ -432,24 +417,17 @@ export type RedirectProps = {
   }>
 }
 
+// -----------------------------------------------------------------------------
+// Checkout
+// -----------------------------------------------------------------------------
 
-// Shipping form data type
 export type TShippingMethod = 'standard' | 'express' | 'overnight'
 
-export type TShippingFormData = {
-  email: string,
-  firstName: string,
-  lastName: string,
-  address: string,
-  apartment: string,
-  city: string,
-  state: string,
-  zipCode: string,
-  country: string,
-  phone: string,
-  shippingMethod: TShippingMethod,
-  saveAddress: boolean,
-  createAccount: boolean,
+export type TShippingFormData = Omit<TAddress, 'id' | 'isDefault'> & {
+  email: string
+  shippingMethod: TShippingMethod
+  saveAddress: boolean
+  createAccount: boolean
 }
 
 export interface TPaymentFormProps {
@@ -467,3 +445,36 @@ export type TPaymentFormData = {
   billingState: string,
   billingZip: string,
 }
+
+// -----------------------------------------------------------------------------
+// B2B Purchases
+// -----------------------------------------------------------------------------
+
+export type AdminPurchaseItem = {
+  id: string
+  productId: string
+  variantId: string
+  name: string
+  sku: string
+  variantLabel: string
+  image: string | null
+  quantity: number
+  cost: number
+}
+
+export type AdminPurchase = {
+  id: string
+  purchaseNumber: string
+  supplier: { name: string; email: string }
+  items: AdminPurchaseItem[]
+  itemCount: number
+  total: number
+  status: PurchaseStatus
+  expectedDate: string
+  receivedDate: string | null
+  inventoryAppliedAt: string | null
+  date: string
+  notes?: string
+}
+
+export type PurchaseStats = Record<PurchaseStatus, number> & { monthSpend: number }

@@ -1,5 +1,5 @@
-import { Sidebar } from '@/components/admin/Sidebar'
-import { AdminHeader } from '@/components/admin/Header'
+import { Sidebar } from './components/Sidebar'
+import { AdminHeader } from './components/AdminHeader'
 import { AuthProvider } from '@/components/providers/auth-provider'
 import { QueryContextProvider } from '@/context/QueryProviderContext'
 import { SidebarProvider } from '@/context/SidebarContext'

@@ -1,10 +1,12 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import { createNotification } from '@/lib/queries/notification.queries';
 import { AddressSnapshotSchema, type IShippingAddress } from './Address';
+import { OrderStatus, TPaymentStatus, TInventoryStatus } from '@/lib/types';
 
 export type { IShippingAddress } from './Address';
-
-export type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+const orderStatusArr = ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
+const paymentStatusArr = ['pending', 'paid', 'failed', 'refunded']
+const invertoryStatusArr = ['pending', 'adjusted', 'failed']
 
 // Order Item Sub-schema (snapshot of cart item at time of order)
 const OrderItemSchema = new Schema({
@@ -38,7 +40,7 @@ const OrderItemSchema = new Schema({
 const StatusHistorySchema = new Schema({
   status: {
     type: String,
-    enum: ['processing', 'shipped', 'delivered', 'cancelled'],
+    enum: orderStatusArr,
     required: true,
   },
   timestamp: {
@@ -65,7 +67,7 @@ export interface IOrderItem {
 
 export interface IStatusHistory {
   _id?: mongoose.Types.ObjectId;
-  status: 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status: OrderStatus;
   timestamp: Date;
   note?: string;
 }
@@ -89,16 +91,16 @@ export interface IOrder {
   tax: number;
   discount: number;
   total: number;
-  status: 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  status: OrderStatus;
   statusHistory: IStatusHistory[];
   shippingAddress: IShippingAddress;
   billingAddress?: IShippingAddress;
   trackingNumber?: string;
   paymentMethod: PaymentMethod;
-  paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+  paymentStatus: TPaymentStatus
   stripeCheckoutSessionId: string;
   stripePaymentIntentId?: string;
-  inventoryStatus: 'pending' | 'adjusted' | 'failed';
+  inventoryStatus: TInventoryStatus;
   inventoryAdjustedAt?: Date;
   notes?: string;
   createdAt: Date;
@@ -159,7 +161,7 @@ const OrderSchema = new Schema<IOrder>(
     },
     status: {
       type: String,
-      enum: ['processing', 'shipped', 'delivered', 'cancelled'],
+      enum: orderStatusArr,
       default: 'processing',
       index: true,
     },
@@ -182,7 +184,7 @@ const OrderSchema = new Schema<IOrder>(
     },
     paymentStatus: {
       type: String,
-      enum: ['pending', 'paid', 'failed', 'refunded'],
+      enum: paymentStatusArr,
       default: 'pending',
     },
     stripeCheckoutSessionId: {
@@ -195,7 +197,7 @@ const OrderSchema = new Schema<IOrder>(
     stripePaymentIntentId: String,
     inventoryStatus: {
       type: String,
-      enum: ['pending', 'adjusted', 'failed'],
+      enum: invertoryStatusArr,
       default: 'pending',
     },
     inventoryAdjustedAt: Date,
@@ -239,8 +241,12 @@ OrderSchema.pre('validate', async function () {
 
 // Update status history when status changes
 OrderSchema.pre('save', function () {
-  this.wasNew = this.isNew
-  if (!this.isNew && this.isModified('status')) {
+  const hasStatusChanged = !this.isNew && this.isModified('status');
+
+  this.$locals.wasNew = this.isNew;
+  this.$locals.statusChanged = hasStatusChanged;
+
+  if (hasStatusChanged) {
     this.statusHistory.push({
       status: this.status,
       timestamp: new Date(),
@@ -248,48 +254,46 @@ OrderSchema.pre('save', function () {
   }
 });
 
-// Update user's total orders count
+// Update user's total orders count and create notification
 OrderSchema.post('save', async function () {
-  if (this.status !== 'cancelled') {
-    const User = mongoose.model('User');
+  const { wasNew, hasStatusChanged } = this.$locals as {
+    wasNew?: boolean;
+    hasStatusChanged?: boolean;
+  };
+
+  if (!wasNew && !hasStatusChanged) return;
+
+  // User's order count
+  try {
     const count = await mongoose.model('Order').countDocuments({
       user: this.user,
       status: { $ne: 'cancelled' },
     });
-    await User.findByIdAndUpdate(this.user, { totalOrders: count });
-  }
-});
-
-// New order placed
-OrderSchema.post('save', async function () {
-  const name = this.shippingAddress.firstName + ' ' + this.shippingAddress.lastName
-  if (this.wasNew) {
-    await createNotification({
-      type: 'ORDER',
-      message: `New order received from ${name} — $${this.total.toFixed(2)}`,
-      link: `/admin/orders/${this._id}`,
-    }).catch(console.error)
-    return
+    await mongoose.model('User').findByIdAndUpdate(this.user, { totalOrders: count });
+  } catch (err) {
+    console.error('Failed to update user order count', err);
   }
 
-  // Order status changed → notify on meaningful transitions
-  const statusMessages: Partial<Record<OrderStatus, string>> = {
+  // Notification
+  const name = `${this.shippingAddress.firstName} ${this.shippingAddress.lastName}`;
+  const statusMessages: Record<OrderStatus, string> = {
+    processing: `Order from ${name} is being processed`,
     shipped: `Order from ${name} has been shipped`,
     delivered: `Order from ${name} was delivered`,
     cancelled: `Order from ${name} was cancelled`,
-    processing: `Order from ${name} is being processed`,
     pending: `Order from ${name} is pending`,
-  }
+  };
 
-  const message = statusMessages[this.status as OrderStatus]
-  if (message) {
-    await createNotification({
-      type: 'ORDER',
-      message,
-      link: `/admin/orders/${this._id}`,
-    }).catch(console.error)
-  }
-})
+  const message = wasNew
+    ? `New order received from ${name} — $${this.total.toFixed(2)}`
+    : statusMessages[this.status];
+
+  await createNotification({
+    type: 'ORDER',
+    message,
+    link: `/admin/orders/${this._id}`,
+  }).catch(console.error);
+});
 
 // Virtual for item count
 OrderSchema.virtual('itemCount').get(function () {

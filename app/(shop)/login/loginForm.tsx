@@ -3,12 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react'
+import { Eye, EyeOff, Mail, Lock, LoaderCircle } from 'lucide-react'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { signIn } from "@/lib/auth-client";
-
 import { SocialLogins } from './socialLogins'
 
 import { z } from "zod";
@@ -143,7 +142,11 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
               size="lg"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Signing in...' : 'Sign In'}
+              {isSubmitting ?
+                <>
+                  <LoaderCircle className="w-4 h-4 mr-2 animate-spin" />
+                  Signing in...
+                </> : 'Sign In'}
             </Button>
 
             {error && (

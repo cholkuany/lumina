@@ -35,7 +35,7 @@ export const UserAvatar = ({
           <AvatarBadge
             image={user.image}
             initials={initials}
-            className={cn('h-8 w-8 text-xs ring-2 ring-background/30 transition-shadow', open && 'ring-gold')}
+            className={cn('h-8 w-8 text-xs ring-2 ring-background/30 transition-shadow', open && 'ring-warning')}
           />
         ) : (
           <UserRound className="h-5 w-5 shrink-0 text-background" aria-hidden="true" />

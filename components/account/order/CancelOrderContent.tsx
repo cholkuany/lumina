@@ -10,6 +10,7 @@ import {
 
 import type { TOrderProps } from '@/lib/types'
 import { Button } from '@/components/ui/Button'
+import { formatPrice } from '@/lib/utils'
 
 // Cancel Order Modal Content
 export function CancelOrderContent({
@@ -32,13 +33,6 @@ export function CancelOrderContent({
     'Payment issues',
     'Other',
   ]
-
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(price)
-  }
 
   const handleSubmit = async () => {
     setIsSubmitting(true)

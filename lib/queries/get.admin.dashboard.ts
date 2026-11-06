@@ -67,7 +67,7 @@ export async function getAdminDashboardData() {
       ]),
     ])
 
-  const types = { ORDER: 'order', REVIEW: 'review', USER: 'user', SYSTEM: 'product' } as const
+  const types = { ORDER: 'order', REVIEW: 'review', USER: 'user', SYSTEM: 'product', RETURN: 'return' } as const
   const orderStatuses = { processing: 0, shipped: 0, delivered: 0, cancelled: 0 }
   for (const status of orderStatusCounts) {
     if (status._id in orderStatuses) {

@@ -113,7 +113,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
         {/* Price */}
         <section aria-label="Price" className="space-y-1 border-y border-border-light py-5">
           <div className="flex items-baseline gap-2 tracking-tighter">
-            <span className="text-3xl font-bold text-ink">{formatPrice(price)}</span>
+            <span className="text-3xl font-bold text-foreground">{formatPrice(price)}</span>
             {hasDiscount && (
               <span className="text-lg text-muted line-through">{formatPrice(originalPrice)}</span>
             )}

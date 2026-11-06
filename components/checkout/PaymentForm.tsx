@@ -97,7 +97,7 @@ export function PaymentForm({ onSubmit, onBack, isProcessing = false }: TPayment
         >
           Back to Shipping
         </Button>
-        <Button type="submit" size="lg" className="sm:flex-1" disabled={isProcessing}>
+        <Button type="submit" className="sm:flex-1" disabled={isProcessing}>
           {isProcessing ? 'Preparing Checkout...' : 'Review Order'}
         </Button>
       </div>

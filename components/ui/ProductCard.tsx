@@ -10,7 +10,9 @@ import { ProductBadges } from './Productbadges'
 import { QuickAddButton } from './Quickaddbutton'
 import { RatingSummary } from './RatingSummary'
 import { PriceDisplay } from './Pricedisplay'
-import { CartQuantityBadge } from './Cartquantitybadge'
+import { QuantityStepper } from './QuantityStepper'
+import { useUpdateCartQuantity } from '@/stores/cart/cart.selectors'
+import { getDefaultVariant } from '@/lib/utils'
 
 interface ProductCardProps {
   product: TProduct
@@ -29,6 +31,8 @@ export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
 
   const { currentVariant, quantity, isInCart, canAdd, addToCart, image } =
     useProductCardState(product)
+  const updateQuantity = useUpdateCartQuantity()
+  const defVariant = getDefaultVariant(product)
 
   return (
     <Link href={`/products/${product.id}`} className="group block">
@@ -47,18 +51,31 @@ export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
             isCompact={isCompact}
           />
           <WishlistButton product={product} isCompact={isCompact} />
-          <QuickAddButton
-            onClick={addToCart}
-            disabled={!canAdd}
-            isCompact={isCompact}
-          />
+          {
+            isInCart
+              ? <div className='absolute bottom-2 left-0 translate-y-0'>
+                <QuantityStepper
+                  min={0}
+                  max={defVariant.stock}
+                  size='sm'
+                  value={quantity}
+                  onChange={(qty) => updateQuantity(defVariant, qty)}
+                />
+              </div>
+              :
+              <QuickAddButton
+                onClick={addToCart}
+                disabled={!canAdd}
+                isCompact={isCompact}
+              />
+          }
         </div>
 
         {/* Content */}
         <div className={cn('relative')}>
           <h3
             className={cn(
-              'mb-1 h-8 overflow-hidden text-[12.5px] font-medium leading-tight text-ink',
+              'mb-1 h-8 overflow-hidden text-[12.5px] font-medium leading-tight text-foreground',
               isCompact ? 'line-clamp-2' : 'line-clamp-1'
             )}
           >
@@ -66,7 +83,7 @@ export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
           </h3>
 
           {!isCompact && product.description && (
-            <p className="mb-2 line-clamp-1 text-xs text-ink">
+            <p className="mb-2 line-clamp-1 text-xs text-foreground">
               {product.description}
             </p>
           )}
@@ -83,8 +100,6 @@ export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
             originalPrice={currentVariant.originalPrice}
             isCompact={isCompact}
           />
-
-          {isInCart && <CartQuantityBadge quantity={quantity} isCompact={isCompact} />}
         </div>
       </div>
     </Link>

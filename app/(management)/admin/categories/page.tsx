@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { CategoryTree } from '@/components/admin/CategoryTree'
-import { CategoryModal } from '@/components/admin/CategoryModal'
-import { ConfirmModal } from '@/components/admin/ConfirmModal'
+import { CategoryTree } from '../../components/CategoryTree'
+import { CategoryModal } from '../../components/CategoryModal'
+import { ConfirmModal } from '../../components/ConfirmModal'
 import { SearchComponent } from '@/components/Search'
 import { Button } from '@/components/ui/Button'
 import { CategoryFormData } from '@/lib/validations/category.validation'

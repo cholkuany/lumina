@@ -2,18 +2,17 @@
 
 import { useRouter } from 'next/navigation'
 
-import { ConfirmModal } from '@/components/admin/ConfirmModal'
-
 import { useProducts } from '@/hooks/useProducts'
 import { useFlatCategories } from '@/hooks/useFlatCategories'
 
-import { ResourceHeader } from '@/components/admin/resource/ResourceHeader'
-import { useProductColumns } from '@/components/admin/columns/productColumns'
-import { BulkActions } from '@/components/admin/products/BulkActions'
+import { ResourceHeader } from '../../components/resource/ResourceHeader'
+import { createProductColumns } from '../../components/columns/createProductColumns'
+import { BulkActions } from '../../components/resource/ResourceBulkActions'
+import { ConfirmModal } from '../../components/ConfirmModal'
 
-import { ResourceTableToolbar } from '@/components/tables/ResourceTableToolbar'
-import { ResourceTable } from '@/components/tables/ResourceTable'
-import { ResourceTablePagination } from '@/components/tables/ResourceTablePagination'
+import { ResourceTableToolbar } from '@/app/(management)/components/tables/ResourceTableToolbar'
+import { ResourceTable } from '@/app/(management)/components/tables/ResourceTable'
+import { ResourceTablePagination } from '@/app/(management)/components/tables/ResourceTablePagination'
 import { useResourceController, useTableInstanceController } from '@/hooks/useResourceController'
 import { AdminPageLoadingState } from '@/components/ui/PageLoadingState'
 
@@ -47,7 +46,7 @@ export default function ProductsPage() {
   const { isPending, isError, data: allProducts = [], error } = useProducts()
   const { data: categoriesData } = useFlatCategories(true)
 
-  const columns = useProductColumns({ onDelete: handleDelete })
+  const columns = createProductColumns({ onDelete: handleDelete })
 
   const { table } = useTableInstanceController(
     columns,

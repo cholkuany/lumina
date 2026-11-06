@@ -19,8 +19,8 @@ const base =
 
 const placements = {
   edge: {
-    prev: 'left-0 -translate-x-1/3 border border-ink hover:border-2',
-    next: 'right-0 translate-x-1/3 border border-ink hover:border-2',
+    prev: 'left-0 -translate-x-1/3 border border-foreground hover:border-2',
+    next: 'right-0 translate-x-1/3 border border-foreground hover:border-2',
   },
   inset: {
     prev: 'left-4',

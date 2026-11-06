@@ -25,57 +25,57 @@ export function OrdersClient({ orders }: { orders: TOrder[] }) {
     : orders.filter((order) => order.status === filter)
 
   return (
-    <main className="pb-16">
-      <div className="container-lumina py-4">
-        <Breadcrumb
-          items={[
-            { label: 'My Account', href: '/account' },
-            { label: 'Orders' },
-          ]}
-        />
-      </div>
-
+    <main className="pb-16 pt-4">
       <div className="container-lumina">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           <aside className="hidden lg:block">
             <AccountSidebar />
           </aside>
-
-          <div className="lg:col-span-3">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <h1 className="font-serif text-2xl lg:text-3xl text-foreground">
-                My Orders
-              </h1>
-              <Select
-                options={filterOptions}
-                value={filter}
-                onChange={setFilter}
-                className="w-full sm:w-48"
+          <div className='lg:col-span-3'>
+            <div className="pb-4">
+              <Breadcrumb
+                items={[
+                  { label: 'My Account', href: '/account' },
+                  { label: 'Orders' },
+                ]}
               />
             </div>
+            <div className="block">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <h1 className="font-serif text-2xl lg:text-3xl text-foreground">
+                  My Orders
+                </h1>
+                <Select
+                  options={filterOptions}
+                  value={filter}
+                  onChange={setFilter}
+                  className="w-full sm:w-48"
+                />
+              </div>
 
-            {filteredOrders.length > 0 ? (
-              <div className="space-y-6">
-                {filteredOrders.map((order) => (
-                  <OrderCard key={order.id} order={order} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-16 bg-surface rounded-brand">
-                <Package className="w-16 h-16 text-border-dark mx-auto mb-4" />
-                <h2 className="font-serif text-xl text-foreground mb-2">
-                  No orders found
-                </h2>
-                <p className="text-border-dark mb-6">
-                  {filter === 'all'
-                    ? "You haven't placed any orders yet."
-                    : `No ${filter} orders found.`}
-                </p>
-                <Link href="/products">
-                  <Button>Start Shopping</Button>
-                </Link>
-              </div>
-            )}
+              {filteredOrders.length > 0 ? (
+                <div className="space-y-6">
+                  {filteredOrders.map((order) => (
+                    <OrderCard key={order.id} order={order} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-16 bg-surface rounded-brand">
+                  <Package className="w-16 h-16 text-border-dark mx-auto mb-4" />
+                  <h2 className="font-serif text-xl text-foreground mb-2">
+                    No orders found
+                  </h2>
+                  <p className="text-border-dark mb-6">
+                    {filter === 'all'
+                      ? "You haven't placed any orders yet."
+                      : `No ${filter} orders found.`}
+                  </p>
+                  <Link href="/products">
+                    <Button>Start Shopping</Button>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
