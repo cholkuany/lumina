@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <header className="bg-foreground px-4 pb-3 pt-3 md:px-6 md:pb-4 md:pt-3.5">
-      <div className="mx-auto max-w-350">
+      <div className="mx-auto container-lumina">
         {/* row 1 — on mobile: burger + logo + account + cart. on md+: everything inline */}
         <div className="flex items-center gap-3 md:gap-5">
           <MobileDrawer />

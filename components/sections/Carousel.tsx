@@ -11,7 +11,7 @@ export function Carousel({ children, itemsCount }: { children: React.ReactNode; 
     <div className="relative flex shrink-0 items-center gap-2">
       <div
         ref={trackRef}
-        className="scrollHiddened flex w-full snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth py-3"
+        className="scrollHiddened flex w-full snap-x snap-mandatory gap-2 overflow-x-auto scroll-smooth py-3"
       >
         {children}
       </div>

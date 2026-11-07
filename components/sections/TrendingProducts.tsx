@@ -27,7 +27,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
   }, [trendingProducts])
 
   return (
-    <section className="bg-[#f4f4ef] pb-20">
+    <section className="pb-20">
       <div className="container-lumina space-y-5">
         <Shelf
           title="Everyone's into these"

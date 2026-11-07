@@ -16,8 +16,8 @@ export function Shelf({ title, items, href, footerText, variant = 'compact' }:
   if (items.length === 0) return null
 
   return (
-    <div className="rounded-sm bg-background p-5 shadow-soft sm:p-7 mt-5">
-      <div className="mb-5 flex items-baseline justify-between">
+    <div className="rounded-sm mt-5">
+      <div className="mb-2 flex items-baseline justify-between">
         <h2 className="text-2xl font-black tracking-[-.035em] text-foreground sm:text-3xl">{title}</h2>
         <Link href={href} className="text-[12.5px] font-semibold text-success-dark hover:underline">
           {footerText} →
@@ -25,13 +25,11 @@ export function Shelf({ title, items, href, footerText, variant = 'compact' }:
       </div>
       <Carousel itemsCount={items.length}>
         {items.map((product) => (
-          <div key={product.id}
-            className="shrink-0 snap-start w-[35%] sm:w-[40%] md:w-[30%] lg:w-[15%]"
+          <div
+            key={product.id}
+            className="shrink-0 snap-start w-[44%] sm:w-[31%] md:w-[23%] lg:w-[18.5%] xl:w-[15.5%] 2xl:w-[13%]"
           >
-            <ProductCard
-              product={product}
-              variant={variant}
-            />
+            <ProductCard product={product} variant={variant} />
           </div>
         ))}
       </Carousel>

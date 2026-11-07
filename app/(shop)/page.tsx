@@ -13,7 +13,7 @@ export default async function Home() {
   const newArrivals = trendingProducts.filter((product) => product.isNewArrival)
 
   return (
-    <main className="min-h-screen bg-surface">
+    <main className="min-h-screen">
       <Hero deals={deals} trending={trending} essentials={essentials} newArrivals={newArrivals} />
       {/* <Categories /> */}
       <TrendingProducts trendingProducts={trendingProducts} />

@@ -12,7 +12,7 @@ import {
  * Deliberately has no 'use client' directive.
  */
 
-export type HeroKind = 'deals' | 'trending' | 'essentials' | 'new'
+export type HeroKind = 'deals' | 'trending' | 'essentials' | 'new' | 'seasonal'
 
 export type HeroProduct = {
   id: string

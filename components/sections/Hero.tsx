@@ -7,6 +7,7 @@ type HeroProps = {
   trending?: TProduct[]
   essentials?: TProduct[]
   newArrivals?: TProduct[]
+  seasonal?: TProduct[]
 }
 
 export function Hero({
@@ -14,6 +15,7 @@ export function Hero({
   trending = [],
   essentials = [],
   newArrivals = [],
+  seasonal = [],
 }: HeroProps) {
   // Order here is the order shoppers see: the first collection opens featured.
   // Collections with no products are dropped automatically.
@@ -58,6 +60,16 @@ export function Hero({
       href: '/new-arrivals',
       cta: 'Shop new arrivals',
       products: newArrivals,
+    },
+    {
+      id: 'seasonal',
+      kind: 'seasonal',
+      label: 'Seasonal',
+      headline: 'Holiday favourites',
+      blurb: 'Treats and gifts for the season.',
+      href: '/seasonal',
+      cta: 'Shop seasonal',
+      products: seasonal,
     },
   ])
 
