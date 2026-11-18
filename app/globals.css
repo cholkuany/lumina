@@ -72,6 +72,10 @@
     0 2px 8px rgba(15, 23, 42, 0.05);
   /* 0 8px 24px rgba(15, 23, 42, 0.05); */
   --shadow-hover: 1px 1px 12px var(--border), -1px -1px 12px var(--border);
+
+  /* winter */
+  --color-winter: var(--winter);
+  --color-winter-dark: var(--winter-dark);
 }
 
 :root {
@@ -137,6 +141,10 @@
   --gradient-sale: linear-gradient(135deg, #FF6B2C, #F43F5E);
   --gradient-fresh: linear-gradient(135deg, #14B8A6, #22C55E);
   --gradient-fashion: linear-gradient(135deg, #D946EF, #EC4899);
+
+  /* ---------- Seasonal: Winter (violet) ---------- */
+  --winter: #0891B2;
+  --winter-dark: #155E75;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

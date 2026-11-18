@@ -22,13 +22,21 @@ import { Backdrop, SEASONS, getSeason } from './HeroBackdrops'
  * Tailwind can see it.
  */
 const KINDS: Record<Exclude<HeroKind, 'seasonal'>, { tone: string; Icon: LucideIcon }> = {
-  deals: { tone: 'from-danger via-danger to-foreground', Icon: Tag },
-  trending: { tone: 'from-accent via-accent to-foreground', Icon: TrendingUp },
-  essentials: {
-    tone: 'from-primary-light via-primary to-primary-dark',
-    Icon: ShoppingCart,
+  // deals: { tone: 'from-danger via-danger to-foreground', Icon: Tag },
+  // trending: { tone: 'from-accent via-accent to-foreground', Icon: TrendingUp },
+  // essentials: {
+  //   tone: 'from-primary-light via-primary to-primary-dark',
+  //   Icon: ShoppingCart,
+  // },
+  // new: { tone: 'from-primary via-primary-dark to-foreground', Icon: Sparkles },
+  deals: { tone: 'from-accent via-danger to-danger-dark', Icon: Tag },
+  trending: {
+    tone: 'from-category-fashion via-category-beauty to-primary-dark',
+    Icon: TrendingUp,
   },
-  new: { tone: 'from-primary via-primary-dark to-foreground', Icon: Sparkles },
+  essentials: { tone: 'from-secondary via-secondary-dark to-foreground', Icon: ShoppingCart },
+  new: { tone: 'from-info via-primary to-primary-dark', Icon: Sparkles },
+
 }
 
 /** Seasonal banners take their colour and icon from the current season. */

@@ -1,557 +1,3 @@
-// import type { ReactNode } from 'react'
-// import { Flower2, Leaf, Snowflake, Sun, type LucideIcon } from 'lucide-react'
-
-// import type { HeroKind } from './hero-collections'
-
-// /**
-//  * Illustrated artwork behind each kind of hero banner. Every scene is built from
-//  * small glyphs (price tags, flames, groceries, gift boxes, leaves...) drawn in
-//  * white at low opacity, so they sit on top of any gradient without fighting the
-//  * text or the product discs. Purely decorative (aria-hidden).
-//  *
-//  * The viewBox is 600x300; the product cluster sits around (450, 150) and the
-//  * text sits on the left, so the big glyphs go behind the cluster and the small
-//  * ones are scattered around the edges.
-//  *
-//  * To add a kind: write a scene below and register it in BACKDROPS.
-//  */
-
-// type BackdropKind = HeroKind | 'seasonal'
-// export type Season = 'spring' | 'summer' | 'autumn' | 'winter'
-
-// /* -------------------------------------------------------------------------- */
-// /* Seasons                                                                    */
-// /* -------------------------------------------------------------------------- */
-
-// /** Northern-hemisphere meteorological seasons. Change the mapping to taste. */
-// export function getSeason(date: Date = new Date()): Season {
-//   const m = date.getMonth() // 0 = Jan
-//   if (m >= 2 && m <= 4) return 'spring'
-//   if (m >= 5 && m <= 7) return 'summer'
-//   if (m >= 8 && m <= 10) return 'autumn'
-//   return 'winter'
-// }
-
-// /** Gradient + icon for the Seasonal collection. Keep classes as full literals. */
-// export const SEASONS: Record<Season, { tone: string; Icon: LucideIcon }> = {
-//   spring: { tone: 'from-pink-400 via-rose-500 to-fuchsia-800', Icon: Flower2 },
-//   summer: { tone: 'from-yellow-400 via-orange-500 to-rose-600', Icon: Sun },
-//   autumn: { tone: 'from-amber-500 via-orange-600 to-red-900', Icon: Leaf },
-//   winter: { tone: 'from-sky-500 via-indigo-600 to-slate-900', Icon: Snowflake },
-// }
-
-// /* -------------------------------------------------------------------------- */
-// /* Drawing helpers                                                            */
-// /* -------------------------------------------------------------------------- */
-
-// /** Dark detail strokes: on a white glyph at low opacity they read as shading. */
-// const line = {
-//   fill: 'none',
-//   stroke: '#000',
-//   strokeOpacity: 0.5,
-//   strokeWidth: 2,
-//   strokeLinecap: 'round',
-//   strokeLinejoin: 'round',
-// } as const
-
-// /** Places a glyph (drawn around 0,0) in the scene. `o` is its overall opacity. */
-// function Glyph({
-//   x,
-//   y,
-//   s = 1,
-//   r = 0,
-//   o = 0.2,
-//   children,
-// }: {
-//   x: number
-//   y: number
-//   s?: number
-//   r?: number
-//   o?: number
-//   children: ReactNode
-// }) {
-//   return (
-//     <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`} opacity={o}>
-//       {children}
-//     </g>
-//   )
-// }
-
-// function Sparkle({ x, y, s, o = 0.35 }: { x: number; y: number; s: number; o?: number }) {
-//   return (
-//     <path
-//       d="M0,-1 Q0.15,-0.15 1,0 Q0.15,0.15 0,1 Q-0.15,0.15 -1,0 Q-0.15,-0.15 0,-1Z"
-//       transform={`translate(${x} ${y}) scale(${s})`}
-//       fill="#fff"
-//       fillOpacity={o}
-//     />
-//   )
-// }
-
-// function Flake({ x, y, s, o = 0.3 }: { x: number; y: number; s: number; o?: number }) {
-//   return (
-//     <g
-//       transform={`translate(${x} ${y}) scale(${s})`}
-//       stroke="#fff"
-//       strokeOpacity={o}
-//       strokeWidth={1.6}
-//       strokeLinecap="round"
-//       fill="none"
-//     >
-//       <path d="M0-12V12M-10.4-6L10.4 6M-10.4 6L10.4-6" />
-//       <path d="M-3-10L0-7L3-10M-3 10L0 7L3 10" />
-//     </g>
-//   )
-// }
-
-// function burstPoints(cx: number, cy: number, outer: number, inner: number, spikes: number) {
-//   const pts: string[] = []
-//   for (let i = 0; i < spikes * 2; i++) {
-//     const r = i % 2 === 0 ? outer : inner
-//     const a = (Math.PI * i) / spikes - Math.PI / 2
-//     pts.push(`${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`)
-//   }
-//   return pts.join(' ')
-// }
-
-// function Frame({ children, align = 'xMaxYMid' }: { children: ReactNode; align?: string }) {
-//   return (
-//     <svg
-//       aria-hidden
-//       focusable="false"
-//       viewBox="0 0 600 300"
-//       preserveAspectRatio={`${align} slice`}
-//       className="pointer-events-none absolute inset-0 -z-10 size-full"
-//     >
-//       {children}
-//     </svg>
-//   )
-// }
-
-// /* -------------------------------------------------------------------------- */
-// /* Glyphs (all centred on 0,0, roughly 60-90 units tall)                      */
-// /* -------------------------------------------------------------------------- */
-
-// /* deals */
-// const TagGlyph = () => (
-//   <>
-//     <path d="M0,-46 L34,-22 L34,34 Q34,42 26,42 L-26,42 Q-34,42 -34,34 L-34,-22Z" fill="#fff" />
-//     <circle cx="0" cy="-26" r="5" {...line} />
-//     <text x="0" y="26" textAnchor="middle" fontSize="32" fontWeight="800" fontFamily="sans-serif" fill="#000" fillOpacity="0.5">
-//       %
-//     </text>
-//   </>
-// )
-
-// const CouponGlyph = () => (
-//   <>
-//     <path d="M-60,-28 H60 V-8 A8 8 0 0 0 60,8 V28 H-60 V8 A8 8 0 0 0 -60,-8Z" fill="#fff" />
-//     <path d="M28,-22 V22" {...line} strokeDasharray="4 5" />
-//     <text x="-16" y="6" textAnchor="middle" fontSize="17" fontWeight="800" fontFamily="sans-serif" fill="#000" fillOpacity="0.5">
-//       SAVE
-//     </text>
-//     <text x="44" y="8" textAnchor="middle" fontSize="20" fontWeight="800" fontFamily="sans-serif" fill="#000" fillOpacity="0.5">
-//       %
-//     </text>
-//   </>
-// )
-
-// /* trending */
-// const FlameGlyph = () => (
-//   <>
-//     <path
-//       d="M0,-38 C6,-22 24,-14 22,6 C21,22 9,32 0,32 C-11,32 -22,22 -21,6 C-20,-2 -13,-8 -11,-18 C-4,-13 -2,-24 0,-38Z"
-//       fill="#fff"
-//     />
-//     <path
-//       d="M0,-6 C5,2 12,6 10,16 C9,24 4,28 0,28 C-5,28 -10,24 -10,16 C-10,10 -4,6 0,-6Z"
-//       fill="#000"
-//       fillOpacity="0.22"
-//     />
-//   </>
-// )
-
-// const HeartGlyph = () => <path d="M0,12 C-26,-6 -16,-26 0,-12 C16,-26 26,-6 0,12Z" fill="#fff" />
-
-// /* essentials */
-// const BasketGlyph = () => (
-//   <>
-//     <path d="M-30,-10 C-30,-52 30,-52 30,-10" {...line} strokeWidth={5} stroke="#fff" strokeOpacity={1} />
-//     <path d="M-44,-10 H44 L34,34 Q33,38 29,38 H-29 Q-33,38 -34,34Z" fill="#fff" />
-//     <path d="M-20,-6 V34 M0,-6 V34 M20,-6 V34" {...line} />
-//   </>
-// )
-
-// const AppleGlyph = () => (
-//   <>
-//     <path d="M0,-10 C-8,-18 -26,-12 -24,6 C-22,24 -8,32 0,26 C8,32 22,24 24,6 C26,-12 8,-18 0,-10Z" fill="#fff" />
-//     <path d="M0,-10 Q2,-22 8,-26" {...line} />
-//     <path d="M4,-18 C10,-30 22,-28 22,-28 C20,-18 12,-14 4,-18Z" fill="#fff" />
-//   </>
-// )
-
-// const MilkGlyph = () => (
-//   <>
-//     <path d="M-14,-6 H14 V36 H-14Z" fill="#fff" />
-//     <path d="M-14,-6 L-8,-22 H8 L14,-6Z" fill="#fff" />
-//     <rect x="-9" y="6" width="18" height="16" rx="3" {...line} />
-//     <path d="M-5,-14 H5" {...line} />
-//   </>
-// )
-
-// const BreadGlyph = () => (
-//   <>
-//     <path d="M-32,12 C-38,-12 -14,-26 0,-26 C14,-26 38,-12 32,12 L30,30 H-30Z" fill="#fff" />
-//     <path d="M-16,-12 L-8,6 M0,-16 L8,4 M16,-12 L22,6" {...line} />
-//   </>
-// )
-
-// const CarrotGlyph = () => (
-//   <>
-//     <path d="M-9,-14 Q0,-20 9,-14 L1,38 Q0,40 -1,38Z" fill="#fff" />
-//     <path d="M-4,0 H4 M-3,14 H3" {...line} />
-//     <path d="M0,-16 Q-10,-30 -16,-28 M0,-16 V-38 M0,-16 Q10,-30 16,-28" stroke="#fff" strokeWidth="4" strokeLinecap="round" fill="none" />
-//   </>
-// )
-
-// /* new in */
-// const GiftGlyph = () => (
-//   <>
-//     <rect x="-28" y="-2" width="56" height="38" rx="3" fill="#fff" />
-//     <rect x="-5" y="-2" width="10" height="38" fill="#000" fillOpacity="0.25" />
-//     <g transform="rotate(-16 -30 -4)">
-//       <rect x="-32" y="-22" width="64" height="18" rx="3" fill="#fff" />
-//       <rect x="-5" y="-22" width="10" height="18" fill="#000" fillOpacity="0.25" />
-//     </g>
-//   </>
-// )
-
-// /* seasonal: autumn */
-// const MapleGlyph = () => (
-//   <>
-//     <path
-//       d="M0,-32 L6,-19 L15,-23 L11,-8 L25,-14 L20,-1 L31,3 L18,12 L22,23 L6,18 L4,36 L-4,36 L-6,18 L-22,23 L-18,12 L-31,3 L-20,-1 L-25,-14 L-11,-8 L-15,-23 L-6,-19Z"
-//       fill="#fff"
-//     />
-//     <path d="M0,36 V-18 M0,8 L-14,-4 M0,8 L14,-4" {...line} />
-//   </>
-// )
-
-// const PumpkinGlyph = () => (
-//   <>
-//     <ellipse cx="-17" cy="4" rx="22" ry="26" fill="#fff" />
-//     <ellipse cx="17" cy="4" rx="22" ry="26" fill="#fff" />
-//     <ellipse cx="0" cy="4" rx="17" ry="28" fill="#fff" />
-//     <path d="M-8,-22 C-14,-8 -14,16 -8,30 M8,-22 C14,-8 14,16 8,30 M-30,-8 C-34,4 -32,14 -26,22 M30,-8 C34,4 32,14 26,22" {...line} />
-//     <path d="M-2,-24 Q0,-36 9,-40 L12,-34 Q6,-32 5,-24Z" fill="#fff" />
-//   </>
-// )
-
-// const AcornGlyph = () => (
-//   <>
-//     <path d="M-14,-6 C-14,-22 14,-22 14,-6Z" fill="#fff" />
-//     <rect x="-1.5" y="-28" width="3" height="8" rx="1.5" fill="#fff" />
-//     <path d="M-12,-3 C-12,22 -2,30 0,34 C2,30 12,22 12,-3Z" fill="#fff" />
-//   </>
-// )
-
-// /* seasonal: winter */
-// const PineGlyph = () => (
-//   <>
-//     <path d="M0,-42 L16,-16 H-16Z M0,-28 L20,2 H-20Z M0,-12 L25,22 H-25Z" fill="#fff" />
-//     <rect x="-4" y="22" width="8" height="12" fill="#fff" />
-//   </>
-// )
-
-// const OrnamentGlyph = () => (
-//   <>
-//     <rect x="-5" y="-24" width="10" height="8" rx="2" fill="#fff" />
-//     <circle cx="0" cy="0" r="16" fill="#fff" />
-//     <path d="M-13,-2 Q0,9 13,-2" {...line} />
-//   </>
-// )
-
-// /* seasonal: spring */
-// const FlowerGlyph = () => (
-//   <>
-//     {[0, 72, 144, 216, 288].map((a) => (
-//       <ellipse key={a} cx="0" cy="-15" rx="9" ry="15" transform={`rotate(${a})`} fill="#fff" />
-//     ))}
-//     <circle r="7" fill="#000" fillOpacity="0.3" />
-//   </>
-// )
-
-// const DropGlyph = () => <path d="M0,-14 C10,0 12,6 12,10 A12 12 0 0 1 -12,10 C-12,6 -10,0 0,-14Z" fill="#fff" />
-
-// /* seasonal: summer */
-// const SunGlyph = () => (
-//   <>
-//     <circle r="22" fill="#fff" />
-//     {Array.from({ length: 12 }, (_, i) => (
-//       <path key={i} d="M0,-32 V-44" stroke="#fff" strokeWidth="5" strokeLinecap="round" transform={`rotate(${i * 30})`} />
-//     ))}
-//   </>
-// )
-
-// const WaveGlyph = () => (
-//   <path d="M-100,0 q25,-18 50,0 t50,0 t50,0 t50,0" fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
-// )
-
-// /* -------------------------------------------------------------------------- */
-// /* Scenes                                                                     */
-// /* -------------------------------------------------------------------------- */
-
-// /** Deals: sale stripes, a starburst, price tags, coupons and % signs. */
-// function DealsBackdrop() {
-//   return (
-//     <Frame>
-//       <defs>
-//         <pattern id="bd-deals-stripes" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
-//           <rect width="15" height="30" fill="#fff" fillOpacity="0.06" />
-//         </pattern>
-//       </defs>
-//       <rect width="600" height="300" fill="url(#bd-deals-stripes)" />
-
-//       <polygon points={burstPoints(450, 150, 215, 175, 22)} fill="#fff" fillOpacity="0.08" />
-
-//       <Glyph x={455} y={150} s={3.6} r={-14} o={0.1}><TagGlyph /></Glyph>
-//       <Glyph x={322} y={58} s={0.9} r={-12} o={0.22}><TagGlyph /></Glyph>
-//       <Glyph x={556} y={246} s={0.85} r={14} o={0.22}><TagGlyph /></Glyph>
-//       <Glyph x={338} y={252} s={0.9} r={-6} o={0.2}><CouponGlyph /></Glyph>
-//       <Glyph x={540} y={58} s={0.75} r={10} o={0.2}><CouponGlyph /></Glyph>
-
-//       <g fill="#fff" fontFamily="sans-serif" fontWeight="800">
-//         <text x="400" y="30" fontSize="26" fillOpacity="0.16" transform="rotate(-10 400 30)">%</text>
-//         <text x="585" y="150" fontSize="34" fillOpacity="0.14" transform="rotate(12 585 150)">%</text>
-//       </g>
-//       <Sparkle x={385} y={278} s={7} o={0.3} />
-//       <Sparkle x={600} y={20} s={8} o={0.3} />
-//     </Frame>
-//   )
-// }
-
-// /** Trending: a big flame, rising hearts, a #1 rank and growing bars. */
-// function TrendingBackdrop() {
-//   return (
-//     <Frame>
-//       <defs>
-//         <pattern id="bd-trend-dots" width="22" height="22" patternUnits="userSpaceOnUse">
-//           <circle cx="2" cy="2" r="1.4" fill="#fff" fillOpacity="0.14" />
-//         </pattern>
-//       </defs>
-//       <rect width="600" height="300" fill="url(#bd-trend-dots)" />
-
-//       <Glyph x={455} y={162} s={4.4} o={0.1}><FlameGlyph /></Glyph>
-
-//       {/* hearts drifting upward, fading as they rise */}
-//       <Glyph x={326} y={236} s={0.75} r={-12} o={0.24}><HeartGlyph /></Glyph>
-//       <Glyph x={372} y={176} s={0.5} r={10} o={0.2}><HeartGlyph /></Glyph>
-//       <Glyph x={560} y={100} s={0.8} r={14} o={0.24}><HeartGlyph /></Glyph>
-//       <Glyph x={540} y={30} s={0.45} r={-8} o={0.16}><HeartGlyph /></Glyph>
-//       <Glyph x={400} y={34} s={0.55} r={6} o={0.18}><HeartGlyph /></Glyph>
-
-//       {/* growing bars */}
-//       <g fill="#fff" fillOpacity="0.17">
-//         <rect x="290" y="252" width="16" height="30" rx="3" />
-//         <rect x="312" y="234" width="16" height="48" rx="3" />
-//         <rect x="334" y="212" width="16" height="70" rx="3" />
-//       </g>
-//       <path d="M296 236 L322 214 L344 190 M330 190 H344 V204" fill="none" stroke="#fff" strokeOpacity="0.32" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-
-//       {/* #1 rank */}
-//       <g transform="translate(566 214)">
-//         <circle r="24" fill="#fff" fillOpacity="0.15" />
-//         <text y="8" textAnchor="middle" fontSize="22" fontWeight="800" fontFamily="sans-serif" fill="#fff" fillOpacity="0.4">#1</text>
-//       </g>
-
-//       <Sparkle x={300} y={60} s={9} o={0.3} />
-//       <Sparkle x={500} y={266} s={6} o={0.25} />
-//     </Frame>
-//   )
-// }
-
-// /** Essentials: gingham picnic cloth with a basket and everyday groceries. */
-// function EssentialsBackdrop() {
-//   return (
-//     <Frame>
-//       <defs>
-//         <pattern id="bd-ess-gingham" width="56" height="56" patternUnits="userSpaceOnUse">
-//           <rect width="28" height="56" fill="#fff" fillOpacity="0.06" />
-//           <rect width="56" height="28" fill="#fff" fillOpacity="0.06" />
-//         </pattern>
-//       </defs>
-//       <rect width="600" height="300" fill="url(#bd-ess-gingham)" />
-
-//       <Glyph x={455} y={168} s={3.3} o={0.1}><BasketGlyph /></Glyph>
-
-//       <Glyph x={326} y={58} s={0.85} r={-14} o={0.22}><AppleGlyph /></Glyph>
-//       <Glyph x={548} y={66} s={0.85} r={10} o={0.22}><MilkGlyph /></Glyph>
-//       <Glyph x={338} y={240} s={0.85} r={-8} o={0.22}><BreadGlyph /></Glyph>
-//       <Glyph x={562} y={234} s={0.85} r={28} o={0.22}><CarrotGlyph /></Glyph>
-//       <Glyph x={410} y={26} s={0.5} r={12} o={0.18}><AppleGlyph /></Glyph>
-
-//       <Sparkle x={400} y={272} s={6} o={0.25} />
-//     </Frame>
-//   )
-// }
-
-// /** New in: an opened gift box bursting with light, confetti and a NEW ribbon. */
-// function NewBackdrop() {
-//   return (
-//     <Frame>
-//       <defs>
-//         <radialGradient id="bd-new-glow" cx="75%" cy="50%" r="55%">
-//           <stop offset="0" stopColor="#fff" stopOpacity="0.3" />
-//           <stop offset="1" stopColor="#fff" stopOpacity="0" />
-//         </radialGradient>
-//       </defs>
-//       <rect width="600" height="300" fill="url(#bd-new-glow)" />
-
-//       {/* light rays fanning out of the box */}
-//       <g stroke="#fff" strokeOpacity="0.16" strokeWidth="5" strokeLinecap="round">
-//         {[-72, -48, -24, 0, 24, 48, 72].map((a) => (
-//           <path key={a} d="M0,-110 V-150" transform={`translate(455 200) rotate(${a})`} />
-//         ))}
-//       </g>
-//       <Glyph x={455} y={196} s={2.6} o={0.14}><GiftGlyph /></Glyph>
-
-//       <Glyph x={330} y={246} s={0.7} r={-10} o={0.2}><GiftGlyph /></Glyph>
-//       <Glyph x={560} y={60} s={0.6} r={12} o={0.18}><GiftGlyph /></Glyph>
-
-//       <g fill="#fff">
-//         <rect x="320" y="46" width="16" height="6" rx="3" fillOpacity="0.28" transform="rotate(28 328 49)" />
-//         <rect x="270" y="170" width="12" height="5" rx="2.5" fillOpacity="0.22" transform="rotate(-40 276 172)" />
-//         <rect x="560" y="150" width="14" height="6" rx="3" fillOpacity="0.26" transform="rotate(60 567 153)" />
-//         <circle cx="520" cy="34" r="5" fillOpacity="0.25" />
-//         <circle cx="590" cy="250" r="6" fillOpacity="0.2" />
-//       </g>
-//       <Sparkle x={455} y={44} s={18} o={0.42} />
-//       <Sparkle x={350} y={110} s={9} o={0.3} />
-//       <Sparkle x={572} y={196} s={11} o={0.35} />
-
-//       {/* corner ribbon */}
-//       <g transform="translate(572 28) rotate(45)">
-//         <rect x="-58" y="-12" width="116" height="24" fill="#fff" fillOpacity="0.14" />
-//         <text y="6" textAnchor="middle" fontSize="15" fontWeight="800" fontFamily="sans-serif" letterSpacing="3" fill="#fff" fillOpacity="0.4">
-//           NEW
-//         </text>
-//       </g>
-//     </Frame>
-//   )
-// }
-
-// /* -- seasonal, one scene per season -------------------------------------- */
-
-// function Autumn() {
-//   return (
-//     <Frame align="xMidYMax">
-//       <circle cx="470" cy="140" r="160" fill="#fff" fillOpacity="0.07" />
-//       <Glyph x={462} y={190} s={3.1} o={0.11}><PumpkinGlyph /></Glyph>
-
-//       <Glyph x={334} y={58} s={0.95} r={-20} o={0.24}><MapleGlyph /></Glyph>
-//       <Glyph x={556} y={62} s={0.75} r={26} o={0.22}><MapleGlyph /></Glyph>
-//       <Glyph x={300} y={196} s={0.6} r={44} o={0.2}><MapleGlyph /></Glyph>
-//       <Glyph x={582} y={190} s={0.8} r={-12} o={0.22}><MapleGlyph /></Glyph>
-//       <Glyph x={420} y={28} s={0.5} r={10} o={0.2}><MapleGlyph /></Glyph>
-//       <Glyph x={352} y={254} s={0.8} r={-16} o={0.22}><AcornGlyph /></Glyph>
-//       <Glyph x={520} y={264} s={0.6} r={18} o={0.2}><AcornGlyph /></Glyph>
-
-//       <path d="M200 300 C300 250 390 272 470 252 C530 238 570 244 600 236 L600 300Z" fill="#fff" fillOpacity="0.12" />
-//     </Frame>
-//   )
-// }
-
-// function Winter() {
-//   return (
-//     <Frame align="xMidYMax">
-//       <circle cx="470" cy="130" r="150" fill="#fff" fillOpacity="0.07" />
-
-//       <Flake x={330} y={50} s={1.5} />
-//       <Flake x={520} y={44} s={1.1} o={0.26} />
-//       <Flake x={578} y={140} s={1.7} />
-//       <Flake x={300} y={170} s={0.9} o={0.24} />
-
-//       {/* hanging ornament */}
-//       <path d="M404 0 V32" stroke="#fff" strokeOpacity="0.3" strokeWidth="2" />
-//       <Glyph x={404} y={52} s={0.9} o={0.26}><OrnamentGlyph /></Glyph>
-
-//       <path d="M200 300 C300 244 380 272 470 248 C530 232 570 240 600 230 L600 300Z" fill="#fff" fillOpacity="0.14" />
-//       <Glyph x={520} y={236} s={1.5} o={0.22}><PineGlyph /></Glyph>
-//       <Glyph x={568} y={252} s={1.05} o={0.18}><PineGlyph /></Glyph>
-//       <Glyph x={340} y={256} s={0.8} r={-6} o={0.24}><GiftGlyph /></Glyph>
-//       <path d="M260 300 C350 270 430 292 520 274 C560 266 585 268 600 264 L600 300Z" fill="#fff" fillOpacity="0.16" />
-//     </Frame>
-//   )
-// }
-
-// function Spring() {
-//   return (
-//     <Frame align="xMidYMax">
-//       <circle cx="470" cy="140" r="160" fill="#fff" fillOpacity="0.07" />
-//       <Glyph x={462} y={160} s={3.7} r={10} o={0.11}><FlowerGlyph /></Glyph>
-
-//       <Glyph x={336} y={66} s={0.95} r={-10} o={0.24}><FlowerGlyph /></Glyph>
-//       <Glyph x={558} y={232} s={0.9} r={20} o={0.24}><FlowerGlyph /></Glyph>
-//       <Glyph x={352} y={244} s={0.6} r={0} o={0.2}><FlowerGlyph /></Glyph>
-//       <Glyph x={548} y={58} s={0.6} r={30} o={0.2}><FlowerGlyph /></Glyph>
-
-//       <Glyph x={300} y={150} s={0.5} o={0.22}><DropGlyph /></Glyph>
-//       <Glyph x={406} y={30} s={0.6} o={0.22}><DropGlyph /></Glyph>
-//       <Glyph x={592} y={130} s={0.5} o={0.2}><DropGlyph /></Glyph>
-
-//       <path d="M200 300 C300 250 390 272 470 252 C530 238 570 244 600 236 L600 300Z" fill="#fff" fillOpacity="0.12" />
-//     </Frame>
-//   )
-// }
-
-// function Summer() {
-//   return (
-//     <Frame align="xMidYMax">
-//       <circle cx="470" cy="140" r="170" fill="#fff" fillOpacity="0.06" />
-//       <Glyph x={470} y={134} s={3.4} o={0.13}><SunGlyph /></Glyph>
-//       <Glyph x={336} y={60} s={0.7} o={0.22}><SunGlyph /></Glyph>
-
-//       <Glyph x={330} y={262} o={0.2}><WaveGlyph /></Glyph>
-//       <Glyph x={530} y={262} o={0.2}><WaveGlyph /></Glyph>
-//       <Glyph x={380} y={284} o={0.16}><WaveGlyph /></Glyph>
-//       <Glyph x={580} y={284} o={0.16}><WaveGlyph /></Glyph>
-
-//       <Sparkle x={560} y={60} s={10} o={0.32} />
-//       <Sparkle x={310} y={170} s={7} o={0.26} />
-//       <Sparkle x={410} y={30} s={6} o={0.26} />
-//     </Frame>
-//   )
-// }
-
-// const SEASON_SCENES: Record<Season, () => ReactNode> = {
-//   spring: Spring,
-//   summer: Summer,
-//   autumn: Autumn,
-//   winter: Winter,
-// }
-
-// function SeasonalBackdrop({ season }: { season?: Season }) {
-//   const Scene = SEASON_SCENES[season ?? getSeason()]
-//   return <Scene />
-// }
-
-// /* -------------------------------------------------------------------------- */
-
-// const BACKDROPS: Record<Exclude<BackdropKind, 'seasonal'>, () => ReactNode> = {
-//   deals: DealsBackdrop,
-//   trending: TrendingBackdrop,
-//   essentials: EssentialsBackdrop,
-//   new: NewBackdrop,
-// }
-
-// /** Pass `season` to force a season (handy for previewing); otherwise it follows the date. */
-// export function Backdrop({ kind, season }: { kind: BackdropKind; season?: Season }) {
-//   if (kind === 'seasonal') return <SeasonalBackdrop season={season} />
-//   const Art = BACKDROPS[kind]
-//   return Art ? <Art /> : null
-// }
-
-
 import { useId, type ReactNode } from 'react'
 import {
   Flower2,
@@ -563,11 +9,10 @@ import {
 
 import type { HeroKind } from './hero-collections'
 
-type BackdropKind = HeroKind | 'seasonal'
 export type Season = 'spring' | 'summer' | 'autumn' | 'winter'
 
 /* -------------------------------------------------------------------------- */
-/* Seasons                                                                     */
+/* Seasons                                                                    */
 /* -------------------------------------------------------------------------- */
 
 export function getSeason(date: Date = new Date()): Season {
@@ -580,24 +25,21 @@ export function getSeason(date: Date = new Date()): Season {
   return 'winter'
 }
 
-export const SEASONS: Record<
-  Season,
-  { tone: string; Icon: LucideIcon }
-> = {
+export const SEASONS: Record<Season, { tone: string; Icon: LucideIcon }> = {
   spring: {
-    tone: 'from-pink-400 via-rose-500 to-fuchsia-800',
+    tone: 'from-success via-success-dark to-foreground',
     Icon: Flower2,
   },
   summer: {
-    tone: 'from-yellow-400 via-orange-500 to-rose-600',
+    tone: 'from-warning via-accent to-accent-dark',
     Icon: Sun,
   },
   autumn: {
-    tone: 'from-amber-500 via-orange-600 to-red-900',
+    tone: 'from-warning-dark via-accent-dark to-foreground',
     Icon: Leaf,
   },
   winter: {
-    tone: 'from-sky-500 via-indigo-600 to-slate-900',
+    tone: 'from-winter via-winter-dark to-foreground',
     Icon: Snowflake,
   },
 }
@@ -824,23 +266,23 @@ function ProductBox() {
   )
 }
 
-function MiniStar({
-  x,
-  y,
-  s = 1,
-}: {
-  x: number
-  y: number
-  s?: number
-}) {
-  return (
-    <path
-      d="M0 -10 L3 -3 L10 0 L3 3 L0 10 L-3 3 L-10 0 L-3 -3Z"
-      transform={`translate(${x} ${y}) scale(${s})`}
-      fill={WHITE}
-    />
-  )
-}
+// function MiniStar({
+//   x,
+//   y,
+//   s = 1,
+// }: {
+//   x: number
+//   y: number
+//   s?: number
+// }) {
+//   return (
+//     <path
+//       d="M0 -10 L3 -3 L10 0 L3 3 L0 10 L-3 3 L-10 0 L-3 -3Z"
+//       transform={`translate(${x} ${y}) scale(${s})`}
+//       fill={WHITE}
+//     />
+//   )
+// }
 
 /* -------------------------------------------------------------------------- */
 /* Deals                                                                       */
@@ -897,7 +339,7 @@ function DealsArtwork({ id }: { id: string }) {
           fontSize="28"
           fontWeight="900"
           textAnchor="middle"
-          fill="#D97706"
+          className='fill-accent-dark'
         >
           %
         </text>
@@ -942,17 +384,17 @@ function DealsArtwork({ id }: { id: string }) {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Trending                                                                    */
+/* Trending                                                                   */
 /* -------------------------------------------------------------------------- */
 
 function TrendingArtwork({ id }: { id: string }) {
   return (
     <Frame>
       <defs>
-        <linearGradient id={`${id}-trend-glow`} cx="70%" cy="50%" r="65%">
+        <radialGradient id={`${id}-trend-glow`} cx="70%" cy="50%" r="65%">
           <stop offset="0" stopColor="#fff" stopOpacity=".28" />
           <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
+        </radialGradient>
       </defs>
 
       <Circle x={465} y={148} r={150} opacity={0.07} />
@@ -1001,24 +443,24 @@ function TrendingArtwork({ id }: { id: string }) {
         <circle r="32" fill="none" stroke="#E35B43" strokeWidth="2" strokeDasharray="3 4" />
         <path
           d="M0 -19 L6 -5 L21 -4 L10 6 L13 21 L0 13 L-13 21 L-10 6 L-21 -4 L-6 -5Z"
-          fill="#E35B43"
+          className='fill-category-fashion'
         />
       </Glyph>
 
       {/* Floating rating and heart-like popularity markers */}
       <Glyph x={555} y={65} s={0.85} r={10} o={0.8}>
         <circle r="22" fill={WHITE} />
-        <path d="M0 -12 L4 -3 L14 -2 L6 5 L8 15 L0 10 L-8 15 L-6 5 L-14 -2 L-4 -3Z" fill="#E35B43" />
+        <path d="M0 -12 L4 -3 L14 -2 L6 5 L8 15 L0 10 L-8 15 L-6 5 L-14 -2 L-4 -3Z" className='fill-category-fashion' />
       </Glyph>
 
       <Glyph x={370} y={65} s={0.75} o={0.28}>
         <circle r="22" fill={WHITE} />
-        <path d="M0 -12 L4 -3 L14 -2 L6 5 L8 15 L0 10 L-8 15 L-6 5 L-14 -2 L-4 -3Z" fill="#E35B43" />
+        <path d="M0 -12 L4 -3 L14 -2 L6 5 L8 15 L0 10 L-8 15 L-6 5 L-14 -2 L-4 -3Z" className='fill-category-fashion' />
       </Glyph>
 
       <Glyph x={565} y={232} s={0.7} o={0.25}>
         <circle r="25" fill={WHITE} />
-        <path d="M-12 0 L-3 9 L14 -10" fill="none" stroke="#E35B43" strokeWidth="5" strokeLinecap="round" />
+        <path d="M-12 0 L-3 9 L14 -10" fill="none" strokeWidth="5" strokeLinecap="round" className='stroke-category-fashion' />
       </Glyph>
 
       <Sparkle x={425} y={40} s={1.1} />
@@ -1062,9 +504,9 @@ function EssentialsArtwork({ id }: { id: string }) {
         <path
           d="M-35 -8 V42 M-12 -8 V46 M12 -8 V46 M35 -8 V42"
           fill="none"
-          stroke="#24855D"
           strokeOpacity=".35"
           strokeWidth="4"
+          className='stroke-secondary-dark'
         />
         {/* Handle */}
         <path
@@ -1092,7 +534,7 @@ function EssentialsArtwork({ id }: { id: string }) {
       {/* Bread */}
       <Glyph x={552} y={157} s={0.9} r={18} o={0.85}>
         <path d="M-30 13 C-39 -12 -18 -28 0 -28 C18 -28 39 -12 30 13 L28 26 H-28Z" fill={WHITE} />
-        <path d="M-15 -13 L-8 5 M0 -17 L7 3 M15 -13 L22 5" stroke="#24855D" strokeOpacity=".4" strokeWidth="3" />
+        <path d="M-15 -13 L-8 5 M0 -17 L7 3 M15 -13 L22 5" strokeOpacity=".4" strokeWidth="3" className='stroke-secondary-dark' />
       </Glyph>
 
       {/* Carrot */}
@@ -1167,7 +609,7 @@ function NewArtwork({ id }: { id: string }) {
           fontSize="14"
           fontWeight="900"
           letterSpacing="2"
-          fill="#7346B9"
+          className='fill-primary-dark'
         >
           NEW
         </text>
@@ -1564,7 +1006,7 @@ function Summer({ id }: { id: string }) {
 type ArtworkProps = { id: string }
 
 const BACKDROPS: Record<
-  Exclude<BackdropKind, 'seasonal'>,
+  Exclude<HeroKind, 'seasonal'>,
   (props: ArtworkProps) => ReactNode
 > = {
   deals: DealsArtwork,
@@ -1591,7 +1033,7 @@ export function Backdrop({
   kind,
   season,
 }: {
-  kind: BackdropKind
+  kind: HeroKind
   season?: Season
 }) {
   const reactId = useId()
