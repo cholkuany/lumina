@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { Product } from "../db/models";
 import dbConnect from "../db/connection";
 import type { TProduct as ProductType } from "../types";

@@ -55,7 +55,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
   const canAddMore = cartQuantity < stock
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 items-center">
       {/* Image Gallery */}
       <div className="lg:sticky lg:top-24 lg:self-start">
         <ImageGallery key={currentVariant?.sku} images={currentImages} productName={product.name} />

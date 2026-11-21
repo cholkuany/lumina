@@ -69,7 +69,7 @@ const COLLECTION_CONFIG: CollectionConfig[] = [
     headline: ({ maxDiscount }) =>
       maxDiscount ? `Save up to ${maxDiscount}% today` : "Today's best deals",
     blurb: 'Limited-time prices on products people actually buy.',
-    href: '/sale',
+    href: 'products?filter=sale',
     cta: 'Shop deals',
   },
   {
@@ -78,7 +78,7 @@ const COLLECTION_CONFIG: CollectionConfig[] = [
     label: 'Trending',
     headline: "What everyone's buying",
     blurb: 'The most-loved picks right now.',
-    href: '/trending',
+    href: 'products?filter=popular',
     cta: 'Shop trending',
   },
   {
@@ -87,7 +87,7 @@ const COLLECTION_CONFIG: CollectionConfig[] = [
     label: 'Essentials',
     headline: 'Stock up on the basics',
     blurb: 'Everyday staples for your cart.',
-    href: '/essentials',
+    href: 'products?filter=essentials',
     cta: 'Shop essentials',
   },
   {
@@ -96,7 +96,7 @@ const COLLECTION_CONFIG: CollectionConfig[] = [
     label: 'New in',
     headline: 'Just landed',
     blurb: 'Fresh arrivals, added this week.',
-    href: '/new-arrivals',
+    href: 'products?filter=new',
     cta: 'Shop new arrivals',
   },
   {
@@ -105,7 +105,7 @@ const COLLECTION_CONFIG: CollectionConfig[] = [
     label: 'Seasonal',
     headline: 'Holiday favourites',
     blurb: 'Treats and gifts for the season.',
-    href: '/seasonal',
+    href: 'products?filter=seasonal',
     cta: 'Shop seasonal',
   },
 ]

@@ -12,7 +12,6 @@ export default async function ProductsPage({
   }>
 }) {
   const { filter, category, id } = await searchParams
-  console.log('searchParams ****', filter, category, id)
   return (
     <Suspense fallback={<ProductsLoadingState />}>
       <FetchProducts

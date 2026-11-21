@@ -31,7 +31,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
       <div className="container-lumina space-y-5">
         <Shelf
           title="Everyone's into these"
-          href="/products?sort=popular"
+          href="/products?filter=popular"
           footerText="Shop best sellers"
           items={bestSellers}
           variant="compact"
@@ -39,7 +39,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
 
         <div className="grid gap-4 lg:grid-cols-3">
           <PromoPanel
-            href="/products?sort=sale"
+            href="/products?filter=sale"
             icon={<Percent className="h-5 w-5" aria-hidden="true" />}
             eyebrow="Limited-time savings"
             title="Today's deals"
@@ -48,7 +48,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
             cta="Shop deals"
           />
           <PromoPanel
-            href="/products?sort=newest"
+            href="/products?filter=newest"
             icon={<Sparkles className="h-5 w-5" aria-hidden="true" />}
             eyebrow="Fresh drops"
             title="New arrivals"
@@ -69,7 +69,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
 
         <Shelf
           title="Deals for you"
-          href="/products?sort=sale"
+          href="/products?filter=sale"
           footerText="Shop all deals"
           items={deals}
           variant='compact'
@@ -77,7 +77,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
 
         <Shelf
           title="Recommended for you"
-          href="/products"
+          href="/products?filter=recommended"
           footerText="See more"
           items={recommended}
           variant="compact"

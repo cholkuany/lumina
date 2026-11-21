@@ -39,7 +39,7 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
 
   return (
     <div
-      className="flex flex-col-reverse gap-3 lg:flex-row lg:items-start"
+      className="flex flex-col-reverse gap-2 lg:flex-row lg:items-start"
       onKeyDown={handleKeyDown}
     >
       {/* Thumbnails: horizontal strip on mobile, vertical column on desktop */}
@@ -61,10 +61,10 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
               aria-label={`View image ${index + 1}`}
               onClick={() => goTo(index)}
               className={cn(
-                'relative h-14 w-14 shrink-0 overflow-hidden rounded-md bg-surface transition-all sm:h-16 sm:w-16',
-                'ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary',
+                'relative h-14 w-14 shrink-0 overflow-hidden bg-surface transition-all sm:h-16 sm:w-16',
+                'border-2 border-transparent rounded-md',
                 activeIndex === index
-                  ? 'ring-2 ring-text-primary'
+                  ? 'border-warning bg-card'
                   : 'opacity-60 hover:opacity-100'
               )}
             >
