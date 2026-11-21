@@ -1,5 +1,7 @@
 import type { TProduct } from "@/lib/types"
 
+const ESSENTIALS_ANCESTOR = "Groceries"
+
 export const filteredSearch = (
   allProducts: TProduct[],
   selectedFilters: Record<string, string[]>,
@@ -20,7 +22,9 @@ export const filteredSearch = (
         p.category.name.toLowerCase().includes(query) ||
         p.category.ancestors?.some(ancestor => ancestor.toLowerCase().includes(query)) ||
         query === "new" && p.isNewArrival ||
-        query === "sale" && p.isSale
+        query === "sale" && p.isSale ||
+        query === "popular" && p.unitsSold ||
+        query === "essentials" && p.category.ancestors?.includes(ESSENTIALS_ANCESTOR)
     )
   }
 
