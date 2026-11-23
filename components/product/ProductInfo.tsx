@@ -2,33 +2,25 @@
 
 import { buildKey } from '@/hooks/useVariant'
 
-import { Heart, ShoppingCart, Truck, RotateCcw, ShieldCheck } from 'lucide-react'
+import { ShoppingCart, Truck, RotateCcw, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { VariantSelector } from './VariantSelector'
 import { useCartItems, useAddToCart } from '@/stores/cart/cart.selectors'
-import { useAddToWishlist, useRemoveFromWishlist, useIsInWishlist } from '@/stores/wishlist/wishlist.selectors'
 import { TProduct } from '@/lib/types'
-import { formatPrice, cn } from '@/lib/utils'
+import { formatPrice } from '@/lib/utils'
 import { ImageGallery } from '@/components/product/ImageGallery'
 import { useVariantSelector } from '@/hooks/useVariant'
 import { ShareDropdown } from './ShareDropdown'
 import { RatingSummary } from '../ui/RatingSummary'
 import { Badge } from '../ui/Badge'
 import { QuantityStepper } from '../ui/QuantityStepper'
-
-/* -------------------------------------------------------------------------- */
-/*  ProductInfo                                                                */
-/* -------------------------------------------------------------------------- */
+import { WishlistButton } from '../layout/nav/WishlistButton'
 
 export function ProductInfo({ product }: { product: TProduct }) {
   const { selectedAttributes, setAttribute, currentVariant } = useVariantSelector(product.variants)
 
   const addItemToCart = useAddToCart()
   const items = useCartItems()
-
-  const addToWishlist = useAddToWishlist()
-  const removeFromWishlist = useRemoveFromWishlist()
-  const isInWishlist = useIsInWishlist(product.id)
 
   const currentImages = currentVariant?.images ?? []
 
@@ -50,14 +42,12 @@ export function ProductInfo({ product }: { product: TProduct }) {
     addItemToCart(product, delta, currentVariant.attributes)
   }
 
-  const toggleWishlist = () => (isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product))
-
   const canAddMore = cartQuantity < stock
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 items-start">
       {/* Image Gallery */}
-      <div className="lg:sticky lg:top-24 lg:self-start">
+      <div className="mt-2 lg:top-24 lg:self-start">
         <ImageGallery key={currentVariant?.sku} images={currentImages} productName={product.name} />
       </div>
 
@@ -69,24 +59,11 @@ export function ProductInfo({ product }: { product: TProduct }) {
             <h1 className="font-serif text-2xl font-semibold leading-tight text-foreground sm:text-3xl lg:text-4xl">
               {product.name}
             </h1>
-            <button
-              type="button"
-              onClick={toggleWishlist}
-              aria-pressed={isInWishlist}
-              aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
-              className={cn(
-                'shrink-0 rounded-full border p-2.5 transition-all duration-200',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
-                isInWishlist ? 'border-red-200 bg-red-50' : 'border-border-light hover:border-border'
-              )}
+            <div
+              className='relative px-2.5'
             >
-              <Heart
-                className={cn(
-                  'h-5 w-5 transition-colors',
-                  isInWishlist ? 'fill-red-500 text-red-500' : 'text-muted'
-                )}
-              />
-            </button>
+              <WishlistButton isCompact={true} product={product} />
+            </div>
           </div>
 
           {(product.isNewArrival || hasDiscount || product.isFeatured) && (
@@ -158,7 +135,7 @@ export function ProductInfo({ product }: { product: TProduct }) {
             </>
           )}
         </div>
-        <Reassurance />
+        <DeliveryInfo />
         <ShareDropdown
           productName={product.name}
           productDescription={product.description}
@@ -169,21 +146,21 @@ export function ProductInfo({ product }: { product: TProduct }) {
   )
 }
 
-const Reassurance = () => {
+const DELIVERY_ROWS = [
+  { icon: Truck, text: 'Free shipping over $50' },
+  { icon: RotateCcw, text: '30-day returns' },
+  { icon: ShieldCheck, text: 'Secure checkout' },
+]
+
+function DeliveryInfo() {
   return (
     <ul className="grid grid-cols-3 gap-3 border-t border-border-light pt-6 text-center text-xs text-muted">
-      <li className="flex flex-col items-center gap-1.5">
-        <Truck className="h-5 w-5" strokeWidth={1.5} />
-        Free shipping over $50
-      </li>
-      <li className="flex flex-col items-center gap-1.5">
-        <RotateCcw className="h-5 w-5" strokeWidth={1.5} />
-        30-day returns
-      </li>
-      <li className="flex flex-col items-center gap-1.5">
-        <ShieldCheck className="h-5 w-5" strokeWidth={1.5} />
-        Secure checkout
-      </li>
+      {DELIVERY_ROWS.map(({ icon: Icon, text }, index) => (
+        <li key={index} className="flex flex-col items-center gap-1.5">
+          <Icon className="h-5 w-5" strokeWidth={1.5} />
+          {text}
+        </li>
+      ))}
     </ul>
   )
 }

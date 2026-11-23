@@ -24,9 +24,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   crumbs.push({ label: product.category.name, href: `/products?category=${product.category.name}` })
 
   return (
-    <main className="pb-16">
+    <main className="pb-12 sm:pb-16">
       {/* Breadcrumb */}
-      <div className="container-lumina py-4">
+      <div className="container-lumina py-2 sm:py-4">
         <Breadcrumb items={crumbs} />
       </div>
 
@@ -36,7 +36,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </section>
 
       {/* Product Details Tabs */}
-      <section className="container-lumina mt-16">
+      <section className="container-lumina mt-10 sm:mt-14 lg:mt-16">
         <Header title="About This Product" as="h2" />
         <Accordion
           items={[
@@ -77,7 +77,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         />
       </Suspense>
 
-      <section className="container-lumina mt-16">
+      <section className="container-lumina mt-10 sm:mt-14 lg:mt-16">
         <ProductReviews productId={product.id} productName={product.name} />
       </section>
     </main>

@@ -80,7 +80,7 @@ export const filteredSearch = (
       result.sort((a, b) => b.rating - a.rating)
       break
     case 'bestselling':
-      result.sort((a, b) => b.reviewCount - a.reviewCount)
+      result.sort((a, b) => (b.unitsSold || 0) - (a.unitsSold || 0))
       break
   }
 

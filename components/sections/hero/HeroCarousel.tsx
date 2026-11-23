@@ -88,7 +88,7 @@ function ProductDisc({
           src={product.image}
           alt=""
           fill
-          priority={priority}
+          preload={priority}
           sizes="(max-width: 768px) 110px, 180px"
           className="object-contain p-[10%]"
         />

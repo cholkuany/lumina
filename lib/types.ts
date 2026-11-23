@@ -413,7 +413,7 @@ export interface ApiError {
 
 export type RedirectProps = {
   searchParams?: Promise<{
-    redirectTo?: string
+    callbackUrl?: string
   }>
 }
 

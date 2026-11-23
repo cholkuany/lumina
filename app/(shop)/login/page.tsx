@@ -6,13 +6,15 @@ import { RedirectProps } from '@/lib/types'
 
 export default async function LoginPage({ searchParams }: RedirectProps) {
   const session = await getServerSession();
-  const requestedRedirect = (await searchParams)?.redirectTo
+  const requestedRedirect = (await searchParams)?.callbackUrl
+  console.log('Redirect login page =>>', requestedRedirect)
   const signedInRedirectTo = getSafeRedirectPath(requestedRedirect, "/")
-  const loginSuccessRedirectTo = getSafeRedirectPath(requestedRedirect, "/account")
+  // const loginSuccessRedirectTo = getSafeRedirectPath(requestedRedirect, "/")
+  console.log('Redirect safeRedirect login page =>>', signedInRedirectTo)
 
   if (session) {
     redirect(signedInRedirectTo);
   }
 
-  return <LoginForm redirectTo={loginSuccessRedirectTo} />;
+  return <LoginForm redirectTo={signedInRedirectTo} />;
 }

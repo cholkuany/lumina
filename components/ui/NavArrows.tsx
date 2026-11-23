@@ -15,12 +15,12 @@ interface NavArrowsProps {
 }
 
 const base =
-  'absolute top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-md transition-opacity duration-200 hover:bg-white'
+  'hidden absolute top-1/2 z-20 sm:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 shadow-md transition-opacity duration-200 hover:bg-white'
 
 const placements = {
   edge: {
-    prev: 'left-0 -translate-x-1/3 border border-foreground hover:border-2',
-    next: 'right-0 translate-x-1/3 border border-foreground hover:border-2',
+    prev: 'left-2 -translate-x-1/3 border border-foreground hover:border-2',
+    next: 'right-2 translate-x-1/3 border border-foreground hover:border-2',
   },
   inset: {
     prev: 'left-4',

@@ -27,7 +27,6 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
   const prev = () => goTo(activeIndex === 0 ? images.length - 1 : activeIndex - 1)
   const next = () => goTo(activeIndex === images.length - 1 ? 0 : activeIndex + 1)
 
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!hasMultiple) return
     if (e.key === 'ArrowLeft') prev()

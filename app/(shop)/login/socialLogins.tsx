@@ -14,6 +14,8 @@ export const SocialLogins = ({ redirectTo = '/account', mode = 'sign-in' }: Soci
   const [pendingProvider, setPendingProvider] = useState<SocialProvider | null>(null)
   const [error, setError] = useState('')
 
+  console.log('redirectTO in social login >>>', redirectTo)
+
   const handleSocialLogin = async (provider: SocialProvider) => {
     setPendingProvider(provider)
     setError('')

@@ -26,8 +26,10 @@ type LoginFormProps = {
   redirectTo?: string
 }
 
-export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
+export default function LoginForm({ redirectTo = '/' }: LoginFormProps) {
   const router = useRouter()
+
+  console.log('Login form redirectTo', redirectTo)
 
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false)
@@ -49,6 +51,7 @@ export default function LoginForm({ redirectTo = '/account' }: LoginFormProps) {
         email: data.email,
         password: data.password,
         rememberMe: data.rememberMe,
+        callbackURL: redirectTo,
       });
 
       if (result.error) {
