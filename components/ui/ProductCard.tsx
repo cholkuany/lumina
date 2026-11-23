@@ -1,25 +1,16 @@
 'use client'
 
+import Link from 'next/link'
 import { ProductThumb } from '@/components/ui/ProductThumb'
 import { WishlistButton } from '../layout/nav/WishlistButton'
-
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import type { TProduct } from '@/lib/types'
 import { ProductBadges } from './Productbadges'
-import { QuickAddButton } from './Quickaddbutton'
 import { RatingSummary } from './RatingSummary'
 import { PriceDisplay } from './Pricedisplay'
 import { QuantityStepper } from './QuantityStepper'
-import { useUpdateCartQuantity } from '@/stores/cart/cart.selectors'
-import { getDefaultVariant } from '@/lib/utils'
-
-interface ProductCardProps {
-  product: TProduct
-  variant?: 'full' | 'compact'
-}
-
 import { useProductCardState } from '@/hooks/useProductcardstate'
+import { useUpdateCartQuantity } from '@/stores/cart/cart.selectors'
+import { cn, getDefaultVariant } from '@/lib/utils'
+import type { TProduct } from '@/lib/types'
 
 interface ProductCardProps {
   product: TProduct
@@ -33,150 +24,93 @@ export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
     useProductCardState(product)
   const updateQuantity = useUpdateCartQuantity()
   const defVariant = getDefaultVariant(product)
+  const href = `/products/${product.id}`
 
   return (
-    <Link href={`/products/${product.id}`} className="group block min-w-0">
-      <div
-        className={cn(
-          'overflow-hidden rounded-brand border card',
-          'p-2 sm:p-2.5',
-          isCompact && 'rounded-lg'
-        )}
-      >
-        {/* Image */}
-        <div className="relative mb-1.5 aspect-square overflow-hidden rounded-brand">
+    <article className="group min-w-0">
+      {/* Image tile: light surface so product photos pop */}
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-card">
+        <Link href={href} aria-label={product.name} className="h-full w-full">
           <ProductThumb image={image} name={product.name} isCompact={isCompact} />
-          <ProductBadges
-            isSale={product.isSale}
-            isNewArrival={product.isNewArrival}
-            isCompact={isCompact}
-          />
-          <WishlistButton product={product} isCompact={isCompact} />
-          {isInCart ? (
-            <div className="absolute bottom-1.5 left-0 sm:bottom-2">
-              <QuantityStepper
-                min={0}
-                max={defVariant.stock}
-                size="sm"
-                value={quantity}
-                onChange={(qty) => updateQuantity(defVariant, qty)}
-              />
-            </div>
-          ) : (
-            <QuickAddButton
-              onClick={addToCart}
-              disabled={!canAdd}
-              isCompact={isCompact}
-            />
-          )}
-        </div>
+        </Link>
+        <ProductBadges
+          isSale={product.isSale}
+          isNewArrival={product.isNewArrival}
+          isCompact={isCompact}
+        />
+        <WishlistButton product={product} isCompact={isCompact} />
+      </div>
 
-        {/* Content */}
-        <div className="relative min-w-0">
+      {/* Details */}
+      <div className="mt-3 min-w-0">
+        {/* Name + price on one row */}
+        <div className="flex items-start justify-between gap-3">
           <h3
             className={cn(
-              'mb-1 overflow-hidden font-medium leading-tight text-foreground',
-              'text-xs sm:text-[12.5px]',
-              // reserve 2 lines of height so cards in a row stay aligned
-              'h-[2.1rem] sm:h-8',
-              isCompact ? 'line-clamp-2' : 'line-clamp-1 max-sm:line-clamp-2'
+              'min-w-0 line-clamp-2 font-medium leading-snug text-foreground',
+              isCompact ? 'text-sm' : 'text-base sm:text-lg'
             )}
           >
-            {product.name}
+            <Link href={href} className="hover:underline">
+              {product.name}
+            </Link>
           </h3>
 
-          {!isCompact && product.description && (
-            // hidden on very small screens where there's no room for it
-            <p className="mb-2 line-clamp-1 hidden text-xs text-foreground sm:block">
-              {product.description}
-            </p>
+          <div
+            className={cn(
+              'shrink-0 font-semibold leading-snug text-foreground',
+              isCompact ? 'text-sm' : 'text-base sm:text-lg'
+            )}
+          >
+            <PriceDisplay
+              price={currentVariant.price}
+              originalPrice={currentVariant.originalPrice}
+              isCompact={isCompact}
+            />
+          </div>
+        </div>
+
+        {!isCompact && product.description && (
+          <p className="mt-1 line-clamp-1 text-xs text-foreground/80">
+            {product.description}
+          </p>
+        )}
+
+        <RatingSummary
+          rating={product.rating}
+          reviewCount={product.reviewCount}
+          isCompact={isCompact}
+          className="mt-2"
+        />
+
+        {/* Outlined pill; becomes a stepper once in cart */}
+        <div className="mt-3 flex min-h-10 items-center">
+          {isInCart ? (
+            <QuantityStepper
+              min={0}
+              max={defVariant.stock}
+              size="sm"
+              value={quantity}
+              onChange={(qty) => updateQuantity(defVariant, qty)}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={addToCart}
+              disabled={!canAdd}
+              className={cn(
+                'rounded-full border border-foreground bg-transparent font-medium text-foreground',
+                'transition-colors hover:border-primary hover:bg-primary hover:text-white',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+                'disabled:cursor-not-allowed disabled:opacity-50',
+                isCompact ? 'px-4 py-1.5 text-xs' : 'px-6 py-2 text-sm'
+              )}
+            >
+              {canAdd ? 'Add to Cart' : 'Out of Stock'}
+            </button>
           )}
-
-          <RatingSummary
-            rating={product.rating}
-            reviewCount={product.reviewCount}
-            isCompact={isCompact}
-            className={isCompact ? 'my-1' : 'mb-1.5 sm:mb-2'}
-          />
-
-          <PriceDisplay
-            price={currentVariant.price}
-            originalPrice={currentVariant.originalPrice}
-            isCompact={isCompact}
-          />
         </div>
       </div>
-    </Link>
+    </article>
   )
-
-  // return (
-  //   <Link href={`/products/${product.id}`} className="group block">
-  //     <div
-  //       className={cn(
-  //         'overflow-hidden rounded-brand border card p-2.5',
-  //         isCompact && 'rounded-lg'
-  //       )}
-  //     >
-  //       {/* Image */}
-  //       <div className="relative aspect-square overflow-hidden rounded-brand mb-1.5">
-  //         <ProductThumb image={image} name={product.name} isCompact={isCompact} />
-  //         <ProductBadges
-  //           isSale={product.isSale}
-  //           isNewArrival={product.isNewArrival}
-  //           isCompact={isCompact}
-  //         />
-  //         <WishlistButton product={product} isCompact={isCompact} />
-  //         {
-  //           isInCart
-  //             ? <div className='absolute bottom-2 left-0 translate-y-0'>
-  //               <QuantityStepper
-  //                 min={0}
-  //                 max={defVariant.stock}
-  //                 size='sm'
-  //                 value={quantity}
-  //                 onChange={(qty) => updateQuantity(defVariant, qty)}
-  //               />
-  //             </div>
-  //             :
-  //             <QuickAddButton
-  //               onClick={addToCart}
-  //               disabled={!canAdd}
-  //               isCompact={isCompact}
-  //             />
-  //         }
-  //       </div>
-
-  //       {/* Content */}
-  //       <div className={cn('relative')}>
-  //         <h3
-  //           className={cn(
-  //             'mb-1 h-8 overflow-hidden text-[12.5px] font-medium leading-tight text-foreground',
-  //             isCompact ? 'line-clamp-2' : 'line-clamp-1'
-  //           )}
-  //         >
-  //           {product.name}
-  //         </h3>
-
-  //         {!isCompact && product.description && (
-  //           <p className="mb-2 line-clamp-1 text-xs text-foreground">
-  //             {product.description}
-  //           </p>
-  //         )}
-
-  //         <RatingSummary
-  //           rating={product.rating}
-  //           reviewCount={product.reviewCount}
-  //           isCompact={isCompact}
-  //           className={isCompact ? 'my-1' : 'mb-2'}
-  //         />
-
-  //         <PriceDisplay
-  //           price={currentVariant.price}
-  //           originalPrice={currentVariant.originalPrice}
-  //           isCompact={isCompact}
-  //         />
-  //       </div>
-  //     </div>
-  //   </Link>
-  // )
 }
