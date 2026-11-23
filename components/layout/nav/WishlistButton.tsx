@@ -1,5 +1,7 @@
 'use client'
 
+import { useLoggedInUser } from '@/hooks/useLoggedInUser'
+
 import { Heart } from 'lucide-react'
 // import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
@@ -7,7 +9,7 @@ import { CountBadge } from '@/components/layout/nav/CountBadge'
 import { useAddToWishlist, useWishlistItems, useRemoveFromWishlist, useWishlistItemCount } from '@/stores/wishlist/wishlist.selectors'
 import { cn } from '@/lib/utils'
 import type { TProduct } from '@/lib/types'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 export const WishlistButtonIcon = () => {
   const itemsCount = useWishlistItemCount()
@@ -37,6 +39,9 @@ export const WishlistButton = (
     isCompact?: boolean
     product: TProduct
   }) => {
+  const user = useLoggedInUser()
+  console.log('user', user)
+
   const addItemToWishlist = useAddToWishlist()
   const removeItem = useRemoveFromWishlist()
   const wishlistItems = useWishlistItems()
@@ -45,10 +50,13 @@ export const WishlistButton = (
   return (
     <button
       className={cn(
-        'absolute right-2 top-2 rounded-full bg-white/90 backdrop-blur-sm transition-all',
+        'absolute right-2 top-2 rounded-full bg-surface backdrop-blur-sm transition-all duration-200',
         isCompact ? 'p-1.5' : 'p-2',
+        isInWishlist ? 'border-danger bg-danger-light' : 'border-border-light hover:border-border'
       )}
+
       onClick={(e) => {
+        if (!user.user) redirect('/login')
         e.preventDefault()
         if (isInWishlist) {
           removeItem(product.id)
@@ -58,9 +66,10 @@ export const WishlistButton = (
       }}
     >
       <Heart
-        className={cn(isCompact ? 'h-4 w-4' : 'h-5 w-5')}
-        fill={isInWishlist ? '#B8956C' : 'none'}
-        stroke={isInWishlist ? '#B8956C' : 'currentColor'}
+        className={cn(
+          'h-5 w-5 transition-colors',
+          isInWishlist ? 'fill-danger text-danger' : 'text-muted'
+        )}
       />
     </button>
   )
