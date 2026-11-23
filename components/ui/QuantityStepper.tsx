@@ -47,8 +47,7 @@ export function QuantityStepper({
           onClick={(e) => {
             e.preventDefault()
             onChange(Math.max(min, value - 1))
-          }
-          }
+          }}
           disabled={atMin}
         >
           <Minus className="h-4 w-4" />
@@ -71,8 +70,7 @@ export function QuantityStepper({
           onClick={(e) => {
             e.preventDefault()
             onChange(Math.min(max, value + 1))
-          }
-          }
+          }}
           disabled={atMax}
         >
           <Plus className="h-4 w-4" />

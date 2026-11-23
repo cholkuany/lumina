@@ -110,9 +110,9 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
                   title={`${displayName}${!hasStock ? ' (Out of stock)' : ''}`}
                   className={cn(
                     'relative rounded-md overflow-hidden transition-all duration-200',
-                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2',
+                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
                     isSelected
-                      ? 'ring-2 ring-text-primary'
+                      ? 'ring-2 ring-primary'
                       : 'ring-1 ring-border-light hover:ring-border',
                     !hasStock && 'opacity-40 cursor-not-allowed'
                   )}
@@ -135,7 +135,7 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
 
                     {/* Selected checkmark */}
                     {isSelected && (
-                      <div className="absolute inset-0 bg-text-primary/10 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-primary/10 flex items-center justify-center">
                         <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
                           <Check className="w-3 h-3 text-foreground" />
                         </div>
@@ -145,7 +145,7 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
                     {/* Out of stock diagonal line */}
                     {!hasStock && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-[140%] h-px bg-text-primary/60 rotate-45" />
+                        <div className="w-[140%] h-px bg-foreground/60 rotate-45" />
                       </div>
                     )}
                   </div>
@@ -163,9 +163,6 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
             <span className="text-sm font-medium text-foreground">
               Size: <span className="font-normal text-border-dark">{selected.size || 'Select'}</span>
             </span>
-            {/* <button className="text-xs text-foreground underline underline-offset-2 hover:no-underline">
-              Size Guide
-            </button> */}
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -180,12 +177,12 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
                   disabled={isOutOfStock}
                   className={cn(
                     'relative min-w-12 py-2.5 px-3 border rounded text-sm font-medium transition-all',
-                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-text-primary',
+                    'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
                     isSelected
-                      ? 'border-text-primary bg-text-primary text-white'
+                      ? 'border-primary bg-primary text-white'
                       : isOutOfStock
-                        ? 'border-border-light text-border line-through cursor-not-allowed bg-gray-50'
-                        : 'border-border-light text-foreground hover:border-text-primary'
+                        ? 'border-border-light text-border line-through cursor-not-allowed bg-surface'
+                        : 'border-border-light text-foreground hover:border-primary'
                   )}
                 >
                   {size}
@@ -198,12 +195,11 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
           {selected.size && currentStock <= 10 && (
             <div className="mt-2 flex items-center gap-4 text-xs text-border-dark">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 bg-amber-500 rounded-full" />
+                <span className="w-2 h-2 bg-warning rounded-full" />
                 Low stock
               </span>
             </div>
-          )
-          }
+          )}
         </div>
       )}
 
@@ -211,18 +207,17 @@ export function VariantSelector({ variants, selected, onChange }: VariantSelecto
       {selected.color && selected.size && (
         <p className={cn(
           'flex items-center gap-2 text-sm font-medium',
-          !currentStock ? 'text-red-600' : isLowStock ? 'text-amber-600' : 'text-success'
+          !currentStock ? 'text-danger' : isLowStock ? 'text-warning-dark' : 'text-success'
         )}>
           <span
             className={cn(
               'h-2 w-2 rounded-full',
-              !currentStock ? 'bg-red-500' : isLowStock ? 'bg-amber-500' : 'bg-success'
+              !currentStock ? 'bg-danger' : isLowStock ? 'bg-warning' : 'bg-success'
             )}
           />
           {!currentStock ? 'Out of stock' : isLowStock ? `Only ${currentStock} left` : 'In stock'}
         </p>
-      )
-      }
-    </div >
+      )}
+    </div>
   )
 }

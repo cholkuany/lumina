@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { Heart, ShoppingCart, Trash2 } from 'lucide-react'
-import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { useWishlistItems, useRemoveFromWishlist, useClearWishlist, useWishlistItemCount } from '@/stores/wishlist/wishlist.selectors'
 import { useAddToCart } from '@/stores/cart/cart.selectors'
 import { formatPrice } from '@/lib/utils'
 import { TProduct } from '@/lib/types'
+import { ProductThumb } from '@/components/ui/ProductThumb'
 
 export default function WishlistPage() {
   const items = useWishlistItems()
@@ -64,15 +64,13 @@ export default function WishlistPage() {
                 className="bg-white border border-border-light rounded-brand overflow-hidden group"
               >
                 {/* Image */}
-                <Link
-                  href={`/products/${item.product.id}`}
+                <div
+                  // href={`/products/${item.product.id}`}
                   className="relative aspect-square block bg-surface overflow-hidden"
                 >
-                  <Image
-                    src={item.product.variants[0].images[0].secure_url}
-                    alt={item.product.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  <ProductThumb
+                    image={item.product.variants[0].images[0].secure_url}
+                    name={item.product.name}
                   />
 
                   {/* Remove Button */}
@@ -93,7 +91,7 @@ export default function WishlistPage() {
                       SALE
                     </span>
                   )}
-                </Link>
+                </div>
 
                 {/* Content */}
                 <div className="p-4">
