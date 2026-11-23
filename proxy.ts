@@ -3,11 +3,11 @@ import type { NextRequest } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-const protectedRoutes = ["/admin", "/account", "/profile", "/settings"];
+const protectedRoutes = ["/admin", "/account", "/profile", "/settings", '/wishlist'];
 const authRoutes = ["/login", "/register", "/forgot-password", "/reset-password"];
 
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
 
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -18,6 +18,7 @@ export async function proxy(request: NextRequest) {
   const isPublicRoute =
     pathname === "/" ||
     pathname.startsWith("/verify-email");
+
   if (isPublicRoute) {
     return NextResponse.next();
   }
@@ -30,7 +31,7 @@ export async function proxy(request: NextRequest) {
   // Redirect unauthenticated users to login
   if (!isAuthenticated && protectedRoutes.some((route) => pathname.startsWith(route))) {
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
+    loginUrl.searchParams.set("callbackUrl", pathname + search);
     return NextResponse.redirect(loginUrl);
   }
 
