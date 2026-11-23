@@ -4,7 +4,7 @@ import { RedirectProps } from '@/lib/types'
 
 export default async function RegisterPage({ searchParams }: RedirectProps) {
   const redirectTo = getSafeRedirectPath(
-    (await searchParams)?.redirectTo,
+    (await searchParams)?.callbackUrl,
     '/account'
   )
 
