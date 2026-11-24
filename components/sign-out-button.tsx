@@ -3,6 +3,7 @@
 import { signOut } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 import { LogOut } from "lucide-react";
 
 export function SignOutButton({ closeMenu }: { closeMenu?: () => void }) {
@@ -10,12 +11,16 @@ export function SignOutButton({ closeMenu }: { closeMenu?: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignOut = async () => {
+    if (isLoading) return;
     setIsLoading(true);
     try {
       await signOut();
       closeMenu?.();
-      router.push("/");
-      router.refresh();
+      router.replace("/");
+    } catch {
+      toast.error("Failed to sign out", {
+        description: "Please try again"
+      })
     } finally {
       setIsLoading(false);
     }

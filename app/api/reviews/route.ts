@@ -1,4 +1,3 @@
-import { NextRequest } from 'next/server'
 import { z } from 'zod';
 
 import { Model } from 'mongoose'
@@ -9,11 +8,11 @@ import { getAllReviews } from '@/lib/queries/get.reviews'
 import Review from '@/lib/db/models/Review'
 import Product from '@/lib/db/models/Product'
 import User from '@/lib/db/models/User'
-import { getServerSession } from '@/lib/auth-server'
 import { Resource } from '@/lib/types'
 import { apiResponse } from '../apiResponse'
 import Order from '@/lib/db/models/Order';
 import Purchase from '@/lib/db/models/Purchase';
+import { withAuth } from '@/lib/withAuth';
 
 type MongooseModel = Model<unknown>
 
@@ -25,13 +24,7 @@ const MODEL_MAP: Record<Resource, MongooseModel> = {
   purchase: Purchase
 }
 
-export async function POST(req: NextRequest) {
-  await dbConnect()
-
-  const sessionUser = await getServerSession()
-  if (!sessionUser?.user) {
-    return apiResponse('Unauthorized', 401)
-  }
+export const POST = withAuth(async (req, user) => {
 
   const body = await req.json()
   if (!body) {
@@ -47,8 +40,8 @@ export async function POST(req: NextRequest) {
 
   const user_and_review = {
     ...parsed.data,
-    author: sessionUser.user.id,
-    authorName: sessionUser.user.name || "Anonymous"
+    author: user.id,
+    authorName: user.name || "Anonymous"
   }
 
   try {
@@ -58,11 +51,9 @@ export async function POST(req: NextRequest) {
     console.error('Error creating review:', error)
     return apiResponse('An error occurred while creating the review', 500)
   }
-}
+})
 
-export async function PATCH(req: NextRequest) {
-  await dbConnect()
-
+export const PATCH = withAuth(async (req) => {
   try {
     const { action, ids, resource } = await req.json()
 
@@ -113,7 +104,7 @@ export async function PATCH(req: NextRequest) {
       { status: 500 }
     )
   }
-}
+})
 
 export async function GET() {
   await dbConnect()

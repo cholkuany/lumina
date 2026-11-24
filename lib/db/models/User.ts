@@ -25,28 +25,10 @@ const CartItemSchema = new Schema({
   },
 });
 
-// Wishlist Item Sub-schema
-const WishlistItemSchema = new Schema({
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: 'Product',
-    required: true,
-  },
-  addedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
-
 export interface ICartItem {
   product: mongoose.Types.ObjectId;
   quantity: number;
   selectedVariants?: Map<string, string>;
-  addedAt: Date;
-}
-
-export interface IWishlistItem {
-  product: mongoose.Types.ObjectId;
   addedAt: Date;
 }
 
@@ -59,7 +41,6 @@ export interface IUser {
   phone?: string;
   role: 'customer' | 'admin' | 'moderator';
   cart: ICartItem[];
-  wishlist: IWishlistItem[];
   addresses: mongoose.Types.ObjectId[];
   totalOrders: number;
   totalReviews: number;
@@ -108,7 +89,6 @@ const UserSchema = new Schema<IUser>(
       default: 'customer',
     },
     cart: [CartItemSchema],
-    wishlist: [WishlistItemSchema],
     addresses: [{
       type: Schema.Types.ObjectId,
       ref: 'Address',

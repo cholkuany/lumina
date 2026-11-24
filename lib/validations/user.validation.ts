@@ -23,14 +23,6 @@ export const CartItemSchema = z.object({
     .default(() => new Date()),
 });
 
-export const WishlistItemSchema = z.object({
-  product: objectIdSchema,
-
-  addedAt: z
-    .date()
-    .default(() => new Date()),
-});
-
 // ─────────────────────────────────────────────
 // User Role Enum
 // ─────────────────────────────────────────────
@@ -76,8 +68,6 @@ export const UserSchema = z.object({
 
   cart: z.array(CartItemSchema).default([]),
 
-  wishlist: z.array(WishlistItemSchema).default([]),
-
   addresses: z.array(objectIdSchema).default([]),
 
   totalOrders: z
@@ -115,7 +105,6 @@ export const CreateUserSchema = UserSchema.omit({
   totalReviews: true,
   isVerified: true,
   cart: true,
-  wishlist: true,
   addresses: true,
   createdAt: true,
   updatedAt: true,
@@ -154,7 +143,6 @@ export const LoginSchema = z.object({
 // ─────────────────────────────────────────────
 
 export type CartItem = z.infer<typeof CartItemSchema>;
-export type WishlistItem = z.infer<typeof WishlistItemSchema>;
 export type UserRole = z.infer<typeof UserRoleEnum>;
 export type ZUser = z.infer<typeof UserSchema>;
 export type CreateUserInput = z.infer<typeof CreateUserSchema>;
