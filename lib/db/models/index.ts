@@ -1,5 +1,5 @@
 export { default as Product, type IProduct, type IProductVariant } from './Product';
-export { default as User, type IUser, type ICartItem, type IWishlistItem } from './User';
+export { default as User, type IUser, type ICartItem } from './User';
 export {
   default as Address,
   AddressSnapshotSchema,
