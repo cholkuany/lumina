@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'sonner'
 
 import { Footer } from '@/components/layout/Footer'
 import Header from '@/components/layout/nav/header';
@@ -6,7 +7,6 @@ import CategoryNav from '@/components/layout/nav/categoryNav/CategoryNav';
 
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { QueryContextProvider } from '@/context/QueryProviderContext'
-
 // Global Styles
 import '../globals.css'
 
@@ -21,13 +21,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className='overflow-x-hidden'>
         <AuthProvider>
           <QueryContextProvider>
             <Header />
             <CategoryNav />
             {children}
+            <Toaster position='top-center' richColors closeButton />
             <Footer />
           </QueryContextProvider>
         </AuthProvider>

@@ -30,7 +30,7 @@ export function ProductCard({ product, variant = 'full' }: ProductCardProps) {
     <article className="group min-w-0">
       {/* Image tile: light surface so product photos pop */}
       <div className="relative aspect-square overflow-hidden rounded-2xl bg-card">
-        <Link href={href} aria-label={product.name} className="h-full w-full">
+        <Link href={href} aria-label={product.name} className="relative block h-full w-full">
           <ProductThumb image={image} name={product.name} isCompact={isCompact} />
         </Link>
         <ProductBadges

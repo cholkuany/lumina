@@ -30,7 +30,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <AuthProvider>
           <QueryContextProvider>

@@ -48,7 +48,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
             cta="Shop deals"
           />
           <PromoPanel
-            href="/products?filter=newest"
+            href="/products?filter=new"
             icon={<Sparkles className="h-5 w-5" aria-hidden="true" />}
             eyebrow="Fresh drops"
             title="New arrivals"
@@ -57,7 +57,7 @@ export function TrendingProducts({ trendingProducts = [] }: { trendingProducts: 
             cta="Explore new arrivals"
           />
           <PromoPanel
-            href="/categories"
+            href="/products?filter=categories"
             icon={<Store className="h-5 w-5" aria-hidden="true" />}
             eyebrow="Browse departments"
             title="Shop by category"

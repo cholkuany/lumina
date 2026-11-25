@@ -7,14 +7,14 @@ type ObjectId = Types.ObjectId
 import { WishlistItem } from "@/lib/db/models/Wishlist";
 
 async function fetchUserList(user: string) {
-  return WishlistItem.find({ user })
+  return await WishlistItem.find({ user })
     .populate("product")
     .sort({ createdAt: -1 })
     .lean();
 }
 
 async function addToWishlist(product: ObjectId, user: string) {
-  return WishlistItem.updateOne({ user, product },
+  return await WishlistItem.updateOne({ user, product },
     {
       $setOnInsert: { user, product }
     },
@@ -23,7 +23,7 @@ async function addToWishlist(product: ObjectId, user: string) {
 }
 
 async function removeFromWishlist(products: ObjectId[], user: string) {
-  return WishlistItem.deleteMany({
+  return await WishlistItem.deleteMany({
     user: user,
     product: { $in: products }
   })
@@ -37,7 +37,7 @@ export const GET = withAuth(async (_req, user) => {
 
 export const POST = withAuth(async (req, user) => {
   const { product } = await req.json();
-
+  console.log('product in API --->', product)
   if (!isValidObjectId(product)) {
     return NextResponse.json(
       { message: "Invalid product ID" },
@@ -53,6 +53,7 @@ export const POST = withAuth(async (req, user) => {
 
 export const DELETE = withAuth(async (req, user) => {
   const { products } = await req.json();
+  console.log('products in API ---->', products)
 
   if (
     !Array.isArray(products) ||
